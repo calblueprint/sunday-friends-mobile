@@ -1,6 +1,6 @@
 import firebaseApp from "../firebaseApp";
 import "firebase/firestore";
-import { Transaction } from "../../src/types/schema";
+import { Transaction } from "../../types/schema";
 
 const db = firebaseApp.firestore();
 const transactionsCollection = db.collection("transactions");
