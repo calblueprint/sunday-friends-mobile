@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { getAllTransactions } from '../firebase/firestore/transaction';
+import { useEffect } from 'react';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,6 +24,19 @@ const styles = StyleSheet.create({
 });
 
 export default function PersonalScreen() {
+
+    // USED FOR MANUAL TESTING, FEEL FREE TO COMMENT OUT/DELETE
+    // useEffect(() => {
+    //     const test = async () => {
+    //         const allTs = await getAllTransactions();
+    //         console.log(allTs);
+    //         if (allTs) {
+    //             console.log(allTs[0])
+    //         }
+    //     }
+    //     test();
+    // }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Personal Screen</Text>
