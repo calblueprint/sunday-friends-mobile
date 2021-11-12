@@ -18,7 +18,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import PersonalScreen from '../screens/PersonalScreen';
 import FamilyScreen from '../screens/FamilyScreen';
 import RedeemScreen from '../screens/RedeemScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types/types';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
