@@ -1,6 +1,6 @@
 import firebaseApp from "../firebaseApp";
 import "firebase/firestore";
-import { Transaction } from "../../types/schema";
+import { Transaction } from "../../src/types/schema";
 
 const db = firebaseApp.firestore();
 const transactionsCollection = db.collection("transactions");
@@ -89,7 +89,8 @@ export const getTransactionByUser = async (
     }
 };
 
-const parseTransaction = async (doc) => {
+// TODO replace doc with proper type
+const parseTransaction = async (doc: any) => {
     const data = doc.data();
     const transaction = {
         admin_name: data.admin_name,
