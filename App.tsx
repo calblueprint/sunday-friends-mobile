@@ -10,8 +10,6 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  "Profile Personal Transactions Family Transactions Redeem"
-
   if (!isLoadingComplete) {
     return null;
   } else {
