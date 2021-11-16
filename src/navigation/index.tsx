@@ -14,9 +14,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import ProfileScreen from '../screens/ProfileScreen';
+import PersonalScreen from '../screens/PersonalScreen';
+import FamilyScreen from '../screens/FamilyScreen';
+import RedeemScreen from '../screens/RedeemScreen';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -58,15 +60,15 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Profile"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        name="Profile"
+        component={ProfileScreen}
+        options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
+          title: 'Profile',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -85,10 +87,26 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Personal"
+        component={PersonalScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Personal',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Family"
+        component={FamilyScreen}
+        options={{
+          title: 'Family',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Redeem"
+        component={RedeemScreen}
+        options={{
+          title: 'Redeem',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
