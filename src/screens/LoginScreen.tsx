@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function FamilyScreen() {
+export default function LoginScreen() {
     return (
         <ViewContainer>
-            <Title> Family Screen </Title>
+            <Title>Login</Title>
             <View style={styles.separator} />
-            <EditScreenInfo path="/screens/FamilyScreen.tsx" />
+            <EditScreenInfo path="/screens/LoginScreen.tsx" />
         </ViewContainer>
     );
 }

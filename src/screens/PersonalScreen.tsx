@@ -1,25 +1,17 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, View } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
 import { getAllTransactions } from '../firebase/firestore/transaction';
 import { useEffect } from 'react';
+import ViewContainer from '../components/ViewContainer';
+import { Title } from 'react-native-paper';
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
     separator: {
         marginVertical: 30,
         height: 1,
         width: '80%',
+        backgroundColor: '#eee',
     },
 });
 
@@ -38,10 +30,10 @@ export default function PersonalScreen() {
     // }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Personal Screen</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+        <ViewContainer>
+            <Title>Personal Screen</Title>
+            <View style={styles.separator} />
             <EditScreenInfo path="/screens/PersonalScreen.tsx" />
-        </View>
+        </ViewContainer>
     );
 }
