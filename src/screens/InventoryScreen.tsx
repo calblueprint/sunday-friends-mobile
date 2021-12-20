@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Title } from 'react-native-paper';
+import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
 
 const styles = StyleSheet.create({
     separator: {
         marginVertical: 30,
         height: 1,
-        width: "80%",
-        backgroundColor: "#eee"
+        width: '80%',
+        backgroundColor: '#eee',
     },
 });
 
-export default function FamilyScreen() {
+export default function InventoryScreen() {
     return (
         <ViewContainer>
-            <Title> Family Screen </Title>
+            <Title>Inventory Screen</Title>
             <View style={styles.separator} />
-            <EditScreenInfo path="/screens/FamilyScreen.tsx" />
+            <EditScreenInfo path="/screens/InventoryScreen.tsx" />
         </ViewContainer>
     );
 }

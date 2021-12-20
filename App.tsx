@@ -3,20 +3,23 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './src/hooks/useCachedResources';
-import useColorScheme from './src/hooks/useColorScheme';
+import { Provider as PaperProvider } from 'react-native-paper';
+import useTheme from './src/hooks/useTheme';
 import Navigation from './src/navigation';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const theme = useTheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <PaperProvider theme={theme}>
+          <Navigation />
+          <StatusBar />
+        </PaperProvider>
       </SafeAreaProvider>
     );
   }
