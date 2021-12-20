@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-
+import { Title } from 'react-native-paper';
 import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
-import { Title } from 'react-native-paper';
 
 const styles = StyleSheet.create({
     separator: {
@@ -14,12 +13,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ProfileScreen() {
+export default function InventoryScreen() {
     return (
         <ViewContainer>
-            <Title>Profile</Title>
+            <Title>Inventory Screen</Title>
             <View style={styles.separator} />
-            <EditScreenInfo path="/screens/ProfileScreen.tsx" />
+            <EditScreenInfo path="/screens/InventoryScreen.tsx" />
         </ViewContainer>
     );
 }

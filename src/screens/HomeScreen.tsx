@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function PersonalScreen() {
+export default function HomeScreen() {
 
     // USED FOR MANUAL TESTING, FEEL FREE TO COMMENT OUT/DELETE
     // useEffect(() => {
@@ -31,9 +31,9 @@ export default function PersonalScreen() {
 
     return (
         <ViewContainer>
-            <Title>Personal Screen</Title>
+            <Title>Home Screen</Title>
             <View style={styles.separator} />
-            <EditScreenInfo path="/screens/PersonalScreen.tsx" />
+            <EditScreenInfo path="/screens/HomeScreen.tsx" />
         </ViewContainer>
     );
 }

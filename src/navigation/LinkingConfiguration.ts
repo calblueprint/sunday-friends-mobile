@@ -20,24 +20,14 @@ const linking: LinkingOptions<RootStackParamList> = {
               LoginScreen: 'login'
             }
           },
-          Profile: {
-            screens: {
-              ProfileScreen: 'profile',
-            },
-          },
-          Personal: {
-            screens: {
-              PersonalScreen: 'personal',
-            },
-          },
           Family: {
             screens: {
               FamilyScreen: 'family',
             },
           },
-          Redeem: {
+          Inventory: {
             screens: {
-              RedeemScreen: 'redeem',
+              RedeemScreen: 'inventory',
             },
           }
         },
