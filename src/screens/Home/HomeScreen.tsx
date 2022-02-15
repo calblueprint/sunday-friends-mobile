@@ -1,21 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import EditScreenInfo from '../components/EditScreenInfo';
-import { getAllTransactions } from '../firebase/firestore/transaction';
+import { StyleSheet, View, Button, TouchableOpacity, Text } from 'react-native';
+import EditScreenInfo from '../../components/EditScreenInfo';
+import { getAllTransactions } from '../../firebase/firestore/transaction';
 import { useEffect } from 'react';
-import ViewContainer from '../components/ViewContainer';
+import ViewContainer from '../../components/ViewContainer';
 import { Title } from 'react-native-paper';
+import styles from './styles';
 
-const styles = StyleSheet.create({
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-        backgroundColor: '#eee',
-    },
-});
-
-export default function HomeScreen() {
+const HomeScreen = ({navigation}: any) => {
 
     // USED FOR MANUAL TESTING, FEEL FREE TO COMMENT OUT/DELETE
     // useEffect(() => {
@@ -32,8 +24,12 @@ export default function HomeScreen() {
     return (
         <ViewContainer>
             <Title>Home Screen</Title>
-            <View style={styles.separator} />
+            <TouchableOpacity style={styles.profile} onPress={() => navigation.navigate('Profile')}>
+                <Text>Profile</Text>
+            </TouchableOpacity>
             <EditScreenInfo path="/screens/HomeScreen.tsx" />
         </ViewContainer>
     );
 }
+
+export default HomeScreen;

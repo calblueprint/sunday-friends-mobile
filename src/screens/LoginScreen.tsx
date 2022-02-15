@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function LoginScreen() {
+const LoginScreen = () => {
     return (
         <ViewContainer>
             <Title>Login</Title>
@@ -22,3 +22,5 @@ export default function LoginScreen() {
         </ViewContainer>
     );
 }
+
+export default LoginScreen;

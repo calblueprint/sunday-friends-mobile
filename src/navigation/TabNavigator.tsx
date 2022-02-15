@@ -2,18 +2,18 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FamilyScreen from "../screens/FamilyScreen";
 import LoginScreen from "../screens/LoginScreen";
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
 import InventoryScreen from "../screens/InventoryScreen";
 import { RootTabParamList, RootTabScreenProps } from "../types/navigation";
 import Icon from '../components/Icon';
 
-export default function TabNavigator() {
-    const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
+const TabNavigator = () => {
+    const Tab = createBottomTabNavigator();
     return (
-        <Navigator
+        <Tab.Navigator
             initialRouteName="Home"
         >
-            <Screen
+            <Tab.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -21,7 +21,7 @@ export default function TabNavigator() {
                     tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
                 }}
             />
-            <Screen
+            <Tab.Screen
                 name="Family"
                 component={FamilyScreen}
                 options={{
@@ -29,7 +29,7 @@ export default function TabNavigator() {
                     tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
                 }}
             />
-            <Screen
+            <Tab.Screen
                 name="Inventory"
                 component={InventoryScreen}
                 options={{
@@ -37,6 +37,8 @@ export default function TabNavigator() {
                     tabBarIcon: ({ color }) => <Icon name="shopping-cart" color={color} />,
                 }}
             />
-        </Navigator>
+        </Tab.Navigator>
     );
 }
+
+export default TabNavigator;

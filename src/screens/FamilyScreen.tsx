@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function FamilyScreen() {
+const FamilyScreen = () => {
     return (
         <ViewContainer>
             <Title> Family Screen </Title>
@@ -22,3 +22,5 @@ export default function FamilyScreen() {
         </ViewContainer>
     );
 }
+
+export default FamilyScreen;
