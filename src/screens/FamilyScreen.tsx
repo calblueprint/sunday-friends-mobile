@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Title } from 'react-native-paper';
 import ViewContainer from '../components/ViewContainer';
@@ -13,11 +13,19 @@ const styles = StyleSheet.create({
     },
 });
 
-const FamilyScreen = () => {
+const FamilyScreen = ({ navigation }: any) => {
     return (
         <ViewContainer>
             <Title> Family Screen </Title>
             <View style={styles.separator} />
+            <Button
+                title="Go to Login"
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Login' })}
+            ></Button>
+            <Button
+                title="Go to Registration"
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Invite' })}
+            ></Button>
             <EditScreenInfo path="/screens/FamilyScreen.tsx" />
         </ViewContainer>
     );

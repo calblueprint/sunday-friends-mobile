@@ -39,4 +39,5 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 
 export type LoginStackParamList = {
   Invite: undefined;
+  Login: undefined;
 }

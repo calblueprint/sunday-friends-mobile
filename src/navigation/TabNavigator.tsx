@@ -18,6 +18,7 @@ const TabNavigator = () => {
                 component={HomeScreen}
                 options={{
                     title: 'Home',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
                 }}
             />
@@ -26,6 +27,7 @@ const TabNavigator = () => {
                 component={FamilyScreen}
                 options={{
                     title: 'Family',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
                 }}
             />
@@ -34,6 +36,7 @@ const TabNavigator = () => {
                 component={InventoryScreen}
                 options={{
                     title: 'Inventory',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="shopping-cart" color={color} />,
                 }}
             />

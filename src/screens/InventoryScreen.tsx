@@ -21,10 +21,6 @@ const InventoryScreen = ({ navigation }: any) => {
         <ViewContainer>
             <Title>"Bonus" Screen</Title>
             <View style={styles.separator} />
-            <Button
-                title="Go to Registration"
-                onPress={() => navigation.navigate('LoginStack', { screen: 'Invite' })}
-            ></Button>
             {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
         </ViewContainer>
     );
