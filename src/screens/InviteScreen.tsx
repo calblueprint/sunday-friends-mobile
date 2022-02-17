@@ -2,10 +2,8 @@ import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Button, StyleSheet, View } from 'react-native';
 import { Title } from 'react-native-paper';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
-import { LoginStackParamList, RootStackParamList, RootTabParamList } from '../types/navigation';
 
 const styles = StyleSheet.create({
     separator: {
@@ -16,14 +14,15 @@ const styles = StyleSheet.create({
     },
 });
 
-const InventoryScreen = ({ navigation }: any) => {
+const InviteScreen = () => {
+
     return (
         <ViewContainer>
-            <Title>"Bonus" Screen</Title>
+            <Title>Invite Screen</Title>
             <View style={styles.separator} />
-            {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
+            <EditScreenInfo path="/screens/InventoryScreen.tsx" />
         </ViewContainer>
     );
 }
 
-export default InventoryScreen;
+export default InviteScreen;

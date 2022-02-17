@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ModalScreen() {
+const ModalScreen = () => {
   return (
     <ViewContainer>
       <Title>Modal</Title>
@@ -27,3 +27,5 @@ export default function ModalScreen() {
     </ViewContainer>
   );
 }
+
+export default ModalScreen;

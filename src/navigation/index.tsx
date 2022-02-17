@@ -12,31 +12,35 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
+import InviteScreen from '../screens/InviteScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabNavigator from './TabNavigator';
+import LoginStack from './LoginStack';
+import ProfileScreen from '../screens/ProfileScreen';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
-function RootNavigator() {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-  const { Navigator, Screen, Group } = Stack;
+const RootNavigator = () => {
+  const Stack = createNativeStackNavigator();
   return (
-    <Navigator>
-      <Screen name="Root" component={TabNavigator} options={{ headerShown: false }} />
-      <Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Group screenOptions={{ presentation: 'modal' }}>
-        <Screen name="Modal" component={ModalScreen} />
-      </Group>
-    </Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Root" component={TabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="LoginStack" component={LoginStack} options={{ headerShown: false }}/>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 }
 
-export default function Navigation() {
+const Navigation = () => {
   return (
     <NavigationContainer linking={LinkingConfiguration} >
       <RootNavigator />
@@ -44,3 +48,4 @@ export default function Navigation() {
   );
 }
 
+export default Navigation;
