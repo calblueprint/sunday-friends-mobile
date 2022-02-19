@@ -5,6 +5,7 @@ import { Title } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
+import TransactionsHeader from '../components/TransactionsHeader';
 import { LoginStackParamList, RootStackParamList, RootTabParamList } from '../types/navigation';
 
 const styles = StyleSheet.create({
@@ -22,6 +23,7 @@ const InventoryScreen = ({ navigation }: any) => {
             <Title>"Bonus" Screen</Title>
             <View style={styles.separator} />
             {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
+            <TransactionsHeader/>
         </ViewContainer>
     );
 }
