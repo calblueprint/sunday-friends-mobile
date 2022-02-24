@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Keyboard, Button, ActivityIndicator } from 'react-native';
-import { Feather, Entypo } from "@expo/vector-icons";
+import { Searchbar } from 'react-native-paper';
 
 const TransactionsHeader = () => {
     const [selection, setSelection] = useState(1);
 
     const [searchText, setSearchText] = useState("");
-    const [searchClicked, setSearchClicked] = useState(false);
+    // const [searchClicked, setSearchClicked] = useState(false);
     const [transactions, setTransactions] = useState();
 
     //Use effect later to get transaction data
@@ -25,41 +25,17 @@ const TransactionsHeader = () => {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.searchContainer}>
-                <View style={searchClicked ? styles.searchBar__clicked : styles.searchBar__unclicked}>
-                    <Feather
-                        name="search"
-                        size={10}
-                        color="black"
-                        style={{ marginLeft: 1 }}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Search"
-                        value={searchText}
-                        onChangeText={setSearchText}
-                        onFocus={() => {
-                            setSearchClicked(true);
-                        }}
-                    />
-                    {searchClicked && (
-                        <Entypo name="cross" size={10} color="black" style={{ padding: 1 }} onPress={() => {
-                            setSearchText("");
-                        }}/>
-                    )}
-                </View>
-                {searchClicked && (
-                    <View>
-                        <Button
-                            title="Cancel"
-                            onPress={() => {
-                                Keyboard.dismiss();
-                                setSearchClicked(false);
-                            }}
-                        ></Button>
-                    </View>
-                )}
+            <View style={styles.searchFilterContainer}>
+                <Searchbar
+                    placeholder="Search"
+                    onChangeText={query => setSearchText(query)}
+                    value={searchText}
+                    style={styles.searchbar}
+                />
+                <Button title="Filters (0)" color='#6B7280'/>
             </View>
+
+            
 
             {!transactions ? (
                 <ActivityIndicator size="large"/>
@@ -92,37 +68,22 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         fontSize: 14
     },
-
-    searchContainer: {
-        margin: 15,
-        justifyContent: "flex-start",
+    searchFilterContainer: {
+        padding: 15,
+        flexDirection: 'row',
+        justifyContent: "space-between",
         alignItems: "center",
-        flexDirection: "row",
-        width: "90%",
-        
-      },
-      searchBar__unclicked: {
-        padding: 10,
-        flexDirection: "row",
-        width: "95%",
-        backgroundColor: "#d9dbda",
-        borderRadius: 15,
-        alignItems: "center",
-      },
-      searchBar__clicked: {
-        padding: 10,
-        flexDirection: "row",
-        width: "80%",
-        backgroundColor: "#d9dbda",
-        borderRadius: 15,
-        alignItems: "center",
-        justifyContent: "space-evenly",
-      },
-      input: {
-        fontSize: 20,
-        marginLeft: 10,
-        width: "90%",
-      },
+        width: "100%"
+    },
+    searchbar: {
+        // margin: 15,
+        width: "70%"
+    },
+    // filterButton: {
+    //     marginLeft: 15,
+    //     width: "30%",
+    //     height: "100%"
+    // }
 });
 
 export default TransactionsHeader
