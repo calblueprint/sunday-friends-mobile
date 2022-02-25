@@ -19,7 +19,7 @@ import { RootStackParamList } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabNavigator from './TabNavigator';
 import LoginStack from './LoginStack';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
