@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Title } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
-import TransactionsHeader from '../components/TransactionsHeader';
+import TransactionsGroup from '../components/TransactionsGroup';
 import { LoginStackParamList, RootStackParamList, RootTabParamList } from '../types/navigation';
 
 const styles = StyleSheet.create({
@@ -23,7 +23,7 @@ const InventoryScreen = ({ navigation }: any) => {
             <Title>"Bonus" Screen</Title>
             <View style={styles.separator} />
             {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
-            <TransactionsHeader/>
+            <TransactionsGroup/>
         </ViewContainer>
     );
 }
