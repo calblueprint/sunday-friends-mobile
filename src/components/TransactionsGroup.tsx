@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Keyboard, Button, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
 const TransactionsGroup = () => {
@@ -7,9 +7,35 @@ const TransactionsGroup = () => {
 
     const [searchText, setSearchText] = useState("");
     const [searchEntered, setSearchEntered] = useState(false);
-    const [transactions, setTransactions] = useState();
+    const [transactions, setTransactions] = useState([] as any);
 
     //Use effect later to get transaction data
+    useEffect(() => {
+        //dummy for now
+        setTransactions([
+            {
+                username: "dummy",
+                date: "Oct 21",
+                description: "Volunteered at community BBBBBB",
+                pointGain: 107,
+                role: "admin"
+            },
+            {
+                username: "dummy1",
+                date: "Oct 21",
+                description: "Volunteered at community BBBBBB",
+                pointGain: -107,
+                role: "admin"
+            },
+            {
+                username: "dummy2",
+                date: "Oct 22",
+                description: "test",
+                pointGain: 107,
+                role: "user"
+            },
+        ])
+    }, []);
 
     const handleSearch = () => {
         //todo search transactions
@@ -49,7 +75,7 @@ const TransactionsGroup = () => {
 
                 
 
-                {!transactions ? (
+                {(transactions.length === 0) ? (
                     <ActivityIndicator size="large"/>
                 ) : (
                     <Text>Transaction list</Text>
