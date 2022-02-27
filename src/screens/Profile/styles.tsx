@@ -50,23 +50,12 @@ export default StyleSheet.create({
         lineHeight: 19,
         textTransform: "uppercase",
         color: "#525454",
-        marginBottom: 36,
     },
     values: {
-        height: 19,
         fontFamily: "Avenir",
         fontSize: 14,
         lineHeight: 19,
         color: "#525454",
-        marginBottom: 36,
-    },
-    profileInformation: {
-        display: "flex",
-        width: "83%",
-        height: "23%",
-        flexDirection: "row",
-        alignItems: "center",
-        marginTop: "5%",
     },
     profileFields: {
         display: "flex",
@@ -74,6 +63,9 @@ export default StyleSheet.create({
         position: "absolute",
         left: "8%",
         top: "39.6%",
+        height: "23%",
+        justifyContent: "space-between",
+        alignContent: "center",
     },
     profileValues: {
         display: "flex",
@@ -81,6 +73,9 @@ export default StyleSheet.create({
         position: "absolute",
         left: "37%",
         top: "39.6%",
+        height: "23%",
+        justifyContent: "space-between",
+        alignContent: "center", 
     },
     buttonText: {
         fontFamily: "Avenir",
