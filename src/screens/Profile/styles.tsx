@@ -14,12 +14,8 @@ export default StyleSheet.create({
         color: "#525454",
     },
     profileImage: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
         position:"absolute",
         top: "10%",
-        alignContent: "center",
     },
     editPressable: {
         display: "flex",
@@ -65,7 +61,6 @@ export default StyleSheet.create({
         top: "39.6%",
         height: "23%",
         justifyContent: "space-between",
-        alignContent: "center",
     },
     profileValues: {
         display: "flex",
@@ -75,7 +70,6 @@ export default StyleSheet.create({
         top: "39.6%",
         height: "23%",
         justifyContent: "space-between",
-        alignContent: "center", 
     },
     buttonText: {
         fontFamily: "Avenir",
