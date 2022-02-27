@@ -25,4 +25,38 @@ export default StyleSheet.create({
     width: "80%",
     marginVertical: "2%",
   },
+
+  backgroundContainer: {
+    backgroundColor: "#F6F6F6",
+    alignItems: "stretch",
+  },
+
+  addContainer: {
+    flexDirection: "row",
+    marginVertical: "6%",
+    width: "80%",
+  },
+
+  addCircle: {
+    backgroundColor: "#C4C4C4",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: "center",
+  },
+
+  innerContainer: {
+    alignSelf: "center",
+    marginLeft: "3%",
+  },
+
+  rowContainer: {
+    flexDirection: "row",
+  },
+
+  nameText: {
+    fontFamily: "Avenir",
+    fontWeight: "800",
+    fontSize: 14,
+  },
 });

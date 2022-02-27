@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
-export default function RectangularButton({ text }: { text: string }) {
+const RectangularButton = ({ text }: { text: string }) => {
   const styles = StyleSheet.create({
     buttonText: {
       fontFamily: "Avenir",
@@ -14,17 +14,17 @@ export default function RectangularButton({ text }: { text: string }) {
 
     buttonContainer: {
       backgroundColor: "#C4C4C4",
-      width: 303,
-      height: 43,
+      width: "80%",
+      height: "5%",
       justifyContent: "center",
     },
   });
 
   return (
-    <View>
-      <Pressable style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>{text}</Text>
-      </Pressable>
-    </View>
+    <Pressable style={styles.buttonContainer}>
+      <Text style={styles.buttonText}>{text}</Text>
+    </Pressable>
   );
-}
+};
+
+export default RectangularButton;
