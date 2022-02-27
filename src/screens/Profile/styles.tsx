@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    profile: {
+    profileName: {
         position: "absolute",
-        width: 122,
-        height: 31,
-        top: 197,
+        top: "24%",
         textAlign: "center",
         //fontFamily: "DM Sans", dont have dm sans need to import?
         fontStyle: "normal",
@@ -19,25 +17,31 @@ export default StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "flex-start",
-        padding: 5.5,
-
         position:"absolute",
-        top: 75,
+        top: "10%",
         alignContent: "center",
     },
-    editButton: {
-        backgroundColor: "#F2F2F2"
-    },
-    buttonLayout: {
+    editPressable: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-
         position: "absolute",
-        top: 245,
+        alignItems: "center",
+        justifyContent: "center",
+        width: "40%",
+        height: "5%",
+        top: "30%",
+        left: "8%",
+        backgroundColor: "#F2F2F2",
     },
-    button: {
-
+    resetPressable: {
+        display: "flex",
+        position: "absolute",
+        top: "30%",
+        right: "8%",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "40%",
+        height: "5%",
+        backgroundColor: "#F2F2F2", 
     },
     fields: {
         fontFamily: "Avenir",
@@ -46,6 +50,7 @@ export default StyleSheet.create({
         lineHeight: 19,
         textTransform: "uppercase",
         color: "#525454",
+        marginBottom: 36,
     },
     values: {
         height: 19,
@@ -53,25 +58,45 @@ export default StyleSheet.create({
         fontSize: 14,
         lineHeight: 19,
         color: "#525454",
+        marginBottom: 36,
     },
     profileInformation: {
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignContent: "center",
+        width: "83%",
+        height: "23%",
+        flexDirection: "row",
         alignItems: "center",
+        marginTop: "5%",
     },
     profileFields: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "space-between",
+        flexDirection: "column",
+        position: "absolute",
+        left: "8%",
+        top: "39.6%",
     },
     profileValues: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "center",
+        flexDirection: "column",
+        position: "absolute",
+        left: "37%",
+        top: "39.6%",
+    },
+    buttonText: {
+        fontFamily: "Avenir",
+        fontWeight: "800",
+        fontSize: 12,
+        lineHeight: 16,
+        color: "#525454",
+    },
+    logoutPressable: {
+        display: "flex",
+        position: "absolute",
         alignItems: "center",
+        justifyContent: "center",
+        top:"77%",
+        width: "40%",   
+        height: "5%",
+        backgroundColor: "#C4C4C4",
     },
 })
