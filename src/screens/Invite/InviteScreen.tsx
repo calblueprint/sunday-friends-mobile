@@ -5,7 +5,7 @@ import { default as styles } from "./styles";
 import MemberCard from "../../components/MemberCard/MemberCard";
 import ViewContainer from "../../components/ViewContainer";
 
-const InviteScreen = () => {
+const InviteScreen = ({ navigation }: any) => {
   return (
     <ViewContainer>
       <Text style={styles.title1}>You're in charge!</Text>
@@ -31,7 +31,12 @@ const InviteScreen = () => {
           </View>
         </Pressable>
       </ScrollView>
-      <RectangularButton text="review" />
+      <RectangularButton
+        onPress={() => navigation.navigate("LoginStack", { screen: "Invite" })}
+        text="review"
+        buttonStyle={{ backgroundColor: "#C4C4C4" }}
+        textStyle={{ color: "#525454" }}
+      />
       <View style={styles.separator} />
     </ViewContainer>
   );
