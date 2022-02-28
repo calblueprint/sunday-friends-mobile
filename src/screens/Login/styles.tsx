@@ -34,5 +34,6 @@ export default StyleSheet.create({
         textAlign: "left",
         width: "80%",
         marginVertical: "2%",
-    }
+        marginTop: '4%',
+    },
 });
