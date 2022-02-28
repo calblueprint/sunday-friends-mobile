@@ -41,16 +41,16 @@ const ProfileScreen = () => {
                 <Text style={styles.buttonText}>RESET PASSWORD</Text>
             </Pressable>
             <View style={styles.profileFields}>
-                    <Text style={styles.fields}>NAME</Text>
-                    <Text style={styles.fields}>ROLE</Text>
-                    <Text style={styles.fields}>EMAIL</Text>
-                    <Text style={styles.fields}>PASSWORD</Text>
+                <Text style={styles.fields}>NAME</Text>
+                <Text style={styles.fields}>ROLE</Text>
+                <Text style={styles.fields}>EMAIL</Text>
+                <Text style={styles.fields}>PASSWORD</Text>
             </View>
             <View style={styles.profileValues}>
-                    <Text style={styles.values}>Jacob Kim</Text>
-                    <Text style={styles.values}>Dad</Text>
-                    <Text style={styles.values}>booblywobbly@gmail.com</Text>
-                    <Text style={styles.values}>********</Text>
+                <Text style={styles.values}>Jacob Kim</Text>
+                <Text style={styles.values}>Dad</Text>
+                <Text style={styles.values}>booblywobbly@gmail.com</Text>
+                <Text style={styles.values}>********</Text>
             </View>
             <Pressable style={styles.logoutPressable}>
                 <Text style={styles.buttonText}>LOGOUT</Text>
