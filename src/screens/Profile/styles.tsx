@@ -14,8 +14,10 @@ export default StyleSheet.create({
         color: "#525454",
     },
     profileImage: {
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
         position:"absolute",
-        top: "10%",
     },
     editPressable: {
         display: "flex",
@@ -88,4 +90,23 @@ export default StyleSheet.create({
         height: "5%",
         backgroundColor: "#C4C4C4",
     },
+    profileImagePressable: {
+        display: "flex",
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        top: "6%",
+        width: "37%",
+        height: "16%",
+        backgroundColor: "#FAFAFA",
+        borderRadius: 10,
+    }, 
+    switchProfileModalView: {
+        position: "absolute",
+        width: "87%",
+        height: "46%",
+        top: "20%",
+        left: "6%",
+        backgroundColor: "#E3E3E3"
+    }
 })
