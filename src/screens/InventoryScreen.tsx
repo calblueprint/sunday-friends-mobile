@@ -5,7 +5,7 @@ import { Title } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EditScreenInfo from '../components/EditScreenInfo';
 import ViewContainer from '../components/ViewContainer';
-import TransactionsGroup from '../components/TransactionsGroup';
+import TransactionsGroup from '../components/TransactionsGroup/TransactionsGroup';
 import { LoginStackParamList, RootStackParamList, RootTabParamList } from '../types/navigation';
 
 const styles = StyleSheet.create({

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import styles from './styles';
+import TransactionPreview from './TransactionPreview/TransactionPreview';
 
 const TransactionsGroup = () => {
     const [selection, setSelection] = useState(1);
@@ -18,21 +20,24 @@ const TransactionsGroup = () => {
                 date: "Oct 21",
                 description: "Volunteered at community BBBBBB",
                 pointGain: 107,
-                role: "admin"
+                role: "admin",
+                id: 0
             },
             {
                 username: "dummy1",
                 date: "Oct 21",
                 description: "Volunteered at community BBBBBB",
                 pointGain: -107,
-                role: "admin"
+                role: "admin",
+                id: 1
             },
             {
                 username: "dummy2",
                 date: "Oct 22",
                 description: "test",
-                pointGain: 107,
-                role: "user"
+                pointGain: 108,
+                role: "user",
+                id: 2
             },
         ])
     }, []);
@@ -71,6 +76,7 @@ const TransactionsGroup = () => {
                     <TouchableOpacity style={styles.filtersButton}> 
                         <Text style={styles.filtersButtonText}>Filters (0)</Text>
                     </TouchableOpacity>
+
                 </View>
 
                 
@@ -78,65 +84,17 @@ const TransactionsGroup = () => {
                 {(transactions.length === 0) ? (
                     <ActivityIndicator size="large"/>
                 ) : (
-                    <Text>Transaction list</Text>
+                    <FlatList
+                        data={transactions}
+                        keyExtractor={item => item.id}
+                        renderItem={( {item} ) => (
+                            <TransactionPreview transaction={item}/>
+                        )}
+                    />
                 )}
             </View>
         </TouchableWithoutFeedback>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: '100%'
-    },
-    btnGroup: {
-        flexDirection: 'row',
-        alignItems: "center",
-        width: "100%"
-    },
-    btn: {
-        width: '33.3333%',
-    },
-    selectedBtn: {
-        borderBottomWidth: 2,
-        borderColor: '#6B7280'
-    },
-    unselectedBtn: {
-        borderColor: '#253C85'
-    },
-    btnText: {
-        textAlign: 'center',
-        paddingVertical: 16,
-        fontSize: 14
-    },
-    searchFilterContainer: {
-        padding: '5.26%', //15
-        flexDirection: 'row',
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        width: "100%"
-    },
-    searchbar: {
-        width: "70%",
-        marginRight: 16,
-
-        borderColor: '#A9A9A9',
-        borderWidth: 1.2,
-        borderRadius: 8,
-        shadowOpacity: 0,
-    },
-    filtersButton: {
-        flex: 1,
-        backgroundColor: '#A9A9A9',
-        borderRadius: 6,
-    },
-    filtersButtonText: {
-        color: '#F2F2F2',
-        textAlign: 'center',
-        paddingVertical: 16,
-        fontSize: 14
-    }
-});
 
 export default TransactionsGroup
