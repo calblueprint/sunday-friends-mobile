@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-    backgroundColor: "#eee",
+  scrollContainer: {
+    backgroundColor: "#FAFAFA",
+    alignContent: "center",
+    width: "100%",
   },
 
   title1: {
@@ -28,21 +27,33 @@ export default StyleSheet.create({
 
   backgroundContainer: {
     backgroundColor: "#F6F6F6",
-    alignItems: "stretch",
+    width: "100%",
+    marginBottom: "6%",
+    height: "40%",
+    justifyContent: "center",
   },
 
   addContainer: {
     flexDirection: "row",
-    marginVertical: "6%",
     width: "80%",
+    alignSelf: "center",
   },
 
   addCircle: {
-    backgroundColor: "#C4C4C4",
+    backgroundColor: "#EBEBEB",
     width: 50,
     height: 50,
     borderRadius: 25,
-    justifyContent: "center",
+  },
+
+  add: {
+    color: "#C4C4C4",
+    fontSize: 50,
+    fontWeight: "200",
+    alignSelf: "center",
+    textAlign: "center",
+    bottom: "11%",
+    left: "2%",
   },
 
   innerContainer: {
@@ -58,5 +69,12 @@ export default StyleSheet.create({
     fontFamily: "Avenir",
     fontWeight: "800",
     fontSize: 14,
+  },
+
+  separator: {
+    marginBottom: "17%",
+    height: 1,
+    width: "100%",
+    backgroundColor: "#FAFAFA",
   },
 });

@@ -24,6 +24,7 @@ export default function MemberCard({
       flexDirection: "row",
       width: "80%",
       marginVertical: "6%",
+      marginHorizontal: "10%",
     },
 
     circle: {
@@ -45,7 +46,7 @@ export default function MemberCard({
   });
 
   return (
-    <Pressable style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.circle} />
       <View style={styles.innerContainer}>
         <View style={styles.rowContainer}>
@@ -54,6 +55,6 @@ export default function MemberCard({
         </View>
         <Text>{email}</Text>
       </View>
-    </Pressable>
+    </View>
   );
 }
