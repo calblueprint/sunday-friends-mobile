@@ -1,7 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, GestureResponderEvent, ViewStyle } from "react-native";
 
-const RectangularButton = ({ text }: { text: string }) => {
+const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: { 
+  text: string, 
+  onPress: (event: GestureResponderEvent) => void,
+  buttonStyle: any,
+  textStyle: any,
+ }) => {
   const styles = StyleSheet.create({
     buttonText: {
       fontFamily: "Avenir",
@@ -21,8 +26,8 @@ const RectangularButton = ({ text }: { text: string }) => {
   });
 
   return (
-    <Pressable style={styles.buttonContainer}>
-      <Text style={styles.buttonText}>{text}</Text>
+    <Pressable onPress={onPress} style={[styles.buttonContainer, buttonStyle]}>
+      <Text style={[styles.buttonText, textStyle]}>{text}</Text>
     </Pressable>
   );
 };

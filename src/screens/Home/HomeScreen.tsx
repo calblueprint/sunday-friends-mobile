@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Button, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
 import { useEffect } from 'react';
@@ -7,7 +7,7 @@ import ViewContainer from '../../components/ViewContainer';
 import { Title } from 'react-native-paper';
 import styles from './styles';
 
-const HomeScreen = ({navigation}: any) => {
+const HomeScreen = ({ navigation }: any) => {
 
     // USED FOR MANUAL TESTING, FEEL FREE TO COMMENT OUT/DELETE
     // useEffect(() => {
