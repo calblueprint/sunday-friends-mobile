@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FamilyScreen from "../screens/FamilyScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginScreen from "../screens/Login/LoginScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import InventoryScreen from "../screens/InventoryScreen";
 import { RootTabParamList, RootTabScreenProps } from "../types/navigation";

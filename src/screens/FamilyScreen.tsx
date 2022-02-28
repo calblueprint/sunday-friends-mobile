@@ -20,7 +20,7 @@ const FamilyScreen = ({ navigation }: any) => {
             <View style={styles.separator} />
             <Button
                 title="Go to Login"
-                onPress={() => navigation.navigate('LoginStack', { screen: 'Login' })}
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Signin' })}
             ></Button>
             <Button
                 title="Go to Registration"
