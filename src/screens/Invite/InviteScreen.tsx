@@ -1,10 +1,9 @@
 import * as React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { View, Text, Pressable, ScrollView } from "react-native";
 import RectangularButton from "../../components/RectangularButton";
 import { default as styles } from "./styles";
 import globalStyles from "../../globalStyles";
-import MemberCard from "./MemberCard";
+import MemberCard from "../../components/MemberCard/MemberCard";
 
 const InviteScreen = () => {
   return (
