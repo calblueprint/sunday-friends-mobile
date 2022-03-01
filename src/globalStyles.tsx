@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  
   container: {
     flex: 1,
     backgroundColor: "#FAFAFA",
@@ -9,42 +10,42 @@ export default StyleSheet.create({
   },
 
   h1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 36,
     fontWeight: "700",
     textAlign: "left",
   },
 
   h2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
   },
 
   h3: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 24,
     fontWeight: "500",
     textAlign: "left",
   },
 
   h4: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 18,
     fontWeight: "500",
     textAlign: "left",
   },
 
   body1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_400Regular",
     fontSize: 14,
     fontWeight: "400",
     textAlign: "left",
   },
 
   body2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_400Regular",
     fontSize: 12,
     fontWeight: "400",
     textAlign: "left",
@@ -67,28 +68,28 @@ export default StyleSheet.create({
   },
 
   h3Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 24,
     fontWeight: "700",
     textAlign: "left",
   },
 
   h4Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 18,
     fontWeight: "700",
     textAlign: "left",
   },
 
   body1Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "Avenir",
     fontSize: 14,
     fontWeight: "800",
     textAlign: "left",
   },
 
   body2Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "Avenir",
     fontSize: 12,
     fontWeight: "800",
     textAlign: "left",

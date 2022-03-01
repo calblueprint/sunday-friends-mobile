@@ -7,11 +7,30 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import useTheme from './src/hooks/useTheme';
 import Navigation from './src/navigation';
 
+import {
+  useFonts,
+  DMSans_400Regular,
+  DMSans_400Regular_Italic,
+  DMSans_500Medium,
+  DMSans_500Medium_Italic,
+  DMSans_700Bold,
+  DMSans_700Bold_Italic,
+} from '@expo-google-fonts/dm-sans';
+
 export const UserContext = React.createContext(null);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const theme = useTheme();
+
+  let [fontsLoaded] = useFonts({
+    DMSans_400Regular,
+    DMSans_400Regular_Italic,
+    DMSans_500Medium,
+    DMSans_500Medium_Italic,
+    DMSans_700Bold,
+    DMSans_700Bold_Italic,
+  });
 
   if (!isLoadingComplete) {
     return null;
