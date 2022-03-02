@@ -13,3 +13,7 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           eslint: true
+          prettier: true
+          auto_fix: true
+          git_name: Auto-Lint-Fixer
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
