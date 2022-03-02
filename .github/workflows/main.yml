@@ -1,14 +1,6 @@
 name: Actions
 
-on:
-  push:
-    paths-ignore:
-      - README.md
-      - .github/workflows/rating-chart.yml
-  pull_request:
-    paths-ignore:
-      - README.md
-      - .github/workflows/rating-chart.yml
+on: [push, pull_request]
 
 jobs:
   run-linters:
@@ -22,5 +14,5 @@ jobs:
         with:
           eslint: true
           prettier: true
-          auto_fix: true
+          auto_fix: ${{ github.event_name == 'pull_request' }}
           git_name: Auto-Lint-Fixer
