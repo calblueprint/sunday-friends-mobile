@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FamilyScreen from "../screens/FamilyScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginScreen from "../screens/Login/LoginScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
 import InventoryScreen from "../screens/InventoryScreen";
 import { RootTabParamList, RootTabScreenProps } from "../types/navigation";
 import Icon from '../components/Icon';
+import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -38,6 +39,15 @@ const TabNavigator = () => {
                     title: 'Inventory',
                     headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="shopping-cart" color={color} />,
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                    title: 'Profile',
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
                 }}
             />
         </Tab.Navigator>

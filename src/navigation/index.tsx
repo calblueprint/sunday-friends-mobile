@@ -3,8 +3,8 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
   DefaultTheme,
@@ -19,7 +19,7 @@ import { RootStackParamList } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabNavigator from './TabNavigator';
 import LoginStack from './LoginStack';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -29,23 +29,35 @@ const RootNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={TabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="LoginStack" component={LoginStack} options={{ headerShown: false }}/>
+      <Stack.Screen
+        name="Root"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="LoginStack"
+        component={LoginStack}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
-}
+};
 
 const Navigation = () => {
   return (
-    <NavigationContainer linking={LinkingConfiguration} >
+    <NavigationContainer linking={LinkingConfiguration}>
       <RootNavigator />
     </NavigationContainer>
   );
-}
+};
 
 export default Navigation;
