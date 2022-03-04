@@ -22,23 +22,13 @@ export default StyleSheet.create({
         padding: 0,
         marginVertical: 10
     },
-    yay: {
-        // width: "90%",
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 0,
-    },
     frame117: {
         display: "flex",
-        flexGrow: 1,
-        // width: "75%",
+        width: "75%",
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: 0,
+        paddingLeft: 0,
     },
     smiley: {
         display: "flex",
@@ -53,7 +43,7 @@ export default StyleSheet.create({
         alignItems: "flex-start",
         padding: 0,
         width: "70%",
-        marginLeft: 3
+        marginLeft: 20
     },
     description: {
         color: "#525454",
@@ -74,12 +64,17 @@ export default StyleSheet.create({
         marginVertical: 2
     },
     points: {
-        marginRight: 25,
+        // marginRight: 25,
         fontFamily: "DM_Mono",
         fontStyle: "normal",
         fontWeight: "500",
         fontSize: 16,
         lineHeight: 21,
-        // width: "20%"
-    }    
+        width: "20%",
+        textAlign: "center"
+    },
+    icon: {
+        display: "flex",
+        justifyContent: "flex-end"
+    }
 })
