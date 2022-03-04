@@ -15,9 +15,9 @@
     "preset": "jest-expo"
   },
   "lint-staged": {
-    "**/*.js": [
-      "eslint --fix",
-      "git add"
+    "src/**/*.{ts,tsx,json,css}": [
+      "prettier --write",
+      "eslint --fix src/"
     ]
   },
   "dependencies": {
