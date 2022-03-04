@@ -7,6 +7,8 @@ import ViewContainer from '../../components/ViewContainer';
 import { Title } from 'react-native-paper';
 import styles from './styles';
 
+// comment here 
+
 const HomeScreen = ({ navigation }: any) => {
 
     // USED FOR MANUAL TESTING, FEEL FREE TO COMMENT OUT/DELETE
