@@ -6,6 +6,8 @@ import { default as styles } from "./styles";
 import globalStyles from "../../globalStyles";
 import MemberCard from "./MemberCard";
 
+// comment
+
 const InviteScreen = () => {
   return (
     <View style={globalStyles.container}>
