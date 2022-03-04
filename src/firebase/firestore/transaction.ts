@@ -20,6 +20,8 @@ export const getTransaction = async (
     }
 };
 
+// a comment
+
 /**
  * Returns all transaction data from firestore
  */
