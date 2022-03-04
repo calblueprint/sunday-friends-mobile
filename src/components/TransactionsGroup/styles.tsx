@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
+        width: '100%',
+        backgroundColor: "#E3E3E3" //delete later, used now for styling
     },
     btnGroup: {
         flexDirection: 'row',
@@ -23,7 +24,8 @@ export default StyleSheet.create({
     btnText: {
         textAlign: 'center',
         paddingVertical: 16,
-        fontSize: 14
+        fontSize: 14,
+
     },
     searchFilterContainer: {
         padding: '5.26%', //15
@@ -50,6 +52,8 @@ export default StyleSheet.create({
         color: '#F2F2F2',
         textAlign: 'center',
         paddingVertical: 16,
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: "Avenir",
+        fontWeight: "800"
     }
 })

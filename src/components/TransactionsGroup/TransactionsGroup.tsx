@@ -18,9 +18,9 @@ const TransactionsGroup = () => {
             {
                 username: "dummy",
                 date: "Oct 21",
-                description: "Volunteered at community BBBBBB",
+                description: "test overlap asdfsajl;fdk a s l f j d s d a a a a a a a a a a a a a",
                 pointGain: 107,
-                role: "admin",
+                role: "head",
                 id: 0
             },
             {
@@ -28,7 +28,7 @@ const TransactionsGroup = () => {
                 date: "Oct 21",
                 description: "Volunteered at community BBBBBB",
                 pointGain: -107,
-                role: "admin",
+                role: "head",
                 id: 1
             },
             {
@@ -36,7 +36,7 @@ const TransactionsGroup = () => {
                 date: "Oct 22",
                 description: "test",
                 pointGain: 108,
-                role: "user",
+                role: "parent",
                 id: 2
             },
         ])
@@ -73,13 +73,11 @@ const TransactionsGroup = () => {
                         value={searchText}
                         style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}
                     />
-                    <TouchableOpacity style={styles.filtersButton}> 
+                    <Pressable style={styles.filtersButton}> 
                         <Text style={styles.filtersButtonText}>Filters (0)</Text>
-                    </TouchableOpacity>
-
+                    </Pressable>
+                    
                 </View>
-
-                
 
                 {(transactions.length === 0) ? (
                     <ActivityIndicator size="large"/>

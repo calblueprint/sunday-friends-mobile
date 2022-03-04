@@ -1,67 +1,39 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, Text, View, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
-
-const styles = StyleSheet.create({
-    container: {
-      backgroundColor: "gray",
-      width: "100%",
-    //   height: "66px",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 1,
-      marginBottom: 1,
-      paddingVertical: 12,
-      paddingHorizontal: 20
-    },
-    rdca: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 0,
-        margin: 10
-    },
-    yay: {
-        width: "90%",
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 0,
-    },
-    points: {
-        marginRight: 25,
-        fontFamily: "DM Mono",
-        fontStyle: "normal",
-        fontWeight: "500",
-        fontSize: 16,
-        lineHeight: 21,
-    }
-  });
+import { useFonts } from 'expo-font'
+import styles from './styles';
 
 const TransactionPreview = ({ transaction }: any) => {
-  return (
-    <Pressable style={styles.container}>
-        <View style={styles.rdca}>
-            <View style={styles.yay}>
-                <Text>
-                    {transaction.username}
-                </Text>
-                <Text>
-                    {transaction.date}
-                </Text>
-                <Text>
-                    {transaction.description}
-                </Text>
+    return (
+        <Pressable style={styles.container}>
+            <View style={styles.rdca}>
                 
+                <View style={styles.yay}>
+                    <View style={styles.frame117}>
+                        {(transaction.role === "head") ? (
+                            <Image source={require('../../../../assets/images/headSmiley.png')} style={styles.smiley}/>
+                        ) : (
+                            <Image source={require('../../../../assets/images/parentSmiley.png')} style={styles.smiley}/>
+                        )}
+                        <View style={styles.textGroup}>
+                            <Text style={styles.description} numberOfLines={1}>
+                                {transaction.description}
+                            </Text>
+                            <Text style={styles.nameDate}>
+                                {transaction.username}  •  {transaction.date}
+                            </Text>
+                        </View>
+                    </View>
+                    <Text style={[styles.points, (transaction.pointGain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
+                        {((transaction.pointGain > 0) ? "+" : "") + transaction.pointGain}
+                    </Text>
+                </View>
+                
+                <FontAwesome5 name="chevron-right" size={24} color="#CACACA"/>
             </View>
-            <Text style={[styles.points, (transaction.pointGain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
-                {((transaction.pointGain > 0) ? "+" : "") + transaction.pointGain}
-            </Text>
-            <FontAwesome5 name="chevron-right" size={24} color="black" />
-        </View>
-    </Pressable>
-  )
+        </Pressable>
+    )
 }
 
 export default TransactionPreview
