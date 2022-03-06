@@ -28,10 +28,12 @@ export default StyleSheet.create({
   familyCardContainer: {
     backgroundColor: "#F6F6F6",
     // alignItems: "stretch",
-    marginTop: "5%",
+    marginTop: 17,
     borderRadius: 10, 
-    width: "90%",
+    width: "89.4%",
     overflow: "hidden",
+    borderWidth: 2,
+    borderColor: '#F2F2F2',
   },
 
   homeContainer: {
@@ -42,24 +44,26 @@ export default StyleSheet.create({
 
   familyBalanceCardContainer: {
     backgroundColor: "#F6F6F6",
-    // alignItems: "stretch",
-    marginTop: "5%",
+    marginTop: 17,
     borderRadius: 10, 
-    width: "90%",
+    width: "89.4%",
+    borderWidth: 2,
+    height: 210,
+    borderColor: '#F2F2F2',
   },
 
   headline: {
     flexDirection: "row",
-    width: "80%",
+    width: "89.4%",
     justifyContent: "space-between",
-    marginTop: "20%",
+    marginTop: 91,
   },
 
   addContainer: {
     flexDirection: "row",
     marginVertical: "5%",
     marginLeft: "5%",
-    width: "90%",
+    width: "89.4%",
   },
 
   topHalfContainer: {
@@ -67,7 +71,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     marginVertical: "5%",
     marginLeft: "5%",
-    width: "90%",
+    width: "89.4%",
   },
 
   buttomBar: {
@@ -76,13 +80,12 @@ export default StyleSheet.create({
     flexDirection: "row",
     marginVertical: "5%",
     marginLeft: "5%",
-    width: "90%",
+    width: "89.4%",
   },
 
 
   progressBar: {
-    marginVertical: "5%",
-    // height: "25%",
+    marginVertical: "2.5%",
     justifyContent: "center",
   },
 
@@ -109,7 +112,7 @@ export default StyleSheet.create({
   },
 
   contributions: {
-    backgroundColor: "#F2F2F2",
+    // backgroundColor: "#F2F2F2",
     width: 127,
     height: 24,
     borderRadius: 26,

@@ -12,7 +12,7 @@ const HomeScreen = ({navigation}: any) => {
     return (
         <View style = {styles.homeContainer}>
             <View style = {styles.headline}>
-                <Text style={globalStyles.h3Bold}>Kim Family</Text>
+                <Text style={[globalStyles.h3Bold, {color: '#525454'}]}>Kim Family</Text>
                 <View style={styles.innerContainer}>
                     <View style={styles.addCircle} />
                 </View>
@@ -26,9 +26,9 @@ const HomeScreen = ({navigation}: any) => {
                     <View style={styles.addCircle} />
                     <View style={styles.innerContainer}>
                         <View style={styles.rowContainer}>
-                            <Text style={globalStyles.body1Bold}>5 People</Text>
+                            <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
                         </View>
-                        <Text style={globalStyles.body1}>Me, Jacob, Cindy, Albert, Charles</Text>
+                        <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
                     </View>
                 </View>
             </View>
@@ -36,7 +36,7 @@ const HomeScreen = ({navigation}: any) => {
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
                     <View style = {styles.balanceContainer}>
-                        <Text style={styles.balanceText}>9088</Text>
+                        <Text style={[styles.balanceText, {color: "#5F5F5F"}]}>9088</Text>
                         <Text style={globalStyles.body1}>Account Balance</Text>
                     </View>
                         <Pressable style={({ pressed }) => [
@@ -47,7 +47,7 @@ const HomeScreen = ({navigation}: any) => {
                             },
                             styles.optionsContainer
                             ]}>
-                            <Text style={globalStyles.body2Bold}>Tier Options</Text>
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>Tier Options</Text>
                         </Pressable>
                 </View>
                 <View style={styles.progressBar}>
@@ -57,31 +57,39 @@ const HomeScreen = ({navigation}: any) => {
                             <View style={styles.addLevelCircleCurrent}>
                                 <Text style={[globalStyles.body2, {color:'white'}]}>1</Text>
                                 </View>
-                            <Text style={globalStyles.body2}>2000</Text>
+                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>1000</Text>
                         </View>
                         <View style={styles.columnContainer}>
                             <View style={styles.addLevelCircle}>
                                 <Text style={globalStyles.body2}>2</Text>
                                 </View>
-                            <Text style={globalStyles.body2}>2000</Text>
+                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>2000</Text>
                         </View>
                         <View style={styles.columnContainer}>
                             <View style={styles.addLevelCircle}>
                                 <Text style={globalStyles.body2}>3</Text>
                                 </View>
-                            <Text style={globalStyles.body2}>2000</Text>
+                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>3000</Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.buttomBar}>
                     <View style={styles.rowContainer}>
-                        <Text style={globalStyles.body2Bold}>Tire 1: </Text>
-                        <Text style={globalStyles.body2}>The Basic Family</Text>
+                        <Text style={[globalStyles.body2Bold, {color: "#5F5F5F"}]}>Tire 1: </Text>
+                        <Text style={[globalStyles.body2, {color: "#5F5F5F"}]}>The Basic Family</Text>
                     </View>
-                    <View style={styles.contributions}>
-                        <Text style={globalStyles.body2}>View Contributions</Text>
+                    <View>
+                        <Pressable style={({ pressed }) => [
+                            {
+                                backgroundColor: pressed
+                                ? 'white'
+                                : '#F2F2F2'
+                            },
+                            styles.contributions
+                            ]}>
+                            <Text style={[globalStyles.body2, {color: "#5F5F5F"}]}>View Contributions</Text>
+                        </Pressable>
                     </View>
-
                 </View>
             </View>
             
@@ -91,41 +99,3 @@ const HomeScreen = ({navigation}: any) => {
 }
 
 export default HomeScreen;
-
-// import * as React from "react";
-// import { useNavigation } from "@react-navigation/native";
-// import { View, Text, Pressable } from "react-native";
-// import RectangularButton from "../../components/RectangularButton";
-// import { default as styles } from "./styles";
-// import globalStyles from "../../globalStyles";
-// import MemberCard from "./MemberCard";
-
-// const InviteScreen = () => {
-//   return (
-//     <View style={globalStyles.container}>
-//       <Text style={styles.title1}>You're in charge!</Text>
-//       <Text style={styles.title2}>Invite members to Kim Family</Text>
-//       <MemberCard
-//         name="Yakob Kim"
-//         head={true}
-//         email="yakobkimiscool@gmail.com"
-//         status="hi"
-//       />
-    //   <Pressable style={styles.backgroundContainer}>
-    //     <View style={styles.addContainer}>
-    //       <View style={styles.addCircle} />
-    //       <View style={styles.innerContainer}>
-    //         <View style={styles.rowContainer}>
-    //           <Text style={styles.nameText}>Add a member</Text>
-    //         </View>
-    //         <Text>Invite parents and/or children</Text>
-    //       </View>
-    //     </View>
-    //   </Pressable>
-
-//       <RectangularButton text="review" />
-//     </View>
-//   );
-// };
-
-// export default InviteScreen;
