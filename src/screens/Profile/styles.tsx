@@ -107,6 +107,9 @@ export default StyleSheet.create({
         height: "46%",
         top: "20%",
         left: "6%",
-        backgroundColor: "#E3E3E3"
+        backgroundColor: "#E3E3E3",
+        borderRadius: 10,
+
+
     }
 })

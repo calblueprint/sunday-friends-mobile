@@ -16,8 +16,7 @@ const ProfileScreen = () => {
         <ViewContainer>
             <Modal
                 visible={profileSwitchModalVisible}
-                onRequestClose={() => setProfileSwitchModalVisible(!setProfileSwitchModalVisible)}
-                onDismiss={() => setProfileSwitchModalVisible(false)}
+                onRequestClose={() => setProfileSwitchModalVisible(false)}
                 transparent={true}
             >
                 <View
