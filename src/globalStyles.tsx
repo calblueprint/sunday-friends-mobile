@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#FAFAFA",
     alignItems: "center",
-    padding: "1%",
+    justifyContent: "center",
   },
 
   h1: {
@@ -30,6 +30,7 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 
   h4: {
@@ -37,6 +38,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 
   body1: {
@@ -44,6 +46,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     textAlign: "left",
+    color: "#525454"
   },
 
   body2: {
@@ -51,6 +54,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: "400",
     textAlign: "left",
+    color: "#525454"
   },
 
   body3: {
@@ -67,6 +71,7 @@ export default StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
     textAlign: "left",
+    color: "#525454"
   },
 
   overline2: {
@@ -83,6 +88,7 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     textAlign: "left",
+    color: "#525454"
   },
 
   h4Bold: {
@@ -90,6 +96,7 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     textAlign: "left",
+    color: "#525454"
   },
 
   body1Bold: {
@@ -105,6 +112,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: "800",
     textAlign: "left",
+    color: "#525454"
   },
 
   numbers: {
@@ -112,5 +120,6 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 });
