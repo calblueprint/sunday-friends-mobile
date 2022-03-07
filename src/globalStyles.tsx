@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  
+
   container: {
     flex: 1,
     backgroundColor: "#FAFAFA",
@@ -14,6 +14,7 @@ export default StyleSheet.create({
     fontSize: 36,
     fontWeight: "700",
     textAlign: "left",
+    color: "#272929",
   },
 
   h2: {
@@ -21,6 +22,7 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
+    color: "#272929",
   },
 
   h3: {
@@ -51,6 +53,14 @@ export default StyleSheet.create({
     textAlign: "left",
   },
 
+  body3: {
+    fontFamily: "Avenir",
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "left",
+    color: '#525454',
+  },
+
   overline1: {
     fontFamily: "Avenir",
     fontWeight: "900",
@@ -65,6 +75,7 @@ export default StyleSheet.create({
     fontSize: 12,
     textTransform: "uppercase",
     textAlign: "left",
+    color: '#525454',
   },
 
   h3Bold: {
@@ -86,6 +97,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: "800",
     textAlign: "left",
+    color: "#525454",
   },
 
   body2Bold: {

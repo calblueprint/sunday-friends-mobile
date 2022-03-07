@@ -1,12 +1,12 @@
 import * as React from "react";
 import { StyleSheet, View, Text, Pressable, GestureResponderEvent, ViewStyle } from "react-native";
 
-const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: { 
-  text: string, 
+const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: {
+  text: string,
   onPress: (event: GestureResponderEvent) => void,
   buttonStyle: any,
   textStyle: any,
- }) => {
+}) => {
   const styles = StyleSheet.create({
     buttonText: {
       fontFamily: "Avenir",
@@ -22,6 +22,7 @@ const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: {
       width: "80%",
       height: "5%",
       justifyContent: "center",
+      marginTop: "3%",
     },
   });
 
