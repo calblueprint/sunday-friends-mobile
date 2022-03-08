@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import SvgIcon from '../../../assets/SvgIcon';
 import styles from './styles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
 
@@ -72,6 +73,9 @@ const TransactionsGroup = () => {
                         onFocus={() => setSearchEntered(false)}
                         value={searchText}
                         style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}
+                        inputStyle={styles.searchText}
+                        icon={() => <SvgIcon type='searchbar_search'/>}
+                        clearIcon={() => <SvgIcon type='searchbar_close'/>}
                     />
                     <Pressable style={styles.filtersButton}> 
                         <Text style={styles.filtersButtonText}>Filters (0)</Text>
