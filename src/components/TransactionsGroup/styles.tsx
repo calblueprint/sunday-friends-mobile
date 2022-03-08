@@ -34,14 +34,23 @@ export default StyleSheet.create({
     width: '100%',
   },
   searchbar: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 10,
     width: '70%',
     marginRight: 16,
-    paddingBottom: 0,
     borderColor: '#A9A9A9',
     borderWidth: 1.2,
     borderRadius: 8,
     shadowOpacity: 0,
-    height: 36,
+  },
+  innerSearchbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 0
   },
   searchText: {
     fontFamily: 'Avenir',
@@ -50,6 +59,7 @@ export default StyleSheet.create({
     lineHeight: 16,
     color: '#525454',
     margin: 0,
+    flex: 1
   },
   filtersButton: {
     display: 'flex',

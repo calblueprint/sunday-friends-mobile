@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback, TextInput } from 'react-native';
 import SvgIcon from '../../../assets/SvgIcon';
 import styles from './styles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
@@ -8,6 +7,7 @@ import TransactionPreview from './TransactionPreview/TransactionPreview';
 const TransactionsGroup = () => {
     const [selection, setSelection] = useState(1);
 
+    const [searchClicked, setSearchClicked] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [searchEntered, setSearchEntered] = useState(false);
     const [transactions, setTransactions] = useState([] as any);
@@ -66,17 +66,34 @@ const TransactionsGroup = () => {
                 </View>
 
                 <View style={styles.searchFilterContainer}>
-                    <Searchbar
-                        placeholder="Search by..."
-                        onChangeText={query => setSearchText(query)}
-                        onSubmitEditing={handleSearch}
-                        onFocus={() => setSearchEntered(false)}
-                        value={searchText}
-                        style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}
-                        inputStyle={styles.searchText}
-                        icon={() => <SvgIcon type='searchbar_search'/>}
-                        clearIcon={() => <SvgIcon type='searchbar_close'/>}
-                    />
+                    <View style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}>
+                        <View style={styles.innerSearchbar}>
+                            <View style={{paddingRight: 10}}>
+                                <SvgIcon type="searchbar_search"/>
+                            </View>
+                            <TextInput
+                                style={styles.searchText}
+                                placeholder="Search by..."
+                                placeholderTextColor={"#525454"}
+                                value={searchText}
+                                onChangeText={setSearchText}
+                                onFocus={() => {
+                                    setSearchClicked(true);
+                                }}
+                                onSubmitEditing={() => {
+                                    setSearchEntered(true);
+                                }}
+                            />
+                            {(searchText !== "") && (
+                                <Pressable onPress={() => {
+                                    setSearchText("");
+                                    setSearchEntered(false);
+                                }}>
+                                    <SvgIcon type="searchbar_close" />
+                                </Pressable>
+                            )}
+                        </View>
+                    </View>
                     <Pressable style={styles.filtersButton}> 
                         <Text style={styles.filtersButtonText}>Filters (0)</Text>
                     </Pressable>
