@@ -42,6 +42,7 @@ export default function App() {
     transactions: [],
   };
   const [user, setUser] = useState(defaultUser);
+  const [userid, setUserId] = useState("X89EpL9f0nNE49PvXp0ERhkO30U2");
 
   let [fontsLoaded] = useFonts({
     DMSans_400Regular,
@@ -64,7 +65,7 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
-          <userContext.Provider value={user}>
+          <userContext.Provider value={userid}>
             <Navigation />
             <StatusBar />
           </userContext.Provider>

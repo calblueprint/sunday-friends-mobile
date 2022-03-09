@@ -23,6 +23,6 @@ const defaultUser: User = {
 //   etUser: (user: User) => {},
 // });
 
-const userContext = React.createContext(defaultUser);
+const userContext = React.createContext("");
 
 export default userContext;

@@ -28,7 +28,7 @@ const FamilyScreen = ({ navigation }: any) => {
         <ViewContainer>
             <Title style={globalStyles.h1}> Family Screen </Title>
             <View style={styles.separator} />
-            <Title>{value.full_name}</Title>
+            <Title>{value}</Title>
             <Button
                 title="Go to Login"
                 onPress={() => navigation.navigate('LoginStack', { screen: 'Signin' })}
