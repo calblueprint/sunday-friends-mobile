@@ -5,7 +5,8 @@ export type IconType =
   | "chevron_down"
   | "chevron_right"
   | "searchbar_close"
-  | "searchbar_search";
+  | "searchbar_search"
+  | "modal_close";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
   chevron_down: (
@@ -44,6 +45,16 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
       `}
     />
   ),
+  modal_close: (
+    <SvgXml
+      xml={`
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8.5" cy="8.5" r="8.5" fill="#CCCCCC"/>
+      <path d="M7.41759 8.45583L5.09709 5.104H7.04075L8.53817 7.56333L9.97609 5.104H11.8503L9.57942 8.42608L12.1181 12.125H10.1744L8.45884 9.29875L6.79284 12.125H4.95825L7.41759 8.45583Z" fill="#9D9D9D"/>
+      </svg>
+      `}
+    />
+  )
 };
 
 type Props = {
