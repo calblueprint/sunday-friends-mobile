@@ -7,6 +7,7 @@ import ViewContainer from '../../components/ViewContainer';
 import { Divider, Title } from 'react-native-paper';
 import styles from './styles';
 import globalStyles from "../../globalStyles";
+import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 const HomeScreen = ({navigation}: any) => {
     return (
@@ -17,7 +18,6 @@ const HomeScreen = ({navigation}: any) => {
                     <View style={styles.addCircle} />
                 </View>
             </View>
-
             <View style={styles.familyCardContainer}>
                 <View style={styles.addContainer}>
                     <View style={styles.addCircle} />
@@ -50,7 +50,29 @@ const HomeScreen = ({navigation}: any) => {
                             <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>Tier Options</Text>
                         </Pressable>
                 </View>
-                <View style={styles.progressBar}>
+
+                <View style={[{flex: 1}, {marginHorizontal: '5.3%'}]}>
+                    <ProgressSteps activeStepIconColor = '#5F5F5F' topOffset = '20px' activeStepIconBorderColor = '#F2F2F2' progressBarColor = '#F2F2F2'
+                    activeLabelColor = '#A9A9A9' labelColor = '#A9A9A9'>
+                        <ProgressStep label="10000"  nextBtnTextStyle={styles.buttonTextStyle}>
+                            <View style={[{ alignItems: 'center'}]}>
+                                <Text>This is the content within step 1!</Text>
+                            </View>
+                        </ProgressStep>
+                        <ProgressStep label="200000">
+                            <View style={{ alignItems: 'center' }}>
+                                <Text>This is the content within step 2!</Text>
+                            </View>
+                        </ProgressStep>
+                        <ProgressStep label="300000">
+                            <View style={{ alignItems: 'center' }}>
+                                <Text>This is the content within step 3!</Text>
+                            </View>
+                        </ProgressStep>
+                    </ProgressSteps>
+                </View>
+                
+                {/* <View style={styles.progressBar}>
                     <View style={styles.addBar} />
                     <View style={styles.levels}>
                         <View style={styles.columnContainer}>
@@ -72,7 +94,7 @@ const HomeScreen = ({navigation}: any) => {
                             <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>3000</Text>
                         </View>
                     </View>
-                </View>
+                </View> */}
                 <View style={styles.buttomBar}>
                     <View style={styles.rowContainer}>
                         <Text style={[globalStyles.body2Bold, {color: "#5F5F5F"}]}>Tire 1: </Text>

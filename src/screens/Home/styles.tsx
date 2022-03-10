@@ -83,13 +83,22 @@ export default StyleSheet.create({
     width: "89.4%",
   },
 
+  buttonText: {
+    color: '#393939',
+  },
+
+  buttonTextStyle: {
+    color: 'green'
+  },
+
+
 
   progressBar: {
     marginVertical: "2.5%",
     justifyContent: "center",
   },
 
-  circles: {
+  nextBtnStyle: {
     marginVertical: "5%",
     height: "25%",
   },
