@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FAFAFA",
+    alignItems: "center",
+  },
+
   scrollContainer: {
     backgroundColor: "#FAFAFA",
     alignContent: "center",
@@ -8,7 +14,7 @@ export default StyleSheet.create({
   },
 
   title1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 18,
     fontWeight: "500",
     textAlign: "left",
@@ -17,12 +23,61 @@ export default StyleSheet.create({
   },
 
   title2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
     width: "80%",
     marginVertical: "2%",
+  },
+
+  modalContainer: {
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    top: "33%",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    //padding: "10%",
+  },
+
+  modalTopContainer: {
+    width: "90%",
+    alignItems: "flex-end",
+    marginTop: "4%",
+  },
+
+  innerContainer: {
+    width: "80%",
+  },
+
+  modalText: {
+    fontFamily: "Avenir",
+    fontWeight: "800",
+    fontSize: 12,
+    textTransform: "uppercase",
+    textAlign: "left",
+    color: "#525454",
+    marginVertical: "3%",
+    width: "80%",
+  },
+
+  modalTitle: {
+    fontFamily: "DMSans_700Bold",
+    fontSize: 16,
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#272929",
+    marginTop: "2%",
+    marginBottom: "5%",
+  },
+
+  input: {
+    backgroundColor: "#EBEBEB",
+    width: "80%",
+    height: "5%",
+    justifyContent: "center",
+    marginBottom: "5%",
   },
 
   backgroundContainer: {
@@ -56,7 +111,7 @@ export default StyleSheet.create({
     left: "2%",
   },
 
-  innerContainer: {
+  addInnerContainer: {
     alignSelf: "center",
     marginLeft: "3%",
   },
