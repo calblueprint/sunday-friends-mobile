@@ -1,25 +1,15 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-    },
-});
+import * as React from "react";
+import { View } from "react-native";
+import globalStyles from "../globalStyles";
 
 type ViewProps = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-export default function ViewContainer({
-    children
-}: ViewProps) {
-    return <View style={styles.container}>{children}</View>;
+export default function ViewContainer({ children }: ViewProps) {
+  return <View style={globalStyles.container}>{children}</View>;
 }
 
 ViewContainer.defaultProps = {
-    children: null,
+  children: null,
 };

@@ -1,53 +1,68 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: "#FAFAFA",
     alignItems: "center",
-    padding: "1%",
+    justifyContent: "center",
   },
 
   h1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 36,
     fontWeight: "700",
     textAlign: "left",
+    color: "#272929",
   },
 
   h2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
+    color: "#272929",
   },
 
   h3: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 24,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 
   h4: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 18,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 
   body1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_400Regular",
     fontSize: 14,
     fontWeight: "400",
     textAlign: "left",
+    color: "#525454"
   },
 
   body2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_400Regular",
     fontSize: 12,
     fontWeight: "400",
     textAlign: "left",
+    color: "#525454"
+  },
+
+  body3: {
+    fontFamily: "Avenir",
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "left",
+    color: '#525454',
   },
 
   overline1: {
@@ -56,6 +71,7 @@ export default StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
     textAlign: "left",
+    color: "#525454"
   },
 
   overline2: {
@@ -64,40 +80,46 @@ export default StyleSheet.create({
     fontSize: 12,
     textTransform: "uppercase",
     textAlign: "left",
+    color: '#525454',
   },
 
   h3Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 24,
     fontWeight: "700",
     textAlign: "left",
+    color: "#525454"
   },
 
   h4Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 18,
     fontWeight: "700",
     textAlign: "left",
+    color: "#525454"
   },
 
   body1Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "Avenir",
     fontSize: 14,
     fontWeight: "800",
     textAlign: "left",
+    color: "#525454",
   },
 
   body2Bold: {
-    fontFamily: "DM Sans",
+    fontFamily: "Avenir",
     fontSize: 12,
     fontWeight: "800",
     textAlign: "left",
+    color: "#525454"
   },
 
   numbers: {
-    fontFamily: "DM Mono",
+    fontFamily: "DM_Mono",
     fontSize: 12,
     fontWeight: "500",
     textAlign: "left",
+    color: "#525454"
   },
 });
