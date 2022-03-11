@@ -35,20 +35,28 @@ export default StyleSheet.create({
     alignItems: "center",
     flex: 1,
     backgroundColor: "#FFFFFF",
-    top: "33%",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    //padding: "10%",
-  },
-
-  modalTopContainer: {
-    width: "90%",
-    alignItems: "flex-end",
-    marginTop: "4%",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
 
   innerContainer: {
     width: "80%",
+  },
+
+  rectangularButton: {
+    backgroundColor: "#C4C4C4",
+    width: "80%",
+    height: "7%",
+    justifyContent: "center",
+  },
+
+  rectangularButtonText: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+    textTransform: "uppercase",
+    alignSelf: "center",
+    color: "#525454",
   },
 
   modalText: {
@@ -75,7 +83,7 @@ export default StyleSheet.create({
   input: {
     backgroundColor: "#EBEBEB",
     width: "80%",
-    height: "5%",
+    height: "7%",
     justifyContent: "center",
     marginBottom: "5%",
   },
