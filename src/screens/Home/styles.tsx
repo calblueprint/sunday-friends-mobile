@@ -8,23 +8,6 @@ export default StyleSheet.create({
     backgroundColor: "#eee",
   },
 
-  title1: {
-    fontFamily: "DM Sans",
-    fontSize: 28,
-    fontWeight: "500",
-    textAlign: "left",
-    width: "90%",
-  },
-
-  title2: {
-    fontFamily: "DM Sans",
-    fontSize: 30,
-    fontWeight: "700",
-    textAlign: "left",
-    width: "90%",
-    marginVertical: "2%",
-  },
-
   familyCardContainer: {
     backgroundColor: "#F6F6F6",
     // alignItems: "stretch",
