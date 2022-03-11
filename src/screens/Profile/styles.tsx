@@ -97,7 +97,7 @@ export default StyleSheet.create({
     alignContent: 'center',
     justifyContent: "center",
     width: '100%',
-    marginVertical: 16,
+    marginVertical: 15,
   },
   headFlatListItem: {
     display: 'flex',
@@ -152,9 +152,9 @@ export default StyleSheet.create({
   },
   flatList: {
     position: 'absolute',
-    top: '30%',
+    top: '29%',
     width: '100%',
-    height: '66%',
+    height: '70%',
   },
   addPressable: {
     display: 'flex',
@@ -191,7 +191,7 @@ export default StyleSheet.create({
   modalVisibleContainer: {
     flex: 1,
     backgroundColor: '#FAFAFA',
-    opacity: 0.6,
+    opacity: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
   },
