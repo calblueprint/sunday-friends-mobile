@@ -5,7 +5,7 @@ import styles from './styles';
 import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
 import RBSheet from "react-native-raw-bottom-sheet";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import FiltersModal from "./FiltersModal/FiltersModal";
 
 const TransactionsGroup = () => {
     const refRBSheet = useRef();
@@ -18,7 +18,7 @@ const TransactionsGroup = () => {
 
     // const [dateFilter, setDateFilter] = useState(1);
     const [minDate, setMinDate] = useState(new Date(1598051730000));
-    const [showMin, setShowMin] = useState(false);
+    const [showMin, setShowMin] = useState(true);
     const [typeFilter, setTypeFilter] = useState(1);
     const [minAmount, setMinAmount] = useState(null as any);
     const [maxAmount, setMaxAmount] = useState(null as any);
@@ -149,109 +149,10 @@ const TransactionsGroup = () => {
                         }
                     }}
                 >
-                    <Pressable style={styles.modalIconContainer} onPress={() => refRBSheet.current.close()}>
-                        <Text style={styles.closeText}>Close</Text>
-                        {/* <SvgIcon type="modal_close" /> */}
-                    </Pressable>
-                    <Text style={styles.modalTitle}>Filter Transactions</Text>
-                    <View style={styles.innerModal}>
-                        <View style={styles.filtersContainer}>
-                            <View style={styles.filterGroup}>
-                                <Text style={[styles.filterBtnText, {marginBottom: 5}]}>Filter by date</Text>
-                                {/* <View style={styles.filterButtonGroup}>
-                                    <Pressable style={[styles.filterBtn, dateFilter === 1 ? { borderColor: '#A9A9A9' } : {borderColor: '#F7F7F7'}]} onPress={() => setDateFilter(1)}>
-                                        <Text style={[styles.filterBtnText, dateFilter === 1 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Anytime</Text>
-                                    </Pressable>
-                                    <Pressable style={[styles.filterBtn, dateFilter === 2 ? { borderColor: '#A9A9A9' } : {borderColor: '#F7F7F7'}]} onPress={() => setDateFilter(2)}>
-                                        <Text style={[styles.filterBtnText, dateFilter === 2 ? { color: '#525454' } : {color: '#A9A9A9'}]}>This week</Text>
-                                    </Pressable>
-                                    <Pressable style={[styles.filterBtn, dateFilter === 3 ? { borderColor: '#A9A9A9' } : {borderColor: '#F7F7F7'}]} onPress={() => setDateFilter(3)}>
-                                        <Text style={[styles.filterBtnText, dateFilter === 3 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Past 30 days</Text>
-                                    </Pressable>
-                                    <Pressable style={[styles.filterBtn, dateFilter === 4 ? { borderColor: '#A9A9A9' } : {borderColor: '#F7F7F7'}]} onPress={() => setDateFilter(4)}>
-                                        <Text style={[styles.filterBtnText, dateFilter === 4 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Past 6 months</Text>
-                                    </Pressable>
-                                </View> */}
-                                <View style={styles.amountsContainer}>
-                                    <TextInput
-                                        editable={false}
-                                        onPress={() => setShowMin(true)}
-                                        style={styles.amountInput}
-                                        value={minDate.toLocaleString()}
-                                        placeholder="MM/DD/YYYY"
-                                        placeholderTextColor={'#A9A9A9'}
-                                    />
-                                    {showMin && (
-                                        <DateTimePicker
-                                        testID="dateTimePicker"
-                                        value={minDate}
-                                        // is24Hour={true}
-                                        onChange={(event, selectedDate) => {
-                                            const currentDate = selectedDate;
-                                            setShowMin(false);
-                                            setMinDate(currentDate);
-                                          }}
-                                        />
-                                    )}
-                                    <Text style={styles.to}>to</Text>
-                                    <TextInput
-                                        style={styles.amountInput}
-                                        onChangeText={text => setMaxAmount(text)}
-                                        value={maxAmount}
-                                        placeholder="Amount"
-                                        placeholderTextColor={'#A9A9A9'}
-                                        keyboardType="numeric"
-                                        returnKeyType="done"
-                                    />
-                                </View>
-                            </View>
-                            <View style={styles.filterGroup}>
-                                <Text style={[styles.filterBtnText, {marginBottom: 5}]}>Filter by amount</Text>
-                                <View style={styles.amountsContainer}>
-                                    <TextInput
-                                        style={styles.amountInput}
-                                        onChangeText={text => setMinAmount(text)}
-                                        value={minAmount}
-                                        placeholder="Amount"
-                                        placeholderTextColor={'#A9A9A9'}
-                                        keyboardType="numeric"
-                                        returnKeyType="done"
-                                    />
-                                    <Text style={styles.to}>to</Text>
-                                    <TextInput
-                                        style={styles.amountInput}
-                                        onChangeText={text => setMaxAmount(text)}
-                                        value={maxAmount}
-                                        placeholder="Amount"
-                                        placeholderTextColor={'#A9A9A9'}
-                                        keyboardType="numeric"
-                                        returnKeyType="done"
-                                    />
-                                </View>
-                            </View>
-                            <View style={styles.filterGroup}>
-                                <Text style={[styles.filterBtnText, {marginBottom: 5}]}>Filter by transaction type</Text>
-                                <Pressable style={[styles.filterBtn, typeFilter === 1 ? { borderColor: '#7F93D1' } : {borderColor: '#F7F7F7'}]} onPress={() => setTypeFilter(1)}>
-                                    <Text style={[styles.filterBtnText, typeFilter === 1 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Any transaction</Text>
-                                </Pressable>
-                                <Pressable style={[styles.filterBtn, typeFilter === 2 ? { borderColor: '#7F93D1' } : {borderColor: '#F7F7F7'}]} onPress={() => setTypeFilter(2)}>
-                                    <Text style={[styles.filterBtnText, typeFilter === 2 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Earnings</Text>
-                                </Pressable>
-                                <Pressable style={[styles.filterBtn, typeFilter === 3 ? { borderColor: '#7F93D1' } : {borderColor: '#F7F7F7'}]} onPress={() => setTypeFilter(3)}>
-                                    <Text style={[styles.filterBtnText, typeFilter === 3 ? { color: '#525454' } : {color: '#A9A9A9'}]}>Expirations</Text>
-                                </Pressable>
-                            </View>
-                        </View>
-                        
-                    </View>
-                    <View style={styles.resetApplyContainer}>
-                            <Pressable style={styles.resetApplyButton} onPress={handleReset}> 
-                                <Text style={[globalStyles.overline1, {color: "#272929"}]}>Reset</Text>
-                            </Pressable>
-                            <Pressable style={[styles.resetApplyButton, {backgroundColor: "#253C85", borderColor: "#253C85"}]} onPress={handleApply}> 
-                                <Text style={[globalStyles.overline1, {color: "#FFFFFF"}]}>Apply</Text>
-                            </Pressable>
-                        </View>
+                    <FiltersModal refRBSheet={refRBSheet} minDate={minDate} setMinDate={setMinDate} showMin={showMin} setShowMin={setShowMin}
+                        minAmount={minAmount} setMinAmount={setMinAmount} maxAmount={maxAmount} setMaxAmount={setMaxAmount}
+                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset}
+                    />
                 </RBSheet>
             </View>
         </TouchableWithoutFeedback>
