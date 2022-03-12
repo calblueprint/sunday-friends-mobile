@@ -8,6 +8,7 @@ export default StyleSheet.create({
   },
   btnGroup: {
     flexDirection: 'row',
+    backgroundColor: "#FAFAFA",
     alignItems: 'center',
     width: '100%',
   },
@@ -15,19 +16,23 @@ export default StyleSheet.create({
     width: '33.3333%',
   },
   selectedBtn: {
-    borderBottomWidth: 2,
-    borderColor: '#6B7280',
+    borderBottomWidth: 3,
+    borderColor: '#253C85',
   },
   unselectedBtn: {
-    borderColor: '#253C85',
+    borderBottomWidth: 3,
+    borderColor: '#F2F2F2',
   },
   btnText: {
     textAlign: 'center',
-    paddingVertical: 16,
+    paddingVertical: 11,
     fontSize: 14,
+    color: '#272929',
+    fontFamily: 'Avenir',
+    fontWeight: '800',
   },
   searchFilterContainer: {
-    padding: '5.26%', // 15
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -83,29 +88,42 @@ export default StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-    padding: 17
+    padding: 14
+  },
+  closeText: {
+    fontFamily: "Avenir",
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "center",
+    color: "#526DC2",
   },
   innerModal: {
-    // marginTop: 26,
+    marginTop: 56,
     height: "100%"
   },
   filtersContainer: {
-    height: 649,
-    padding: 32,
+    position: "absolute",
+    top: 0,
+    height: 533,
+    paddingHorizontal: 20,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   modalTitle: {
+    width: "100%",
     fontFamily: "DMSans_700Bold",
     fontSize: 16,
     fontWeight: "700",
     textAlign: "center",
-    color: "#272929"
+    color: "#272929",
+    position: "absolute",
+    top: 34
   },
   filterGroup: {
-    width: "100%"
+    width: "100%",
+    marginBottom: 40
   },
   filterButtonGroup: {
     width: "100%"
@@ -157,14 +175,21 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 13,
+    paddingBottom: 53,
     borderTopWidth: 1,
     borderTopColor: "#C4C4C4",
-    height: 87
+    height: 113,
+    position: "absolute",
+    width: "100%",
+    top: 648,
+    left: 0
   },
   resetApplyButton: {
     borderWidth: 2,
-    borderColor: "#C4C4C4",
+    borderRadius: 5,
+    borderColor: "#526DC2",
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
