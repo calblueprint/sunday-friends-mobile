@@ -18,7 +18,7 @@ const TransactionsGroup = () => {
 
     // const [dateFilter, setDateFilter] = useState(1);
     const [minDate, setMinDate] = useState(new Date(1598051730000));
-    const [showMin, setShowMin] = useState(true);
+    const [showMin, setShowMin] = useState(false);
     const [typeFilter, setTypeFilter] = useState(1);
     const [minAmount, setMinAmount] = useState(null as any);
     const [maxAmount, setMaxAmount] = useState(null as any);

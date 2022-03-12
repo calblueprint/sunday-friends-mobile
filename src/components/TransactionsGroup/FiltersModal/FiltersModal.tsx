@@ -2,7 +2,7 @@ import React from 'react'
 import { Pressable, Text, View, TextInput } from 'react-native';
 import styles from './styles';
 import globalStyles from '../../../globalStyles';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, minAmount, 
@@ -18,28 +18,15 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, mi
                 <View style={styles.filterGroup}>
                     <Text style={[styles.filterBtnText, {marginBottom: 5}]}>Filter by date</Text>
                     <View style={styles.amountsContainer}>
-                        <Pressable onPress={() => setShowMin(true)}>
+                        <Pressable onPress={() => setShowMin(true)} style={{width: "45%"}}>
                             <TextInput
                                 editable={false}
-                                style={styles.amountInput}
+                                style={[styles.amountInput, {width: "100%"}]}
                                 value={minDate.toLocaleString()}
                                 placeholder="MM/DD/YYYY"
                                 placeholderTextColor={'#A9A9A9'}
                             />
                         </Pressable>
-                        {showMin && (
-                            <DateTimePicker
-                            testID="dateTimePicker"
-                            value={minDate}
-                            mode={"date"}
-                            is24Hour={true}
-                            onChange={(event, selectedDate) => {
-                                const currentDate = selectedDate;
-                                setShowMin(false);
-                                setMinDate(currentDate);
-                                }}
-                            />
-                        )}
                         <Text style={styles.to}>to</Text>
                         <TextInput
                             style={styles.amountInput}
@@ -87,7 +74,6 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, mi
                     </Pressable>
                 </View>
             </View>
-            
         </View>
         <View style={styles.resetApplyContainer}>
                 <Pressable style={styles.resetApplyButton} onPress={handleReset}> 
@@ -96,8 +82,18 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, mi
                 <Pressable style={[styles.resetApplyButton, {backgroundColor: "#253C85", borderColor: "#253C85"}]} onPress={handleApply}> 
                     <Text style={[globalStyles.overline1, {color: "#FFFFFF"}]}>Apply</Text>
                 </Pressable>
-            </View>
-        </>
+        </View>
+        <DateTimePickerModal
+            isVisible={showMin}
+            mode="date"
+            is24Hour={true}
+            onConfirm={(date) => {
+                setShowMin(false)
+                setMinDate(date)
+            }}
+            onCancel={() => setShowMin(false)}
+        />
+    </>
   )
 }
 
