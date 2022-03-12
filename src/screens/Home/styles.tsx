@@ -26,14 +26,14 @@ export default StyleSheet.create({
   },
 
   familyCardContainer: {
+    borderWidth: 2,
+    borderColor: '#E6ECFE',
     backgroundColor: "#F6F6F6",
     // alignItems: "stretch",
-    marginTop: 17,
+    marginTop: 16,
     borderRadius: 10, 
     width: "89.4%",
     overflow: "hidden",
-    borderWidth: 2,
-    borderColor: '#F2F2F2',
   },
 
   homeContainer: {
@@ -49,14 +49,21 @@ export default StyleSheet.create({
     width: "89.4%",
     borderWidth: 2,
     height: 210,
-    borderColor: '#F2F2F2',
+    borderColor: '#E6ECFE',
   },
 
   headline: {
     flexDirection: "row",
     width: "89.4%",
     justifyContent: "space-between",
-    marginTop: 91,
+    marginTop: 0,
+  },
+
+  dateContainer: {
+    flexDirection: "row",
+    width: "89.4%",
+    justifyContent: "space-between",
+    marginTop: 78,
   },
 
   addContainer: {
@@ -68,6 +75,7 @@ export default StyleSheet.create({
 
   topHalfContainer: {
     justifyContent: 'space-between',
+    alignItems: "center",
     flexDirection: "row",
     marginVertical: "5%",
     marginLeft: "5%",
@@ -121,13 +129,14 @@ export default StyleSheet.create({
   },
 
   contributions: {
-    // backgroundColor: "#F2F2F2",
     width: 127,
     height: 24,
     borderRadius: 26,
     padding: 4,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: '#A9A9A9',
   },
 
   addLevelCircle: {
@@ -166,20 +175,44 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
 
+  tierContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    // width: '89.4%'
+  },
+
+  tierBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 69,
+    height: 39,
+    backgroundColor: '#526DC2',
+    borderRadius: 5, 
+    paddingHorizontal: 13,
+    paddingVertical: 10, 
+    marginRight: 14,
+  },
+
   columnContainer: {
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
   },
 
   balanceContainer: {
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
   },
 
   balanceText: {
     fontFamily: "DM Mono",
-    fontWeight: "800",
+    fontWeight: "500",
     fontSize: 36,
+
+  },
+  itemsText: {
+    fontFamily: 'Avenir',
+    fontWeight: "400",
+    fontSize: 12,
 
   },
 });
