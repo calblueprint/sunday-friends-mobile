@@ -31,7 +31,7 @@ function ProfileScreen() {
     email: "",
     role: "",
     family_id: 0,
-    full_name: "default",
+    full_name: "",
     last_active: new Date(),
     parent: false,
     points: 0,
@@ -43,6 +43,7 @@ function ProfileScreen() {
   const [profileSwitchModalVisible, setProfileSwitchModalVisible] = useState(false);
   const value = useContext(userContext)
   const [user, setUser] = useState(defaultUser)
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
   useEffect(() => {
     getUser(value).then((currUser) => {
@@ -53,7 +54,7 @@ function ProfileScreen() {
   return (
     <ViewContainer>
       <View
-        style={profileSwitchModalVisible ? styles.modalVisibleContainer : null}
+        style={(profileSwitchModalVisible || logoutModalVisible) ? styles.modalVisibleContainer : null}
       />
 
       <ProfileSwitchModal
@@ -77,7 +78,7 @@ function ProfileScreen() {
         </View>
       </Pressable>
 
-      <Title style={[styles.profileName, globalStyles.h3Bold]}>{user.full_name}Jacob Kim</Title>
+      <Title style={[styles.profileName, globalStyles.h3Bold]}>{user.full_name}</Title>
       <Pressable style={styles.editPressable}>
         <Text style={styles.overline2WHITE}>EDIT PROFILE</Text>
       </Pressable>
@@ -92,14 +93,33 @@ function ProfileScreen() {
       </View>
 
       <View style={styles.profileValues}>
-        <Text style={globalStyles.body1}>Jacob Kim</Text>
-        <Text style={globalStyles.body1}>Dad</Text>
-        <Text style={globalStyles.body1}>booblywobbly@gmail.com</Text>
+        <Text style={globalStyles.body1}>{user.full_name}</Text>
+        <Text style={globalStyles.body1}>{user.role}</Text>
+        <Text style={globalStyles.body1}>{user.email}</Text>
       </View>
 
-      <Pressable style={styles.logoutPressable}>
+      <Pressable 
+        style={styles.logoutPressable} 
+        onPress={() => setLogoutModalVisible(true)}>
         <Text style={styles.overline1WHITE}>LOGOUT</Text>
       </Pressable>
+
+      <Modal visible={logoutModalVisible} transparent>
+        <View style={styles.logoutModal}>
+          <Pressable
+            style={styles.logoutPressableModal}
+          >
+            <Text style={styles.overline1WHITE}>LOGOUT</Text>
+          </Pressable>
+          <Pressable
+            style={styles.cancelLogoutPressable}
+            onPress={() => setLogoutModalVisible(false)}
+          >
+            <Text style={globalStyles.overline1}>CANCEL</Text>
+          </Pressable>
+        </View>
+      </Modal>
+
     </ViewContainer>
   );
 }
