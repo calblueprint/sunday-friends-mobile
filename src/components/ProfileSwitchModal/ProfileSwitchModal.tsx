@@ -18,12 +18,9 @@ function Item({
     return (
       <View style={styles.flatListItem}>
         <Pressable style={styles.flatListImagePressable}>
-          <SvgIcon type='headSmiley' />
+          <SvgIcon type='smallHeadSmiley' />
         </Pressable>
-        <View style={styles.listInfo}>
-          <Text style={globalStyles.body1Bold}>{name}</Text>
-          <Text style={globalStyles.body2}>{role}</Text>
-        </View>
+        <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
         <Pressable style={styles.signedIn}>
           <Text style={globalStyles.body2}>Signed In</Text>
         </Pressable>
@@ -35,10 +32,7 @@ function Item({
       <Pressable style={styles.flatListImagePressable}>
         <SvgIcon type='dependentSmiley'/>
       </Pressable>
-      <View style={styles.listInfo}>
-        <Text style={globalStyles.body1Bold}>{name}</Text>
-        <Text style={globalStyles.body2}>{role}</Text>
-      </View>
+      <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
       <Pressable style={styles.switch}>
         <Text style={styles.body2WHITE}>Switch</Text>
       </Pressable>
@@ -59,18 +53,18 @@ const DATA = [
     role: "Dependent",
     signedIn: false,
   },
-  // {
-  //   id: "2",
-  //   name: "Albert Liu",
-  //   role: "Dependent",
-  //   signedIn: false,
-  // },
-  // {
-  //   id: "3",
-  //   name: "Sydney Bui",
-  //   role: "Dependent",
-  //   signedIn: false, 
-  // },
+  {
+    id: "2",
+    name: "Albert Liu",
+    role: "Dependent",
+    signedIn: false,
+  },
+  {
+    id: "3",
+    name: "Sydney Bui",
+    role: "Dependent",
+    signedIn: false, 
+  },
   // {
   //   id: '4',
   //   name: 'Gabe Espinosa',

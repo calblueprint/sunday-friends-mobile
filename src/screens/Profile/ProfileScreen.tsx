@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -24,7 +24,31 @@ import { User } from "../../types/schema";
 
 
 function ProfileScreen() {
-  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =    useState(false);
+  const defaultUser: User = {
+    user_id: "",
+    address: "",
+    created_at: "",
+    email: "",
+    role: "",
+    family_id: 0,
+    full_name: "default",
+    last_active: new Date(),
+    parent: false,
+    points: 0,
+    reward_eligible: false,
+    suspended: false,
+    phone_number: "",
+    transactions: [],
+  };
+  const [profileSwitchModalVisible, setProfileSwitchModalVisible] = useState(false);
+  const value = useContext(userContext)
+  const [user, setUser] = useState(defaultUser)
+
+  useEffect(() => {
+    getUser(value).then((currUser) => {
+      setUser(currUser);
+    })
+  },[])
 
   return (
     <ViewContainer>
@@ -47,16 +71,13 @@ function ProfileScreen() {
         style={styles.profileImagePressable}
         onPress={() => setProfileSwitchModalVisible(true)}
       >
-        <Image
-          style={styles.profileImage}
-          source={require('../../../assets/images/CrownedSmiley.png')}
-        />
+        <SvgIcon type='profileHeadSmiley'/>
         <View style={styles.downArrow}>
           <SvgIcon type="downArrow" />
         </View>
       </Pressable>
 
-      <Title style={[styles.profileName, globalStyles.h3Bold]}>Jacob Kim</Title>
+      <Title style={[styles.profileName, globalStyles.h3Bold]}>{user.full_name}Jacob Kim</Title>
       <Pressable style={styles.editPressable}>
         <Text style={styles.overline2WHITE}>EDIT PROFILE</Text>
       </Pressable>

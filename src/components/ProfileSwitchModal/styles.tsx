@@ -4,8 +4,8 @@ export default StyleSheet.create({
   switchProfileModalView: {
     position: 'absolute',
     width: '92.5%',
-    height: '46%',
-    top: '20%',
+    height: '40%',
+    top: '23%',
     left: '4%',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     width: '100%',
-    marginVertical: 15,
+    marginVertical: 18,
   },
   listInfo: {
     display: 'flex',
@@ -45,7 +45,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     left: '21.9%',
     position: 'relative',
-    top: '-90%', //hard fix for last separator but try better way 
+    top: '-100%', //hard fix for last separator but try better way 
   },
   signedIn: {
     display: 'flex',
@@ -83,7 +83,7 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 63,
     width: '100%',
-    height: '84%',
+    height: '82%',
   },
   flatListImagePressable: {
     display: 'flex',
