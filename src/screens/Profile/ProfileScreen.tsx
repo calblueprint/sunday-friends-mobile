@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -18,6 +18,10 @@ import styles from "./styles";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitchModal";
+import userContext from "../../context/userContext";
+import { getUser } from "../../firebase/firestore/user";
+import { User } from "../../types/schema";
+
 
 function ProfileScreen() {
   const [profileSwitchModalVisible, setProfileSwitchModalVisible] =    useState(false);
@@ -35,6 +39,11 @@ function ProfileScreen() {
       />
 
       <Pressable
+        style={styles.backArrowPressable}
+      >
+        <SvgIcon type="chevronLeft"/>
+      </Pressable>
+      <Pressable
         style={styles.profileImagePressable}
         onPress={() => setProfileSwitchModalVisible(true)}
       >
@@ -49,7 +58,7 @@ function ProfileScreen() {
 
       <Title style={[styles.profileName, globalStyles.h3Bold]}>Jacob Kim</Title>
       <Pressable style={styles.editPressable}>
-        <Text style={globalStyles.overline2}>EDIT PROFILE</Text>
+        <Text style={styles.overline2WHITE}>EDIT PROFILE</Text>
       </Pressable>
       <Pressable style={styles.resetPressable}>
         <Text style={globalStyles.overline2}>RESET PASSWORD</Text>
@@ -59,18 +68,16 @@ function ProfileScreen() {
         <Text style={globalStyles.overline1}>NAME</Text>
         <Text style={globalStyles.overline1}>ROLE</Text>
         <Text style={globalStyles.overline1}>EMAIL</Text>
-        <Text style={globalStyles.overline1}>PASSWORD</Text>
       </View>
 
       <View style={styles.profileValues}>
         <Text style={globalStyles.body1}>Jacob Kim</Text>
         <Text style={globalStyles.body1}>Dad</Text>
         <Text style={globalStyles.body1}>booblywobbly@gmail.com</Text>
-        <Text style={globalStyles.body1}>********</Text>
       </View>
 
       <Pressable style={styles.logoutPressable}>
-        <Text style={globalStyles.overline2}>LOGOUT</Text>
+        <Text style={styles.overline1WHITE}>LOGOUT</Text>
       </Pressable>
     </ViewContainer>
   );
