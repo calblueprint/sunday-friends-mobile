@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
 const FamilyScreen = ({ navigation }: any) => {
 
     const value = useContext(userContext);
-
     return (
         <ViewContainer>
             <Title style={globalStyles.h1}> Family Screen </Title>

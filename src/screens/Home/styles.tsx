@@ -48,7 +48,7 @@ export default StyleSheet.create({
     borderRadius: 10, 
     width: "89.4%",
     borderWidth: 2,
-    height: 210,
+    height: 268,
     borderColor: '#E6ECFE',
   },
 
@@ -57,6 +57,13 @@ export default StyleSheet.create({
     width: "89.4%",
     justifyContent: "space-between",
     marginTop: 0,
+    alignItems: "flex-end",
+  },
+
+  shadow: {
+    shadowColor: '#202020',
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 5,
   },
 
   dateContainer: {
@@ -69,7 +76,7 @@ export default StyleSheet.create({
   addContainer: {
     flexDirection: "row",
     marginVertical: "5%",
-    marginLeft: "5%",
+    marginLeft: 10,
     width: "89.4%",
   },
 
@@ -77,18 +84,47 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: "center",
     flexDirection: "row",
-    marginVertical: "5%",
     marginLeft: "5%",
     width: "89.4%",
+    marginTop: 16, 
   },
+
+  tierOptionsContainer: {
+    flexDirection: "row-reverse",
+    width: "100%",
+    // borderWidth: 2,
+    // borderColor: 'black',
+  },
+
+  stackOfSmileys: {
+    marginRight: 10,
+    flexDirection: "row",
+    width: 120,
+    // shadowColor: 'black',
+    // shadowOffset: {width: 10, height: 10},
+    // shadowRadius: 5,
+    // borderWidth: 2,
+    // borderColor: 'black',
+  },
+
+  profileImage: {
+    width: 42, 
+    height: 42,
+    // borderWidth: 2,
+    // borderColor: 'black',
+  },
+
+
 
   buttomBar: {
     justifyContent: 'space-between',
     alignItems: "center",
-    flexDirection: "row",
-    marginVertical: "5%",
+    flexDirection: "column",
+    marginTop: 20,
     marginLeft: "5%",
     width: "89.4%",
+    // borderColor: 'black',
+    // borderWidth: 2,
   },
 
   buttonText: {
@@ -102,8 +138,10 @@ export default StyleSheet.create({
 
 
   progressBar: {
-    marginVertical: "2.5%",
+    marginTop: 20,
     justifyContent: "center",
+    // borderWidth: 2, 
+    // borderColor: 'black',
   },
 
   nextBtnStyle: {
@@ -117,6 +155,19 @@ export default StyleSheet.create({
     height: 30,
     borderRadius: 25,
     justifyContent: "center",
+  },
+
+  addPersonalCircle: {
+    backgroundColor: "#7F93D1",
+    width: 36,
+    height: 37,
+    borderRadius: 20,
+    justifyContent: "center",
+    borderWidth: 2, 
+    borderColor: '#5A6AA2',
+    alignItems: 'flex-start',
+    paddingLeft: 10, 
+    paddingVertical: 7,
   },
 
   addBar: {
@@ -163,7 +214,7 @@ export default StyleSheet.create({
   },
 
   optionsContainer: {
-    marginTop: "5%",
+    marginTop: 20,
   },
 
   levels: {
@@ -176,8 +227,10 @@ export default StyleSheet.create({
   },
 
   tierContainer: {
+    // marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: 'center',
     // width: '89.4%'
   },
 
@@ -213,6 +266,13 @@ export default StyleSheet.create({
     fontFamily: 'Avenir',
     fontWeight: "400",
     fontSize: 12,
+
+  },
+
+  initialText: {
+    fontFamily: 'DM Sans',
+    fontWeight: "700",
+    fontSize: 18,
 
   },
 });

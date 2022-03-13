@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
 import { useEffect } from 'react';
@@ -53,15 +53,23 @@ const HomeScreen = ({navigation}: any) => {
             <View style = {styles.headline}>
                 <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Kim Family</Text>
                 <View style={styles.innerContainer}>
-                    <View style={styles.addCircle} />
+                    <View style={styles.addPersonalCircle}>
+                    <Pressable
+                        // this doesnt work because wrong screen name but kinda confused on which screen it should be
+                        onPress={() => navigation.navigate('ProfileScreen', { screen: 'Profile' })}
+                        ></Pressable>
+                        <Text style={[styles.initialText, {color: '#253C85'}]}>Y</Text>
+                    </View>
                 </View>
             </View>
             <View style={styles.familyCardContainer}>
                 <View style={styles.addContainer}>
-                    <View style={styles.addCircle} />
-                    <View style={styles.addCircle} />
-                    <View style={styles.addCircle} />
-                    <View style={styles.addCircle} />
+                    <View style={styles.stackOfSmileys}>
+                        <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
+                        <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
+                        <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
+                        <Image style = {[styles.profileImage, {position: 'absolute', left: 90}]} source={require('../../../assets/images/childSmiley.png')} />
+                    </View>
                     <View style={styles.innerContainer}>
                         <View style={styles.rowContainer}>
                             <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
@@ -77,16 +85,6 @@ const HomeScreen = ({navigation}: any) => {
                         <Text style={[styles.balanceText, {color: "#253C85"}]}>100</Text>
                         <Text style={globalStyles.overline2}>FAMILY BALANCE</Text>
                     </View>
-                        {/* <Pressable style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                ? 'white'
-                                : '#F6F6F6'
-                            },
-                            styles.optionsContainer
-                            ]}>
-                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>Tier Options</Text>
-                        </Pressable> */}
                         <Pressable style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
@@ -99,60 +97,15 @@ const HomeScreen = ({navigation}: any) => {
                         </Pressable>
                 </View>
 
-                <View>
-                <StepIndicator 
+                <View style={styles.progressBar}>
+                    <StepIndicator 
                     stepCount = {3}
                     customStyles={customStyles}
                     currentPosition={0}
                     labels={labels}
-                />
+                    />
 
                 </View>
-
-                {/* <View style={[{flex: 1}, {marginHorizontal: '5.3%'}]}>
-                    <ProgressSteps activeStepIconColor = '#5F5F5F' topOffset = '20px' activeStepIconBorderColor = '#F2F2F2' progressBarColor = '#F2F2F2'
-                    activeLabelColor = '#A9A9A9' labelColor = '#A9A9A9'>
-                        <ProgressStep label="10000"  nextBtnTextStyle={styles.buttonTextStyle}>
-                            <View style={[{ alignItems: 'center'}]}>
-                                <Text>This is the content within step 1!</Text>
-                            </View>
-                        </ProgressStep>
-                        <ProgressStep label="200000">
-                            <View style={{ alignItems: 'center' }}>
-                                <Text>This is the content within step 2!</Text>
-                            </View>
-                        </ProgressStep>
-                        <ProgressStep label="300000">
-                            <View style={{ alignItems: 'center' }}>
-                                <Text>This is the content within step 3!</Text>
-                            </View>
-                        </ProgressStep>
-                    </ProgressSteps>
-                </View> */}
-                
-                {/* <View style={styles.progressBar}>
-                    <View style={styles.addBar} />
-                    <View style={styles.levels}>
-                        <View style={styles.columnContainer}>
-                            <View style={styles.addLevelCircleCurrent}>
-                                <Text style={[globalStyles.body2, {color:'white'}]}>1</Text>
-                                </View>
-                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>1000</Text>
-                        </View>
-                        <View style={styles.columnContainer}>
-                            <View style={styles.addLevelCircle}>
-                                <Text style={globalStyles.body2}>2</Text>
-                                </View>
-                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>2000</Text>
-                        </View>
-                        <View style={styles.columnContainer}>
-                            <View style={styles.addLevelCircle}>
-                                <Text style={globalStyles.body2}>3</Text>
-                                </View>
-                            <Text style={[globalStyles.body2, {color: '#A9A9A9'}]}>3000</Text>
-                        </View>
-                    </View>
-                </View> */}
                 <View style={styles.buttomBar}>
                     <View  style={styles.tierContainer}>
                         <View style={styles.tierBox}>
@@ -170,18 +123,20 @@ const HomeScreen = ({navigation}: any) => {
 
                         </View>
                     </View>
-                    <View>
-                        {/* <Pressable style={({ pressed }) => [
+                    <View style={styles.tierOptionsContainer}>
+                        <Pressable style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
                                 ? 'white'
-                                : '#F2F2F2'
+                                : '#F6F6F6'
                             },
-                            styles.contributions
+                            styles.optionsContainer
                             ]}>
-                            <Text style={[globalStyles.body2, {color: "#5F5F5F"}]}>View Contributions</Text>
-                        </Pressable> */}
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>Tier Options</Text>
+                        </Pressable>
                     </View>
+                </View>
+                <View>
                 </View>
             </View>
             
