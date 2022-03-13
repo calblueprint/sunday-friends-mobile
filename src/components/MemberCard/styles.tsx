@@ -10,16 +10,41 @@ export default StyleSheet.create({
   container: {
     flexDirection: "row",
     width: "80%",
-    marginVertical: "6%",
+    marginVertical: "3%",
     marginHorizontal: "10%",
   },
 
-  circle: {
-    backgroundColor: "#C4C4C4",
+  head: {
+    resizeMode: "contain",
+    width: 48,
+    height: 48,
+    justifyContent: "center",
+  },
+
+  parent: {
     width: 50,
     height: 50,
-    borderRadius: 25,
+    resizeMode: "contain",
     justifyContent: "center",
+  },
+
+  imageContainer: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  child: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain",
+  },
+
+  dependent: {
+    width: 28,
+    height: 28,
+    resizeMode: "contain",
   },
 
   rowContainer: {
@@ -28,6 +53,6 @@ export default StyleSheet.create({
 
   innerContainer: {
     alignSelf: "center",
-    marginLeft: "3%",
+    paddingLeft: "4.5%",
   },
 });

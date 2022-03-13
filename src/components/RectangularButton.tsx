@@ -1,11 +1,23 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable, GestureResponderEvent, ViewStyle } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  GestureResponderEvent,
+  ViewStyle,
+} from "react-native";
 
-const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: {
-  text: string,
-  onPress: (event: GestureResponderEvent) => void,
-  buttonStyle: any,
-  textStyle: any,
+const RectangularButton = ({
+  text,
+  onPress,
+  buttonStyle,
+  textStyle,
+}: {
+  text: string;
+  onPress: (event: GestureResponderEvent) => void;
+  buttonStyle: any;
+  textStyle: any;
 }) => {
   const styles = StyleSheet.create({
     buttonText: {
@@ -23,6 +35,7 @@ const RectangularButton = ({ text, onPress, buttonStyle, textStyle }: {
       height: "5%",
       justifyContent: "center",
       marginTop: "3%",
+      borderRadius: 5,
     },
   });
 

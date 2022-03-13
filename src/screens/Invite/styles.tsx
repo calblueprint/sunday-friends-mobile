@@ -11,6 +11,7 @@ export default StyleSheet.create({
     backgroundColor: "#FAFAFA",
     alignContent: "center",
     width: "100%",
+    height: "65%",
   },
 
   title1: {
@@ -24,7 +25,7 @@ export default StyleSheet.create({
 
   title2: {
     fontFamily: "DMSans_700Bold",
-    fontSize: 30,
+    fontSize: 34,
     fontWeight: "700",
     textAlign: "left",
     width: "80%",
@@ -44,10 +45,11 @@ export default StyleSheet.create({
   },
 
   rectangularButton: {
-    backgroundColor: "#C4C4C4",
+    backgroundColor: "#253C85",
     width: "80%",
     height: "7%",
     justifyContent: "center",
+    borderRadius: 5,
   },
 
   rectangularButtonText: {
@@ -56,7 +58,7 @@ export default StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
     alignSelf: "center",
-    color: "#525454",
+    color: "#FFF",
   },
 
   modalText: {
@@ -92,7 +94,7 @@ export default StyleSheet.create({
     backgroundColor: "#F6F6F6",
     width: "100%",
     marginBottom: "6%",
-    height: "40%",
+    height: 70,
     justifyContent: "center",
   },
 
@@ -103,10 +105,10 @@ export default StyleSheet.create({
   },
 
   addCircle: {
-    backgroundColor: "#EBEBEB",
     width: 50,
     height: 50,
-    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   add: {
@@ -121,7 +123,7 @@ export default StyleSheet.create({
 
   addInnerContainer: {
     alignSelf: "center",
-    marginLeft: "3%",
+    marginLeft: "4.5%",
   },
 
   rowContainer: {
