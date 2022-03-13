@@ -51,6 +51,7 @@ export default function App() {
     DMSans_500Medium_Italic,
     DMSans_700Bold,
     DMSans_700Bold_Italic,
+    DM_Mono: require('./assets/fonts/DMMono-Medium.ttf'),
   });
 
   useEffect(() => {
