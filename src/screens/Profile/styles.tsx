@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   backArrowPressable: {
-    position: 'absolute',
-    top: '6%',
-    left: '8.1%'
+    position: "absolute",
+    top: "6%",
+    left: "8.1%",
   },
   profileImagePressable: {
     display: "flex",
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     fontSize: 12,
     textTransform: "uppercase",
     textAlign: "left",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   resetPressable: {
     display: "flex",
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
     textAlign: "left",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   logoutPressable: {
     display: "flex",
@@ -101,52 +101,16 @@ export default StyleSheet.create({
   },
   modalVisibleContainer: {
     flex: 1,
-    backgroundColor: '#000000',
-    width: '100%',
-    height: '100%',
+    backgroundColor: "#000000",
+    width: "100%",
+    height: "100%",
     opacity: 0.4,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 10,
   },
   downArrow: {
-    position: 'absolute',
-    bottom: '6%',
+    position: "absolute",
+    bottom: "6%",
   },
-  logoutModal: {
-    position: 'absolute',
-    top: '27.9%',
-    left: '3.7%',
-    width: '92.5%', 
-    height: '17.2%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 5,
-  },
-  logoutPressableModal: {
-    position: 'absolute', 
-    width: '91.9%',
-    height: '33.5%',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    top: '14%',
-    left: '3.7%',
-    backgroundColor: "#253C85",
-    borderRadius: 5,
-  },
-  cancelLogoutPressable: {
-    position: 'absolute', 
-    width: '91.9%',
-    height: '33.5%',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: '14%',
-    left: '3.7%',
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: '#526DC2'
-  }
 });

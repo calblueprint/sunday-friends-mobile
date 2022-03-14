@@ -1,7 +1,16 @@
-import * as React from 'react';
-import { SvgXml } from 'react-native-svg';
+import * as React from "react";
+import { SvgXml } from "react-native-svg";
 
-export type IconType = 'chevron_down' | 'greyX' | 'addPlus' | 'downArrow' | 'chevronLeft' | 'smallHeadSmiley' | 'dependentSmiley' | 'profileHeadSmiley';
+export type IconType =
+  | "chevron_down"
+  | "greyX"
+  | "addPlus"
+  | "downArrow"
+  | "chevronLeft"
+  | "smallHeadSmiley"
+  | "dependentSmiley"
+  | "profileHeadSmiley"
+  | "profileDependentSmiley";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
   chevron_down: (
@@ -63,7 +72,7 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
     />
   ),
   dependentSmiley: (
-    <SvgXml 
+    <SvgXml
       xml={`
         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="13" cy="13.0005" r="12.0513" fill="#E6ECFE"/>
@@ -85,6 +94,18 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
         <path d="M10.5899 23.8858L1.5 12.7759H9.57994L8.56994 3.686L15.6399 8.73596L19.6799 1.66602L24.7298 17.8259C20.6898 24.2898 13.6199 24.5592 10.5899 23.8858Z" fill="#FFF2C3" stroke="#FFE381" stroke-width="1.83333" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       `}
+    />
+  ),
+  profileDependentSmiley: (
+    <SvgXml
+      xml={`
+				<svg width="67" height="67" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="33.6216" cy="33.6216" r="31.2883" fill="#E6ECFE" stroke="#B5C4F4" stroke-width="3.66667"/>
+				<circle cx="19.8534" cy="31.1425" r="1.02143" fill="#525454" stroke="#525454" stroke-width="2.04286"/>
+				<circle cx="46.411" cy="31.1425" r="1.02143" fill="#525454" stroke="#525454" stroke-width="2.04286"/>
+				<path d="M28.0234 43.4004C29.0449 47.4861 36.1949 47.4861 37.2163 43.4004" stroke="#525454" stroke-width="1.14911" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			`}
     />
   ),
 };

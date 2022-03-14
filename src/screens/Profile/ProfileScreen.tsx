@@ -21,7 +21,8 @@ import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitc
 import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
-
+import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
+import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 
 function ProfileScreen() {
   const defaultUser: User = {
@@ -40,21 +41,27 @@ function ProfileScreen() {
     phone_number: "",
     transactions: [],
   };
-  const [profileSwitchModalVisible, setProfileSwitchModalVisible] = useState(false);
-  const value = useContext(userContext)
-  const [user, setUser] = useState(defaultUser)
-  const [logoutModalVisible, setLogoutModalVisible] = useState(false)
+  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =
+    useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const value = useContext(userContext);
+  const [user, setUser] = useState(defaultUser);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
-    })
-  },[])
+    });
+  }, []);
 
   return (
     <ViewContainer>
       <View
-        style={(profileSwitchModalVisible || logoutModalVisible) ? styles.modalVisibleContainer : null}
+        style={
+          profileSwitchModalVisible || logoutModalVisible || editModalVisible
+            ? styles.modalVisibleContainer
+            : null
+        }
       />
 
       <ProfileSwitchModal
@@ -63,25 +70,34 @@ function ProfileScreen() {
         userID="userIDfiller"
       />
 
-      <Pressable
-        style={styles.backArrowPressable}
-      >
-        <SvgIcon type="chevronLeft"/>
+      <Pressable style={styles.backArrowPressable}>
+        <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
         style={styles.profileImagePressable}
         onPress={() => setProfileSwitchModalVisible(true)}
       >
-        <SvgIcon type='profileHeadSmiley'/>
+        <SvgIcon type="profileHeadSmiley" />
         <View style={styles.downArrow}>
           <SvgIcon type="downArrow" />
         </View>
       </Pressable>
 
-      <Title style={[styles.profileName, globalStyles.h3Bold]}>{user.full_name}</Title>
-      <Pressable style={styles.editPressable}>
+      <Title style={[styles.profileName, globalStyles.h3Bold]}>
+        {user.full_name}
+      </Title>
+
+      <Pressable
+        style={styles.editPressable}
+        onPress={() => setEditModalVisible(true)}
+      >
         <Text style={styles.overline2WHITE}>EDIT PROFILE</Text>
+        <ProfileEditModal
+          visible={editModalVisible}
+          setVisible={setEditModalVisible}
+        />
       </Pressable>
+
       <Pressable style={styles.resetPressable}>
         <Text style={globalStyles.overline2}>RESET PASSWORD</Text>
       </Pressable>
@@ -98,28 +114,16 @@ function ProfileScreen() {
         <Text style={globalStyles.body1}>{user.email}</Text>
       </View>
 
-      <Pressable 
-        style={styles.logoutPressable} 
-        onPress={() => setLogoutModalVisible(true)}>
+      <Pressable
+        style={styles.logoutPressable}
+        onPress={() => setLogoutModalVisible(true)}
+      >
         <Text style={styles.overline1WHITE}>LOGOUT</Text>
+        <ProfileLogoutModal
+          visible={logoutModalVisible}
+          setVisible={setLogoutModalVisible}
+        />
       </Pressable>
-
-      <Modal visible={logoutModalVisible} transparent>
-        <View style={styles.logoutModal}>
-          <Pressable
-            style={styles.logoutPressableModal}
-          >
-            <Text style={styles.overline1WHITE}>LOGOUT</Text>
-          </Pressable>
-          <Pressable
-            style={styles.cancelLogoutPressable}
-            onPress={() => setLogoutModalVisible(false)}
-          >
-            <Text style={globalStyles.overline1}>CANCEL</Text>
-          </Pressable>
-        </View>
-      </Modal>
-
     </ViewContainer>
   );
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { View, Text, Modal, Pressable, FlatList, Image } from 'react-native';
-import styles from './styles'
+import { useState } from "react";
+import { View, Text, Modal, Pressable, FlatList, Image } from "react-native";
+import styles from "./styles";
 
 import globalStyles from "../../globalStyles";
 import SvgIcon from "../../../assets/SvgIcon";
@@ -18,7 +19,7 @@ function Item({
     return (
       <View style={styles.flatListItem}>
         <Pressable style={styles.flatListImagePressable}>
-          <SvgIcon type='smallHeadSmiley' />
+          <SvgIcon type="smallHeadSmiley" />
         </Pressable>
         <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
         <Pressable style={styles.signedIn}>
@@ -30,7 +31,7 @@ function Item({
   return (
     <View style={styles.flatListItem}>
       <Pressable style={styles.flatListImagePressable}>
-        <SvgIcon type='dependentSmiley'/>
+        <SvgIcon type="dependentSmiley" />
       </Pressable>
       <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
       <Pressable style={styles.switch}>
@@ -42,9 +43,9 @@ function Item({
 
 const DATA = [
   {
-    id: '0',
-    name: 'Jacob Kim',
-    role: 'Head',
+    id: "0",
+    name: "Jacob Kim",
+    role: "Head",
     signedIn: true,
   },
   {
@@ -63,7 +64,7 @@ const DATA = [
     id: "3",
     name: "Sydney Bui",
     role: "Dependent",
-    signedIn: false, 
+    signedIn: false,
   },
   // {
   //   id: '4',
@@ -77,7 +78,7 @@ const DATA = [
   // },
 ];
 
-const renderItem = ({ item }) => (
+const renderItem = ({ item }: any) => (
   <Item name={item.name} role={item.role} signedIn={item.signedIn} />
 );
 
@@ -85,7 +86,7 @@ const itemSeparator = () => <View style={styles.itemSeparator} />;
 
 const addMember = () => (
   <View style={styles.addMember}>
-    <View style={styles.lastItemSeparator}/>
+    <View style={styles.lastItemSeparator} />
     <Pressable style={styles.flatListImagePressable}>
       <SvgIcon type="addPlus" />
     </Pressable>
@@ -99,13 +100,15 @@ export default function ProfileSwitchModal({
   userID,
 }: {
   visible: boolean;
-  setVisible: Function,
+  setVisible: Function;
   userID: string;
 }) {
   return (
     <Modal visible={visible} transparent>
       <View style={styles.switchProfileModalView}>
-        <Text style={[globalStyles.h4Bold, styles.switchTitle]}>Switch Accounts</Text>
+        <Text style={[globalStyles.h4Bold, styles.switchTitle]}>
+          Switch Accounts
+        </Text>
         <Pressable
           style={styles.switchModalX}
           onPress={() => setVisible(false)}
