@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   backArrowPressable: {
     position: "absolute",
-    top: "6%",
+    top: "8%",
     left: "8.1%",
   },
   profileImagePressable: {

@@ -24,7 +24,7 @@ import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}: any) => {
   const defaultUser: User = {
     user_id: "",
     address: "",
@@ -64,7 +64,8 @@ const ProfileScreen = () => {
         }
       />
 
-      <Pressable style={styles.backArrowPressable}>
+      <Pressable style={styles.backArrowPressable}
+      onPress={() => navigation.goBack()}>
         <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
