@@ -9,7 +9,7 @@ const ProfileSwitchItem = ({ name, signedIn }: any) => {
     return (
       <View style={styles.flatListItem}>
         <Pressable style={styles.flatListImagePressable}>
-          <SvgIcon type="headSmiley" />
+          <SvgIcon type="profileSmallHeadSmiley" />
         </Pressable>
         <View style={styles.flatlistName}>
           <Text style={globalStyles.body1Bold}>{name}</Text>
@@ -23,7 +23,7 @@ const ProfileSwitchItem = ({ name, signedIn }: any) => {
   return (
     <View style={styles.flatListItem}>
       <Pressable style={styles.flatListImagePressable}>
-        <SvgIcon type="dependentSmiley" />
+        <SvgIcon type="profileSmallDependentSmiley" />
       </Pressable>
       <View style={styles.flatlistName}>
         <Text style={globalStyles.body1Bold}>{name}</Text>

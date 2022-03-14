@@ -4,8 +4,8 @@ export default StyleSheet.create({
   switchProfileModalView: {
     position: "absolute",
     width: "92.5%",
-    height: "46%",
-    top: "20%",
+    height: "40%",
+    top: "23%",
     left: "4%",
     backgroundColor: "#FFFFFF",
     borderRadius: 10,

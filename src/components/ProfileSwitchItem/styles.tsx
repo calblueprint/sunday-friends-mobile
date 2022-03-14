@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     width: "100%",
-    marginVertical: 15,
+    marginVertical: 18,
   },
   flatListImagePressable: {
     display: "flex",

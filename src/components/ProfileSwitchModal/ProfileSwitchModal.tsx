@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { View, Text, Modal, Pressable, FlatList, Image } from "react-native";
 import styles from "./styles";
 
@@ -20,18 +21,18 @@ const DATA = [
     role: "Dependent",
     signedIn: false,
   },
-  // {
-  //   id: "2",
-  //   name: "Albert Liu",
-  //   role: "Dependent",
-  //   signedIn: false,
-  // },
-  // {
-  //   id: "3",
-  //   name: "Sydney Bui",
-  //   role: "Dependent",
-  //   signedIn: false,
-  // },
+  {
+    id: "2",
+    name: "Albert Liu",
+    role: "Dependent",
+    signedIn: false,
+  },
+  {
+    id: "3",
+    name: "Sydney Bui",
+    role: "Dependent",
+    signedIn: false,
+  },
   // {
   //   id: '4',
   //   name: 'Gabe Espinosa',
