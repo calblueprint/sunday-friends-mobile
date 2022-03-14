@@ -41,7 +41,7 @@ const TabNavigator = () => {
                     tabBarIcon: ({ color }) => <Icon name="shopping-cart" color={color} />,
                 }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="Profile"
                 component={ProfileScreen}
                 options={{
@@ -49,7 +49,7 @@ const TabNavigator = () => {
                     headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
                 }}
-            />
+            /> */}
         </Tab.Navigator>
     );
 }

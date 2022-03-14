@@ -45,7 +45,11 @@ const RootNavigator = () => {
         options={{ title: "Oops!" }}
       />
 
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen 
+        name="Profile" 
+        component={ProfileScreen} 
+        options={{ headerShown: false }}
+      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
