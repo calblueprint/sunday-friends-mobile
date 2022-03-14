@@ -1,40 +1,130 @@
-import * as React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, View, Image, ImageBackground, Text, Pressable } from 'react-native';
-import { Title } from 'react-native-paper';
-import EditScreenInfo from '../../components/EditScreenInfo';
-import ViewContainer from '../../components/ViewContainer';
-import styles from '../Profile/styles';
+import * as React from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  ImageBackground,
+  Text,
+  Pressable,
+  Modal,
+  FlatList,
+} from "react-native";
+import { Title } from "react-native-paper";
+import EditScreenInfo from "../../components/EditScreenInfo";
+import ViewContainer from "../../components/ViewContainer";
+import styles from "./styles";
+import SvgIcon from "../../../assets/SvgIcon";
+import globalStyles from "../../globalStyles";
+import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitchModal";
+import userContext from "../../context/userContext";
+import { getUser } from "../../firebase/firestore/user";
+import { User } from "../../types/schema";
+import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
+import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 
 const ProfileScreen = () => {
+  const defaultUser: User = {
+    user_id: "",
+    address: "",
+    created_at: "",
+    email: "",
+    role: "",
+    family_id: 0,
+    full_name: "",
+    last_active: new Date(),
+    parent: false,
+    points: 0,
+    reward_eligible: false,
+    suspended: false,
+    phone_number: "",
+    transactions: [],
+  };
+  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =
+    useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const value = useContext(userContext);
+  const [user, setUser] = useState(defaultUser);
 
-    return (
-        <ViewContainer>
-            <Image style = {styles.profileImage} source={require('../../../assets/images/Smileys.png')} />
-            <Title style = {styles.profileName}>Jacob Kim</Title>
-            <Pressable style={styles.editPressable}>
-                <Text style={styles.buttonText}>EDIT PROFILE</Text>
-            </Pressable>
-            <Pressable style={styles.resetPressable}>
-                <Text style={styles.buttonText}>RESET PASSWORD</Text>
-            </Pressable>
-            <View style={styles.profileFields}>
-                <Text style={styles.fields}>NAME</Text>
-                <Text style={styles.fields}>ROLE</Text>
-                <Text style={styles.fields}>EMAIL</Text>
-                <Text style={styles.fields}>PASSWORD</Text>
-            </View>
-            <View style={styles.profileValues}>
-                <Text style={styles.values}>Jacob Kim</Text>
-                <Text style={styles.values}>Dad</Text>
-                <Text style={styles.values}>booblywobbly@gmail.com</Text>
-                <Text style={styles.values}>********</Text>
-            </View>
-            <Pressable style={styles.logoutPressable}>
-                <Text style={styles.buttonText}>LOGOUT</Text>
-            </Pressable>
-        </ViewContainer>
-    );
-}
+  useEffect(() => {
+    getUser(value).then((currUser) => {
+      setUser(currUser);
+    });
+  }, []);
+
+  return (
+    <ViewContainer>
+      <View
+        style={
+          profileSwitchModalVisible || logoutModalVisible || editModalVisible
+            ? styles.modalVisibleContainer
+            : null
+        }
+      />
+
+      <Pressable style={styles.backArrowPressable}>
+        <SvgIcon type="chevronLeft" />
+      </Pressable>
+      <Pressable
+        style={styles.profileImagePressable}
+        onPress={() => setProfileSwitchModalVisible(true)}
+      >
+        <ProfileSwitchModal
+          visible={profileSwitchModalVisible}
+          setVisible={setProfileSwitchModalVisible}
+        />
+        <SvgIcon type="profileHeadSmiley" />
+        <View style={styles.downArrow}>
+          <SvgIcon type="downArrow" />
+        </View>
+      </Pressable>
+
+      <Title style={[styles.profileName, globalStyles.h3Bold]}>
+        {user.full_name}
+      </Title>
+
+      <Pressable
+        style={styles.editPressable}
+        onPress={() => setEditModalVisible(true)}
+      >
+        <Text style={styles.overline2WHITE}>EDIT PROFILE</Text>
+        <ProfileEditModal
+          visible={editModalVisible}
+          setVisible={setEditModalVisible}
+          user={user}
+        />
+      </Pressable>
+
+      <Pressable style={styles.resetPressable}>
+        <Text style={globalStyles.overline2}>RESET PASSWORD</Text>
+      </Pressable>
+
+      <View style={styles.profileFields}>
+        <Text style={globalStyles.overline1}>NAME</Text>
+        <Text style={globalStyles.overline1}>ROLE</Text>
+        <Text style={globalStyles.overline1}>EMAIL</Text>
+      </View>
+
+      <View style={styles.profileValues}>
+        <Text style={globalStyles.body1}>{user.full_name}</Text>
+        <Text style={globalStyles.body1}>{user.role}</Text>
+        <Text style={globalStyles.body1}>{user.email}</Text>
+      </View>
+
+      <Pressable
+        style={styles.logoutPressable}
+        onPress={() => setLogoutModalVisible(true)}
+      >
+        <Text style={styles.overline1WHITE}>LOGOUT</Text>
+        <ProfileLogoutModal
+          visible={logoutModalVisible}
+          setVisible={setLogoutModalVisible}
+        />
+      </Pressable>
+    </ViewContainer>
+  );
+};
 
 export default ProfileScreen;

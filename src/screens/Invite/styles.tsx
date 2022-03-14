@@ -1,14 +1,21 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FAFAFA",
+    alignItems: "center",
+  },
+
   scrollContainer: {
     backgroundColor: "#FAFAFA",
     alignContent: "center",
     width: "100%",
+    height: "65%",
   },
 
   title1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 18,
     fontWeight: "500",
     textAlign: "left",
@@ -17,19 +24,77 @@ export default StyleSheet.create({
   },
 
   title2: {
-    fontFamily: "DM Sans",
-    fontSize: 30,
+    fontFamily: "DMSans_700Bold",
+    fontSize: 34,
     fontWeight: "700",
     textAlign: "left",
     width: "80%",
     marginVertical: "2%",
   },
 
+  modalContainer: {
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+
+  innerContainer: {
+    width: "80%",
+  },
+
+  rectangularButton: {
+    backgroundColor: "#253C85",
+    width: "80%",
+    height: "7%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  rectangularButtonText: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+    textTransform: "uppercase",
+    alignSelf: "center",
+    color: "#FFF",
+  },
+
+  modalText: {
+    fontFamily: "Avenir",
+    fontWeight: "800",
+    fontSize: 12,
+    textTransform: "uppercase",
+    textAlign: "left",
+    color: "#525454",
+    marginVertical: "3%",
+    width: "80%",
+  },
+
+  modalTitle: {
+    fontFamily: "DMSans_700Bold",
+    fontSize: 16,
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#272929",
+    marginTop: "2%",
+    marginBottom: "5%",
+  },
+
+  input: {
+    backgroundColor: "#EBEBEB",
+    width: "80%",
+    height: "7%",
+    justifyContent: "center",
+    marginBottom: "5%",
+  },
+
   backgroundContainer: {
     backgroundColor: "#F6F6F6",
     width: "100%",
     marginBottom: "6%",
-    height: "40%",
+    height: 70,
     justifyContent: "center",
   },
 
@@ -40,10 +105,10 @@ export default StyleSheet.create({
   },
 
   addCircle: {
-    backgroundColor: "#EBEBEB",
     width: 50,
     height: 50,
-    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   add: {
@@ -56,9 +121,9 @@ export default StyleSheet.create({
     left: "2%",
   },
 
-  innerContainer: {
+  addInnerContainer: {
     alignSelf: "center",
-    marginLeft: "3%",
+    marginLeft: "4.5%",
   },
 
   rowContainer: {

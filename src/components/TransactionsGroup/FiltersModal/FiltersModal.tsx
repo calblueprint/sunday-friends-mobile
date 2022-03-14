@@ -29,7 +29,10 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                         </Text>
                     </View>
                     <View style={styles.amountsContainer}>
-                        <Pressable onPress={() => setShowMin(true)} style={[styles.dateInput, (minDate !== null) ? styles.selectedInput : styles.unselectedInput]}>
+                        <Pressable 
+                            onPress={() => setShowMin(true)} 
+                            style={[styles.dateInput, (minDate !== null) ? styles.selectedInput : styles.unselectedInput]}
+                        >
                             <Text
                                 style={[styles.dateText, (minDate !== null) ? { color: '#525454' } : {color: '#A9A9A9'}]}
                             >
@@ -37,7 +40,10 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                             </Text>
                         </Pressable>
                         <Text style={styles.to}>to</Text>
-                        <Pressable onPress={() => setShowMax(true)} style={[styles.dateInput, (maxDate !== null) ? styles.selectedInput : styles.unselectedInput]}>
+                        <Pressable 
+                            onPress={() => setShowMax(true)} 
+                            style={[styles.dateInput, (maxDate !== null) ? styles.selectedInput : styles.unselectedInput]}
+                        >
                             <Text
                                 style={[styles.dateText, (maxDate !== null) ? { color: '#525454' } : {color: '#A9A9A9'}]}
                             >

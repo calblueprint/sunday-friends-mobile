@@ -9,12 +9,14 @@ export default StyleSheet.create({
     },
 
     title1: {
-        fontFamily: "DM Sans",
-        fontSize: 36,
-        fontWeight: "700",
-        textAlign: "left",
         width: "80%",
         marginTop: "60%",
+    },
+
+    loginTitle: {
+        textAlign: "left",
+        width: "80%",
+        marginTop: "30%",
     },
 
     title2: {
@@ -27,13 +29,38 @@ export default StyleSheet.create({
     },
 
     text: {
-        marginBottom: "8%",
-        fontFamily: "DM Sans",
-        fontSize: 14,
-        fontWeight: "400",
+        marginBottom: "7%",
         textAlign: "left",
         width: "80%",
-        marginVertical: "2%",
-        marginTop: '4%',
+        marginTop: '3%',
     },
+
+    input: {
+        height: 40,
+        width: "80%",
+        marginTop: "2%",
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 5,
+    },
+
+    body1: {
+        marginBottom: "8%",
+        textAlign: "left",
+        width: "80%",
+        marginTop: '3%',
+    },
+
+    underline: {
+        textDecorationLine: 'underline',
+    },
+
+    footer: {
+        marginTop: "40%",
+        textAlign: "center",
+    },
+
+    // inline: {
+    //     marginTop: "-15%"
+    // }
 });

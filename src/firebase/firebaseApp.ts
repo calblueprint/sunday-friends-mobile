@@ -5,7 +5,7 @@ import {
     STORAGE_BUCKET,
     MESSAGING_SENDER_ID,
     APP_ID,
-  } from '@env';
+} from '@env';
 import firebase from "firebase/app";
 import "firebase/auth";
 

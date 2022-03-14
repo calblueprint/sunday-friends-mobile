@@ -2,15 +2,15 @@ import * as React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import ViewContainer from '../../components/ViewContainer';
 import { default as styles } from "./styles";
-import RectangularButton from '../../components/RectangularButton';
-
+import RectangularButton from '../../components/RectangularButton/RectangularButton';
+import globalStyles from '../../globalStyles';
 
 const SigninScreen = ({ navigation }: any) => {
 
     return (
         <ViewContainer>
-            <Text style={styles.title1}>Oh, hi there!</Text>
-            <Text style={styles.text}>Let's sign you into your account.</Text>
+            <Text style={[styles.title1, globalStyles.h1]}>Oh, hi there!</Text>
+            <Text style={[styles.text, globalStyles.body3]}>Let's sign you into your account.</Text>
             <RectangularButton
                 onPress={() => navigation.navigate('LoginStack', { screen: 'Login' })}
                 text="Log in"
