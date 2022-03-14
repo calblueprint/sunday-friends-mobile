@@ -4,7 +4,6 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: "#E3E3E3", // delete later, used now for styling
   },
   btnGroup: {
     flexDirection: 'row',

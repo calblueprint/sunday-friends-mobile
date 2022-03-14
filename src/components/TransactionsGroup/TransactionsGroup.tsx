@@ -17,8 +17,10 @@ const TransactionsGroup = () => {
     const [transactions, setTransactions] = useState([] as any);
 
     // const [dateFilter, setDateFilter] = useState(1);
-    const [minDate, setMinDate] = useState(new Date(1598051730000));
+    const [minDate, setMinDate] = useState(null);
     const [showMin, setShowMin] = useState(false);
+    const [maxDate, setMaxDate] = useState(null);
+    const [showMax, setShowMax] = useState(false);
     const [typeFilter, setTypeFilter] = useState(1);
     const [minAmount, setMinAmount] = useState(null as any);
     const [maxAmount, setMaxAmount] = useState(null as any);
@@ -62,7 +64,8 @@ const TransactionsGroup = () => {
 
     const handleReset = () => {
         //todo search transactions
-        // setDateFilter(1);
+        setMinDate(null)
+        setMaxDate(null)
         setMinAmount(null);
         setMaxAmount(null);
         setTypeFilter(1);
@@ -90,7 +93,7 @@ const TransactionsGroup = () => {
                 </View>
 
                 <View style={styles.searchFilterContainer}>
-                    <View style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}>
+                    <View style={[styles.searchbar, searchClicked && { borderColor: "#7F93D1" }, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}>
                         <View style={styles.innerSearchbar}>
                             <View style={{paddingRight: 10}}>
                                 <SvgIcon type="searchbar_search"/>
@@ -112,6 +115,7 @@ const TransactionsGroup = () => {
                                 <Pressable onPress={() => {
                                     setSearchText("");
                                     setSearchEntered(false);
+                                    setSearchClicked(false);
                                 }}>
                                     <SvgIcon type="searchbar_close" />
                                 </Pressable>
@@ -150,6 +154,7 @@ const TransactionsGroup = () => {
                     }}
                 >
                     <FiltersModal refRBSheet={refRBSheet} minDate={minDate} setMinDate={setMinDate} showMin={showMin} setShowMin={setShowMin}
+                        maxDate={maxDate} setMaxDate={setMaxDate} showMax={showMax} setShowMax={setShowMax}
                         minAmount={minAmount} setMinAmount={setMinAmount} maxAmount={maxAmount} setMaxAmount={setMaxAmount}
                         typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset}
                     />

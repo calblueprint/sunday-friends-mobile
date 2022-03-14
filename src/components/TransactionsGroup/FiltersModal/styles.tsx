@@ -59,6 +59,13 @@ export default StyleSheet.create({
     width: "100%",
     marginBottom: 40
   },
+  withClear: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5
+  },
   filterButtonGroup: {
     width: "100%"
   },
@@ -68,7 +75,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#F7F7F7",
     marginVertical: 5,
-    padding: 12
+    padding: 12,
   },
   filterBtnText: {
     fontFamily: "Avenir",
@@ -80,6 +87,22 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+  dateInput: {
+    width: "45%",
+    borderWidth: 1.5,
+    borderColor: "#F7F7F7",
+    borderRadius: 8,
+    backgroundColor: "#F7F7F7",
+    marginVertical: 5,
+    padding: 12,
+  },
+  dateText: {
+    fontFamily: 'Avenir',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 19,
+    color: '#525454'
   },
   to: {
     color: '#A9A9A9',
@@ -103,6 +126,13 @@ export default StyleSheet.create({
     fontWeight: '400',
     lineHeight: 19,
     color: '#525454'
+  },
+  selectedInput: {
+    borderColor: '#7F93D1',
+    backgroundColor: "#E6ECFE"
+  },
+  unselectedInput: {
+    borderColor: '#F7F7F7'
   },
   resetApplyContainer: {
     display: 'flex',
