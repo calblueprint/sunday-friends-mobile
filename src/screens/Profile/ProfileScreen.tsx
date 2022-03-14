@@ -21,10 +21,11 @@ import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitc
 import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
+import ProfileSwitchItem from "../../components/ProfileSwitchItem/ProfileSwitchItem";
 
-
-function ProfileScreen() {
-  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =    useState(false);
+const ProfileScreen = ({ navigation }: any) => {
+  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =
+    useState(false);
 
   return (
     <ViewContainer>
@@ -35,13 +36,9 @@ function ProfileScreen() {
       <ProfileSwitchModal
         visible={profileSwitchModalVisible}
         setVisible={setProfileSwitchModalVisible}
-        userID="userIDfiller"
       />
-
-      <Pressable
-        style={styles.backArrowPressable}
-      >
-        <SvgIcon type="chevronLeft"/>
+      <Pressable style={styles.backArrowPressable}>
+        <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
         style={styles.profileImagePressable}
@@ -49,7 +46,7 @@ function ProfileScreen() {
       >
         <Image
           style={styles.profileImage}
-          source={require('../../../assets/images/CrownedSmiley.png')}
+          source={require("../../../assets/images/CrownedSmiley.png")}
         />
         <View style={styles.downArrow}>
           <SvgIcon type="downArrow" />
@@ -81,6 +78,6 @@ function ProfileScreen() {
       </Pressable>
     </ViewContainer>
   );
-}
+};
 
 export default ProfileScreen;

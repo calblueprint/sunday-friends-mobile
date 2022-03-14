@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   backArrowPressable: {
-    position: 'absolute',
-    top: '6%',
-    left: '8.1%'
+    position: "absolute",
+    top: "6%",
+    left: "8.1%",
   },
   profileImagePressable: {
     display: "flex",
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     fontSize: 12,
     textTransform: "uppercase",
     textAlign: "left",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   resetPressable: {
     display: "flex",
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     fontSize: 14,
     textTransform: "uppercase",
     textAlign: "left",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   logoutPressable: {
     display: "flex",
@@ -101,16 +101,16 @@ export default StyleSheet.create({
   },
   modalVisibleContainer: {
     flex: 1,
-    backgroundColor: '#000000',
-    width: '100%',
-    height: '100%',
+    backgroundColor: "#000000",
+    width: "100%",
+    height: "100%",
     opacity: 0.4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1,
   },
   downArrow: {
-    position: 'absolute',
-    bottom: '6%',
+    position: "absolute",
+    bottom: "6%",
   },
 });

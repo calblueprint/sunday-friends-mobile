@@ -1,56 +1,17 @@
 import * as React from "react";
-import { View, Text, Modal, Pressable, FlatList, Image } from 'react-native';
-import styles from './styles'
+import { View, Text, Modal, Pressable, FlatList, Image } from "react-native";
+import styles from "./styles";
 
 import globalStyles from "../../globalStyles";
 import SvgIcon from "../../../assets/SvgIcon";
-
-function Item({
-  name,
-  role,
-  signedIn,
-}: {
-  name: string;
-  role: string;
-  signedIn: boolean;
-}) {
-  if (signedIn) {
-    return (
-      <View style={styles.flatListItem}>
-        <Pressable style={styles.flatListImagePressable}>
-          <SvgIcon type='headSmiley' />
-        </Pressable>
-        <View style={styles.listInfo}>
-          <Text style={globalStyles.body1Bold}>{name}</Text>
-          <Text style={globalStyles.body2}>{role}</Text>
-        </View>
-        <Pressable style={styles.signedIn}>
-          <Text style={globalStyles.body2}>Signed In</Text>
-        </Pressable>
-      </View>
-    );
-  }
-  return (
-    <View style={styles.flatListItem}>
-      <Pressable style={styles.flatListImagePressable}>
-        <SvgIcon type='dependentSmiley'/>
-      </Pressable>
-      <View style={styles.listInfo}>
-        <Text style={globalStyles.body1Bold}>{name}</Text>
-        <Text style={globalStyles.body2}>{role}</Text>
-      </View>
-      <Pressable style={styles.switch}>
-        <Text style={styles.body2WHITE}>Switch</Text>
-      </Pressable>
-    </View>
-  );
-}
+import ProfileSwitchItem from "../ProfileSwitchItem/ProfileSwitchItem";
+import { User } from "../../types/schema";
 
 const DATA = [
   {
-    id: '0',
-    name: 'Jacob Kim',
-    role: 'Head',
+    id: "0",
+    name: "Jacob Kim",
+    role: "Head",
     signedIn: true,
   },
   {
@@ -69,7 +30,7 @@ const DATA = [
   //   id: "3",
   //   name: "Sydney Bui",
   //   role: "Dependent",
-  //   signedIn: false, 
+  //   signedIn: false,
   // },
   // {
   //   id: '4',
@@ -83,35 +44,31 @@ const DATA = [
   // },
 ];
 
-const renderItem = ({ item }) => (
-  <Item name={item.name} role={item.role} signedIn={item.signedIn} />
+const renderItem = ({ item }: any) => (
+  <ProfileSwitchItem name={item.name} signedIn={item.signedIn} />
 );
 
 const itemSeparator = () => <View style={styles.itemSeparator} />;
 
 const addMember = () => (
   <View style={styles.addMember}>
-    <View style={styles.lastItemSeparator}/>
+    <View style={styles.lastItemSeparator} />
     <Pressable style={styles.flatListImagePressable}>
       <SvgIcon type="addPlus" />
     </Pressable>
-    <Text style={[globalStyles.body1, styles.listInfo]}>Add Family Member</Text>
+    <Text style={[globalStyles.body1, styles.flatlistName]}>
+      Add Family Member
+    </Text>
   </View>
 );
 
-export default function ProfileSwitchModal({
-  visible,
-  setVisible,
-  userID,
-}: {
-  visible: boolean;
-  setVisible: Function,
-  userID: string;
-}) {
+const ProfileSwitchModal = ({ visible, setVisible }: any) => {
   return (
     <Modal visible={visible} transparent>
       <View style={styles.switchProfileModalView}>
-        <Text style={[globalStyles.h4Bold, styles.switchTitle]}>Switch Accounts</Text>
+        <Text style={[globalStyles.h4Bold, styles.switchTitle]}>
+          Switch Accounts
+        </Text>
         <Pressable
           style={styles.switchModalX}
           onPress={() => setVisible(false)}
@@ -130,4 +87,6 @@ export default function ProfileSwitchModal({
       </View>
     </Modal>
   );
-}
+};
+
+export default ProfileSwitchModal;
