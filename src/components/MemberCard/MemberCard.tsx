@@ -13,7 +13,7 @@ const MemberCard = ({
   email: string;
   status: string;
 }) => {
-  const icon = (status: string) => {
+  const icon = () => {
     if (status == "head") {
       return (
         <Image
@@ -54,7 +54,7 @@ const MemberCard = ({
 
   return (
     <View style={styles.container}>
-      {icon(status)}
+      {icon()}
       <View style={styles.innerContainer}>
         <View style={styles.rowContainer}>
           <Text style={styles.nameText}>{name}</Text>

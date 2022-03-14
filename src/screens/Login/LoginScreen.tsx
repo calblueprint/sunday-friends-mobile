@@ -3,7 +3,7 @@ import { Text, Pressable, View } from 'react-native';
 import ViewContainer from '../../components/ViewContainer';
 import FormInput from "../../components/FormInput";
 import { default as styles } from "./styles";
-import RectangularButton from '../../components/RectangularButton';
+import RectangularButton from '../../components/RectangularButton/RectangularButton';
 import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import globalStyles from '../../globalStyles';
 
