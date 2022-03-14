@@ -24,7 +24,7 @@ import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 
-function ProfileScreen() {
+const ProfileScreen = () => {
   const defaultUser: User = {
     user_id: "",
     address: "",
@@ -64,12 +64,6 @@ function ProfileScreen() {
         }
       />
 
-      <ProfileSwitchModal
-        visible={profileSwitchModalVisible}
-        setVisible={setProfileSwitchModalVisible}
-        userID="userIDfiller"
-      />
-
       <Pressable style={styles.backArrowPressable}>
         <SvgIcon type="chevronLeft" />
       </Pressable>
@@ -77,6 +71,10 @@ function ProfileScreen() {
         style={styles.profileImagePressable}
         onPress={() => setProfileSwitchModalVisible(true)}
       >
+        <ProfileSwitchModal
+          visible={profileSwitchModalVisible}
+          setVisible={setProfileSwitchModalVisible}
+        />
         <SvgIcon type="profileHeadSmiley" />
         <View style={styles.downArrow}>
           <SvgIcon type="downArrow" />
@@ -95,6 +93,7 @@ function ProfileScreen() {
         <ProfileEditModal
           visible={editModalVisible}
           setVisible={setEditModalVisible}
+          user={user}
         />
       </Pressable>
 
@@ -126,6 +125,6 @@ function ProfileScreen() {
       </Pressable>
     </ViewContainer>
   );
-}
+};
 
 export default ProfileScreen;

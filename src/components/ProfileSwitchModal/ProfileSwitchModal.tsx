@@ -5,41 +5,8 @@ import styles from "./styles";
 
 import globalStyles from "../../globalStyles";
 import SvgIcon from "../../../assets/SvgIcon";
-
-function Item({
-  name,
-  role,
-  signedIn,
-}: {
-  name: string;
-  role: string;
-  signedIn: boolean;
-}) {
-  if (signedIn) {
-    return (
-      <View style={styles.flatListItem}>
-        <Pressable style={styles.flatListImagePressable}>
-          <SvgIcon type="smallHeadSmiley" />
-        </Pressable>
-        <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
-        <Pressable style={styles.signedIn}>
-          <Text style={globalStyles.body2}>Signed In</Text>
-        </Pressable>
-      </View>
-    );
-  }
-  return (
-    <View style={styles.flatListItem}>
-      <Pressable style={styles.flatListImagePressable}>
-        <SvgIcon type="dependentSmiley" />
-      </Pressable>
-      <Text style={[globalStyles.body1Bold, styles.listInfo]}>{name}</Text>
-      <Pressable style={styles.switch}>
-        <Text style={styles.body2WHITE}>Switch</Text>
-      </Pressable>
-    </View>
-  );
-}
+import ProfileSwitchItem from "../ProfileSwitchItem/ProfileSwitchItem";
+import { User } from "../../types/schema";
 
 const DATA = [
   {
@@ -79,7 +46,7 @@ const DATA = [
 ];
 
 const renderItem = ({ item }: any) => (
-  <Item name={item.name} role={item.role} signedIn={item.signedIn} />
+  <ProfileSwitchItem name={item.name} signedIn={item.signedIn} />
 );
 
 const itemSeparator = () => <View style={styles.itemSeparator} />;
@@ -90,19 +57,13 @@ const addMember = () => (
     <Pressable style={styles.flatListImagePressable}>
       <SvgIcon type="addPlus" />
     </Pressable>
-    <Text style={[globalStyles.body1, styles.listInfo]}>Add Family Member</Text>
+    <Text style={[globalStyles.body1, styles.flatlistName]}>
+      Add Family Member
+    </Text>
   </View>
 );
 
-export default function ProfileSwitchModal({
-  visible,
-  setVisible,
-  userID,
-}: {
-  visible: boolean;
-  setVisible: Function;
-  userID: string;
-}) {
+const ProfileSwitchModal = ({ visible, setVisible }: any) => {
   return (
     <Modal visible={visible} transparent>
       <View style={styles.switchProfileModalView}>
@@ -127,4 +88,6 @@ export default function ProfileSwitchModal({
       </View>
     </Modal>
   );
-}
+};
+
+export default ProfileSwitchModal;
