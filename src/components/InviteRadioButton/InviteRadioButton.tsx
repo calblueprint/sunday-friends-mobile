@@ -4,7 +4,6 @@ import { View, Text, Pressable, Image } from "react-native";
 import { default as styles } from "./styles";
 
 const InviteRadioButton = () => {
-
   const [userOption, setUserOption] = useState(0);
 
   return (
@@ -15,7 +14,7 @@ const InviteRadioButton = () => {
       >
         <Image
           style={styles.parent}
-          source={require("../../assets/images/parentSmiley.png")}
+          source={require("../../../assets/images/parentSmiley.png")}
         />
         <Text style={styles.statusText}>Parent</Text>
       </Pressable>
@@ -26,7 +25,7 @@ const InviteRadioButton = () => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.child}
-            source={require("../../assets/images/childSmiley.png")}
+            source={require("../../../assets/images/childSmiley.png")}
           />
         </View>
         <Text style={styles.statusText}>Child</Text>
@@ -38,7 +37,7 @@ const InviteRadioButton = () => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.dependent}
-            source={require("../../assets/images/childSmiley.png")}
+            source={require("../../../assets/images/childSmiley.png")}
           />
         </View>
         <Text style={styles.statusText}>Dependent</Text>
