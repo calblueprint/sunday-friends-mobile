@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import ViewContainer from '../../components/ViewContainer';
 import { Divider, Title } from 'react-native-paper';
 import styles from './styles';
+import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import {moment} from 'moment';
@@ -17,31 +18,6 @@ const getCurrentDate=()=>{
     var moment = require('moment');
     return (moment().format('dddd[,] MMMM Do')); 
 }
-
-const customStyles = {
-    stepIndicatorSize: 23.05,
-    currentStepIndicatorSize:23.05,
-    separatorStrokeWidth: 4.39,
-    currentStepStrokeWidth: 2,
-    stepStrokeCurrentColor: '#7F93D1',
-    stepStrokeWidth: 2,
-    stepStrokeFinishedColor: '#7F93D1',
-    stepStrokeUnFinishedColor: '#7F93D1',
-    separatorFinishedColor: '#7F93D1',
-    separatorUnFinishedColor: '#7F93D1',
-    stepIndicatorFinishedColor: '#253C85',
-    stepIndicatorUnFinishedColor: '#E6ECFE',
-    stepIndicatorCurrentColor: '#253C85',
-    stepIndicatorLabelFontSize: 14,
-    currentStepIndicatorLabelFontSize: 14,
-    stepIndicatorLabelCurrentColor: 'white',
-    stepIndicatorLabelFinishedColor: 'white',
-    stepIndicatorLabelUnFinishedColor: '#253C85',
-    labelColor: '#A9A9A9',
-    labelSize: 14,
-    currentStepLabelColor: '#253C85'
-  };
-
 
 
 const HomeScreen = ({navigation}: any) => {
@@ -55,10 +31,10 @@ const HomeScreen = ({navigation}: any) => {
                 <View style={styles.innerContainer}>
                     <View style={styles.addPersonalCircle}>
                     <Pressable
-                        // this doesnt work because wrong screen name but kinda confused on which screen it should be
-                        onPress={() => navigation.navigate('ProfileScreen', { screen: 'Profile' })}
-                        ></Pressable>
+                        onPress={()=>navigation.navigate('Profile')}
+                    >
                         <Text style={[styles.initialText, {color: '#253C85'}]}>Y</Text>
+                    </Pressable>
                     </View>
                 </View>
             </View>

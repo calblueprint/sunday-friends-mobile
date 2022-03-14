@@ -276,3 +276,27 @@ export default StyleSheet.create({
 
   },
 });
+
+export const customStyles = {
+  stepIndicatorSize: 23.05,
+  currentStepIndicatorSize:23.05,
+  separatorStrokeWidth: 4.39,
+  currentStepStrokeWidth: 2,
+  stepStrokeCurrentColor: '#7F93D1',
+  stepStrokeWidth: 2,
+  stepStrokeFinishedColor: '#7F93D1',
+  stepStrokeUnFinishedColor: '#7F93D1',
+  separatorFinishedColor: '#7F93D1',
+  separatorUnFinishedColor: '#7F93D1',
+  stepIndicatorFinishedColor: '#253C85',
+  stepIndicatorUnFinishedColor: '#E6ECFE',
+  stepIndicatorCurrentColor: '#253C85',
+  stepIndicatorLabelFontSize: 14,
+  currentStepIndicatorLabelFontSize: 14,
+  stepIndicatorLabelCurrentColor: 'white',
+  stepIndicatorLabelFinishedColor: 'white',
+  stepIndicatorLabelUnFinishedColor: '#253C85',
+  labelColor: '#A9A9A9',
+  labelSize: 14,
+  currentStepLabelColor: '#253C85'
+};
