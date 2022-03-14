@@ -6,6 +6,9 @@ import { default as styles } from "./styles";
 import RectangularButton from '../../components/RectangularButton';
 import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import globalStyles from '../../globalStyles';
+import { signInWithEmailAndPassword } from "../../firebase/auth";
+import firebaseApp from "../../firebase/firebaseApp";
+import Navigation from '../../navigation';
 
 const LoginScreen = ({ navigation }: any) => {
 
@@ -14,6 +17,9 @@ const LoginScreen = ({ navigation }: any) => {
         password: string;
     };
 
+    const auth = firebaseApp.auth();
+
+
     const [email, onChangeEmail] = React.useState("");
     const [isFocused, changeFocus] = React.useState(false);
     const handleFocus = () => changeFocus(false);
@@ -21,7 +27,14 @@ const LoginScreen = ({ navigation }: any) => {
 
     const { ...methods } = useForm();
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => console.log({ data });
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        try {
+            await signInWithEmailAndPassword(data.email, data.password);
+            navigation.navigate('Root', { screen: 'Home' });
+        } catch (e) {
+            console.error(e.message);
+        }
+    };
 
     const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
         return console.log(errors)

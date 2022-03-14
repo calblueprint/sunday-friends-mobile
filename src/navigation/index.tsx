@@ -28,10 +28,15 @@ import ProfileScreen from '../screens/Profile/ProfileScreen';
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="LoginStack">
       <Stack.Screen
         name="Root"
         component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="LoginStack"
+        component={LoginStack}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -39,11 +44,7 @@ const RootNavigator = () => {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Screen
-        name="LoginStack"
-        component={LoginStack}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
