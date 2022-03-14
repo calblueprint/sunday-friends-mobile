@@ -7,7 +7,7 @@ export type IconType =
   | "addPlus"
   | "downArrow"
   | "chevronLeft"
-  | "smallHeadSmiley"
+  | "profileSmallHeadSmiley"
   | "profileSmallDependentSmiley"
   | "profileHeadSmiley"
   | "profileDependentSmiley";
@@ -58,7 +58,7 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
       `}
     />
   ),
-  smallHeadSmiley: (
+  profileSmallHeadSmiley: (
     <SvgXml
       xml={`
         <svg width="38" height="40" viewBox="0 0 38 40" fill="none" xmlns="http://www.w3.org/2000/svg">
