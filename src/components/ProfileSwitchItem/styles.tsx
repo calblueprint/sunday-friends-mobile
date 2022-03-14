@@ -1,0 +1,56 @@
+import { StyleSheet } from "react-native";
+
+export default StyleSheet.create({
+  flatListItem: {
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "center",
+    width: "100%",
+    marginVertical: 15,
+  },
+  flatListImagePressable: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    left: "4%",
+    width: 42,
+    height: 42,
+  },
+  flatlistName: {
+    display: "flex",
+    left: "21.9%",
+  },
+  signedIn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F2F2F2",
+    width: "21.6%",
+    height: 24,
+    position: "absolute",
+    right: "4%",
+    borderRadius: 26,
+    borderWidth: 1,
+    borderColor: "#A9A9A9",
+    borderStyle: "solid",
+  },
+  switch: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 24,
+    width: "16.7%",
+    position: "absolute",
+    right: "4%",
+    backgroundColor: "#7F93D1",
+    borderRadius: 26,
+  },
+  body2WHITE: {
+    fontFamily: "DMSans_400Regular",
+    fontSize: 12,
+    fontWeight: "400",
+    textAlign: "left",
+    color: "#FFFFFF",
+  },
+});
