@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Button, StyleSheet, View, Keyboard, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import { Title } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -19,12 +19,15 @@ const styles = StyleSheet.create({
 
 const InventoryScreen = ({ navigation }: any) => {
     return (
-        <ViewContainer>
-            <Title>"Bonus" Screen</Title>
-            <View style={styles.separator} />
-            {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
-            <TransactionsGroup/>
-        </ViewContainer>
+        <SafeAreaView style={{flex: 1}}>        
+            <ViewContainer>
+                <Title>"Bonus" Screen</Title>
+                <View style={styles.separator} />
+                {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
+                <TransactionsGroup/>
+            </ViewContainer>
+        </SafeAreaView>
+
     );
 }
 

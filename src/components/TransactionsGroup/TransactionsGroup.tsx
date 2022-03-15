@@ -1,15 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, Keyboard, FlatList, ActivityIndicator, Pressable, TouchableWithoutFeedback, TextInput } from 'react-native';
+import SvgIcon from '../../../assets/SvgIcon';
 import styles from './styles';
+import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
+import RBSheet from "react-native-raw-bottom-sheet";
+import FiltersModal from "./FiltersModal/FiltersModal";
 
 const TransactionsGroup = () => {
+    const refRBSheet = useRef();
     const [selection, setSelection] = useState(1);
 
+    const [searchClicked, setSearchClicked] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [searchEntered, setSearchEntered] = useState(false);
     const [transactions, setTransactions] = useState([] as any);
+
+    // const [dateFilter, setDateFilter] = useState(1);
+    const [minDate, setMinDate] = useState(null);
+    const [showMin, setShowMin] = useState(false);
+    const [maxDate, setMaxDate] = useState(null);
+    const [showMax, setShowMax] = useState(false);
+    const [typeFilter, setTypeFilter] = useState(1);
+    const [minAmount, setMinAmount] = useState(null as any);
+    const [maxAmount, setMaxAmount] = useState(null as any);
 
     //Use effect later to get transaction data
     useEffect(() => {
@@ -48,6 +62,20 @@ const TransactionsGroup = () => {
         setSearchEntered(true);
     }
 
+    const handleReset = () => {
+        //todo search transactions
+        setMinDate(null)
+        setMaxDate(null)
+        setMinAmount(null);
+        setMaxAmount(null);
+        setTypeFilter(1);
+    }
+
+    const handleApply = () => {
+        //todo connect to backend
+        refRBSheet.current.close()
+    }
+
     return (
         //Line below allows searchbar to dismiss keyboard when clicked away
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
@@ -65,15 +93,36 @@ const TransactionsGroup = () => {
                 </View>
 
                 <View style={styles.searchFilterContainer}>
-                    <Searchbar
-                        placeholder="Search by..."
-                        onChangeText={query => setSearchText(query)}
-                        onSubmitEditing={handleSearch}
-                        onFocus={() => setSearchEntered(false)}
-                        value={searchText}
-                        style={[styles.searchbar, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}
-                    />
-                    <Pressable style={styles.filtersButton}> 
+                    <View style={[styles.searchbar, searchClicked && { borderColor: "#7F93D1" }, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}>
+                        <View style={styles.innerSearchbar}>
+                            <View style={{paddingRight: 10}}>
+                                <SvgIcon type="searchbar_search"/>
+                            </View>
+                            <TextInput
+                                style={styles.searchText}
+                                placeholder="Search transaction"
+                                placeholderTextColor={"#525454"}
+                                value={searchText}
+                                onChangeText={setSearchText}
+                                onFocus={() => {
+                                    setSearchClicked(true);
+                                }}
+                                onSubmitEditing={() => {
+                                    handleSearch();
+                                }}
+                            />
+                            {(searchText !== "") && (
+                                <Pressable onPress={() => {
+                                    setSearchText("");
+                                    setSearchEntered(false);
+                                    setSearchClicked(false);
+                                }}>
+                                    <SvgIcon type="searchbar_close" />
+                                </Pressable>
+                            )}
+                        </View>
+                    </View>
+                    <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}> 
                         <Text style={styles.filtersButtonText}>Filters (0)</Text>
                     </Pressable>
                     
@@ -90,6 +139,26 @@ const TransactionsGroup = () => {
                         )}
                     />
                 )}
+
+                {/* Filters Modal  */}
+                <RBSheet
+                    ref={refRBSheet}
+                    closeOnDragDown={true}
+                    closeOnPressMask={true}
+                    height={761}
+                    customStyles={{
+                        container: {
+                            borderTopLeftRadius: 20,
+                            borderTopRightRadius: 20,
+                        }
+                    }}
+                >
+                    <FiltersModal refRBSheet={refRBSheet} minDate={minDate} setMinDate={setMinDate} showMin={showMin} setShowMin={setShowMin}
+                        maxDate={maxDate} setMaxDate={setMaxDate} showMax={showMax} setShowMax={setShowMax}
+                        minAmount={minAmount} setMinAmount={setMinAmount} maxAmount={maxAmount} setMaxAmount={setMaxAmount}
+                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset}
+                    />
+                </RBSheet>
             </View>
         </TouchableWithoutFeedback>
     )
