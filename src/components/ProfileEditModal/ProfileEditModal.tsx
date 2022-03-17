@@ -33,8 +33,6 @@ export const ProfileEditModal = ({
   const [roleText, onChangeRoleText] = useState(user.role);
 
   const [newUserData, setNewUserData] = useState<UserUpdateData>({});
-  const [newUserName, setNewUserName] = useState("");
-  const [newUserRole, setNewUserRole] = useState("");
   const [wasEdited, setWasEdited] = useState(false);
 
   const refresh = () => {};
@@ -42,24 +40,16 @@ export const ProfileEditModal = ({
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
-      onChangeNameText(newUserName);
-      onChangeRoleText(newUserRole);
-    });
-  }, [nameText]);
-
-  const resetFields = (): void => {
-    getUser(value).then((user) => {
-      setUser(user);
       onChangeNameText(user.full_name);
       onChangeRoleText(user.role);
     });
-  };
+  }, [visible]);
 
   const handleSubmit = async (): Promise<void> => {
     try {
       db.doc(user.user_id).update({
-        full_name: newUserName,
-        role: newUserRole,
+        full_name: nameText,
+        role: roleText,
       });
       setVisible(false);
       console.log("completed");
@@ -79,32 +69,26 @@ export const ProfileEditModal = ({
           <SvgIcon type="greyX" />
         </Pressable>
         <Text style={[globalStyles.h4Bold, styles.title]}>Edit Profile</Text>
-        <View style={styles.profileImage}>
-          <Pressable style={styles.profileImagePressable}>
-            <SvgIcon type="profileHeadSmiley" />
-          </Pressable>
-        </View>
+
+        <Pressable style={styles.profileImagePressable}>
+          <SvgIcon type="profileHeadSmiley" />
+        </Pressable>
+
         <View style={styles.fields}>
           <Text style={globalStyles.overline1}>Name</Text>
           <Text style={globalStyles.overline1}>Role</Text>
         </View>
         <TextInput
           style={[globalStyles.body1, styles.textNameInput]}
-          onChangeText={(e) => {
-            onChangeNameText(e);
-            setNewUserName(e);
-          }}
+          onChangeText={onChangeNameText}
           value={nameText}
         />
         <TextInput
           style={[globalStyles.body1, styles.textRoleInput]}
-          onChangeText={(e) => {
-            onChangeRoleText(e);
-            setNewUserRole(e);
-          }}
+          onChangeText={onChangeRoleText}
           value={roleText}
         />
-        <Pressable onPress={handleSubmit} style={styles.profileImagePressable}>
+        <Pressable onPress={handleSubmit} style={styles.savePressable}>
           <Text>SAVEE</Text>
         </Pressable>
       </View>

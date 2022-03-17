@@ -47,6 +47,8 @@ const ProfileScreen = ({ navigation }: any) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
+  const [nameText, onChangeNameText] = useState(user.full_name);
+  const [roleText, onChangeRoleText] = useState(user.role);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
