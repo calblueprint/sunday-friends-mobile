@@ -23,8 +23,9 @@ import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
+import { ProfileResetPassword } from "../../components/ProfileResetPassword/ProfileResetPassword";
 
-const ProfileScreen = ({navigation}: any) => {
+const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
     user_id: "",
     address: "",
@@ -45,6 +46,7 @@ const ProfileScreen = ({navigation}: any) => {
     useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [resetModalVisible, setResetModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
 
@@ -64,8 +66,10 @@ const ProfileScreen = ({navigation}: any) => {
         }
       />
 
-      <Pressable style={styles.backArrowPressable}
-      onPress={() => navigation.goBack()}>
+      <Pressable
+        style={styles.backArrowPressable}
+        onPress={() => navigation.goBack()}
+      >
         <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
@@ -98,8 +102,16 @@ const ProfileScreen = ({navigation}: any) => {
         />
       </Pressable>
 
-      <Pressable style={styles.resetPressable}>
+      <Pressable
+        style={styles.resetPressable}
+        onPress={() => setResetModalVisible(true)}
+      >
         <Text style={globalStyles.overline2}>RESET PASSWORD</Text>
+        <ProfileResetPassword
+          visible={resetModalVisible}
+          setVisible={setResetModalVisible}
+          user={user}
+        />
       </Pressable>
 
       <View style={styles.profileFields}>
