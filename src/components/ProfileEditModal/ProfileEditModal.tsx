@@ -89,7 +89,7 @@ export const ProfileEditModal = ({
           value={roleText}
         />
         <Pressable onPress={handleSubmit} style={styles.savePressable}>
-          <Text>SAVEE</Text>
+          <Text>SAVE</Text>
         </Pressable>
       </View>
     </Modal>
