@@ -3,14 +3,13 @@ import styles from "./styles";
 import { Modal, View, Pressable, TextInput, Text } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
-import { verify } from "crypto";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [email, onChangeEmail] = useState("");
   const [code, onChangeCode] = useState("");
   const [newPW, onChangeNewPW] = useState("");
   const [confirmPW, onChangeConfirmPW] = useState("");
-  const [edited, setEdited] = useState(true);
+  const [edited, setEdited] = useState(false);
   const [currScreen, setCurrScreen] = useState("reset");
 
   const reset = () => {
@@ -21,6 +20,25 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setCurrScreen("reset");
     setEdited(false);
     setVisible(false);
+  };
+
+  const valid = () => {
+    if (currScreen == "reset") {
+      return true;
+    }
+    if (currScreen == "verify") {
+      if (code.length == 6) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (currScreen == "setNew") {
+      if (newPW == confirmPW && newPW.length >= 8 && newPW.length <= 20) {
+        return true;
+      }
+      return false;
+    }
   };
 
   const resetModal = () => {
@@ -90,12 +108,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Pressable
             style={
-              edited
+              edited && valid()
                 ? styles.verifyContinuePressableAllowed
                 : styles.verifyContinuePressable
             }
             onPress={() => {
-              edited ? setCurrScreen("setNew") : null;
+              edited && valid() ? setCurrScreen("setNew") : null;
               setEdited(false);
             }}
           >
@@ -120,28 +138,37 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <TextInput
             style={[globalStyles.body1, styles.setNewInput]}
             placeholder="New Password"
+            placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeNewPW(e), setEdited(true)]}
             value={newPW}
           />
+          <Pressable style={styles.passwordHiddenIconSet}>
+            <SvgIcon type="passwordHidden" />
+          </Pressable>
+          <Text style={styles.mustBeCharacter}>
+            Must be 8-20 characters long
+          </Text>
           <TextInput
             style={[globalStyles.body1, styles.confirmNewInput]}
             placeholder="Confirm New Password"
+            placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
-            caretHidden={true}
           />
+          <Pressable style={styles.passwordHiddenIconConfirm}>
+            <SvgIcon type="passwordHidden" />
+          </Pressable>
+          <Text style={styles.pwMustMatch}>Passwords must match</Text>
           <Pressable
             style={
-              edited && newPW == confirmPW
+              edited && valid()
                 ? styles.verifyContinuePressableAllowed
                 : styles.verifyContinuePressable
             }
           >
             <Text
               style={globalStyles.overline2}
-              onPress={() =>
-                newPW == confirmPW ? setCurrScreen("success") : null
-              }
+              onPress={() => (valid() ? setCurrScreen("success") : null)}
             >
               RESET PASSWORD
             </Text>
