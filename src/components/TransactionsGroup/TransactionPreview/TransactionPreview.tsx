@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, Image } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import SvgIcon from ',,/../../assets/SvgIcon';
 import { useFonts } from 'expo-font'
 import styles from './styles';
 
@@ -26,9 +26,7 @@ const TransactionPreview = ({ transaction }: any) => {
                 <Text style={[styles.points, (transaction.pointGain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
                     {((transaction.pointGain > 0) ? "+" : "") + transaction.pointGain}
                 </Text>
-                <View style={styles.icon}>
-                    <FontAwesome5 name="chevron-right" size={24} color="#CACACA"/>
-                </View>
+                <SvgIcon type='chevron_right' />
             </View>
         </Pressable>
     )

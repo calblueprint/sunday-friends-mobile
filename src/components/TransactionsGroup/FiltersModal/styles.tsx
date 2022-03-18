@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-  },
   btnGroup: {
     flexDirection: 'row',
     backgroundColor: "#FAFAFA",
@@ -14,14 +10,6 @@ export default StyleSheet.create({
   btn: {
     width: '33.3333%',
   },
-  selectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: '#253C85',
-  },
-  unselectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: '#F2F2F2',
-  },
   btnText: {
     textAlign: 'center',
     paddingVertical: 11,
@@ -30,59 +18,6 @@ export default StyleSheet.create({
     fontFamily: 'Avenir',
     fontWeight: '800',
   },
-  searchFilterContainer: {
-    padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    width: '100%',
-  },
-  searchbar: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 10,
-    width: '70%',
-    marginRight: 16,
-    borderColor: '#A9A9A9',
-    borderWidth: 1.2,
-    borderRadius: 8,
-    shadowOpacity: 0,
-  },
-  innerSearchbar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 0
-  },
-  searchText: {
-    fontFamily: 'Avenir',
-    fontSize: 12,
-    fontWeight: '400',
-    lineHeight: 16,
-    color: '#525454',
-    margin: 0,
-    flex: 1
-  },
-  filtersButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#A9A9A9',
-    borderRadius: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 12
-  },
-  filtersButtonText: {
-    color: '#F2F2F2',
-    textAlign: 'center',
-    fontSize: 14,
-    fontFamily: 'Avenir',
-    fontWeight: '800',
-  },
-
   modalIconContainer: {
     position: "absolute",
     top: 0,
@@ -124,6 +59,13 @@ export default StyleSheet.create({
     width: "100%",
     marginBottom: 40
   },
+  withClear: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5
+  },
   filterButtonGroup: {
     width: "100%"
   },
@@ -133,7 +75,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#F7F7F7",
     marginVertical: 5,
-    padding: 12
+    padding: 12,
   },
   filterBtnText: {
     fontFamily: "Avenir",
@@ -145,6 +87,22 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+  dateInput: {
+    width: "45%",
+    borderWidth: 1.5,
+    borderColor: "#F7F7F7",
+    borderRadius: 8,
+    backgroundColor: "#F7F7F7",
+    marginVertical: 5,
+    padding: 12,
+  },
+  dateText: {
+    fontFamily: 'Avenir',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 19,
+    color: '#525454'
   },
   to: {
     color: '#A9A9A9',
@@ -168,6 +126,13 @@ export default StyleSheet.create({
     fontWeight: '400',
     lineHeight: 19,
     color: '#525454'
+  },
+  selectedInput: {
+    borderColor: '#7F93D1',
+    backgroundColor: "#E6ECFE"
+  },
+  unselectedInput: {
+    borderColor: '#F7F7F7'
   },
   resetApplyContainer: {
     display: 'flex',
