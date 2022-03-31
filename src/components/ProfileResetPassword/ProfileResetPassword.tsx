@@ -12,6 +12,8 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [edited, setEdited] = useState(false);
   const [currScreen, setCurrScreen] = useState("reset");
 
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
   const reset = () => {
     onChangeEmail("");
     onChangeCode("");
@@ -23,21 +25,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   };
 
   const valid = () => {
-    if (currScreen == "reset") {
-      return true;
-    }
-    if (currScreen == "verify") {
-      if (code.length == 6) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    if (currScreen == "setNew") {
-      if (newPW == confirmPW && newPW.length >= 8 && newPW.length <= 20) {
-        return true;
-      }
-      return false;
+    switch (currScreen) {
+      case "reset":
+        return emailRegex.test(email);
+      case "verify":
+        return code.length == 6;
+      case "setNew":
+        return newPW == confirmPW && newPW.length >= 8 && newPW.length <= 20;
     }
   };
 
@@ -47,9 +41,9 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
         <View style={styles.modalView}>
           <View style={styles.topGreyLine} />
           <Pressable style={styles.exitPressable} onPress={() => reset()}>
-            <SvgIcon type="greyX" />
+            <Text style={(globalStyles.body1, styles.closeText)}>Close</Text>
           </Pressable>
-          <Text style={[globalStyles.h2, styles.resetPasswordTitle]}>
+          <Text style={[globalStyles.h2, styles.modalTitle]}>
             Reset Password
           </Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
@@ -59,23 +53,36 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             A text containing a 6-digit code will be sent
           </Text>
           <TextInput
-            style={[globalStyles.body1, styles.emailInput]}
-            placeholder="Email"
+            style={
+              edited && valid()
+                ? [globalStyles.body1, styles.emailInputTyping]
+                : [globalStyles.body1, styles.emailInput]
+            }
+            placeholder="email@gmail.com"
+            placeholderTextColor={"#A9A9A9"}
             onChangeText={(e) => [onChangeEmail(e), setEdited(true)]}
             value={email}
+            autoFocus={true}
           />
           <Pressable
             style={
-              edited
+              edited && valid()
                 ? styles.resetContinuePressableAllowed
                 : styles.resetContinuePressable
             }
             onPress={() => {
-              edited ? setCurrScreen("verify") : null;
-              setEdited(false);
+              edited ? [setCurrScreen("verify"), setEdited(false)] : null;
             }}
           >
-            <Text style={globalStyles.overline2}>CONTINUE</Text>
+            <Text
+              style={
+                edited && valid()
+                  ? [globalStyles.overline1, styles.greyText]
+                  : [globalStyles.overline1, styles.greyText]
+              }
+            >
+              CONTINUE
+            </Text>
           </Pressable>
         </View>
       </Modal>
@@ -88,23 +95,26 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
         <View style={styles.modalView}>
           <View style={styles.topGreyLine} />
           <Pressable style={styles.exitPressable} onPress={() => reset()}>
-            <SvgIcon type="greyX" />
+            <Text style={(globalStyles.body1, styles.closeText)}>Close</Text>
           </Pressable>
-          <Text style={[globalStyles.h2, styles.resetPasswordTitle]}>
-            Verify Email
-          </Text>
+          <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
             Enter the 6-digit code sent to {email}
           </Text>
           <TextInput
-            style={[globalStyles.body1, styles.verifyInput]}
-            placeholder="Verification Code"
+            style={
+              edited && code.length > 0
+                ? [globalStyles.body1, styles.verifyInputTyping]
+                : [globalStyles.body1, styles.verifyInput]
+            }
+            placeholder="6-digit code"
+            placeholderTextColor={"#A9A9A9"}
             keyboardType="numeric"
             onChangeText={(e) => [onChangeCode(e), setEdited(true)]}
             value={code}
           />
           <Pressable style={styles.resendPressable}>
-            <Text style={globalStyles.overline2}>RESEND CODE</Text>
+            <Text style={globalStyles.overline1}>RESEND CODE</Text>
           </Pressable>
           <Pressable
             style={
@@ -113,11 +123,14 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                 : styles.verifyContinuePressable
             }
             onPress={() => {
-              edited && valid() ? setCurrScreen("setNew") : null;
-              setEdited(false);
+              edited && valid()
+                ? [setCurrScreen("setNew"), setEdited(false)]
+                : null; //when i save file it auto styles code like how it is
             }}
           >
-            <Text style={globalStyles.overline2}>CONTINUE</Text>
+            <Text style={[globalStyles.overline1, styles.whiteText]}>
+              CONTINUE
+            </Text>
           </Pressable>
         </View>
       </Modal>
@@ -130,44 +143,49 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
         <View style={styles.modalView}>
           <View style={styles.topGreyLine} />
           <Pressable style={styles.exitPressable} onPress={() => reset()}>
-            <SvgIcon type="greyX" />
+            <Text style={(globalStyles.body1, styles.closeText)}>Close</Text>
           </Pressable>
-          <Text style={[globalStyles.h2, styles.resetPasswordTitle]}>
+          <Text style={[globalStyles.h2, styles.modalTitle]}>
             Set New Password
           </Text>
+          <Text style={[globalStyles.overline2, styles.labelPassword]}>
+            PASSWORD
+          </Text>
           <TextInput
-            style={[globalStyles.body1, styles.setNewInput]}
-            placeholder="New Password"
+            style={
+              edited && valid()
+                ? [globalStyles.body1, styles.setNewInputTyping]
+                : [globalStyles.body1, styles.setNewInput]
+            }
+            placeholder="Enter password"
             placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeNewPW(e), setEdited(true)]}
             value={newPW}
+            autoFocus={true}
           />
-          <Pressable style={styles.passwordHiddenIconSet}>
-            <SvgIcon type="passwordHidden" />
-          </Pressable>
-          <Text style={styles.mustBeCharacter}>
-            Must be 8-20 characters long
+          <Text style={[globalStyles.overline2, styles.labelConfirmPassword]}>
+            CONFIRM PASSWORD
           </Text>
           <TextInput
             style={[globalStyles.body1, styles.confirmNewInput]}
-            placeholder="Confirm New Password"
+            placeholder="Enter same password"
             placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
           />
-          <Pressable style={styles.passwordHiddenIconConfirm}>
-            <SvgIcon type="passwordHidden" />
-          </Pressable>
-          <Text style={styles.pwMustMatch}>Passwords must match</Text>
           <Pressable
             style={
               edited && valid()
-                ? styles.verifyContinuePressableAllowed
-                : styles.verifyContinuePressable
+                ? styles.resetContinuePressableAllowed
+                : styles.resetContinuePressable
             }
           >
             <Text
-              style={globalStyles.overline2}
+              style={
+                edited && valid()
+                  ? [globalStyles.overline1, styles.greyText]
+                  : [globalStyles.overline1, styles.greyText]
+              }
               onPress={() => (valid() ? setCurrScreen("success") : null)}
             >
               RESET PASSWORD
@@ -184,33 +202,34 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
         <View style={styles.modalView}>
           <View style={styles.topGreyLine} />
           <Pressable style={styles.exitPressable} onPress={() => reset()}>
-            <SvgIcon type="greyX" />
+            <Text style={(globalStyles.body1, styles.closeText)}>Close</Text>
           </Pressable>
-          <Text style={[globalStyles.h2, styles.resetPasswordTitle]}>
-            Success!
+          <Text style={[globalStyles.h2, styles.successTitle]}>
+            You're all set!
           </Text>
-          <Text style={[globalStyles.h4, styles.subText1]}>
-            Your new password was successfully set.
+          <Text style={[globalStyles.h4, styles.successSubTitle]}>
+            Your new password has been set. Check your inbox for comfirmation.
           </Text>
           <Pressable style={styles.closePressable} onPress={() => reset()}>
-            <Text style={globalStyles.overline2}>CLOSE</Text>
+            <Text style={[globalStyles.overline1, styles.whiteText]}>
+              CLOSE
+            </Text>
           </Pressable>
         </View>
       </Modal>
     );
   };
 
-  if (currScreen == "reset") {
-    return resetModal();
+  switch (currScreen) {
+    case "reset":
+      return resetModal();
+    case "verify":
+      return verifyModal();
+    case "setNew":
+      return setNewPassword();
+    case "success":
+      return success();
+    case "":
+      return null;
   }
-  if (currScreen == "verify") {
-    return verifyModal();
-  }
-  if (currScreen == "setNew") {
-    return setNewPassword();
-  }
-  if (currScreen == "success") {
-    return success();
-  }
-  return null;
 };
