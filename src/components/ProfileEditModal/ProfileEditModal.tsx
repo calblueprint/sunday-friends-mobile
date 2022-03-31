@@ -6,12 +6,7 @@ import globalStyles from "../../globalStyles";
 import { User } from "../../types/schema";
 import userContext from "../../context/userContext";
 import firebaseApp from "../../firebase/firebaseApp";
-import { getUser } from "../../firebase/firestore/user";
-
-export type UserUpdateData = {
-  full_name?: string;
-  role?: string;
-};
+import { editUser, getUser } from "../../firebase/firestore/user";
 
 type ProfileEditModalProps = {
   visible: boolean;
@@ -26,13 +21,11 @@ export const ProfileEditModal = ({
   user,
   setUser,
 }: ProfileEditModalProps) => {
-  const db = firebaseApp.firestore().collection("users");
   const value = useContext(userContext);
 
   const [nameText, onChangeNameText] = useState(user.full_name);
   const [roleText, onChangeRoleText] = useState(user.role);
 
-  const [newUserData, setNewUserData] = useState<UserUpdateData>({});
   const [wasEdited, setWasEdited] = useState(false);
 
   const refresh = () => {};
@@ -45,17 +38,12 @@ export const ProfileEditModal = ({
     });
   }, [visible]);
 
-  const handleSubmit = async (): Promise<void> => {
-    try {
-      db.doc(user.user_id).update({
-        full_name: nameText,
-        role: roleText,
-      });
-      setVisible(false);
-      console.log("completed");
-    } catch (err) {
-      console.log(0);
-    }
+  const handleSubmit = () => {
+    editUser(user.user_id, {
+      full_name: nameText,
+      role: roleText,
+    });
+    setVisible(false);
   };
 
   return (
@@ -64,9 +52,9 @@ export const ProfileEditModal = ({
         <View style={styles.topGreyLine} />
         <Pressable
           style={styles.exitPressable}
-          onPress={() => [setVisible(false)]}
+          onPress={() => setVisible(false)}
         >
-          <SvgIcon type="greyX" />
+          <Text style={(globalStyles.body1, styles.closeText)}>Close</Text>
         </Pressable>
         <Text style={[globalStyles.h4Bold, styles.title]}>Edit Profile</Text>
 
@@ -79,9 +67,10 @@ export const ProfileEditModal = ({
           <Text style={globalStyles.overline1}>Role</Text>
         </View>
         <TextInput
-          style={[globalStyles.body1, styles.textNameInput]}
+          style={[globalStyles.body1, styles.nameTextInput]}
           onChangeText={onChangeNameText}
           value={nameText}
+          autoFocus={true}
         />
         <TextInput
           style={[globalStyles.body1, styles.textRoleInput]}
