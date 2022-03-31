@@ -32,7 +32,6 @@ export default StyleSheet.create({
     color: "#526DC2",
   },
   title: {
-    textAlign: "center",
     position: "absolute",
     top: "8.7%",
     left: "38.6%",
