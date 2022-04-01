@@ -173,6 +173,18 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
           />
+
+          <View style={styles.characterCheckIcon}>
+            {newPW.length >= 8 && newPW.length <= 20 ? (
+              <SvgIcon type="greenCheck" />
+            ) : (
+              <SvgIcon type="redX" />
+            )}
+          </View>
+          <View style={styles.characterCheckText}>
+            <Text style={globalStyles.body2}>8-20 Characters</Text>
+          </View>
+
           <Pressable
             style={
               edited && valid()
@@ -188,7 +200,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
               }
               onPress={() => (valid() ? setCurrScreen("success") : null)}
             >
-              RESET PASSWORD
+              {edited && valid() ? "CONTINUE" : "RESET PASSWORD"}
             </Text>
           </Pressable>
         </View>
@@ -229,7 +241,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
       return setNewPassword();
     case "success":
       return success();
-    case "":
-      return null;
   }
+  return null;
 };

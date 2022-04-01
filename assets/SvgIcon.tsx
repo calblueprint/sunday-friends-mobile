@@ -18,7 +18,9 @@ export type IconType =
   | "profileDependentSmiley"
   | "modal_x"
   | "invite_add"
-  | "passwordHidden";
+  | "passwordHidden"
+  | "redX"
+  | "greenCheck";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
   chevron_down: (
@@ -216,6 +218,24 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
 				13.3852 6.5245 13.6875 7.3032L13.75 7.50195L13.6844 7.69945C13.3918 8.46075 12.9588 9.16036 12.4081 9.76195L12.4075 9.7582Z" fill="#A9A9A9"/>
 				</svg>
 			
+			`}
+    />
+  ),
+  redX: (
+    <SvgXml
+      xml={`
+				<svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.42024 4.82L1.14424 0.0879999H3.88824L6.00224 3.56L8.03224 0.0879999H10.6782L7.47224 4.778L11.0562 10H8.31224L5.89024 6.01L3.53824 10H0.948242L4.42024 4.82Z" fill="#E94444"/>
+				</svg>
+  		`}
+    />
+  ),
+  greenCheck: (
+    <SvgXml
+      xml={`
+				<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 4.75L4.5 9.25L13 0.75" stroke="#098D45" stroke-width="2"/>
+				</svg>
 			`}
     />
   ),
