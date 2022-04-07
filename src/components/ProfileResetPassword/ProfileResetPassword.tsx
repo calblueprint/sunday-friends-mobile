@@ -185,6 +185,39 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             <Text style={globalStyles.body2}>8-20 Characters</Text>
           </View>
 
+          <View style={styles.numberCheckIcon}>
+            {/\d/.test(newPW) ? (
+              <SvgIcon type="greenCheck" />
+            ) : (
+              <SvgIcon type="redX" />
+            )}
+          </View>
+          <View style={styles.numberCheckText}>
+            <Text style={globalStyles.body2}>At least 1 number</Text>
+          </View>
+
+          <View style={styles.uppercaseCheckIcon}>
+            {/[A-Z]/.test(newPW) ? (
+              <SvgIcon type="greenCheck" />
+            ) : (
+              <SvgIcon type="redX" />
+            )}
+          </View>
+          <View style={styles.uppercaseCheckText}>
+            <Text style={globalStyles.body2}>At least 1 uppercase letter</Text>
+          </View>
+
+          <View style={styles.spacesCheckIcon}>
+            {/^\S+$/.test(newPW) ? (
+              <SvgIcon type="greenCheck" />
+            ) : (
+              <SvgIcon type="redX" />
+            )}
+          </View>
+          <View style={styles.spacesCheckText}>
+            <Text style={globalStyles.body2}>No spaces</Text>
+          </View>
+
           <Pressable
             style={
               edited && valid()
