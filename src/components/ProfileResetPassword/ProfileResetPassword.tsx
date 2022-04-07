@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./styles";
-import { Modal, View, Pressable, TextInput, Text } from "react-native";
+import { Modal, View, Pressable, TextInput, Text, Linking } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 
