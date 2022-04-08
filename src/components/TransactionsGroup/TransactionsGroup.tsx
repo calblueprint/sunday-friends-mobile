@@ -4,6 +4,7 @@ import SvgIcon from '../../../assets/SvgIcon';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
+import TransactionPreviewNoIcon from './TransactionPreviewNoIcon/TransactionPreviewNoIcon';
 import RBSheet from "react-native-raw-bottom-sheet";
 import FiltersModal from "./FiltersModal/FiltersModal";
 
@@ -25,9 +26,12 @@ const TransactionsGroup = () => {
     const [minAmount, setMinAmount] = useState(null as any);
     const [maxAmount, setMaxAmount] = useState(null as any);
 
+    const [forFamily, setForFamily] = useState(true);
+
     //Use effect later to get transaction data
     useEffect(() => {
-        //dummy for now
+        setForFamily(false); //dummy; used for rendering transactionpreview
+        //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         setTransactions([
             {
                 username: "dummy",
@@ -42,7 +46,7 @@ const TransactionsGroup = () => {
                 date: "Oct 21",
                 description: "Volunteered at community BBBBBB",
                 pointGain: -107,
-                role: "head",
+                role: "child",
                 id: 1
             },
             {
@@ -52,6 +56,14 @@ const TransactionsGroup = () => {
                 pointGain: 108,
                 role: "parent",
                 id: 2
+            },
+            {
+                username: "dummy2",
+                date: "Oct 22",
+                description: "test",
+                pointGain: 108,
+                role: "dependent",
+                id: 3
             },
         ])
     }, []);
@@ -134,9 +146,14 @@ const TransactionsGroup = () => {
                     <FlatList
                         data={transactions}
                         keyExtractor={item => item.id}
-                        renderItem={( {item} ) => (
-                            <TransactionPreview transaction={item}/>
-                        )}
+                        renderItem={(forFamily) ? (
+                            ( {item} ) => (
+                                <TransactionPreview transaction={item}/>
+                            )) : (
+                            ( {item} ) => (
+                                <TransactionPreviewNoIcon transaction={item}/>
+                            ))
+                        }
                     />
                 )}
 

@@ -35,17 +35,15 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: "flex-start",
         padding: 3,
-        resizeMode: "cover",
-        width: 42,
-        height: 42
+        resizeMode: "contain"
     },
     textGroup: {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
         padding: 0,
-        width: "80%",
-        marginLeft: 20
+        width: "100%",
+        // marginLeft: 20
     },
     description: {
         color: "#525454",
