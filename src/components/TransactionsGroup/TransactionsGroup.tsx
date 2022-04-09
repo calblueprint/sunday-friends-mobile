@@ -62,6 +62,17 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
             }
+            if (selection === 2) {
+                const filteredTransactions = newTransactions.filter((transaction) => {
+                    return transaction.point_gain > 0
+                })
+                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            } else if (selection === 3) {
+                const filteredTransactions = newTransactions.filter((transaction) => {
+                    return transaction.point_gain <= 0
+                })
+                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            }
 
             setTransactions(newTransactions)
             setIsLoading(false)
@@ -123,6 +134,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     const handleApply = () => {
         //todo connect to backend
+        setSelection(typeFilter)
         refRBSheet.current.close()
     }
 
@@ -135,10 +147,10 @@ const TransactionsGroup = ({ forFamily }: any) => {
                         <Text style={[styles.btnText, selection === 1 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>All History</Text>
                     </Pressable>
                     <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(2)}>
-                        <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Expenses</Text>
+                        <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Earnings</Text>
                     </Pressable>
                     <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(3)}>
-                        <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Earnings</Text>
+                        <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Expirations</Text>
                     </Pressable>
                 </View>
 
