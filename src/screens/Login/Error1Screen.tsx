@@ -11,7 +11,7 @@ import firebaseApp from "../../firebase/firebaseApp";
 import Navigation from '../../navigation';
 
 
-const ErrorScreen = ({ route, navigation }: any) => {
+const Error1Screen = ({ route, navigation }: any) => {
 
     const auth = firebaseApp.auth();
 
@@ -36,4 +36,4 @@ const ErrorScreen = ({ route, navigation }: any) => {
     );
 }
 
-export default ErrorScreen;
+export default Error1Screen;

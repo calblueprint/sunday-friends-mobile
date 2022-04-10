@@ -7,10 +7,10 @@ import RectangularButton from '../../components/RectangularButton/RectangularBut
 import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import globalStyles from '../../globalStyles';
 import firebaseApp from "../../firebase/firebaseApp";
-import { getHeadInvitesByEmail } from "../../firebase/firestore/userInvite";
+import { getUserInvitesByEmail } from "../../firebase/firestore/userInvite";
 import SvgIcon from "../../../assets/SvgIcon";
 
-const SignupScreen1 = ({ navigation }: any) => {
+const Signup1Screen = ({ navigation }: any) => {
 
     type FormValues = {
         email: string;
@@ -29,9 +29,9 @@ const SignupScreen1 = ({ navigation }: any) => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
-            const headInvites = await getHeadInvitesByEmail(data.email);
+            const headInvites = await getUserInvitesByEmail(data.email);
             if (headInvites.length == 0) {
-                navigation.navigate('LoginStack', { screen: 'Error'})
+                navigation.navigate('LoginStack', { screen: 'Error1'})
             } else {
                 navigation.navigate('LoginStack', { screen: 'Signup2', params: { email: data.email } });
             }
@@ -92,4 +92,4 @@ const SignupScreen1 = ({ navigation }: any) => {
     );
 }
 
-export default SignupScreen1;
+export default Signup1Screen;

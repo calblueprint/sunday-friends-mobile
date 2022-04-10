@@ -74,7 +74,30 @@ export const getUserInviteByFamily = async (
 };
 
 /**
- * Returns userInvite data from firestore with the given email and status == "hHad"
+ * Returns userInvite data from firestore with the given email 
+ */
+ export const getUserInvitesByEmail = async (
+  email: string
+): Promise<User_Invite[]> => {
+  try {
+    const promises: Promise<User_Invite>[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const getUserInvites = await userInvitesCollection
+      .where("email", "==", email)
+      .get()
+      .then((doc) => {
+        doc.forEach((item) => promises.push(parseUserInvite(item)));
+      });
+    const userInvites = await Promise.all(promises);
+    return userInvites;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+/**
+ * Returns userInvite data from firestore with the given email and status == "Head"
  */
 export const getHeadInvitesByEmail = async (
   email: string

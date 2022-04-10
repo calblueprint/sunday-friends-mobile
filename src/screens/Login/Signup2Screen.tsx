@@ -9,9 +9,10 @@ import globalStyles from '../../globalStyles';
 import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
 import SvgIcon from ',,/../../assets/SvgIcon';
+import { getHeadInvitesByEmail } from '../../firebase/firestore/userInvite';
 
 
-const SignupScreen2 = ({ route, navigation }: any) => {
+const Signup2Screen = ({ route, navigation }: any) => {
 
     type FormValues = {
         password1: string;
@@ -34,12 +35,18 @@ const SignupScreen2 = ({ route, navigation }: any) => {
                 console.log(email);
                 console.log(data.password1);
                 await registerWithEmailAndPassword(email, data.password1);
-                navigation.navigate('LoginStack', { screen: 'Signup3' });
+                const headInvites = await getHeadInvitesByEmail(email);
+                if (headInvites.length == 0) {
+                    navigation.navigate('LoginStack', { screen: 'Signup3' });
+                } else {
+                    navigation.navigate('LoginStack', { screen: 'Invite' })
+                }
             } else {
                 console.log("Passwords do not match!")
             }
         } catch (e) {
             console.error(e.message);
+            navigation.navigate('LoginStack', { screen: 'Error2' });
         }
     };
 
@@ -93,4 +100,4 @@ const SignupScreen2 = ({ route, navigation }: any) => {
     );
 }
 
-export default SignupScreen2;
+export default Signup2Screen;

@@ -11,7 +11,7 @@ import firebaseApp from "../../firebase/firebaseApp";
 import Navigation from '../../navigation';
 
 
-const SignupScreen2 = ({ route, navigation }: any) => {
+const Signup3Screen = ({ route, navigation }: any) => {
 
     const auth = firebaseApp.auth();
 
@@ -33,4 +33,4 @@ const SignupScreen2 = ({ route, navigation }: any) => {
     );
 }
 
-export default SignupScreen2;
+export default Signup3Screen;
