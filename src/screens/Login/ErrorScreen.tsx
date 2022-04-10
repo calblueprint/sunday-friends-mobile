@@ -26,7 +26,7 @@ const ErrorScreen = ({ route, navigation }: any) => {
                 Ask an admin if you think this is a mistake.
             </Text>
             <RectangularButton
-                onPress={() => navigation.navigate('LoginStack', { screen: 'SignupScreen1' })}
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Signup1' })}
                 text="Back"
                 buttonStyle={{ backgroundColor: '#253C85' }}
                 textStyle={{ color: '#FFF' }}
