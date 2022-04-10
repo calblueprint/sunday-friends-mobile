@@ -76,7 +76,7 @@ const LoginScreen = ({ navigation }: any) => {
             <View style={styles.text}>
                 <Text style={[globalStyles.body3, styles.footer]}>
                     Haven't activated your account? <Pressable
-                        onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
+                        onPress={() => navigation.navigate('LoginStack', { screen: 'Signup1' })}
                     >
                         <Text style={[globalStyles.body1Bold, styles.underline]}>
                             Activate now
