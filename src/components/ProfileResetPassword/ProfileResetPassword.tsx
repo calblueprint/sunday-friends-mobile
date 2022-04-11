@@ -3,6 +3,7 @@ import styles from "./styles";
 import { Modal, View, Pressable, TextInput, Text, Linking } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
+import emailjs, { init } from "@emailjs/browser";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [email, onChangeEmail] = useState("");
@@ -11,6 +12,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [confirmPW, onChangeConfirmPW] = useState("");
   const [edited, setEdited] = useState(false);
   const [currScreen, setCurrScreen] = useState("reset");
+  const [currPin, setCurrPin] = useState(0);
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -24,12 +26,47 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setVisible(false);
   };
 
+  init("bpUmfdhrALYzPBWpx"); //initializes emailJS userID (only 200 emails a month...)
+
+  const resetEmailParams = () => {
+    setCurrPin(Math.floor(100000 + Math.random() * 900000));
+    return {
+      from: "Sunday Friends",
+      to: email,
+      name: user.full_name,
+      pin: currPin,
+    };
+  };
+
+  const successEmailParams = {
+    from: "Sunday Friends",
+    to: "email",
+    name: user.full_name,
+  };
+
+  const sendEmail = (type: string) => {
+    switch (type) {
+      case "reset":
+        return emailjs.send(
+          "service_4586ayw",
+          "template_mz61cu7",
+          resetEmailParams()
+        );
+      case "success":
+        return emailjs.send(
+          "service_4586ayw",
+          "template_dessp0w",
+          successEmailParams
+        );
+    }
+  };
+
   const valid = () => {
     switch (currScreen) {
       case "reset":
         return emailRegex.test(email);
       case "verify":
-        return code.length == 6;
+        return code.length == 6 && parseInt(code) == currPin;
       case "setNew":
         return newPW == confirmPW && newPW.length >= 8 && newPW.length <= 20;
     }
@@ -60,7 +97,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             }
             placeholder="email@gmail.com"
             placeholderTextColor={"#A9A9A9"}
-            onChangeText={(e) => [onChangeEmail(e), setEdited(true)]}
+            onChangeText={(e) => [onChangeEmail(e), setEdited(true), ,]}
             value={email}
             autoFocus={true}
           />
@@ -71,7 +108,14 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                 : styles.resetContinuePressable
             }
             onPress={() => {
-              edited ? [setCurrScreen("verify"), setEdited(false)] : null;
+              edited && valid()
+                ? [
+                    setCurrScreen("verify"),
+                    setEdited(false),
+                    //setCurrPin(Math.floor(100000 + Math.random() * 900000)),
+                    sendEmail("reset"),
+                  ]
+                : null;
             }}
           >
             <Text
@@ -99,7 +143,8 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
-            Enter the 6-digit code sent to {email}
+            Enter the 6-digit code sent to {email}, typed: {code} generated:
+            {currPin}
           </Text>
           <TextInput
             style={
@@ -113,7 +158,16 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeCode(e), setEdited(true)]}
             value={code}
           />
-          <Pressable style={styles.resendPressable}>
+          <Pressable
+            style={styles.resendPressable}
+            onPress={() => [
+              setEdited(false),
+              setCurrScreen("verify"),
+              //setCurrPin(Math.floor(100000 + Math.random() * 900000)),
+              sendEmail("reset"),
+              onChangeCode(""),
+            ]}
+          >
             <Text style={globalStyles.overline1}>RESEND CODE</Text>
           </Pressable>
           <Pressable
@@ -125,7 +179,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onPress={() => {
               edited && valid()
                 ? [setCurrScreen("setNew"), setEdited(false)]
-                : null; //when i save file it auto styles code like how it is
+                : null;
             }}
           >
             <Text style={[globalStyles.overline1, styles.whiteText]}>
@@ -231,7 +285,11 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                   ? [globalStyles.overline1, styles.greyText]
                   : [globalStyles.overline1, styles.greyText]
               }
-              onPress={() => (valid() ? setCurrScreen("success") : null)}
+              onPress={() =>
+                valid()
+                  ? [setCurrScreen("success"), sendEmail("success")]
+                  : null
+              }
             >
               {edited && valid() ? "CONTINUE" : "RESET PASSWORD"}
             </Text>
