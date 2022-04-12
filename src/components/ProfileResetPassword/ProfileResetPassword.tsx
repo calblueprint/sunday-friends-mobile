@@ -4,6 +4,7 @@ import { Modal, View, Pressable, TextInput, Text, Linking } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import emailjs, { init } from "@emailjs/browser";
+import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [email, onChangeEmail] = useState("");
@@ -26,7 +27,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setVisible(false);
   };
 
-  init("bpUmfdhrALYzPBWpx"); //initializes emailJS userID (only 200 emails a month...)
+  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
 
   const resetEmailParams = () => {
     setCurrPin(Math.floor(100000 + Math.random() * 900000));
@@ -48,13 +49,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     switch (type) {
       case "reset":
         return emailjs.send(
-          "service_4586ayw",
+          EMAILJS_SERVICE_ID,
           "template_mz61cu7",
           resetEmailParams()
         );
       case "success":
         return emailjs.send(
-          "service_4586ayw",
+          EMAILJS_SERVICE_ID,
           "template_dessp0w",
           successEmailParams
         );
@@ -311,7 +312,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             You're all set!
           </Text>
           <Text style={[globalStyles.h4, styles.successSubTitle]}>
-            Your new password has been set. Check your inbox for comfirmation.
+            Your new password has been set. Check your inbox for confirmation.
           </Text>
           <Pressable style={styles.closePressable} onPress={() => reset()}>
             <Text style={[globalStyles.overline1, styles.whiteText]}>
