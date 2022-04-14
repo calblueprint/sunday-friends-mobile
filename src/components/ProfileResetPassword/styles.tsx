@@ -124,6 +124,16 @@ export default StyleSheet.create({
     paddingLeft: "5%",
     backgroundColor: "#F2F2F2",
   },
+  errorBackground: {
+    backgroundColor: "#FFF3F3",
+  },
+  fieldReqSet: {
+    position: "absolute",
+    top: "28.17%",
+    left: "74.5%",
+    width: "21.06%",
+    color: "#E94444",
+  },
   confirmNewInput: {
     position: "absolute",
     top: "33.4%",
@@ -149,6 +159,20 @@ export default StyleSheet.create({
     borderRadius: 5,
     paddingLeft: "5%",
     backgroundColor: "#F2F2F2",
+  },
+  fieldReqConfirm: {
+    position: "absolute",
+    top: "39.05%",
+    left: "74.5%",
+    width: "21.06%",
+    color: "#E94444",
+  },
+  pwMustMatchError: {
+    position: "absolute",
+    top: "39.05%",
+    left: "63.5%",
+    width: "32.8%",
+    color: "#E94444",
   },
   resetContinuePressable: {
     display: "flex",
@@ -224,30 +248,6 @@ export default StyleSheet.create({
     backgroundColor: "#253C85",
     borderRadius: 5,
   },
-  mustBeCharacter: {
-    position: "absolute",
-    top: "27%",
-    right: "9.3%",
-    color: "#A9A9A9",
-    fontFamily: "Avenir",
-    fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: "400",
-    height: 16,
-    textAlign: "left",
-  },
-  pwMustMatch: {
-    position: "absolute",
-    top: "37%",
-    right: "9.3%",
-    color: "#A9A9A9",
-    fontFamily: "Avenir",
-    fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: "400",
-    height: 16,
-    textAlign: "left",
-  },
   successTitle: {
     position: "absolute",
     top: "25.9%",
@@ -265,6 +265,9 @@ export default StyleSheet.create({
   },
   greyText: {
     color: "#F2F2F2",
+  },
+  sapphireText: {
+    color: "#E6ECFE",
   },
   closeText: {
     color: "#526DC2",
