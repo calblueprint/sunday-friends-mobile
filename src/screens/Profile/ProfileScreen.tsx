@@ -49,12 +49,14 @@ const ProfileScreen = ({ navigation }: any) => {
   const [resetModalVisible, setResetModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
+  const [nameText, onChangeNameText] = useState(user.full_name);
+  const [roleText, onChangeRoleText] = useState(user.role);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
     });
-  }, []);
+  }, [editModalVisible]);
 
   return (
     <ViewContainer>
@@ -99,6 +101,7 @@ const ProfileScreen = ({ navigation }: any) => {
           visible={editModalVisible}
           setVisible={setEditModalVisible}
           user={user}
+          setUser={setUser}
         />
       </Pressable>
 
