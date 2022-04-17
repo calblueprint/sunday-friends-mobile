@@ -122,17 +122,7 @@ export default StyleSheet.create({
     fontSize: 16,
     borderRadius: 5,
     paddingLeft: "5%",
-    backgroundColor: "#F2F2F2",
-  },
-  errorBackground: {
-    backgroundColor: "#FFF3F3",
-  },
-  fieldReqSet: {
-    position: "absolute",
-    top: "28.17%",
-    left: "74.5%",
-    width: "21.06%",
-    color: "#E94444",
+    backgroundColor: "#FFFFFF",
   },
   confirmNewInput: {
     position: "absolute",
@@ -158,11 +148,18 @@ export default StyleSheet.create({
     fontSize: 16,
     borderRadius: 5,
     paddingLeft: "5%",
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#FFFFFF",
   },
-  fieldReqConfirm: {
+  fieldReqConfirmPW: {
     position: "absolute",
     top: "39.05%",
+    left: "74.5%",
+    width: "21.06%",
+    color: "#E94444",
+  },
+  fieldReqSetPW: {
+    position: "absolute",
+    top: "28.17%",
     left: "74.5%",
     width: "21.06%",
     color: "#E94444",
@@ -260,6 +257,9 @@ export default StyleSheet.create({
     left: "7.7%",
     width: "84%",
   },
+  errorBackground: {
+    backgroundColor: "#FFF3F3",
+  },
   whiteText: {
     color: "#FFFFFF",
   },
@@ -353,14 +353,5 @@ export default StyleSheet.create({
     alignItems: "center",
     height: "2%",
     justifyContent: "center",
-  },
-  uppercaseCheck: {
-    position: "absolute",
-    top: "42%",
-    left: "8%",
-    display: "flex",
-    alignContent: "center",
-    flexDirection: "row",
-    marginVertical: 8,
   },
 });

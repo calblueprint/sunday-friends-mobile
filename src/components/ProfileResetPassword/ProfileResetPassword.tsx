@@ -68,7 +68,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
       case "reset":
         return emailRegex.test(email);
       case "verify":
-        return code.length == 6 && parseInt(code) == pin;
+        return parseInt(code) == pin;
       case "setNew":
         return (
           newPW == confirmPW &&
@@ -100,7 +100,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Text>
           <TextInput
             style={
-              edited && valid()
+              edited && email.length > 0
                 ? [globalStyles.body1, styles.emailInputTyping]
                 : [globalStyles.body1, styles.emailInput]
             }
@@ -112,21 +112,21 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           />
           <Pressable
             style={
-              edited && valid()
+              valid()
                 ? styles.resetContinuePressableAllowed
                 : styles.resetContinuePressable
             }
             onPress={() => {
-              edited && valid()
+              valid()
                 ? [setScreen("verify"), setEdited(false), sendEmail("reset")]
                 : null;
             }}
           >
             <Text
               style={
-                edited && valid()
+                valid()
                   ? [globalStyles.overline1, styles.greyText]
-                  : [globalStyles.overline1, styles.greyText]
+                  : [globalStyles.overline1, styles.sapphireText]
               }
             >
               CONTINUE
@@ -174,14 +174,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Pressable
             style={
-              edited && valid()
+              valid()
                 ? styles.verifyContinuePressableAllowed
                 : styles.verifyContinuePressable
             }
             onPress={() => {
-              edited && valid()
-                ? [setScreen("setNew"), setEdited(false)]
-                : null;
+              valid() ? [setScreen("setNew"), setEdited(false)] : null;
             }}
           >
             <Text style={[globalStyles.overline1, styles.whiteText]}>
@@ -193,7 +191,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     );
   };
 
-  const setNewPassword = () => {
+  const setNewModal = () => {
     return (
       <Modal visible={visible} transparent animationType="slide">
         <View style={styles.modalView}>
@@ -215,7 +213,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                     styles.setNewInputTyping,
                     styles.errorBackground,
                   ]
-                : edited && valid()
+                : edited && newPW.length > 0
                 ? [globalStyles.body1, styles.setNewInputTyping]
                 : [globalStyles.body1, styles.setNewInput]
             }
@@ -226,7 +224,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             autoFocus={true}
           />
           {pwError && newPW.length == 0 ? (
-            <Text style={[globalStyles.body2, styles.fieldReqSet]}>
+            <Text style={[globalStyles.body2, styles.fieldReqSetPW]}>
               Field Required
             </Text>
           ) : null}
@@ -241,7 +239,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                     styles.confirmNewInputTyping,
                     styles.errorBackground,
                   ]
-                : edited && valid()
+                : edited && confirmPW.length > 0
                 ? [globalStyles.body1, styles.confirmNewInputTyping]
                 : [globalStyles.body1, styles.confirmNewInput]
             }
@@ -257,7 +255,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                 Passwords must match
               </Text>
             ) : confirmPW.length == 0 ? (
-              <Text style={[globalStyles.body2, styles.fieldReqConfirm]}>
+              <Text style={[globalStyles.body2, styles.fieldReqConfirmPW]}>
                 Field Required
               </Text>
             ) : null
@@ -273,7 +271,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <View style={styles.characterCheckText}>
             <Text style={globalStyles.body2}>8-20 Characters</Text>
           </View>
-
           <View style={styles.numberCheckIcon}>
             {/\d/.test(newPW) ? (
               <SvgIcon type="greenCheck" />
@@ -284,7 +281,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <View style={styles.numberCheckText}>
             <Text style={globalStyles.body2}>At least 1 number</Text>
           </View>
-
           <View style={styles.uppercaseCheckIcon}>
             {/[A-Z]/.test(newPW) ? (
               <SvgIcon type="greenCheck" />
@@ -295,7 +291,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <View style={styles.uppercaseCheckText}>
             <Text style={globalStyles.body2}>At least 1 uppercase letter</Text>
           </View>
-
           <View style={styles.spacesCheckIcon}>
             {/^\S+$/.test(newPW) ? (
               <SvgIcon type="greenCheck" />
@@ -309,14 +304,14 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
 
           <Pressable
             style={
-              edited && valid()
+              valid()
                 ? styles.resetContinuePressableAllowed
                 : styles.resetContinuePressable
             }
           >
             <Text
               style={
-                edited && valid()
+                valid()
                   ? [globalStyles.overline1, styles.sapphireText]
                   : [globalStyles.overline1, styles.greyText]
               }
@@ -326,7 +321,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                   : setPwError(true)
               }
             >
-              {edited && valid() ? "CONTINUE" : "RESET PASSWORD"}
+              {valid() ? "CONTINUE" : "RESET PASSWORD"}
             </Text>
           </Pressable>
         </View>
@@ -334,7 +329,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     );
   };
 
-  const success = () => {
+  const successModal = () => {
     return (
       <Modal visible={visible} transparent animationType="slide">
         <View style={styles.modalView}>
@@ -364,9 +359,10 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     case "verify":
       return verifyModal();
     case "setNew":
-      return setNewPassword();
+      return setNewModal();
     case "success":
-      return success();
+      return successModal();
+    default:
+      return null;
   }
-  return null;
 };

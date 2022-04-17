@@ -1,23 +1,11 @@
 import * as React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import {
-  StyleSheet,
-  View,
-  Image,
-  ImageBackground,
-  Text,
-  Pressable,
-  Modal,
-  FlatList,
-} from "react-native";
-import { Title } from "react-native-paper";
-import EditScreenInfo from "../../components/EditScreenInfo";
+import { View, Text, Pressable } from "react-native";
 import ViewContainer from "../../components/ViewContainer";
 import styles from "./styles";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
-import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitchModal";
 import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
@@ -42,15 +30,11 @@ const ProfileScreen = ({ navigation }: any) => {
     phone_number: "",
     transactions: [],
   };
-  const [profileSwitchModalVisible, setProfileSwitchModalVisible] =
-    useState(false);
-  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [resetModalVisible, setResetModalVisible] = useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
-  const [nameText, onChangeNameText] = useState(user.full_name);
-  const [roleText, onChangeRoleText] = useState(user.role);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
@@ -62,7 +46,7 @@ const ProfileScreen = ({ navigation }: any) => {
     <ViewContainer>
       <View
         style={
-          profileSwitchModalVisible || logoutModalVisible || editModalVisible
+          editModalVisible || logoutModalVisible || resetModalVisible
             ? styles.modalVisibleContainer
             : null
         }
@@ -74,23 +58,13 @@ const ProfileScreen = ({ navigation }: any) => {
       >
         <SvgIcon type="chevronLeft" />
       </Pressable>
-      <Pressable
-        style={styles.profileImagePressable}
-        onPress={() => setProfileSwitchModalVisible(true)}
-      >
-        <ProfileSwitchModal
-          visible={profileSwitchModalVisible}
-          setVisible={setProfileSwitchModalVisible}
-        />
-        <SvgIcon type="profileHeadSmiley" />
-        <View style={styles.downArrow}>
-          <SvgIcon type="downArrow" />
-        </View>
-      </Pressable>
 
-      <Title style={[styles.profileName, globalStyles.h3Bold]}>
+      <Pressable style={styles.profileImagePressable}>
+        <SvgIcon type="profileHeadSmiley" />
+      </Pressable>
+      <Text style={[styles.profileName, globalStyles.h3Bold]}>
         {user.full_name}
-      </Title>
+      </Text>
 
       <Pressable
         style={styles.editPressable}
