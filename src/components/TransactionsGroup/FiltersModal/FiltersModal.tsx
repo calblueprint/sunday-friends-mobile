@@ -19,7 +19,7 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                 <View style={styles.filterGroup}>
                     <View style={styles.withClear}>
                         <Text style={styles.filterBtnText}>Filter by date</Text>
-                        <Text style={[styles.closeText, ((minDate !== null && maxDate !== null) ? { color: '#526DC2' } : {color: '#A9A9A9'})]}
+                        <Text style={[styles.closeText, ((minDate !== null || maxDate !== null) ? { color: '#526DC2' } : {color: '#A9A9A9'})]}
                             onPress={() => {
                                 setMinDate(null)
                                 setMaxDate(null)
@@ -36,7 +36,7 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                             <Text
                                 style={[styles.dateText, (minDate !== null) ? { color: '#525454' } : {color: '#A9A9A9'}]}
                             >
-                                {(minDate === null) ? "MM/DD/YYYY" : `${minDate.getMonth()}/${minDate.getDate()}/${minDate.getFullYear()}`}
+                                {(minDate === null) ? "MM/DD/YYYY" : `${minDate.getMonth() + 1}/${minDate.getDate()}/${minDate.getFullYear()}`}
                             </Text>
                         </Pressable>
                         <Text style={styles.to}>to</Text>
@@ -47,7 +47,7 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                             <Text
                                 style={[styles.dateText, (maxDate !== null) ? { color: '#525454' } : {color: '#A9A9A9'}]}
                             >
-                                {(maxDate === null) ? "MM/DD/YYYY" : `${maxDate.getMonth()}/${maxDate.getDate()}/${maxDate.getFullYear()}`}
+                                {(maxDate === null) ? "MM/DD/YYYY" : `${maxDate.getMonth() + 1}/${maxDate.getDate()}/${maxDate.getFullYear()}`}
                             </Text>
                         </Pressable>
                     </View>
@@ -121,6 +121,7 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
             mode="date"
             is24Hour={true}
             onConfirm={(date) => {
+                console.log(date)
                 setShowMin(false)
                 setMinDate(date)
             }}

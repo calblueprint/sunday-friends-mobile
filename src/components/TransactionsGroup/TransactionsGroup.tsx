@@ -32,6 +32,10 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const [minAmount, setMinAmount] = useState(null as any);
     const [maxAmount, setMaxAmount] = useState(null as any);
 
+    const [filterMinDate, setFilterMinDate] = useState(null);
+    const [filterMaxDate, setFilterMaxDate] = useState(null);
+
+
     const [isLoading, setIsLoading] = useState(false);
 
     //Use effect later to get transaction data
@@ -48,7 +52,6 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     const addRole = user.transactions.map((transaction) => {
                         return {...transaction, role: user.role}
                     })
-                    console.log(addRole)
                     newTransactions.push(...addRole)
                 })
             } else {
@@ -70,6 +73,20 @@ const TransactionsGroup = ({ forFamily }: any) => {
             } else if (selection === 3) {
                 const filteredTransactions = newTransactions.filter((transaction) => {
                     return transaction.point_gain <= 0
+                })
+                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            }
+            if (filterMinDate) {
+                const filteredTransactions = newTransactions.filter((transaction) => {
+                    const toDate = new Date(transaction.date)
+                    return toDate >= filterMinDate
+                })
+                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            }
+            if (filterMaxDate) {
+                const filteredTransactions = newTransactions.filter((transaction) => {
+                    const toDate = new Date(transaction.date)
+                    return toDate <= filterMaxDate
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
             }
@@ -115,7 +132,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         //         id: 3
         //     },
         // ])
-    }, [selection, enteredSearch]);
+    }, [selection, enteredSearch, filterMinDate, filterMaxDate]);
 
     const handleSearch = () => {
         //todo search transactions
@@ -135,6 +152,8 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const handleApply = () => {
         //todo connect to backend
         setSelection(typeFilter)
+        setFilterMinDate(minDate)
+        setFilterMaxDate(maxDate)
         refRBSheet.current.close()
     }
 
@@ -176,7 +195,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             {(searchText !== "") && (
                                 <Pressable onPress={() => {
                                     setSearchText("");
-                                    setEnteredSearch("");
+                                  setEnteredSearch("");
                                     setSearchEntered(false);
                                     setSearchClicked(false);
                                 }}>
