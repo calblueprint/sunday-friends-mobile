@@ -200,13 +200,25 @@ const TransactionsGroup = ({ forFamily }: any) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
             <View style={styles.container}>
                 <View style={styles.btnGroup}>
-                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(1)}>
+                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(1)
+                            setTypeFilter(1)
+                        }}>
                         <Text style={[styles.btnText, selection === 1 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>All History</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(2)}>
+                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(2)
+                            setTypeFilter(2)
+                        }}>
                         <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Earnings</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(3)}>
+                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(3)
+                            setTypeFilter(3)
+                        }}>
                         <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Expirations</Text>
                     </Pressable>
                 </View>

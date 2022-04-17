@@ -92,25 +92,6 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                                     )
                                 })
                                 }
-                                {/* <TextInput
-                                    style={styles.amountInput}
-                                    onChangeText={text => setMinAmount(text)}
-                                    value={minAmount}
-                                    placeholder="Amount"
-                                    placeholderTextColor={'#A9A9A9'}
-                                    keyboardType="numeric"
-                                    returnKeyType="done"
-                                />
-                                <Text style={styles.to}>to</Text>
-                                <TextInput
-                                    style={styles.amountInput}
-                                    onChangeText={text => setMaxAmount(text)}
-                                    value={maxAmount}
-                                    placeholder="Amount"
-                                    placeholderTextColor={'#A9A9A9'}
-                                    keyboardType="numeric"
-                                    returnKeyType="done"
-                                /> */}
                             </View>
                         </View>
                     }
