@@ -3,14 +3,24 @@ import { useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { default as styles } from "./styles";
 
-const InviteRadioButton = () => {
+const InviteRadioButton = ({ setStatus }: any) => {
   const [userOption, setUserOption] = useState(0);
+
+  const handlePress = (option: number) => {
+    setUserOption(option);
+    if (option == 0) {
+      setStatus("Parent");
+    }
+    if (option == 1) {
+      setStatus("Child");
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Pressable
         style={0 == userOption ? styles.selected : styles.unselected}
-        onPress={() => setUserOption(0)}
+        onPress={() => handlePress(0)}
       >
         <Image
           style={styles.parent}
@@ -20,7 +30,7 @@ const InviteRadioButton = () => {
       </Pressable>
       <Pressable
         style={1 == userOption ? styles.selected : styles.unselected}
-        onPress={() => setUserOption(1)}
+        onPress={() => handlePress(1)}
       >
         <View style={styles.imageContainer}>
           <Image
@@ -29,18 +39,6 @@ const InviteRadioButton = () => {
           />
         </View>
         <Text style={styles.statusText}>Child</Text>
-      </Pressable>
-      <Pressable
-        style={2 == userOption ? styles.selected : styles.unselected}
-        onPress={() => setUserOption(2)}
-      >
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.dependent}
-            source={require("../../../assets/images/childSmiley.png")}
-          />
-        </View>
-        <Text style={styles.statusText}>Dependent</Text>
       </Pressable>
     </View>
   );

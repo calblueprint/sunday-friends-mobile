@@ -12,12 +12,13 @@ export default StyleSheet.create({
     width: "80%",
     marginVertical: "3%",
     marginHorizontal: "10%",
+    justifyContent: "space-between",
   },
 
   head: {
     resizeMode: "contain",
-    width: 48,
-    height: 48,
+    width: 50,
+    height: 50,
     justifyContent: "center",
   },
 
@@ -36,8 +37,8 @@ export default StyleSheet.create({
   },
 
   child: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     resizeMode: "contain",
   },
 
@@ -53,6 +54,10 @@ export default StyleSheet.create({
 
   innerContainer: {
     alignSelf: "center",
-    paddingLeft: "4.5%",
+    width: "70%",
+  },
+
+  deleteContainer: {
+    alignSelf: "center",
   },
 });

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState, useRef } from "react";
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { useState, useRef, useContext, useEffect } from "react";
+import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
 import FormInput from "../../components/FormInput";
 import RectangularButton from "../../components/RectangularButton/RectangularButton";
 import { default as styles } from "./styles";
@@ -12,89 +12,110 @@ import {
   SubmitHandler,
   SubmitErrorHandler,
 } from "react-hook-form";
+import "firebase/firestore";
+import firebaseApp from "../../firebase/firebaseApp";
+import { User_Invite } from "../../types/schema";
+
 import RBSheet from "react-native-raw-bottom-sheet";
 import SvgIcon from "../../../assets/SvgIcon";
+import {
+  getUserInviteByFamily,
+  addUserInvite,
+} from "../../firebase/firestore/userInvite";
+import userContext from "../../context/userContext";
+import { getUser } from "../../firebase/firestore/user";
+import { Z_DEFAULT_STRATEGY } from "zlib";
+import globalStyles from "../../globalStyles";
+import { getFamily } from "../../firebase/firestore/family";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
 const InviteScreen = ({ navigation }: any) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [text, onChangeText] = React.useState("");
-  const [userInvites, setUserInvites] = useState();
+  const defaultUserInvites: User_Invite[] = [
+    {
+      name: "",
+      family_id: 0,
+      email: "",
+      status: "",
+      user_invite_id: "",
+    },
+  ];
+
+  const defaultInvite: User_Invite = {
+    name: "",
+    family_id: 0,
+    email: "",
+    status: "",
+    user_invite_id: "",
+  };
+
+  const value = useContext(userContext);
+  const [userInvites, setUserInvites] = useState(defaultUserInvites);
+  const [newInviteName, onChangeName] = useState("");
+  const [newInviteEmail, onChangeEmail] = useState("");
+  const [newInviteStatus, setNewInviteStatus] = useState("");
+  const [familyID, setFamilyID] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userID, setUserID] = useState("");
+  const [familyName, setFamilyName] = useState("");
   const refRBSheet = useRef();
 
-  type FormValues = {
-    name: string;
-    email: string;
-  };
-
-  const { ...methods } = useForm();
-
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log({ data });
-
-  const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
-    return console.log(errors);
-  };
-
   const handleAdd = () => {
-    //todo connect to backend
-    //methods.handleSubmit(onSubmit, onError);
+    // methods.handleSubmit(onSubmit, onError);
+    // set default user values to new name, new email, new status
+    // add default user to firebase
+    const newInvite = {
+      name: newInviteName,
+      email: newInviteEmail,
+      status: newInviteStatus,
+      family_id: familyID,
+    };
+
+    addUserInvite(newInvite as User_Invite).then(() => {
+      getUserInviteByFamily(familyID).then((data) => {
+        setUserInvites(data);
+      });
+    });
+
     refRBSheet.current.close();
   };
 
-  const DATA: {
-    id: string;
-    name: string;
-    head: boolean;
-    email: string;
-    status: string;
-  }[] = [
-    {
-      id: "1",
-      name: "Yakob Kim",
-      head: true,
-      email: "yakobkim@gmail.com",
-      status: "head",
-    },
-    {
-      id: "2",
-      name: "Danashi",
-      head: false,
-      email: "danasheesh@gmail.com",
-      status: "parent",
-    },
-    {
-      id: "4",
-      name: "Kelly",
-      head: false,
-      email: "kelly@berkeley.edu",
-      status: "child",
-    },
-    {
-      id: "5",
-      name: "Yulin",
-      head: false,
-      email: "yuliniscool@yahoo.com",
-      status: "child",
-    },
-    {
-      id: "6",
-      name: "Albert",
-      head: false,
-      email: "albie@gmail.edu",
-      status: "dependent",
-    },
-  ];
+  useEffect(() => {
+    getUser(value).then((user) => {
+      setFamilyID(user.family_id);
+      setUserName(user.full_name);
+      setUserEmail(user.email);
+      setUserID(user.user_id);
+      getUserInviteByFamily(user.family_id).then((data) => {
+        setUserInvites(data);
+      });
+      getFamily(user.family_id.toString()).then((family) => {
+        setFamilyName(family.family_name);
+      });
+    });
+  }, []);
+
+  const [isFocused, changeFocus] = React.useState(true);
+  const handleFocus = () => changeFocus(false);
+  const handleBlur = () => changeFocus(true);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title1}>You're in charge!</Text>
-      <Text style={styles.title2}>Invite members to Kim Family</Text>
+      <Text style={styles.title2}>Invite members to {familyName} Family</Text>
       <ScrollView style={styles.scrollContainer}>
-        {DATA.map((member) => (
+        <MemberCard
+          name={userName}
+          email={userEmail}
+          status="Head"
+          userInviteId={userID}
+        />
+        {userInvites.map((user) => (
           <MemberCard
-            name={member.name}
-            head={member.head}
-            email={member.email}
-            status={member.status}
+            name={user.name}
+            email={user.email}
+            status={user.status}
+            userInviteId={user.user_invite_id}
           />
         ))}
         <Pressable
@@ -135,23 +156,49 @@ const InviteScreen = ({ navigation }: any) => {
         }}
       >
         <Text style={styles.modalTitle}>Add your family member's details</Text>
-        <FormProvider {...methods}>
-          <FormInput
-            name="name"
-            rules={{ required: "Field required" }}
-            label="full name"
+        <View style={styles.innerContainer}>
+          <Text style={globalStyles.overline2}>family relationship</Text>
+        </View>
+        <InviteRadioButton setStatus={setNewInviteStatus} />
+        <View style={styles.innerContainer}>
+          <Text style={globalStyles.overline2}>full name</Text>
+          <TextInput
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={[
+              styles.input,
+              {
+                borderColor: isFocused ? "#A9A9A9" : "#526DC2",
+                borderWidth: 1,
+                backgroundColor: value ? "#ffffff" : "#f2f2f2",
+              },
+            ]}
+            value={newInviteName}
             placeholder="Firstname Lastname"
+            onChangeText={onChangeName}
+            placeholderTextColor="#A9A9A9"
           />
-          <FormInput
-            name="email"
-            rules={{ required: "Field required" }}
-            label="email address"
+          <Text style={globalStyles.overline2}>email address</Text>
+          <TextInput
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={[
+              styles.input,
+              {
+                borderColor: isFocused ? "#A9A9A9" : "#526DC2",
+                borderWidth: 1,
+                backgroundColor: value ? "#ffffff" : "#f2f2f2",
+              },
+            ]}
+            value={newInviteEmail}
             placeholder="email@gmail.com"
             keyboardType="email-address"
+            onChangeText={onChangeEmail}
+            placeholderTextColor="#A9A9A9"
           />
-        </FormProvider>
-        <Text style={styles.modalText}>family relationship</Text>
-        <InviteRadioButton />
+        </View>
+
+        <View style={styles.separator} />
         <Pressable onPress={() => handleAdd()} style={styles.rectangularButton}>
           <Text style={styles.rectangularButtonText}>add member</Text>
         </Pressable>

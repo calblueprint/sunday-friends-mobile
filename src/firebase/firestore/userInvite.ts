@@ -51,16 +51,29 @@ export const addUserInvite = async (userInvite: User_Invite): Promise<void> => {
 };
 
 /**
+ * Deletes the given userInvite data from firestore
+ */
+export const deleteUserInvite = async (userInviteId: string): Promise<void> => {
+  try {
+    await userInvitesCollection.doc(userInviteId).delete();
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
+/**
  * Returns the family of userInvite data from firestore with the given userId
  */
 export const getUserInviteByFamily = async (
-  family_id: string
+  family_id: number
 ): Promise<User_Invite[]> => {
   try {
     const promises: Promise<User_Invite>[] = [];
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const getUserInvites = await userInvitesCollection
       .where("family_id", "==", family_id)
+      .where("status", "!=", "Head")
       .get()
       .then((doc) => {
         doc.forEach((item) => promises.push(parseUserInvite(item)));

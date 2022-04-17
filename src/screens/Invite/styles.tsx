@@ -83,11 +83,13 @@ export default StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#EBEBEB",
-    width: "80%",
-    height: "7%",
-    justifyContent: "center",
-    marginBottom: "5%",
+    height: 40,
+    width: "100%",
+    marginBottom: "4%",
+    marginTop: "2%",
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
   },
 
   backgroundContainer: {

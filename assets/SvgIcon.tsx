@@ -17,7 +17,11 @@ export type IconType =
   | "profileHeadSmiley"
   | "profileDependentSmiley"
   | "modal_x"
-  | "invite_add";
+  | "invite_add"
+  | "invite_delete"
+  | "headSmiley"
+  | "parentSmiley"
+  | "childSmiley";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
   chevron_down: (
@@ -30,13 +34,13 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
     ></SvgXml>
   ),
   chevron_right: (
-      <SvgXml
-        xml={`
+    <SvgXml
+      xml={`
         <svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 1.5L7 8L1 14.5" stroke="#CACACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         `}
-      />
+    />
   ),
   modal_x: (
     <SvgXml
@@ -151,6 +155,16 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
           </svg>`}
     />
   ),
+
+  invite_delete: (
+    <SvgXml
+      xml={`<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.4998 18.3337C8.2891 18.3356 6.16832 17.4583 4.60509 15.8951C3.04185 14.3318 2.16452 12.2111 2.16651 10.0003V9.83366C2.23466 6.49384 4.28967 3.51712 7.38848 2.26954C10.4873 1.02196 14.0316 1.7444 16.3948 4.10532C18.7802 6.48872 19.4941 10.0748 18.2035 13.19C16.9128 16.3053 13.8719 18.3356 10.4998 18.3337ZM10.4998 11.1753L12.6582 13.3337L13.8332 12.1587L11.6748 10.0003L13.8332 7.84199L12.6582 6.66699L10.4998 8.82532L8.34151 6.66699L7.16651 7.84199L9.32484 10.0003L7.16651 12.1587L8.34151 13.3337L10.4998 11.1762V11.1753Z" fill="#A9A9A9"/>
+    </svg>
+    `}
+    />
+  ),
+
   profileSmallHeadSmiley: (
     <SvgXml
       xml={`
@@ -199,6 +213,42 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
 				<path d="M28.0234 43.4004C29.0449 47.4861 36.1949 47.4861 37.2163 43.4004" stroke="#525454" stroke-width="1.14911" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			`}
+    />
+  ),
+  headSmiley: (
+    <SvgXml
+      xml={`<svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="21.0663" cy="22.2948" r="17.0663" fill="#E6ECFE" stroke="#B5C4F4" stroke-width="2"/>
+      <circle cx="13.5569" cy="20.9429" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+      <circle cx="28.0425" cy="20.9429" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+      <path d="M18.0132 27.6287C18.5703 29.8572 22.4703 29.8572 23.0275 27.6287" stroke="#525454" stroke-width="0.626786" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7.95814 14.1199L3 8.05995H7.40724L6.85633 3.10181L10.7127 5.85633L12.9163 2L15.6708 10.8145C13.4672 14.3403 9.61086 14.4872 7.95814 14.1199Z" fill="#FFF2C3" stroke="#FFE381" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      `}
+    />
+  ),
+
+  parentSmiley: (
+    <SvgXml
+      xml={`<svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="21.0663" cy="21.0663" r="17.0663" fill="#E6ECFE" stroke="#B5C4F4" stroke-width="2"/>
+    <circle cx="13.5567" cy="19.7144" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+    <circle cx="28.0423" cy="19.7144" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+    <path d="M18.0132 26.4001C18.5703 28.6287 22.4703 28.6287 23.0275 26.4001" stroke="#525454" stroke-width="0.626786" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `}
+    />
+  ),
+
+  childSmiley: (
+    <SvgXml
+      xml={`<svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="21.0663" cy="21.0663" r="17.0663" fill="#DDF3E1" stroke="#ADDBB6" stroke-width="2"/>
+    <rect width="16.7143" height="2.22857" transform="translate(12.4424 18.6001)" fill="#DDF3E1"/>
+    <circle cx="13.5567" cy="19.7144" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+    <circle cx="28.0423" cy="19.7144" r="0.557143" fill="#525454" stroke="#525454" stroke-width="1.11429"/>
+    <path d="M18.0132 26.4001C18.5703 28.6287 22.4703 28.6287 23.0275 26.4001" stroke="#525454" stroke-width="0.626786" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`}
     />
   ),
 };
