@@ -29,16 +29,34 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const [maxDate, setMaxDate] = useState(null);
     const [showMax, setShowMax] = useState(false);
     const [typeFilter, setTypeFilter] = useState(1);
-    const [minAmount, setMinAmount] = useState(null as any);
-    const [maxAmount, setMaxAmount] = useState(null as any);
+    const [familyMembers, setFamilyMembers] = useState(["Any Member"]);
+    const [memberSelect, setMemberSelect] = useState(["Any Member"]);
 
     const [filterMinDate, setFilterMinDate] = useState(null);
     const [filterMaxDate, setFilterMaxDate] = useState(null);
-
+    const [filterMemberSelect, setFilterMemberSelect] = useState(["Any Member"])
 
     const [isLoading, setIsLoading] = useState(false);
 
-    //Use effect later to get transaction data
+    // get family members for Filter by Family Member buttons
+    useEffect(() => {
+        const fetchFamilyMembers = async (user_id: string) => {
+            if (forFamily) {
+                const newMembers = ["Any Member"]
+
+                const user = await getUser(userId)
+                const family = await getFamilyById(user.family_id.toString())
+                family.user_ids.forEach(async (user) => {
+                    newMembers.push(user.full_name)
+                })
+
+                setFamilyMembers(newMembers)
+            }
+        }
+        fetchFamilyMembers(userId).catch(console.error)
+    }, [forFamily])
+
+    //get and filter transaction data
     useEffect(() => {
         console.log(enteredSearch)
         const fetchTransactions = async (user_id: string) => {
@@ -90,6 +108,14 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
             }
+            if (!forFamily || filterMemberSelect.includes("Any Member")) {
+                // don't filter
+            } else {
+                const filteredTransactions = newTransactions.filter((transaction) => {
+                    return filterMemberSelect.includes(transaction.user_name)
+                })
+                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            }
 
             setTransactions(newTransactions)
             setIsLoading(false)
@@ -132,7 +158,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         //         id: 3
         //     },
         // ])
-    }, [selection, enteredSearch, filterMinDate, filterMaxDate]);
+    }, [selection, enteredSearch, filterMinDate, filterMaxDate, filterMemberSelect]);
 
     const handleSearch = () => {
         //todo search transactions
@@ -144,8 +170,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         //todo search transactions
         setMinDate(null)
         setMaxDate(null)
-        setMinAmount(null);
-        setMaxAmount(null);
+        setMemberSelect(["Any Member"])
         setTypeFilter(1);
     }
 
@@ -154,6 +179,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         setSelection(typeFilter)
         setFilterMinDate(minDate)
         setFilterMaxDate(maxDate)
+        setFilterMemberSelect(memberSelect)
         refRBSheet.current.close()
     }
 
@@ -247,8 +273,8 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 >
                     <FiltersModal refRBSheet={refRBSheet} minDate={minDate} setMinDate={setMinDate} showMin={showMin} setShowMin={setShowMin}
                         maxDate={maxDate} setMaxDate={setMaxDate} showMax={showMax} setShowMax={setShowMax}
-                        minAmount={minAmount} setMinAmount={setMinAmount} maxAmount={maxAmount} setMaxAmount={setMaxAmount}
-                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset}
+                        familyMembers={familyMembers} memberSelect={memberSelect} setMemberSelect={setMemberSelect}
+                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset} forFamily={forFamily}
                     />
                 </RBSheet>
             </View>

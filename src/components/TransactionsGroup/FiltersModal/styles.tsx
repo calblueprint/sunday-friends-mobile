@@ -83,10 +83,12 @@ export default StyleSheet.create({
     fontWeight: "800",
     textAlign: "left",
   },
-  amountsContainer: {
+  rowFlex: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
   },
   dateInput: {
     width: "45%",
@@ -112,20 +114,13 @@ export default StyleSheet.create({
     fontWeight: '800',
     width: "10%"
   },
-  amountInput: {
-    width: "45%",
+  memberBtn: {
+    width: "49%",
     borderWidth: 1.5,
-    borderColor: "#F7F7F7",
     borderRadius: 8,
     backgroundColor: "#F7F7F7",
     marginVertical: 5,
     padding: 12,
-
-    fontFamily: 'Avenir',
-    fontSize: 14,
-    fontWeight: '400',
-    lineHeight: 19,
-    color: '#525454'
   },
   selectedInput: {
     borderColor: '#7F93D1',
