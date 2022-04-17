@@ -40,3 +40,9 @@ export type User_Invite = {
   email: string;
   status: string;
 };
+
+export type Tiers = {
+  tier1: number;
+  tier2: number;
+  tier3: number;
+};
