@@ -11,7 +11,6 @@ import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
 import userContext from '../../context/userContext';
-import { countReset } from 'console';
 
 const TransactionsGroup = ({ forFamily }: any) => {
     const userId = useContext(userContext);

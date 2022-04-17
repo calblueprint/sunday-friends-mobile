@@ -24,7 +24,7 @@ import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 
-const ProfileScreen = ({navigation}: any) => {
+const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
     user_id: "",
     address: "",
@@ -47,12 +47,14 @@ const ProfileScreen = ({navigation}: any) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
+  const [nameText, onChangeNameText] = useState(user.full_name);
+  const [roleText, onChangeRoleText] = useState(user.role);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
     });
-  }, []);
+  }, [editModalVisible]);
 
   return (
     <ViewContainer>
@@ -64,8 +66,10 @@ const ProfileScreen = ({navigation}: any) => {
         }
       />
 
-      <Pressable style={styles.backArrowPressable}
-      onPress={() => navigation.goBack()}>
+      <Pressable
+        style={styles.backArrowPressable}
+        onPress={() => navigation.goBack()}
+      >
         <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
@@ -95,6 +99,7 @@ const ProfileScreen = ({navigation}: any) => {
           visible={editModalVisible}
           setVisible={setEditModalVisible}
           user={user}
+          setUser={setUser}
         />
       </Pressable>
 
