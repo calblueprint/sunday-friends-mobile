@@ -11,6 +11,7 @@ import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
 import userContext from '../../context/userContext';
+import { countReset } from 'console';
 
 const TransactionsGroup = ({ forFamily }: any) => {
     const userId = useContext(userContext);
@@ -37,6 +38,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const [filterMemberSelect, setFilterMemberSelect] = useState(["Any Member"])
 
     const [isLoading, setIsLoading] = useState(false);
+    const [numFilters, setNumFilters] = useState(0);
 
     // get family members for Filter by Family Member buttons
     useEffect(() => {
@@ -62,6 +64,8 @@ const TransactionsGroup = ({ forFamily }: any) => {
         const fetchTransactions = async (user_id: string) => {
             setIsLoading(true)
             const newTransactions = []
+            let count = 0
+
             if (forFamily) {
                 const user = await getUser(userId)
                 const family = await getFamilyById(user.family_id.toString())
@@ -88,11 +92,13 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     return transaction.point_gain > 0
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+                count += 1
             } else if (selection === 3) {
                 const filteredTransactions = newTransactions.filter((transaction) => {
                     return transaction.point_gain <= 0
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+                count += 1
             }
             if (filterMinDate) {
                 const filteredTransactions = newTransactions.filter((transaction) => {
@@ -108,6 +114,9 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
             }
+            if (filterMinDate || filterMaxDate) {
+                count += 1
+            }
             if (!forFamily || filterMemberSelect.includes("Any Member")) {
                 // don't filter
             } else {
@@ -115,8 +124,10 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     return filterMemberSelect.includes(transaction.user_name)
                 })
                 newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+                count += 1
             }
 
+            setNumFilters(count)
             setTransactions(newTransactions)
             setIsLoading(false)
             console.log(newTransactions)
@@ -180,6 +191,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         setFilterMinDate(minDate)
         setFilterMaxDate(maxDate)
         setFilterMemberSelect(memberSelect)
+
         refRBSheet.current.close()
     }
 
@@ -231,7 +243,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                         </View>
                     </View>
                     <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}> 
-                        <Text style={styles.filtersButtonText}>Filters (0)</Text>
+                        <Text style={styles.filtersButtonText}>Filters ({numFilters})</Text>
                     </Pressable>
                     
                 </View>
