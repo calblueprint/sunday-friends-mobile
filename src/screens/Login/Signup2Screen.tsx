@@ -10,9 +10,11 @@ import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
 import SvgIcon from ',,/../../assets/SvgIcon';
 import { getHeadInvitesByEmail } from '../../firebase/firestore/userInvite';
+import { addUser } from '../../firebase/firestore/user';
 
 
 const Signup2Screen = ({ route, navigation }: any) => {
+
 
     type FormValues = {
         password1: string;
@@ -27,22 +29,42 @@ const Signup2Screen = ({ route, navigation }: any) => {
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
+    const createUser = (uid, email) => {
+        const defaultUser: User = {
+            user_id: uid,
+            address: "",
+            created_at: "",
+            email: email,
+            role: "",
+            family_id: 0,
+            full_name: "",
+            last_active: new Date(),
+            parent: false,
+            points: 0,
+            reward_eligible: false,
+            suspended: false,
+            phone_number: "",
+            transactions: [],
+        };
+        return defaultUser;
+    };
+
     const { ...methods } = useForm();
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
             if (data.password1 == data.password2) {
-                console.log(email);
-                console.log(data.password1);
-                await registerWithEmailAndPassword(email, data.password1);
+                const result = await registerWithEmailAndPassword(email, data.password1);
+                const newUser = createUser(result.user.uid, email);
+                addUser(newUser);
                 const headInvites = await getHeadInvitesByEmail(email);
                 if (headInvites.length == 0) {
                     navigation.navigate('LoginStack', { screen: 'Signup3' });
                 } else {
-                    navigation.navigate('LoginStack', { screen: 'Invite' })
+                    navigation.navigate('LoginStack', { screen: 'Invite' });
                 }
             } else {
-                console.log("Passwords do not match!")
+                console.log("Passwords do not match!");
             }
         } catch (e) {
             console.error(e.message);

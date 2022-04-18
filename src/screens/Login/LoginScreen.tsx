@@ -8,7 +8,6 @@ import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-
 import globalStyles from '../../globalStyles';
 import { signInWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
-import Navigation from '../../navigation';
 
 const LoginScreen = ({ navigation }: any) => {
 
@@ -20,7 +19,6 @@ const LoginScreen = ({ navigation }: any) => {
     const auth = firebaseApp.auth();
 
 
-    const [email, onChangeEmail] = React.useState("");
     const [isFocused, changeFocus] = React.useState(false);
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
