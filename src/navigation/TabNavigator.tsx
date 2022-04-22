@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FamilyScreen from "../screens/Personal/PersonalScreen";
+import PersonalScreen from "../screens/Personal/PersonalScreen";
+import FamilyScreen from "../screens/Family/FamilyScreen";
+
+// import PersonalScreen from "../screens/Personal/PersonalScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
-import HomeScreen from "../screens/Home/HomeScreen";
+// import PersonalScreen from "../screens/Home/HomeScreen";
 import InventoryScreen from "../screens/InventoryScreen";
 import { RootTabParamList, RootTabScreenProps } from "../types/navigation";
 import Icon from '../components/Icon';
@@ -12,22 +15,22 @@ const TabNavigator = () => {
     const Tab = createBottomTabNavigator();
     return (
         <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName="F"
         >
-            <Tab.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
-                    title: 'Home',
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
-                }}
-            />
             <Tab.Screen
                 name="Family"
                 component={FamilyScreen}
                 options={{
                     title: 'Family',
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
+                }}
+            />
+            <Tab.Screen
+                name="Personal"
+                component={PersonalScreen}
+                options={{
+                    title: 'Personal',
                     headerShown: false,
                     tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
                 }}

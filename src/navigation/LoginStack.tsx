@@ -4,7 +4,7 @@ import InviteScreen from '../screens/Invite/InviteScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
 import SignupScreen from '../screens/Login/SignupScreen';
 import SigninScreen from '../screens/Login/SigninScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
+import HomeScreen from '../screens/Family/FamilyScreen';
 import { LoginStackParamList } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabNavigator from './TabNavigator';

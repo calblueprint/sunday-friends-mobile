@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable, ScrollView, Button, Modal, Image} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
 import { useEffect, useState, useContext } from 'react';
@@ -8,7 +8,6 @@ import { Divider, Title } from 'react-native-paper';
 import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
-import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import {moment} from 'moment';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
@@ -16,6 +15,7 @@ import { getUser } from '../../firebase/firestore/user';
 import userContext from '../../context/userContext';
 import { User } from '../../types/schema';
 import {List} from 'react-native-paper';
+import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
 
 const defaultLabels = ['100', '200', '300']
 
@@ -80,7 +80,7 @@ const PersonalScreen = ({navigation}: any) => {
                 <Text style={[globalStyles.body2, {color: '#525454'}]}>{getCurrentDate()}</Text>
             </View>
             <View style = {styles.headline}>
-                <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Kim Family</Text>
+                <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Morning, Yakob</Text>
                 <View style={styles.innerContainer}>
                     <View style={styles.addPersonalCircle}>
                     <Pressable
@@ -92,6 +92,9 @@ const PersonalScreen = ({navigation}: any) => {
                 </View>
             </View>
 
+            {/* <Text style={[styles.initialText, {color: '#272929'}]}>Y</Text> */}
+
+            
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
                     <View style = {styles.balanceContainer}>
@@ -110,6 +113,18 @@ const PersonalScreen = ({navigation}: any) => {
                         </Pressable>
                 </View>
             </View>
+
+            <View style={styles.tranxContainer}>
+
+                <View style = {styles.tranxbar}>
+                    <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
+                </View>
+
+                <TransactionsGroup forFamily = {true}>
+                </TransactionsGroup>
+
+            </View>
+            
         </View>
     );
 }

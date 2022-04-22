@@ -52,6 +52,16 @@ export default StyleSheet.create({
     borderColor: '#E6ECFE',
   },
 
+  tranxContainer: {
+    marginTop: 17,
+    height: 550,
+  },
+  tranxbar: {
+    marginLeft: "5%",
+    marginBottom: 17,
+    
+  },
+
   headline: {
     flexDirection: "row",
     width: "89.4%",

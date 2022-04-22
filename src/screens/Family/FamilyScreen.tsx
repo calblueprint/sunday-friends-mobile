@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image, ScrollView} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
 import { useEffect, useState, useContext } from 'react';
@@ -8,7 +8,6 @@ import { Divider, Title } from 'react-native-paper';
 import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
-import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import {moment} from 'moment';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
@@ -16,6 +15,8 @@ import { getUser } from '../../firebase/firestore/user';
 import userContext from '../../context/userContext';
 import { User } from '../../types/schema';
 import {List} from 'react-native-paper';
+import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
+
 
 const defaultLabels = ['100', '200', '300']
 
@@ -47,7 +48,9 @@ const defaultUser: User = {
     transactions: [],
   };
 
-const HomeScreen = ({navigation}: any) => {
+
+
+const FamilyScreen = ({navigation}: any) => {
 
     const [labels, setLabels] = useState(['1000', '2000', '3000']);
     const [user, setUser] = useState(defaultUser);
@@ -76,6 +79,8 @@ const HomeScreen = ({navigation}: any) => {
 
     return (
         <View style = {styles.homeContainer}>
+            <ScrollView style = {styles.contentContainer} contentContainerStyle = {styles.alignment}>
+
             <View style = {styles.dateContainer}>
                 <Text style={[globalStyles.body2, {color: '#525454'}]}>{getCurrentDate()}</Text>
             </View>
@@ -167,21 +172,20 @@ const HomeScreen = ({navigation}: any) => {
                 <View>
                 </View>
             </View>
-            <Text>
-            </Text>
-            <List.Section>
-            <List.Accordion
-                title="Uncontrolled Accordion"
-                // left={props => <List.Icon {...props} icon="folder" />}>
-                >
-                <List.Item title="First item" />
-                <List.Item title="Second item" />
-            </List.Accordion>
+            <View style={styles.tranxContainer}>
 
-            </List.Section>
+                <View style = {styles.tranxbar}>
+                    <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
+                </View>
+
+                <TransactionsGroup forFamily = {true}>
+                </TransactionsGroup>
+
+            </View>
+            </ScrollView>
         </View>
         
     );
 }
 
-export default HomeScreen;
+export default FamilyScreen;
