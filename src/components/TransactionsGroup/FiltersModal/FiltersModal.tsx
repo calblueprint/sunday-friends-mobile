@@ -76,8 +76,18 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                                                     setMemberSelect(newSelected)
 
                                                 } else {
-                                                    const newSelected = [...memberSelect, name]
-                                                    setMemberSelect(newSelected)
+                                                    if (name === "Any Member") {
+                                                        const newSelected = ["Any Member"]
+                                                        setMemberSelect(newSelected)
+                                                    }
+                                                    else if (memberSelect.includes("Any Member")) {
+                                                        const newSelected = memberSelect.filter((val: any) => val !== "Any Member")
+                                                        newSelected.push(name)
+                                                        setMemberSelect(newSelected)
+                                                    } else {
+                                                        const newSelected = [...memberSelect, name]
+                                                        setMemberSelect(newSelected)
+                                                    }
                                                 }
                                             }}
                                             key={name}

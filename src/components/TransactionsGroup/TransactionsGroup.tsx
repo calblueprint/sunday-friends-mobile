@@ -127,6 +127,11 @@ const TransactionsGroup = ({ forFamily }: any) => {
             }
 
             setNumFilters(count)
+            newTransactions.sort((a, b) => {
+                const aDate = new Date(a.date)
+                const bDate = new Date(b.date)
+                return (bDate.getTime() - aDate.getTime())
+            })
             setTransactions(newTransactions)
             setIsLoading(false)
             console.log(newTransactions)
