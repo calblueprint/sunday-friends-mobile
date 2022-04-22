@@ -9,9 +9,9 @@ import globalStyles from '../../globalStyles';
 import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
 import SvgIcon from ',,/../../assets/SvgIcon';
-import { getHeadInvitesByEmail } from '../../firebase/firestore/userInvite';
+import { getHeadInvitesByEmail, getUserInvite } from '../../firebase/firestore/userInvite';
 import { addUser } from '../../firebase/firestore/user';
-
+import { User } from '../../types/schema';
 
 const Signup2Screen = ({ route, navigation }: any) => {
 
@@ -23,23 +23,23 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
     const auth = firebaseApp.auth();
 
-    const { email } = route.params;
+    const { user_invite } = route.params;
 
     const [isFocused, changeFocus] = React.useState(false);
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
-    const createUser = (uid, email) => {
+    const createUser = (uid, name, email, role, family_id, parent) => {
         const defaultUser: User = {
             user_id: uid,
             address: "",
-            created_at: "",
+            created_at: new Date(),
             email: email,
-            role: "",
-            family_id: 0,
-            full_name: "",
+            role: role,
+            family_id: family_id,
+            full_name: name,
             last_active: new Date(),
-            parent: false,
+            parent: parent,
             points: 0,
             reward_eligible: false,
             suspended: false,
@@ -54,14 +54,21 @@ const Signup2Screen = ({ route, navigation }: any) => {
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
             if (data.password1 == data.password2) {
-                const result = await registerWithEmailAndPassword(email, data.password1);
-                const newUser = createUser(result.user.uid, email);
+                const result = await registerWithEmailAndPassword(user_invite.email, data.password1);
+                console.log(user_invite.family_id)
+                const parent = user_invite.status != "Child";
+                const newUser = createUser(
+                    result.user.uid, 
+                    user_invite.name, 
+                    user_invite.email, 
+                    user_invite.status, 
+                    user_invite.family_id,
+                    parent);
                 addUser(newUser);
-                const headInvites = await getHeadInvitesByEmail(email);
-                if (headInvites.length == 0) {
-                    navigation.navigate('LoginStack', { screen: 'Signup3' });
-                } else {
+                if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'Invite' });
+                } else {
+                    navigation.navigate('LoginStack', { screen: 'Signup3' });
                 }
             } else {
                 console.log("Passwords do not match!");

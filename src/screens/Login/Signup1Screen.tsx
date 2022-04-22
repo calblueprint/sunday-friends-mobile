@@ -29,11 +29,12 @@ const Signup1Screen = ({ navigation }: any) => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
-            const userInvites = await getUserInvitesByEmail(data.email);
-            if (userInvites.length == 0) {
+            const user_invites = await getUserInvitesByEmail(data.email);
+            if (user_invites.length == 0) {
                 navigation.navigate('LoginStack', { screen: 'Error1'})
             } else {
-                navigation.navigate('LoginStack', { screen: 'Signup2', params: { email: data.email } });
+                const invite =  user_invites[0]
+                navigation.navigate('LoginStack', { screen: 'Signup2', params: { user_invite: invite } });
             }
         } catch (e) {
             console.error(e.message);
