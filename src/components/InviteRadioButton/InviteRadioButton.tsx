@@ -4,7 +4,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import { default as styles } from "./styles";
 
 const InviteRadioButton = ({ setStatus }: any) => {
-  const [userOption, setUserOption] = useState(0);
+  const [userOption, setUserOption] = useState(2);
 
   const handlePress = (option: number) => {
     setUserOption(option);

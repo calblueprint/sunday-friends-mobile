@@ -1,11 +1,9 @@
 import * as React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
-import FormInput from "../../components/FormInput";
 import RectangularButton from "../../components/RectangularButton/RectangularButton";
 import { default as styles } from "./styles";
 import MemberCard from "../../components/MemberCard/MemberCard";
-import InviteRadioButton from "../../components/InviteRadioButton/InviteRadioButton";
 import {
   useForm,
   FormProvider,
@@ -24,12 +22,9 @@ import {
 } from "../../firebase/firestore/userInvite";
 import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
-import { Z_DEFAULT_STRATEGY } from "zlib";
-import globalStyles from "../../globalStyles";
 import { getFamily } from "../../firebase/firestore/family";
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
-const InviteScreen = ({ navigation }: any) => {
+const EditInviteScreen = ({ navigation }: any) => {
   const defaultUserInvites: User_Invite[] = [
     {
       name: "",
@@ -104,14 +99,14 @@ const InviteScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title1}>You're in charge!</Text>
-      <Text style={styles.title2}>Invite members to {familyName} Family</Text>
+      <Text style={styles.title1}>Review before sending invites...</Text>
+      <Text style={styles.title2}>{familyName} Family</Text>
       <ScrollView style={styles.scrollContainer}>
         <MemberCard
           name={userName}
           email={userEmail}
           status="Head"
-          editScreen={false}
+          editScreen={true}
           userInviteId={userID}
           setUserInvites={setUserInvites}
           setName={setInviteName}
@@ -123,7 +118,7 @@ const InviteScreen = ({ navigation }: any) => {
             name={user.name}
             email={user.email}
             status={user.status}
-            editScreen={false}
+            editScreen={true}
             userInviteId={user.user_invite_id}
             setUserInvites={setUserInvites}
             setName={setInviteName}
@@ -131,95 +126,28 @@ const InviteScreen = ({ navigation }: any) => {
             openModal={() => refRBSheet.current.open()}
           />
         ))}
-        <Pressable
-          style={styles.backgroundContainer}
-          onPress={() => refRBSheet.current.open()}
-        >
-          <View style={styles.addContainer}>
-            <View style={styles.addCircle}>
-              <SvgIcon type="invite_add" />
-            </View>
-            <View style={styles.addInnerContainer}>
-              <View style={styles.rowContainer}>
-                <Text style={styles.nameText}>Add a member</Text>
-              </View>
-              <Text>Invite a parent, child, or dependent</Text>
-            </View>
-          </View>
-        </Pressable>
       </ScrollView>
-      <RectangularButton
-        onPress={() =>
-          navigation.navigate("LoginStack", { screen: "EditInvite" })
-        }
-        text="done"
-        buttonStyle={{ backgroundColor: "#253C85" }}
-        textStyle={{ color: "#FFF" }}
-      />
-      <View style={styles.separator} />
-      <RBSheet
-        ref={refRBSheet}
-        closeOnDragDown={true}
-        closeOnPressMask={true}
-        height={600}
-        customStyles={{
-          container: {
-            alignItems: "center",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          },
-        }}
-      >
-        <Text style={styles.modalTitle}>Add your family member's details</Text>
-        <View style={styles.innerContainer}>
-          <Text style={globalStyles.overline2}>family relationship</Text>
-        </View>
-        <InviteRadioButton setStatus={setNewInviteStatus} />
-        <View style={styles.innerContainer}>
-          <Text style={globalStyles.overline2}>full name</Text>
-          <TextInput
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            style={[
-              styles.input,
-              {
-                borderColor: isFocused ? "#A9A9A9" : "#526DC2",
-                borderWidth: 1,
-                backgroundColor: value ? "#ffffff" : "#f2f2f2",
-              },
-            ]}
-            value={newInviteName}
-            placeholder="Firstname Lastname"
-            onChangeText={(newName) => setInviteName(newName)}
-            placeholderTextColor="#A9A9A9"
-          />
-          <Text style={globalStyles.overline2}>email address</Text>
-          <TextInput
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            style={[
-              styles.input,
-              {
-                borderColor: isFocused ? "#A9A9A9" : "#526DC2",
-                borderWidth: 1,
-                backgroundColor: value ? "#ffffff" : "#f2f2f2",
-              },
-            ]}
-            value={newInviteEmail}
-            placeholder="email@gmail.com"
-            keyboardType="email-address"
-            onChangeText={(newEmail) => setInviteEmail(newEmail)}
-            placeholderTextColor="#A9A9A9"
-          />
-        </View>
-
-        <View style={styles.separator} />
-        <Pressable onPress={() => handleAdd()} style={styles.rectangularButton}>
-          <Text style={styles.rectangularButtonText}>add member</Text>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={styles.whiteHalfButton}
+          onPress={() =>
+            navigation.navigate("LoginStack", { screen: "Invite" })
+          }
+        >
+          <Text style={styles.rectangularButtonText2}>edit</Text>
         </Pressable>
-      </RBSheet>
+        <Pressable
+          style={styles.blueHalfButton}
+          onPress={() =>
+            navigation.navigate("LoginStack", { screen: "Invite" })
+          }
+        >
+          <Text style={styles.rectangularButtonText}>send invites</Text>
+        </Pressable>
+      </View>
+      <View style={styles.separator} />
     </View>
   );
 };
 
-export default InviteScreen;
+export default EditInviteScreen;

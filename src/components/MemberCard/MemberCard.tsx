@@ -2,18 +2,32 @@ import * as React from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { default as styles } from "./styles";
 import SvgIcon from "../../../assets/SvgIcon";
-import { deleteUserInvite } from "../../firebase/firestore/userInvite";
+import {
+  deleteUserInvite,
+  getUserInviteByFamily,
+  getUserInvite,
+} from "../../firebase/firestore/userInvite";
 
 const MemberCard = ({
   name,
   email,
   status,
+  editScreen,
   userInviteId,
+  setUserInvites,
+  setName,
+  setEmail,
+  openModal,
 }: {
   name: string;
   email: string;
   status: string;
+  editScreen: boolean;
   userInviteId: string;
+  setUserInvites: any;
+  setName: any;
+  setEmail: any;
+  openModal: any;
 }) => {
   const icon = () => {
     if (status == "Head") {
@@ -61,11 +75,17 @@ const MemberCard = ({
   };
 
   const handleDelete = (id: string) => {
-    deleteUserInvite(id);
+    getUserInvite(id).then((user) => {
+      deleteUserInvite(id).then(() => {
+        getUserInviteByFamily(user.family_id).then((data) => {
+          setUserInvites(data);
+        });
+      });
+    });
   };
 
   const deleteButton = () => {
-    if (status != "Head") {
+    if (status != "Head" && !editScreen) {
       return (
         <Pressable
           onPress={() => {
@@ -77,13 +97,19 @@ const MemberCard = ({
         </Pressable>
       );
     }
-    if (status == "Head") {
+    if (status == "Head" || editScreen) {
       return <View style={styles.deleteContainer} />;
     }
   };
 
+  const handlePress = () => {
+    setName(name);
+    setEmail(email);
+    openModal;
+  };
+
   return (
-    <View style={styles.container}>
+    <Pressable onPress={() => handlePress} style={styles.container}>
       {icon()}
       <View style={styles.innerContainer}>
         <View style={styles.rowContainer}>
@@ -93,7 +119,7 @@ const MemberCard = ({
         <Text>{email}</Text>
       </View>
       {deleteButton()}
-    </View>
+    </Pressable>
   );
 };
 

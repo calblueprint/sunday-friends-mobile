@@ -144,4 +144,38 @@ export default StyleSheet.create({
     width: "100%",
     backgroundColor: "#FAFAFA",
   },
+
+  whiteHalfButton: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#526DC2",
+    borderWidth: 2,
+
+    width: "48%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  blueHalfButton: {
+    backgroundColor: "#253C85",
+
+    width: "48%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  buttonContainer: {
+    width: "80%",
+    height: "5%",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+
+  rectangularButtonText2: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+    textTransform: "uppercase",
+    alignSelf: "center",
+    color: "#272929",
+  },
 });
