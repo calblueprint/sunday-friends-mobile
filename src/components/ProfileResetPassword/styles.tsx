@@ -72,6 +72,12 @@ export default StyleSheet.create({
     paddingLeft: "5%",
     backgroundColor: "#FFFFFF",
   },
+  emailError: {
+    position: "absolute",
+    top: "38.5%",
+    right: "8%",
+    color: "#E94444",
+  },
   verifyInput: {
     position: "absolute",
     top: "32.6%",

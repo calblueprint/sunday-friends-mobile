@@ -23,20 +23,19 @@ export const ProfileEditModal = ({
   const value = useContext(userContext);
 
   const [name, onChangeName] = useState(user.full_name);
-  const [role, onChangeRole] = useState(user.role);
+  const [email, onChangeEmail] = useState(user.email);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
       onChangeName(user.full_name);
-      onChangeRole(user.role);
+      onChangeEmail(user.email);
     });
   }, [visible]);
 
   const handleSubmit = () => {
     editUser(user.user_id, {
       full_name: name,
-      role: role,
     });
     setVisible(false);
   };
@@ -58,8 +57,8 @@ export const ProfileEditModal = ({
         </Pressable>
 
         <View style={styles.fields}>
-          <Text style={globalStyles.overline1}>Name</Text>
-          <Text style={globalStyles.overline1}>Role</Text>
+          <Text style={globalStyles.overline1}>NAME</Text>
+          <Text style={globalStyles.overline1}>EMAIL</Text>
         </View>
         <TextInput
           style={[globalStyles.body1, styles.nameTextInput]}
@@ -68,12 +67,21 @@ export const ProfileEditModal = ({
           autoFocus={true}
         />
         <TextInput
-          style={[globalStyles.body1, styles.textRoleInput]}
-          onChangeText={onChangeRole}
-          value={role}
+          style={[globalStyles.body1, styles.emailTextInput]}
+          onChangeText={onChangeEmail}
+          value={email}
         />
-        <Pressable onPress={handleSubmit} style={styles.savePressable}>
-          <Text>SAVE</Text>
+        <Pressable
+          onPress={
+            name != user.full_name || email != user.email ? handleSubmit : null
+          }
+          style={
+            name != user.full_name || email != user.email
+              ? styles.savePressableAllowed
+              : styles.savePressable
+          }
+        >
+          <Text style={[globalStyles.overline1, styles.whiteText]}>SAVE</Text>
         </Pressable>
       </View>
     </Modal>

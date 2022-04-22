@@ -15,6 +15,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [screen, setScreen] = useState("reset");
   const [pin, setPin] = useState(0);
   const [pwError, setPwError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const reset = () => {
     onChangeEmail("");
@@ -25,6 +26,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setScreen("reset");
     setVisible(false);
     setPwError(false);
+    setEmailError(false);
   };
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -100,7 +102,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Text>
           <TextInput
             style={
-              edited && email.length > 0
+              emailError
+                ? [
+                    globalStyles.body1,
+                    styles.emailInputTyping,
+                    styles.errorBackground,
+                  ]
+                : edited && email.length > 0
                 ? [globalStyles.body1, styles.emailInputTyping]
                 : [globalStyles.body1, styles.emailInput]
             }
@@ -110,6 +118,11 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             value={email}
             autoFocus={true}
           />
+          {emailError ? (
+            <Text style={[globalStyles.body2, styles.emailError]}>
+              Email must match a registered account
+            </Text>
+          ) : null}
           <Pressable
             style={
               valid()
@@ -117,16 +130,18 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                 : styles.resetContinuePressable
             }
             onPress={() => {
-              valid()
+              valid() && email == user.email
                 ? [setScreen("verify"), setEdited(false), sendEmail("reset")]
+                : edited
+                ? setEmailError(true)
                 : null;
             }}
           >
             <Text
               style={
                 valid()
-                  ? [globalStyles.overline1, styles.greyText]
-                  : [globalStyles.overline1, styles.sapphireText]
+                  ? [globalStyles.overline1, styles.sapphireText]
+                  : [globalStyles.overline1, styles.greyText]
               }
             >
               CONTINUE
