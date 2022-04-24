@@ -21,6 +21,9 @@ import {
 import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamily } from "../../firebase/firestore/family";
+import emailjs, { init } from "@emailjs/browser";
+import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import TabNavigator from "../../navigation/TabNavigator";
 
 const EditInviteScreen = ({ navigation }: any) => {
   const defaultUserInvites: User_Invite[] = [
@@ -43,9 +46,7 @@ const EditInviteScreen = ({ navigation }: any) => {
 
   const value = useContext(userContext);
   const [userInvites, setUserInvites] = useState(defaultUserInvites);
-  const [newInviteName, setInviteName] = useState("");
-  const [newInviteEmail, setInviteEmail] = useState("");
-  const [newInviteStatus, setNewInviteStatus] = useState("");
+
   const [familyID, setFamilyID] = useState(0);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -67,6 +68,21 @@ const EditInviteScreen = ({ navigation }: any) => {
       });
     });
   }, []);
+
+  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
+
+  const handleSend = (type: string) => {
+    {
+      userInvites.forEach((user) =>
+        emailjs.send(EMAILJS_SERVICE_ID, "template_j78fcdn", {
+          to: user.name,
+          name: user.name,
+          family: familyName,
+        })
+      );
+    }
+    navigation.navigate("LoginStack", { screen: "Home" });
+  };
 
   return (
     <View style={styles.container}>
@@ -96,18 +112,11 @@ const EditInviteScreen = ({ navigation }: any) => {
       <View style={styles.buttonContainer}>
         <Pressable
           style={styles.whiteHalfButton}
-          onPress={() =>
-            navigation.navigate("LoginStack", { screen: "Invite" })
-          }
+          onPress={() => navigation.navigate("Root", { screen: "Home" })}
         >
           <Text style={styles.rectangularButtonText2}>edit</Text>
         </Pressable>
-        <Pressable
-          style={styles.blueHalfButton}
-          onPress={() =>
-            navigation.navigate("LoginStack", { screen: "AllSetInvite" })
-          }
-        >
+        <Pressable style={styles.blueHalfButton} onPress={() => handleSend}>
           <Text style={styles.rectangularButtonText}>send invites</Text>
         </Pressable>
       </View>
