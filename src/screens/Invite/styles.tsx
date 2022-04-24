@@ -7,6 +7,12 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
+  container2: {
+    flex: 1,
+    backgroundColor: "#FAFAFA",
+    alignItems: "center",
+  },
+
   scrollContainer: {
     backgroundColor: "#FAFAFA",
     alignContent: "center",
@@ -177,5 +183,23 @@ export default StyleSheet.create({
     textTransform: "uppercase",
     alignSelf: "center",
     color: "#272929",
+  },
+
+  separator2: {
+    //marginTop: "10%",
+    height: 8,
+    width: "100%",
+    backgroundColor: "#FAFAFA",
+  },
+
+  allSetContainer: {
+    width: "80%",
+    marginBottom: "3%",
+    marginTop: "44%",
+  },
+
+  logoContainer: {
+    width: "80%",
+    marginTop: "25%",
   },
 });

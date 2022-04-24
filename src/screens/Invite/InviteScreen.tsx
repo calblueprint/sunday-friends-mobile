@@ -104,6 +104,7 @@ const InviteScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.separator2} />
       <Text style={styles.title1}>You're in charge!</Text>
       <Text style={styles.title2}>Invite members to {familyName} Family</Text>
       <ScrollView style={styles.scrollContainer}>
@@ -114,9 +115,6 @@ const InviteScreen = ({ navigation }: any) => {
           editScreen={false}
           userInviteId={userID}
           setUserInvites={setUserInvites}
-          setName={setInviteName}
-          setEmail={setInviteEmail}
-          openModal={() => refRBSheet.current.open()}
         />
         {userInvites.map((user) => (
           <MemberCard
@@ -126,9 +124,6 @@ const InviteScreen = ({ navigation }: any) => {
             editScreen={false}
             userInviteId={user.user_invite_id}
             setUserInvites={setUserInvites}
-            setName={setInviteName}
-            setEmail={setInviteEmail}
-            openModal={() => refRBSheet.current.open()}
           />
         ))}
         <Pressable

@@ -60,4 +60,8 @@ export default StyleSheet.create({
   deleteContainer: {
     alignSelf: "center",
   },
+
+  deleteSeparator: {
+    width: 21,
+  },
 });

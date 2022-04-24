@@ -15,9 +15,6 @@ const MemberCard = ({
   editScreen,
   userInviteId,
   setUserInvites,
-  setName,
-  setEmail,
-  openModal,
 }: {
   name: string;
   email: string;
@@ -25,9 +22,6 @@ const MemberCard = ({
   editScreen: boolean;
   userInviteId: string;
   setUserInvites: any;
-  setName: any;
-  setEmail: any;
-  openModal: any;
 }) => {
   const icon = () => {
     if (status == "Head") {
@@ -98,18 +92,16 @@ const MemberCard = ({
       );
     }
     if (status == "Head" || editScreen) {
-      return <View style={styles.deleteContainer} />;
+      return (
+        <View style={styles.deleteContainer}>
+          <View style={styles.deleteSeparator} />
+        </View>
+      );
     }
   };
 
-  const handlePress = () => {
-    setName(name);
-    setEmail(email);
-    openModal;
-  };
-
   return (
-    <Pressable onPress={() => handlePress} style={styles.container}>
+    <Pressable style={styles.container}>
       {icon()}
       <View style={styles.innerContainer}>
         <View style={styles.rowContainer}>

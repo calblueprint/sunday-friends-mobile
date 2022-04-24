@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
-import RectangularButton from "../../components/RectangularButton/RectangularButton";
 import { default as styles } from "./styles";
 import MemberCard from "../../components/MemberCard/MemberCard";
 import {
@@ -14,7 +13,6 @@ import "firebase/firestore";
 import firebaseApp from "../../firebase/firebaseApp";
 import { User_Invite } from "../../types/schema";
 
-import RBSheet from "react-native-raw-bottom-sheet";
 import SvgIcon from "../../../assets/SvgIcon";
 import {
   getUserInviteByFamily,
@@ -55,29 +53,6 @@ const EditInviteScreen = ({ navigation }: any) => {
   const [familyName, setFamilyName] = useState("");
   const refRBSheet = useRef();
 
-  const handleAdd = () => {
-    // methods.handleSubmit(onSubmit, onError);
-    // set default user values to new name, new email, new status
-    // add default user to firebase
-    const newInvite = {
-      name: newInviteName,
-      email: newInviteEmail,
-      status: newInviteStatus,
-      family_id: familyID,
-    };
-
-    addUserInvite(newInvite as User_Invite).then(() => {
-      getUserInviteByFamily(familyID).then((data) => {
-        setUserInvites(data);
-      });
-    });
-
-    setInviteName("");
-    setInviteEmail("");
-    setNewInviteStatus(2);
-    refRBSheet.current.close();
-  };
-
   useEffect(() => {
     getUser(value).then((user) => {
       setFamilyID(user.family_id);
@@ -93,12 +68,9 @@ const EditInviteScreen = ({ navigation }: any) => {
     });
   }, []);
 
-  const [isFocused, changeFocus] = React.useState(true);
-  const handleFocus = () => changeFocus(false);
-  const handleBlur = () => changeFocus(true);
-
   return (
     <View style={styles.container}>
+      <View style={styles.separator2} />
       <Text style={styles.title1}>Review before sending invites...</Text>
       <Text style={styles.title2}>{familyName} Family</Text>
       <ScrollView style={styles.scrollContainer}>
@@ -109,9 +81,6 @@ const EditInviteScreen = ({ navigation }: any) => {
           editScreen={true}
           userInviteId={userID}
           setUserInvites={setUserInvites}
-          setName={setInviteName}
-          setEmail={setInviteEmail}
-          openModal={() => refRBSheet.current.open()}
         />
         {userInvites.map((user) => (
           <MemberCard
@@ -121,9 +90,6 @@ const EditInviteScreen = ({ navigation }: any) => {
             editScreen={true}
             userInviteId={user.user_invite_id}
             setUserInvites={setUserInvites}
-            setName={setInviteName}
-            setEmail={setInviteEmail}
-            openModal={() => refRBSheet.current.open()}
           />
         ))}
       </ScrollView>
@@ -139,7 +105,7 @@ const EditInviteScreen = ({ navigation }: any) => {
         <Pressable
           style={styles.blueHalfButton}
           onPress={() =>
-            navigation.navigate("LoginStack", { screen: "Invite" })
+            navigation.navigate("LoginStack", { screen: "AllSetInvite" })
           }
         >
           <Text style={styles.rectangularButtonText}>send invites</Text>

@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import InviteScreen from "../screens/Invite/InviteScreen";
 import EditInviteScreen from "../screens/Invite/EditInviteScreen";
+import AllSetInviteScreen from "../screens/Invite/AllSetInviteScreen";
 import LoginScreen from "../screens/Login/LoginScreen";
 import SignupScreen from "../screens/Login/SignupScreen";
 import SigninScreen from "../screens/Login/SigninScreen";
@@ -38,6 +39,11 @@ const LoginStack = () => {
         name="EditInvite"
         component={EditInviteScreen}
         options={{ headerShown: false, title: "EditInvite" }}
+      />
+      <Stack.Screen
+        name="AllSetInvite"
+        component={AllSetInviteScreen}
+        options={{ headerShown: false, title: "AllSetInvite" }}
       />
     </Stack.Navigator>
   );
