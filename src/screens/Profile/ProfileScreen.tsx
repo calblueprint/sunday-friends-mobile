@@ -24,7 +24,7 @@ import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileL
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 import { AuthenticatedUserContext } from '../../context/userContext';
 
-const ProfileScreen = ({navigation}: any) => {
+const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
     user_id: "",
     address: "",
@@ -47,14 +47,6 @@ const ProfileScreen = ({navigation}: any) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [user, setUser] = useState(defaultUser);
-  console.log("userUID is ");
-  console.log(userUID);
-  const test = async () => {
-    const u = await getUser(userUID);
-    console.log(u)
-  };
-  test();
-  
 
 
   useEffect(() => {
@@ -74,7 +66,7 @@ const ProfileScreen = ({navigation}: any) => {
       />
 
       <Pressable style={styles.backArrowPressable}
-      onPress={() => navigation.goBack()}>
+        onPress={() => navigation.goBack()}>
         <SvgIcon type="chevronLeft" />
       </Pressable>
       <Pressable
