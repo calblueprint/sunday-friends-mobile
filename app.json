@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "sunday-friends-mobile",
+    "owner": "sundayfriends",
     "slug": "sunday-friends-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
