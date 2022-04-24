@@ -20,7 +20,7 @@ const TransactionPreview = ({ transaction }: any) => {
         }
     }
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.rdca}>
                 <View style={styles.frame117}>
                     {renderIcon(transaction.role)}
@@ -38,7 +38,7 @@ const TransactionPreview = ({ transaction }: any) => {
                 </Text>
                 <SvgIcon type='chevron_right' />
             </View>
-        </Pressable>
+        </View>
     )
 }
 

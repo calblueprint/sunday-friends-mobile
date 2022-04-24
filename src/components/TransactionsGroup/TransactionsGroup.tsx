@@ -6,6 +6,7 @@ import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
 import TransactionPreviewNoIcon from './TransactionPreviewNoIcon/TransactionPreviewNoIcon';
 import RBSheet from "react-native-raw-bottom-sheet";
+import DetailsModal from './DetailsModal/DetailsModal';
 import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
@@ -38,6 +39,9 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [numFilters, setNumFilters] = useState(0);
+
+    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+    const [detailsTransaction, setDetailsTransaction] = useState(null);
 
     // get family members for Filter by Family Member buttons
     useEffect(() => {
@@ -276,16 +280,32 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             keyExtractor={item => (item.date, item.description)}
                             renderItem={(forFamily) ? (
                                 ( {item} ) => (
-                                    <TransactionPreview transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreview transaction={item}/>
+                                    </Pressable>
                                 )) : (
                                 ( {item} ) => (
-                                    <TransactionPreviewNoIcon transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreviewNoIcon transaction={item}/>
+                                    </Pressable>
                                 ))
                             }
                         />
                     )
                 )}
-
+                {detailsTransaction && (
+                    <DetailsModal
+                        visible={detailsModalVisible}
+                        setVisible={setDetailsModalVisible}
+                        transaction={detailsTransaction}
+                    />
+                )}
                 {/* Filters Modal  */}
                 <RBSheet
                     ref={refRBSheet}
