@@ -105,6 +105,18 @@ export const deleteUser = async (userId: string): Promise<void> => {
   }
 };
 
+/**
+ * Edits the profile fields of the given user and an array with keys of user fields
+ */
+ export const editUser = async (userId: string, values: any): Promise<void> => {
+  try {
+    await userCollection.doc(userId).update(values);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
 const parseUser = async (doc) => {
   const user_id = doc.id.toString();
   const data = doc.data();
