@@ -12,7 +12,7 @@ import {moment} from 'moment';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
 import { getUser } from '../../firebase/firestore/user';
-import userContext from '../../context/userContext';
+import { AuthenticatedUserContext } from '../../context/userContext';
 import { User } from '../../types/schema';
 import {List} from 'react-native-paper';
 import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
@@ -53,10 +53,11 @@ const defaultUser: User = {
 const FamilyScreen = ({navigation}: any) => {
 
     const [labels, setLabels] = useState(['1000', '2000', '3000']);
+    const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
     const [user, setUser] = useState(defaultUser);
 
     
-    const userID = useContext(userContext);
+    //const userID = useContext(userContext);
     
 
     useEffect(() => {
@@ -68,7 +69,7 @@ const FamilyScreen = ({navigation}: any) => {
             newlabels[2] = tiers[0].tier3.toString();
             setLabels(newlabels);
 
-        getUser(userID).then((currUser) => {
+        getUser(userUID).then((currUser) => {
             setUser(currUser);
         })
 
