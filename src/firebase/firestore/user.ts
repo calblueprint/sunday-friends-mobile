@@ -86,7 +86,7 @@ export const getFilteredUsers = async (role: string): Promise<User[]> => {
  */
 export const addUser = async (user: User): Promise<void> => {
   try {
-    await userCollection.doc().set(user);
+    await userCollection.doc(user.user_id).set(user);
   } catch (e) {
     console.warn(e);
     throw e;
@@ -116,6 +116,18 @@ export const deleteUser = async (userId: string): Promise<void> => {
     throw e;
   }
 };
+
+/**
+ * Changes the password of the user that is currently signed in
+ */
+export const setUserPassword = async (password: any): Promise<void> => {
+	try {
+		firebaseApp.auth().currentUser?.updatePassword(password);
+	} catch(e) {
+		console.warn(e);
+		throw(e);
+	}
+}
 
 const parseUser = async (doc) => {
   const user_id = doc.id.toString();

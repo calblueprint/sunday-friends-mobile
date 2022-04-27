@@ -1,9 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import firebaseApp from "./firebaseApp";
-import { User } from "@firebase/auth-types";
-// import { checkAdminId } from "./firestore/admin";
-// import nookies from "nookies";
-// import auth from '@react-native-firebase/auth';
+
 
 const auth = firebaseApp.auth();
 
@@ -27,9 +24,10 @@ export const signInWithEmailAndPassword = async (
 export const registerWithEmailAndPassword = async (
     email: string,
     password: string
-): Promise<void> => {
+): Promise<User> => {
     try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        return userCredential;
     } catch (e) {
         console.error(e);
         throw e;
@@ -45,6 +43,7 @@ export const signOut = async (): Promise<void> => {
         throw e;
     }
 };
+
 
 // const AuthContext = createContext<User>(null);
 

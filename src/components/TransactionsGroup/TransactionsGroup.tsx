@@ -6,14 +6,16 @@ import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
 import TransactionPreviewNoIcon from './TransactionPreviewNoIcon/TransactionPreviewNoIcon';
 import RBSheet from "react-native-raw-bottom-sheet";
+import DetailsModal from './DetailsModal/DetailsModal';
 import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
-import userContext from '../../context/userContext';
+import { AuthenticatedUserContext } from '../../context/userContext';
 
 const TransactionsGroup = ({ forFamily }: any) => {
-    const userId = useContext(userContext);
+    //const userId = useContext(userContext);
+    const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
     const refRBSheet = useRef();
     const [selection, setSelection] = useState(1);
@@ -29,56 +31,122 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const [maxDate, setMaxDate] = useState(null);
     const [showMax, setShowMax] = useState(false);
     const [typeFilter, setTypeFilter] = useState(1);
-    const [minAmount, setMinAmount] = useState(null as any);
-    const [maxAmount, setMaxAmount] = useState(null as any);
+    const [familyMembers, setFamilyMembers] = useState(["Any Member"]);
+    const [memberSelect, setMemberSelect] = useState(["Any Member"]);
+
+    const [filterMinDate, setFilterMinDate] = useState(null);
+    const [filterMaxDate, setFilterMaxDate] = useState(null);
+    const [filterMemberSelect, setFilterMemberSelect] = useState(["Any Member"])
 
     const [isLoading, setIsLoading] = useState(false);
+    const [numFilters, setNumFilters] = useState(0);
 
-    //Use effect later to get transaction data
+    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+    const [detailsTransaction, setDetailsTransaction] = useState(null);
+
+    const fetchFamilyMembers = async () => {
+        if (forFamily) {
+            const newMembers = ["Any Member"]
+
+            const user = await getUser(userUID)
+            const family = await getFamilyById(user.family_id.toString())
+            family.user_ids.forEach(async (user) => {
+                newMembers.push(user.full_name)
+            })
+
+            setFamilyMembers(newMembers)
+        }
+    }
+
+    // get family members for Filter by Family Member buttons
+    useEffect(() => {
+        console.log(userUID);
+
+        fetchFamilyMembers().catch(console.error)
+    }, [forFamily])
+
+    const fetchTransactions = async () => {
+        setIsLoading(true)
+        const newTransactions = []
+        let count = 0
+
+        if (forFamily) {
+            const user = await getUser(userUID)
+            const family = await getFamilyById(user.family_id.toString())
+            console.log(family)
+            family.user_ids.forEach(async (user) => {
+                const addRole = user.transactions.map((transaction) => {
+                    return {...transaction, role: user.role}
+                })
+                newTransactions.push(...addRole)
+            })
+        } else {
+            const fetchedTransactions = await getTransactionByUser(userUID)
+            newTransactions.push(...fetchedTransactions)
+        }
+        
+        if (enteredSearch) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.description.match(searchText)
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (selection === 2) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.point_gain > 0
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        } else if (selection === 3) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.point_gain <= 0
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        }
+        if (filterMinDate) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                const toDate = new Date(transaction.date)
+                return toDate >= filterMinDate
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (filterMaxDate) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                const toDate = new Date(transaction.date)
+                return toDate <= filterMaxDate
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (filterMinDate || filterMaxDate) {
+            count += 1
+        }
+        if (!forFamily || filterMemberSelect.includes("Any Member")) {
+            // don't filter
+        } else {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return filterMemberSelect.includes(transaction.user_name)
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        }
+
+        setNumFilters(count)
+        newTransactions.sort((a, b) => {
+            const aDate = new Date(a.date)
+            const bDate = new Date(b.date)
+            return (bDate.getTime() - aDate.getTime())
+        })
+        setTransactions(newTransactions)
+        setIsLoading(false)
+        console.log(newTransactions)
+    }
+
+    //get and filter transaction data
     useEffect(() => {
         console.log(enteredSearch)
-        const fetchTransactions = async (user_id: string) => {
-            setIsLoading(true)
-            const newTransactions = []
-            if (forFamily) {
-                const user = await getUser(userId)
-                const family = await getFamilyById(user.family_id.toString())
-                console.log(family)
-                family.user_ids.forEach(async (user) => {
-                    const addRole = user.transactions.map((transaction) => {
-                        return {...transaction, role: user.role}
-                    })
-                    console.log(addRole)
-                    newTransactions.push(...addRole)
-                })
-            } else {
-                const fetchedTransactions = await getTransactionByUser(user_id)
-                newTransactions.push(...fetchedTransactions)
-            }
-            
-            if (enteredSearch) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.description.match(searchText)
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            }
-            if (selection === 2) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.point_gain > 0
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            } else if (selection === 3) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.point_gain <= 0
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            }
-
-            setTransactions(newTransactions)
-            setIsLoading(false)
-            console.log(newTransactions)
-        }
-        fetchTransactions(userId).catch(console.error)
+        
+        fetchTransactions().catch(console.error)
 
         //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         // setTransactions([
@@ -115,7 +183,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         //         id: 3
         //     },
         // ])
-    }, [selection, enteredSearch]);
+    }, [selection, enteredSearch, filterMinDate, filterMaxDate, filterMemberSelect]);
 
     const handleSearch = () => {
         //todo search transactions
@@ -127,14 +195,17 @@ const TransactionsGroup = ({ forFamily }: any) => {
         //todo search transactions
         setMinDate(null)
         setMaxDate(null)
-        setMinAmount(null);
-        setMaxAmount(null);
+        setMemberSelect(["Any Member"])
         setTypeFilter(1);
     }
 
     const handleApply = () => {
         //todo connect to backend
         setSelection(typeFilter)
+        setFilterMinDate(minDate)
+        setFilterMaxDate(maxDate)
+        setFilterMemberSelect(memberSelect)
+
         refRBSheet.current.close()
     }
 
@@ -143,13 +214,25 @@ const TransactionsGroup = ({ forFamily }: any) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
             <View style={styles.container}>
                 <View style={styles.btnGroup}>
-                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(1)}>
+                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(1)
+                            setTypeFilter(1)
+                        }}>
                         <Text style={[styles.btnText, selection === 1 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>All History</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(2)}>
+                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(2)
+                            setTypeFilter(2)
+                        }}>
                         <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Earnings</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} onPress={() => setSelection(3)}>
+                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} 
+                        onPress={() => {
+                            setSelection(3)
+                            setTypeFilter(3)
+                        }}>
                         <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Expirations</Text>
                     </Pressable>
                 </View>
@@ -176,7 +259,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             {(searchText !== "") && (
                                 <Pressable onPress={() => {
                                     setSearchText("");
-                                    setEnteredSearch("");
+                                  setEnteredSearch("");
                                     setSearchEntered(false);
                                     setSearchClicked(false);
                                 }}>
@@ -186,7 +269,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                         </View>
                     </View>
                     <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}> 
-                        <Text style={styles.filtersButtonText}>Filters (0)</Text>
+                        <Text style={styles.filtersButtonText}>Filters ({numFilters})</Text>
                     </Pressable>
                     
                 </View>
@@ -204,17 +287,33 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             keyExtractor={item => (item.date, item.description)}
                             renderItem={(forFamily) ? (
                                 ( {item} ) => (
-                                    <TransactionPreview transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreview transaction={item}/>
+                                    </Pressable>
                                 )) : (
                                 ( {item} ) => (
-                                    <TransactionPreviewNoIcon transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreviewNoIcon transaction={item}/>
+                                    </Pressable>
                                 ))
                             }
                         />
                         
                     )
                 )}
-
+                {detailsTransaction && (
+                    <DetailsModal
+                        visible={detailsModalVisible}
+                        setVisible={setDetailsModalVisible}
+                        transaction={detailsTransaction}
+                    />
+                )}
                 {/* Filters Modal  */}
                 <RBSheet
                     ref={refRBSheet}
@@ -230,8 +329,8 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 >
                     <FiltersModal refRBSheet={refRBSheet} minDate={minDate} setMinDate={setMinDate} showMin={showMin} setShowMin={setShowMin}
                         maxDate={maxDate} setMaxDate={setMaxDate} showMax={showMax} setShowMax={setShowMax}
-                        minAmount={minAmount} setMinAmount={setMinAmount} maxAmount={maxAmount} setMaxAmount={setMaxAmount}
-                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset}
+                        familyMembers={familyMembers} memberSelect={memberSelect} setMemberSelect={setMemberSelect}
+                        typeFilter={typeFilter} setTypeFilter={setTypeFilter} handleApply={handleApply} handleReset={handleReset} forFamily={forFamily}
                     />
                 </RBSheet>
             </View>

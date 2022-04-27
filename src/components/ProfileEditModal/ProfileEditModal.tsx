@@ -5,8 +5,8 @@ import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import { User } from "../../types/schema";
 import userContext from "../../context/userContext";
-import firebaseApp from "../../firebase/firebaseApp";
 import { editUser, getUser } from "../../firebase/firestore/user";
+import { AuthenticatedUserContext } from "../../context/userContext";
 
 type ProfileEditModalProps = {
   visible: boolean;
@@ -21,29 +21,29 @@ export const ProfileEditModal = ({
   user,
   setUser,
 }: ProfileEditModalProps) => {
-  const value = useContext(userContext);
+  // const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
-  const [nameText, onChangeNameText] = useState(user.full_name);
-  const [roleText, onChangeRoleText] = useState(user.role);
-
-  const [wasEdited, setWasEdited] = useState(false);
-
-  const refresh = () => {};
+  const [name, onChangeName] = useState(user.full_name);
+  const [email, onChangeEmail] = useState(user.email);
 
   useEffect(() => {
-    getUser(value).then((currUser) => {
+    getUser(userUID).then((currUser) => {
       setUser(currUser);
-      onChangeNameText(user.full_name);
-      onChangeRoleText(user.role);
+      onChangeName(user.full_name);
+      onChangeEmail(user.email);
     });
   }, [visible]);
 
   const handleSubmit = () => {
     editUser(user.user_id, {
-      full_name: nameText,
-      role: roleText,
+      full_name: name,
     });
     setVisible(false);
+  };
+
+  const valid = () => {
+    return name != user.full_name || email != user.email;
   };
 
   return (
@@ -63,22 +63,26 @@ export const ProfileEditModal = ({
         </Pressable>
 
         <View style={styles.fields}>
-          <Text style={globalStyles.overline1}>Name</Text>
-          <Text style={globalStyles.overline1}>Role</Text>
+          <Text style={globalStyles.overline1}>NAME</Text>
+          <Text style={globalStyles.overline1}>EMAIL</Text>
         </View>
         <TextInput
           style={[globalStyles.body1, styles.nameTextInput]}
-          onChangeText={onChangeNameText}
-          value={nameText}
+          onChangeText={onChangeName}
+          value={name}
           autoFocus={true}
         />
         <TextInput
-          style={[globalStyles.body1, styles.textRoleInput]}
-          onChangeText={onChangeRoleText}
-          value={roleText}
+          style={[globalStyles.body1, styles.emailTextInput]}
+          onChangeText={onChangeEmail}
+          editable={false}
+          value={email}
         />
-        <Pressable onPress={handleSubmit} style={styles.savePressable}>
-          <Text>SAVE</Text>
+        <Pressable
+          onPress={valid() ? handleSubmit : null}
+          style={valid() ? styles.savePressableAllowed : styles.savePressable}
+        >
+          <Text style={[globalStyles.overline1, styles.whiteText]}>SAVE</Text>
         </Pressable>
       </View>
     </Modal>

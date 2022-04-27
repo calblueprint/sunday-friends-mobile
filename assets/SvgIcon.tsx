@@ -2,6 +2,7 @@ import * as React from "react";
 import { SvgXml } from "react-native-svg";
 
 export type IconType =
+  | "chevron_back"
   | "chevron_down"
   | "chevron_right"
   | "searchbar_close"
@@ -17,9 +18,23 @@ export type IconType =
   | "profileHeadSmiley"
   | "profileDependentSmiley"
   | "modal_x"
-  | "invite_add";
+  | "invite_add"
+  | "passwordHidden"
+  | "redX"
+  | "greenCheck";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
+  chevron_back: (
+    <SvgXml
+      xml={`
+      <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.94199 11.4998L13.7016 17.2594L15.0576 15.9053L10.6493 11.4998L15.0576 7.09532L13.7025 5.74023L7.94199 11.4998Z" fill="#525454"/>
+</svg>
+
+      `}
+    ></SvgXml>
+  ),
+
   chevron_down: (
     <SvgXml
       xml={`
@@ -30,13 +45,13 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
     ></SvgXml>
   ),
   chevron_right: (
-      <SvgXml
-        xml={`
+    <SvgXml
+      xml={`
         <svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 1.5L7 8L1 14.5" stroke="#CACACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         `}
-      />
+    />
   ),
   modal_x: (
     <SvgXml
@@ -197,6 +212,41 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
 				<circle cx="19.8534" cy="31.1425" r="1.02143" fill="#525454" stroke="#525454" stroke-width="2.04286"/>
 				<circle cx="46.411" cy="31.1425" r="1.02143" fill="#525454" stroke="#525454" stroke-width="2.04286"/>
 				<path d="M28.0234 43.4004C29.0449 47.4861 36.1949 47.4861 37.2163 43.4004" stroke="#525454" stroke-width="1.14911" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			`}
+    />
+  ),
+  passwordHidden: (
+    <SvgXml
+      xml={`
+				<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12.4812 13.3663L10.3837 11.2688C9.47882 11.6808 8.49424 11.8885 7.5 11.877C6.47492 11.8897 5.46045 11.6685 4.53375 11.2301C3.81543 10.8796 
+				3.1704 10.3956 2.63313 9.80383C2.06281 9.19249 1.61456 8.47779 1.3125 7.6982L1.25 7.50195L1.31562 7.30445C1.76738 6.15213 2.52766 5.14643 3.51312 
+				4.39758L1.875 2.75945L2.75813 1.87695L13.3638 12.4826L12.4825 13.3663H12.4812ZM4.3975 5.28258C3.5987 5.84253 2.96791 6.6099 2.57313 7.50195C3.41964 
+				9.45502 5.37242 10.6936 7.5 10.627C8.15615 10.6323 8.80847 10.5267 9.42937 10.3145L8.30437 9.18945C8.05396 9.3122 7.77888 9.37633 7.5 9.37695C6.46716 
+				9.37047 5.63148 8.53479 5.625 7.50195C5.6253 7.22243 5.68943 6.94667 5.8125 6.6957L4.3975 5.28258ZM12.4075 9.7582L11.5375 8.88883C11.9035 8.47502 
+				12.2035 8.00723 12.4269 7.50195C11.5815 5.54794 9.62797 4.30888 7.5 4.37695C7.34562 4.37695 7.19063 4.38258 7.04063 4.3932L5.9375 3.28883C6.45102 
+				3.17897 6.97487 3.1247 7.5 3.12695C8.52507 3.11423 9.53955 3.33547 10.4663 3.77383C11.1846 4.12429 11.8296 4.60832 12.3669 5.20008C12.9369 5.81068 
+				13.3852 6.5245 13.6875 7.3032L13.75 7.50195L13.6844 7.69945C13.3918 8.46075 12.9588 9.16036 12.4081 9.76195L12.4075 9.7582Z" fill="#A9A9A9"/>
+				</svg>
+			
+			`}
+    />
+  ),
+  redX: (
+    <SvgXml
+      xml={`
+				<svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.42024 4.82L1.14424 0.0879999H3.88824L6.00224 3.56L8.03224 0.0879999H10.6782L7.47224 4.778L11.0562 10H8.31224L5.89024 6.01L3.53824 10H0.948242L4.42024 4.82Z" fill="#E94444"/>
+				</svg>
+  		`}
+    />
+  ),
+  greenCheck: (
+    <SvgXml
+      xml={`
+				<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 4.75L4.5 9.25L13 0.75" stroke="#098D45" stroke-width="2"/>
 				</svg>
 			`}
     />
