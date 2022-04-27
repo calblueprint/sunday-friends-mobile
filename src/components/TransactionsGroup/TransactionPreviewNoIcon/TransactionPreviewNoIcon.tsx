@@ -6,7 +6,7 @@ import styles from './styles';
 
 const TransactionPreviewNoIcon = ({ transaction }: any) => {
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.rdca}>
                 <View style={styles.frame117}>
                     <View style={styles.textGroup}>
@@ -23,7 +23,7 @@ const TransactionPreviewNoIcon = ({ transaction }: any) => {
                 </Text>
                 <SvgIcon type='chevron_right' />
             </View>
-        </Pressable>
+        </View>
     )
 }
 
