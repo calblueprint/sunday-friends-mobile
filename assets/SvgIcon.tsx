@@ -2,6 +2,7 @@ import * as React from "react";
 import { SvgXml } from "react-native-svg";
 
 export type IconType =
+  | "chevron_back"
   | "chevron_down"
   | "chevron_right"
   | "searchbar_close"
@@ -25,6 +26,17 @@ export type IconType =
   | "sfLogo";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
+  chevron_back: (
+    <SvgXml
+      xml={`
+      <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.94199 11.4998L13.7016 17.2594L15.0576 15.9053L10.6493 11.4998L15.0576 7.09532L13.7025 5.74023L7.94199 11.4998Z" fill="#525454"/>
+</svg>
+
+      `}
+    ></SvgXml>
+  ),
+
   chevron_down: (
     <SvgXml
       xml={`

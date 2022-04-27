@@ -18,11 +18,11 @@ import styles from "./styles";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import ProfileSwitchModal from "../../components/ProfileSwitchModal/ProfileSwitchModal";
-import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
+import { AuthenticatedUserContext } from '../../context/userContext';
 
 const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
@@ -45,13 +45,14 @@ const ProfileScreen = ({ navigation }: any) => {
     useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [user, setUser] = useState(defaultUser);
   const [nameText, onChangeNameText] = useState(user.full_name);
   const [roleText, onChangeRoleText] = useState(user.role);
 
+
   useEffect(() => {
-    getUser(value).then((currUser) => {
+    getUser(userUID).then((currUser) => {
       setUser(currUser);
     });
   }, [editModalVisible]);

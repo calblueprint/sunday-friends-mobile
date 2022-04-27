@@ -6,10 +6,11 @@ import { default as styles } from "./styles";
 import RectangularButton from '../../components/RectangularButton/RectangularButton';
 import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import globalStyles from '../../globalStyles';
-import { signInWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
+import { getUserInvitesByEmail } from "../../firebase/firestore/userInvite";
+import SvgIcon from "../../../assets/SvgIcon";
 
-const LoginScreen = ({ navigation }: any) => {
+const Signup1Screen = ({ navigation }: any) => {
 
     type FormValues = {
         email: string;
@@ -19,6 +20,7 @@ const LoginScreen = ({ navigation }: any) => {
     const auth = firebaseApp.auth();
 
 
+    const [email, onChangeEmail] = React.useState("");
     const [isFocused, changeFocus] = React.useState(false);
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
@@ -27,8 +29,13 @@ const LoginScreen = ({ navigation }: any) => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
-            await signInWithEmailAndPassword(data.email, data.password);
-            navigation.navigate('Root', { screen: 'Home' });
+            const user_invites = await getUserInvitesByEmail(data.email);
+            if (user_invites.length == 0) {
+                navigation.navigate('LoginStack', { screen: 'Error1'})
+            } else {
+                const invite =  user_invites[0]
+                navigation.navigate('LoginStack', { screen: 'Signup2', params: { user_invite: invite } });
+            }
         } catch (e) {
             console.error(e.message);
         }
@@ -40,8 +47,19 @@ const LoginScreen = ({ navigation }: any) => {
 
     return (
         <ViewContainer>
-            <Text style={[globalStyles.h2, styles.loginTitle]}>Welcome back!</Text>
-            <Text style={[globalStyles.body3, styles.text]}>Let’s log you into your account.</Text>
+            <Pressable
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Signin' })}
+                style={styles.left1}
+            >
+                <View style={styles.back}>
+                    <SvgIcon type='chevron_back' />
+                    <Text style={[globalStyles.body1Bold, styles.backText]}>
+                        Back
+                    </Text>
+                </View>
+
+            </Pressable>
+            <Text style={[globalStyles.h2, styles.loginTitle]}>Welcome! Activate your account.</Text>
             <FormProvider {...methods}>
                 <FormInput
                     name="email"
@@ -50,34 +68,21 @@ const LoginScreen = ({ navigation }: any) => {
                     placeholder="email@email.com"
                     keyboardType="email-address"
                 />
-                <FormInput
-                    name="password"
-                    rules={{ required: 'Password is required!' }}
-                    label="Password"
-                    placeholder="password"
-                    keyboardType="email-address"
-                />
             </FormProvider>
             <RectangularButton
+                // onPress={() => navigation.navigate('LoginStack', { screen: 'Signup2' })}
                 onPress={methods.handleSubmit(onSubmit, onError)}
-                text="Login"
+                text="Next"
                 buttonStyle={{ marginTop: '15%', backgroundColor: '#253C85' }}
                 textStyle={{ color: '#FFF' }}
             />
-            <Pressable
-                style={styles.text}
-                onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
-            >
-                {/* TODO: have this button route to a "reset password" screen */}
-                <Text style={[globalStyles.body1Bold, styles.underline]}>Forgot Password?</Text>
-            </Pressable>
             <View style={styles.text}>
-                <Text style={[globalStyles.body3, styles.footer]}>
-                    Haven't activated your account? <Pressable
-                        onPress={() => navigation.navigate('LoginStack', { screen: 'Signup1' })}
+                <Text style={[globalStyles.body3, styles.signupFooter]}>
+                    Already have an account? <Pressable
+                        onPress={() => navigation.navigate('LoginStack', { screen: 'Login' })}
                     >
                         <Text style={[globalStyles.body1Bold, styles.underline]}>
-                            Activate now
+                            Login
                         </Text>
                     </Pressable>
                 </Text>
@@ -88,4 +93,4 @@ const LoginScreen = ({ navigation }: any) => {
     );
 }
 
-export default LoginScreen;
+export default Signup1Screen;

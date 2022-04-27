@@ -6,14 +6,16 @@ import globalStyles from '../../globalStyles';
 import TransactionPreview from './TransactionPreview/TransactionPreview';
 import TransactionPreviewNoIcon from './TransactionPreviewNoIcon/TransactionPreviewNoIcon';
 import RBSheet from "react-native-raw-bottom-sheet";
+import DetailsModal from './DetailsModal/DetailsModal';
 import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
-import userContext from '../../context/userContext';
+import { AuthenticatedUserContext } from '../../context/userContext';
 
 const TransactionsGroup = ({ forFamily }: any) => {
-    const userId = useContext(userContext);
+    //const userId = useContext(userContext);
+    const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
     const refRBSheet = useRef();
     const [selection, setSelection] = useState(1);
@@ -39,104 +41,112 @@ const TransactionsGroup = ({ forFamily }: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const [numFilters, setNumFilters] = useState(0);
 
+    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
+    const [detailsTransaction, setDetailsTransaction] = useState(null);
+
+    const fetchFamilyMembers = async () => {
+        if (forFamily) {
+            const newMembers = ["Any Member"]
+
+            const user = await getUser(userUID)
+            const family = await getFamilyById(user.family_id.toString())
+            family.user_ids.forEach(async (user) => {
+                newMembers.push(user.full_name)
+            })
+
+            setFamilyMembers(newMembers)
+        }
+    }
+
     // get family members for Filter by Family Member buttons
     useEffect(() => {
-        const fetchFamilyMembers = async (user_id: string) => {
-            if (forFamily) {
-                const newMembers = ["Any Member"]
+        console.log(userUID);
 
-                const user = await getUser(userId)
-                const family = await getFamilyById(user.family_id.toString())
-                family.user_ids.forEach(async (user) => {
-                    newMembers.push(user.full_name)
-                })
-
-                setFamilyMembers(newMembers)
-            }
-        }
-        fetchFamilyMembers(userId).catch(console.error)
+        fetchFamilyMembers().catch(console.error)
     }, [forFamily])
+
+    const fetchTransactions = async () => {
+        setIsLoading(true)
+        const newTransactions = []
+        let count = 0
+
+        if (forFamily) {
+            const user = await getUser(userUID)
+            const family = await getFamilyById(user.family_id.toString())
+            console.log(family)
+            family.user_ids.forEach(async (user) => {
+                const addRole = user.transactions.map((transaction) => {
+                    return {...transaction, role: user.role}
+                })
+                newTransactions.push(...addRole)
+            })
+        } else {
+            const fetchedTransactions = await getTransactionByUser(userUID)
+            newTransactions.push(...fetchedTransactions)
+        }
+        
+        if (enteredSearch) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.description.match(searchText)
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (selection === 2) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.point_gain > 0
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        } else if (selection === 3) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return transaction.point_gain <= 0
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        }
+        if (filterMinDate) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                const toDate = new Date(transaction.date)
+                return toDate >= filterMinDate
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (filterMaxDate) {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                const toDate = new Date(transaction.date)
+                return toDate <= filterMaxDate
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+        }
+        if (filterMinDate || filterMaxDate) {
+            count += 1
+        }
+        if (!forFamily || filterMemberSelect.includes("Any Member")) {
+            // don't filter
+        } else {
+            const filteredTransactions = newTransactions.filter((transaction) => {
+                return filterMemberSelect.includes(transaction.user_name)
+            })
+            newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
+            count += 1
+        }
+
+        setNumFilters(count)
+        newTransactions.sort((a, b) => {
+            const aDate = new Date(a.date)
+            const bDate = new Date(b.date)
+            return (bDate.getTime() - aDate.getTime())
+        })
+        setTransactions(newTransactions)
+        setIsLoading(false)
+        console.log(newTransactions)
+    }
 
     //get and filter transaction data
     useEffect(() => {
         console.log(enteredSearch)
-        const fetchTransactions = async (user_id: string) => {
-            setIsLoading(true)
-            const newTransactions = []
-            let count = 0
-
-            if (forFamily) {
-                const user = await getUser(userId)
-                const family = await getFamilyById(user.family_id.toString())
-                console.log(family)
-                family.user_ids.forEach(async (user) => {
-                    const addRole = user.transactions.map((transaction) => {
-                        return {...transaction, role: user.role}
-                    })
-                    newTransactions.push(...addRole)
-                })
-            } else {
-                const fetchedTransactions = await getTransactionByUser(user_id)
-                newTransactions.push(...fetchedTransactions)
-            }
-            
-            if (enteredSearch) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.description.match(searchText)
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            }
-            if (selection === 2) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.point_gain > 0
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-                count += 1
-            } else if (selection === 3) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return transaction.point_gain <= 0
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-                count += 1
-            }
-            if (filterMinDate) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    const toDate = new Date(transaction.date)
-                    return toDate >= filterMinDate
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            }
-            if (filterMaxDate) {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    const toDate = new Date(transaction.date)
-                    return toDate <= filterMaxDate
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-            }
-            if (filterMinDate || filterMaxDate) {
-                count += 1
-            }
-            if (!forFamily || filterMemberSelect.includes("Any Member")) {
-                // don't filter
-            } else {
-                const filteredTransactions = newTransactions.filter((transaction) => {
-                    return filterMemberSelect.includes(transaction.user_name)
-                })
-                newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
-                count += 1
-            }
-
-            setNumFilters(count)
-            newTransactions.sort((a, b) => {
-                const aDate = new Date(a.date)
-                const bDate = new Date(b.date)
-                return (bDate.getTime() - aDate.getTime())
-            })
-            setTransactions(newTransactions)
-            setIsLoading(false)
-            console.log(newTransactions)
-        }
-        fetchTransactions(userId).catch(console.error)
+        
+        fetchTransactions().catch(console.error)
 
         //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         // setTransactions([
@@ -276,16 +286,32 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             keyExtractor={item => (item.date, item.description)}
                             renderItem={(forFamily) ? (
                                 ( {item} ) => (
-                                    <TransactionPreview transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreview transaction={item}/>
+                                    </Pressable>
                                 )) : (
                                 ( {item} ) => (
-                                    <TransactionPreviewNoIcon transaction={item}/>
+                                    <Pressable onPress={() => {
+                                        setDetailsModalVisible(true);
+                                        setDetailsTransaction(item);
+                                    }}>
+                                        <TransactionPreviewNoIcon transaction={item}/>
+                                    </Pressable>
                                 ))
                             }
                         />
                     )
                 )}
-
+                {detailsTransaction && (
+                    <DetailsModal
+                        visible={detailsModalVisible}
+                        setVisible={setDetailsModalVisible}
+                        transaction={detailsTransaction}
+                    />
+                )}
                 {/* Filters Modal  */}
                 <RBSheet
                     ref={refRBSheet}

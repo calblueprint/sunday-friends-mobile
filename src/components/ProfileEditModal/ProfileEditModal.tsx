@@ -7,6 +7,7 @@ import { User } from "../../types/schema";
 import userContext from "../../context/userContext";
 import firebaseApp from "../../firebase/firebaseApp";
 import { editUser, getUser } from "../../firebase/firestore/user";
+import { AuthenticatedUserContext } from "../../context/userContext";
 
 type ProfileEditModalProps = {
   visible: boolean;
@@ -21,7 +22,8 @@ export const ProfileEditModal = ({
   user,
   setUser,
 }: ProfileEditModalProps) => {
-  const value = useContext(userContext);
+  // const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
   const [nameText, onChangeNameText] = useState(user.full_name);
   const [roleText, onChangeRoleText] = useState(user.role);
@@ -31,7 +33,7 @@ export const ProfileEditModal = ({
   const refresh = () => {};
 
   useEffect(() => {
-    getUser(value).then((currUser) => {
+    getUser(userUID).then((currUser) => {
       setUser(currUser);
       onChangeNameText(user.full_name);
       onChangeRoleText(user.role);
