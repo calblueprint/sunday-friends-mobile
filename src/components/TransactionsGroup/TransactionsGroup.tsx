@@ -10,10 +10,11 @@ import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
-import userContext from '../../context/userContext';
+import { AuthenticatedUserContext } from '../../context/userContext';
 
 const TransactionsGroup = ({ forFamily }: any) => {
-    const userId = useContext(userContext);
+    //const userId = useContext(userContext);
+    const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
     const refRBSheet = useRef();
     const [selection, setSelection] = useState(1);
@@ -41,11 +42,12 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     // get family members for Filter by Family Member buttons
     useEffect(() => {
-        const fetchFamilyMembers = async (user_id: string) => {
+        console.log(userUID);
+        const fetchFamilyMembers = async (user_id: any) => {
             if (forFamily) {
                 const newMembers = ["Any Member"]
 
-                const user = await getUser(userId)
+                const user = await getUser(userUID)
                 const family = await getFamilyById(user.family_id.toString())
                 family.user_ids.forEach(async (user) => {
                     newMembers.push(user.full_name)
@@ -54,7 +56,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                 setFamilyMembers(newMembers)
             }
         }
-        fetchFamilyMembers(userId).catch(console.error)
+        fetchFamilyMembers(userUID).catch(console.error)
     }, [forFamily])
 
     //get and filter transaction data
@@ -66,7 +68,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
             let count = 0
 
             if (forFamily) {
-                const user = await getUser(userId)
+                const user = await getUser(userUID)
                 const family = await getFamilyById(user.family_id.toString())
                 console.log(family)
                 family.user_ids.forEach(async (user) => {
@@ -136,7 +138,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
             setIsLoading(false)
             console.log(newTransactions)
         }
-        fetchTransactions(userId).catch(console.error)
+        fetchTransactions(userUID).catch(console.error)
 
         //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         // setTransactions([
