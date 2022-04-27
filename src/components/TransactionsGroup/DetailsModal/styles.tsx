@@ -35,7 +35,7 @@ export default StyleSheet.create({
     line: {
         borderBottomColor: "#EBEBEB",
         borderBottomWidth: 1,
-        marginVertical: "5%",
+        marginTop: "5%",
         alignSelf: "stretch"
     },
     bottom: {
@@ -43,6 +43,7 @@ export default StyleSheet.create({
     },
     bottomEntry: {
         flexDirection: "row",
+        marginTop: "5%"
 
     },
     smiley: {

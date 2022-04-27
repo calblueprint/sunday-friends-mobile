@@ -19,7 +19,7 @@ const SigninScreen = ({ navigation }: any) => {
             />
             <RectangularButton
                 // style={styles.activateButton}
-                onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
+                onPress={() => navigation.navigate('LoginStack', { screen: 'Signup1' })}
                 text="Activate"
                 buttonStyle={{ backgroundColor: '#fff', borderWidth: 1, borderColor: '#253C85', marginTop: '3%' }}
                 textStyle={{ color: '#253C85' }}
