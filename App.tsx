@@ -23,11 +23,8 @@ import {
   DMSans_700Bold_Italic,
 } from '@expo-google-fonts/dm-sans';
 
-// export const UserContext = React.createContext(null);
-
 export default function App() {
   const auth = firebaseApp.auth();
-  // const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
   const isLoadingComplete = useCachedResources();
   const theme = useTheme();
@@ -47,11 +44,7 @@ export default function App() {
     phone_number: "",
     transactions: [],
   };
-  // const [user, setUser] = useState(defaultUser);
-  // const [userid, setUserId] = useState("X89EpL9f0nNE49PvXp0ERhkO30U2");
-  // const [userid, setUserId] = useState(null);
-  // const currUser = auth.currUser;
-  // const id = currUser ? currUser.uid : "X89EpL9f0nNE49PvXp0ERhkO30U2";
+
   const [userUID, setUserUID] = useState("");
   console.log("try this");
   const test = async () => {
