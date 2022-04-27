@@ -18,7 +18,7 @@ import {
   getUserInviteByFamily,
   addUserInvite,
 } from "../../firebase/firestore/userInvite";
-import userContext from "../../context/userContext";
+import { AuthenticatedUserContext } from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamily } from "../../firebase/firestore/family";
 import emailjs, { init } from "@emailjs/browser";
@@ -44,7 +44,7 @@ const EditInviteScreen = ({ navigation }: any) => {
     user_invite_id: "",
   };
 
-  const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [userInvites, setUserInvites] = useState(defaultUserInvites);
 
   const [familyID, setFamilyID] = useState(0);
@@ -55,7 +55,7 @@ const EditInviteScreen = ({ navigation }: any) => {
   const refRBSheet = useRef();
 
   useEffect(() => {
-    getUser(value).then((user) => {
+    getUser(userUID).then((user) => {
       setFamilyID(user.family_id);
       setUserName(user.full_name);
       setUserEmail(user.email);

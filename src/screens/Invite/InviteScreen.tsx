@@ -22,7 +22,7 @@ import {
   getUserInviteByFamily,
   addUserInvite,
 } from "../../firebase/firestore/userInvite";
-import userContext from "../../context/userContext";
+import { AuthenticatedUserContext } from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { Z_DEFAULT_STRATEGY } from "zlib";
 import globalStyles from "../../globalStyles";
@@ -49,7 +49,7 @@ const InviteScreen = ({ navigation }: any) => {
     user_invite_id: "",
   };
 
-  const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [userInvites, setUserInvites] = useState(defaultUserInvites);
   const [newInviteName, setInviteName] = useState("");
   const [newInviteEmail, setInviteEmail] = useState("");
@@ -106,7 +106,7 @@ const InviteScreen = ({ navigation }: any) => {
   };
 
   useEffect(() => {
-    getUser(value).then((user) => {
+    getUser(userUID).then((user) => {
       setFamilyID(user.family_id);
       setUserName(user.full_name);
       setUserEmail(user.email);
@@ -232,7 +232,7 @@ const InviteScreen = ({ navigation }: any) => {
               {
                 borderColor: isFocused ? "#A9A9A9" : "#526DC2",
                 borderWidth: 1,
-                backgroundColor: value ? "#ffffff" : "#f2f2f2",
+                backgroundColor: newInviteName ? "#ffffff" : "#f2f2f2",
               },
             ]}
             value={newInviteName}
@@ -249,7 +249,7 @@ const InviteScreen = ({ navigation }: any) => {
               {
                 borderColor: isFocused ? "#A9A9A9" : "#526DC2",
                 borderWidth: 1,
-                backgroundColor: value ? "#ffffff" : "#f2f2f2",
+                backgroundColor: newInviteEmail ? "#ffffff" : "#f2f2f2",
               },
             ]}
             value={newInviteEmail}

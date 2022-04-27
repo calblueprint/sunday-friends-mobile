@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
 import RectangularButton from "../../components/RectangularButton/RectangularButton";
-import userContext from "../../context/userContext";
+import { AuthenticatedUserContext } from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamily } from "../../firebase/firestore/family";
 import { Z_DEFAULT_STRATEGY } from "zlib";
@@ -11,11 +11,11 @@ import styles from "../Invite/styles";
 import SvgIcon from "../../../assets/SvgIcon";
 
 const AllSetInviteScreen = ({ navigation }: any) => {
-  const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [familyName, setFamilyName] = useState("");
 
   useEffect(() => {
-    getUser(value).then((user) => {
+    getUser(userUID).then((user) => {
       getFamily(user.family_id.toString()).then((family) => {
         setFamilyName(family.family_name);
       });
