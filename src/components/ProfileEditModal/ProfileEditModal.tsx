@@ -40,6 +40,10 @@ export const ProfileEditModal = ({
     setVisible(false);
   };
 
+  const valid = () => {
+    return name != user.full_name || email != user.email;
+  };
+
   return (
     <Modal visible={visible} transparent animationType="slide">
       <View style={styles.modalView}>
@@ -72,14 +76,8 @@ export const ProfileEditModal = ({
           value={email}
         />
         <Pressable
-          onPress={
-            name != user.full_name || email != user.email ? handleSubmit : null
-          }
-          style={
-            name != user.full_name || email != user.email
-              ? styles.savePressableAllowed
-              : styles.savePressable
-          }
+          onPress={valid() ? handleSubmit : null}
+          style={valid() ? styles.savePressableAllowed : styles.savePressable}
         >
           <Text style={[globalStyles.overline1, styles.whiteText]}>SAVE</Text>
         </Pressable>

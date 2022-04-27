@@ -117,6 +117,18 @@ export const deleteUser = async (userId: string): Promise<void> => {
   }
 };
 
+/**
+ * Changes the password of the user that is currently signed in
+ */
+export const setUserPassword = async (password: any): Promise<void> => {
+	try {
+		firebaseApp.auth().currentUser?.updatePassword(password);
+	} catch(e) {
+		console.warn(e);
+		throw(e);
+	}
+}
+
 const parseUser = async (doc) => {
   const user_id = doc.id.toString();
   const data = doc.data();

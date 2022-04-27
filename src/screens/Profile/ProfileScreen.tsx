@@ -12,6 +12,8 @@ import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 import { ProfileResetPassword } from "../../components/ProfileResetPassword/ProfileResetPassword";
+import { signOut } from "../../firebase/auth";
+import firebaseApp from "../../firebase/firebaseApp";
 
 const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
@@ -35,12 +37,26 @@ const ProfileScreen = ({ navigation }: any) => {
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const value = useContext(userContext);
   const [user, setUser] = useState(defaultUser);
+  const [isLogoutPressed, setIsLogoutPressed] = useState(false);
 
   useEffect(() => {
     getUser(value).then((currUser) => {
       setUser(currUser);
     });
   }, [editModalVisible]);
+
+  // useEffect(() => {
+  //   handleLogout();
+  // }, [isLogoutPressed]);
+
+  const handleLogout = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "LoginStack" }],
+    });
+    setIsLogoutPressed(false);
+    signOut();
+  };
 
   return (
     <ViewContainer>
@@ -111,6 +127,9 @@ const ProfileScreen = ({ navigation }: any) => {
         <ProfileLogoutModal
           visible={logoutModalVisible}
           setVisible={setLogoutModalVisible}
+          logout={isLogoutPressed}
+          setLogout={setIsLogoutPressed}
+          navigation={navigation}
         />
       </Pressable>
     </ViewContainer>

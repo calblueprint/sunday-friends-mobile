@@ -5,6 +5,7 @@ import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import emailjs, { init } from "@emailjs/browser";
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import { setUserPassword } from "../../firebase/firestore/user";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [email, onChangeEmail] = useState("");
@@ -332,7 +333,11 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
               }
               onPress={() =>
                 valid()
-                  ? [setScreen("success"), sendEmail("success")]
+                  ? [
+                      setScreen("success"),
+                      sendEmail("success"),
+                      setUserPassword(confirmPW),
+                    ]
                   : setPwError(true)
               }
             >
