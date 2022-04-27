@@ -28,6 +28,7 @@ import { Z_DEFAULT_STRATEGY } from "zlib";
 import globalStyles from "../../globalStyles";
 import { getFamily } from "../../firebase/firestore/family";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import { constants } from "os";
 
 const InviteScreen = ({ navigation }: any) => {
   const defaultUserInvites: User_Invite[] = [
@@ -60,10 +61,30 @@ const InviteScreen = ({ navigation }: any) => {
   const [familyName, setFamilyName] = useState("");
   const refRBSheet = useRef();
 
+  type FormValues = {
+    email: string;
+    name: string;
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      setInviteName(data.name);
+      setInviteEmail(data.email);
+      handleAdd();
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
+
+  const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
+    return console.log(errors);
+  };
+
   const handleAdd = () => {
     // methods.handleSubmit(onSubmit, onError);
     // set default user values to new name, new email, new status
     // add default user to firebase
+
     const newInvite = {
       name: newInviteName,
       email: newInviteEmail,
@@ -74,12 +95,13 @@ const InviteScreen = ({ navigation }: any) => {
     addUserInvite(newInvite as User_Invite).then(() => {
       getUserInviteByFamily(familyID).then((data) => {
         setUserInvites(data);
+        sortUserInvites(data);
       });
     });
 
     setInviteName("");
     setInviteEmail("");
-    setNewInviteStatus(2);
+    setNewInviteStatus("2");
     refRBSheet.current.close();
   };
 
@@ -91,12 +113,39 @@ const InviteScreen = ({ navigation }: any) => {
       setUserID(user.user_id);
       getUserInviteByFamily(user.family_id).then((data) => {
         setUserInvites(data);
+        sortUserInvites(data);
       });
       getFamily(user.family_id.toString()).then((family) => {
         setFamilyName(family.family_name);
       });
     });
   }, []);
+
+  const sortUserInvites = (data: User_Invite[]) => {
+    const sorted: User_Invite[] = new Array(data.length);
+    let index = 0;
+    let inviteIndex = 0;
+
+    data.forEach((user) => {
+      if (user.status == "Parent") {
+        sorted[index] = user;
+        index++;
+        data.splice(inviteIndex, 1);
+      }
+      inviteIndex++;
+    });
+
+    inviteIndex = 0;
+
+    data.forEach((user) => {
+      sorted[index] = user;
+      index++;
+      data.splice(inviteIndex, 1);
+      inviteIndex++;
+    });
+
+    setUserInvites(sorted);
+  };
 
   const [isFocused, changeFocus] = React.useState(true);
   const handleFocus = () => changeFocus(false);
@@ -115,6 +164,7 @@ const InviteScreen = ({ navigation }: any) => {
           editScreen={false}
           userInviteId={userID}
           setUserInvites={setUserInvites}
+          familyID={familyID}
         />
         {userInvites.map((user) => (
           <MemberCard
@@ -124,6 +174,7 @@ const InviteScreen = ({ navigation }: any) => {
             editScreen={false}
             userInviteId={user.user_invite_id}
             setUserInvites={setUserInvites}
+            familyID={familyID}
           />
         ))}
         <Pressable
@@ -156,12 +207,13 @@ const InviteScreen = ({ navigation }: any) => {
         ref={refRBSheet}
         closeOnDragDown={true}
         closeOnPressMask={true}
-        height={600}
+        height={700}
         customStyles={{
           container: {
             alignItems: "center",
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
+            backgroundColor: "#FFFFFF",
           },
         }}
       >
@@ -169,7 +221,7 @@ const InviteScreen = ({ navigation }: any) => {
         <View style={styles.innerContainer}>
           <Text style={globalStyles.overline2}>family relationship</Text>
         </View>
-        <InviteRadioButton setStatus={setNewInviteStatus} />
+        <InviteRadioButton setStatus={setNewInviteStatus} status={2} />
         <View style={styles.innerContainer}>
           <Text style={globalStyles.overline2}>full name</Text>
           <TextInput
@@ -208,7 +260,7 @@ const InviteScreen = ({ navigation }: any) => {
           />
         </View>
 
-        <View style={styles.separator} />
+        <View style={styles.separator3} />
         <Pressable onPress={() => handleAdd()} style={styles.rectangularButton}>
           <Text style={styles.rectangularButtonText}>add member</Text>
         </Pressable>

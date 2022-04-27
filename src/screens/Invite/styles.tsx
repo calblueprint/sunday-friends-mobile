@@ -53,7 +53,7 @@ export default StyleSheet.create({
   rectangularButton: {
     backgroundColor: "#253C85",
     width: "80%",
-    height: "7%",
+    height: "6.5%",
     justifyContent: "center",
     borderRadius: 5,
   },
@@ -190,6 +190,13 @@ export default StyleSheet.create({
     height: 8,
     width: "100%",
     backgroundColor: "#FAFAFA",
+  },
+
+  separator3: {
+    //marginTop: "10%",
+    height: "25%",
+    width: "100%",
+    backgroundColor: "#FFFFFF",
   },
 
   allSetContainer: {

@@ -3,8 +3,14 @@ import { useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { default as styles } from "./styles";
 
-const InviteRadioButton = ({ setStatus }: any) => {
-  const [userOption, setUserOption] = useState(2);
+const InviteRadioButton = ({
+  setStatus,
+  status,
+}: {
+  setStatus: any;
+  status: number;
+}) => {
+  const [userOption, setUserOption] = useState(status);
 
   const handlePress = (option: number) => {
     setUserOption(option);

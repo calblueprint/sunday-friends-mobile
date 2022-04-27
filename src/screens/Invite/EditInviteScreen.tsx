@@ -62,6 +62,7 @@ const EditInviteScreen = ({ navigation }: any) => {
       setUserID(user.user_id);
       getUserInviteByFamily(user.family_id).then((data) => {
         setUserInvites(data);
+        sortUserInvites(data);
       });
       getFamily(user.family_id.toString()).then((family) => {
         setFamilyName(family.family_name);
@@ -69,19 +70,45 @@ const EditInviteScreen = ({ navigation }: any) => {
     });
   }, []);
 
+  const sortUserInvites = (data: User_Invite[]) => {
+    const sorted: User_Invite[] = new Array(data.length);
+    let index = 0;
+    let inviteIndex = 0;
+
+    data.forEach((user) => {
+      if (user.status == "Parent") {
+        sorted[index] = user;
+        index++;
+        data.splice(inviteIndex, 1);
+      }
+      inviteIndex++;
+    });
+
+    inviteIndex = 0;
+
+    data.forEach((user) => {
+      sorted[index] = user;
+      index++;
+      data.splice(inviteIndex, 1);
+      inviteIndex++;
+    });
+
+    setUserInvites(sorted);
+  };
+
   init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
 
-  const handleSend = (type: string) => {
+  const handleSend = () => {
     {
       userInvites.forEach((user) =>
         emailjs.send(EMAILJS_SERVICE_ID, "template_j78fcdn", {
-          to: user.name,
+          to: user.email,
           name: user.name,
           family: familyName,
         })
       );
     }
-    navigation.navigate("LoginStack", { screen: "Home" });
+    navigation.navigate("LoginStack", { screen: "AllSetInvite" });
   };
 
   return (
@@ -116,7 +143,7 @@ const EditInviteScreen = ({ navigation }: any) => {
         >
           <Text style={styles.rectangularButtonText2}>edit</Text>
         </Pressable>
-        <Pressable style={styles.blueHalfButton} onPress={() => handleSend}>
+        <Pressable style={styles.blueHalfButton} onPress={() => handleSend()}>
           <Text style={styles.rectangularButtonText}>send invites</Text>
         </Pressable>
       </View>

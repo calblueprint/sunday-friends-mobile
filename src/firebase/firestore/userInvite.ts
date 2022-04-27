@@ -1,6 +1,7 @@
 import firebaseApp from "../firebaseApp";
 import "firebase/firestore";
 import { User_Invite } from "../../types/schema";
+import { EmailJSResponseStatus } from "@emailjs/browser";
 
 const db = firebaseApp.firestore();
 const userInvitesCollection = db.collection("user_invites");
@@ -56,6 +57,29 @@ export const addUserInvite = async (userInvite: User_Invite): Promise<void> => {
 export const deleteUserInvite = async (userInviteId: string): Promise<void> => {
   try {
     await userInvitesCollection.doc(userInviteId).delete();
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
+/**
+ * Edits the given userInvite data from firestore
+ */
+export const editUserInvite = async (
+  userInviteId: string,
+  name: string,
+  email: string,
+  status: string
+): Promise<void> => {
+  try {
+    const doc = await userInvitesCollection.doc(userInviteId).get();
+    var data = doc.data();
+    data.name = name;
+    data.email = email;
+    data.status = status;
+
+    userInvitesCollection.doc(userInviteId).set(data);
   } catch (e) {
     console.warn(e);
     throw e;

@@ -39,9 +39,7 @@ const AllSetInviteScreen = ({ navigation }: any) => {
         </Text>
       </View>
       <RectangularButton
-        onPress={() =>
-          navigation.navigate("LoginStack", { screen: "EditInvite" })
-        }
+        onPress={() => navigation.navigate("Root", { screen: "Home" })}
         text="finish"
         buttonStyle={{ backgroundColor: "#253C85" }}
         textStyle={{ color: "#FFF" }}

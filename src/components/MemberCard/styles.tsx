@@ -64,4 +64,63 @@ export default StyleSheet.create({
   deleteSeparator: {
     width: 21,
   },
+
+  separator3: {
+    //marginTop: "10%",
+    height: "25%",
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+  },
+
+  rectangularButton: {
+    backgroundColor: "#253C85",
+    width: "80%",
+    height: "6.5%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  rectangularButtonText: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+    textTransform: "uppercase",
+    alignSelf: "center",
+    color: "#FFF",
+  },
+
+  modalText: {
+    fontFamily: "Avenir",
+    fontWeight: "800",
+    fontSize: 12,
+    textTransform: "uppercase",
+    textAlign: "left",
+    color: "#525454",
+    marginVertical: "3%",
+    width: "80%",
+  },
+
+  modalTitle: {
+    fontFamily: "DMSans_700Bold",
+    fontSize: 16,
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#272929",
+    marginTop: "2%",
+    marginBottom: "5%",
+  },
+
+  innerContainer2: {
+    width: "80%",
+  },
+
+  input: {
+    height: 40,
+    width: "100%",
+    marginBottom: "4%",
+    marginTop: "2%",
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+  },
 });
