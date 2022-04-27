@@ -1,19 +1,16 @@
 import * as React from "react";
 import { useState, useContext, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { View, Text, Pressable } from "react-native";
 import ViewContainer from "../../components/ViewContainer";
 import styles from "./styles";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
-import userContext from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
 import { ProfileLogoutModal } from "../../components/ProfileLogoutModal/ProfileLogoutModal";
 import { ProfileEditModal } from "../../components/ProfileEditModal/ProfileEditModal";
 import { ProfileResetPassword } from "../../components/ProfileResetPassword/ProfileResetPassword";
-import { signOut } from "../../firebase/auth";
-import firebaseApp from "../../firebase/firebaseApp";
+import { AuthenticatedUserContext } from "../../context/userContext";
 
 const ProfileScreen = ({ navigation }: any) => {
   const defaultUser: User = {
@@ -35,28 +32,15 @@ const ProfileScreen = ({ navigation }: any) => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [resetModalVisible, setResetModalVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
-  const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [user, setUser] = useState(defaultUser);
   const [isLogoutPressed, setIsLogoutPressed] = useState(false);
 
   useEffect(() => {
-    getUser(value).then((currUser) => {
+    getUser(userUID).then((currUser) => {
       setUser(currUser);
     });
   }, [editModalVisible]);
-
-  // useEffect(() => {
-  //   handleLogout();
-  // }, [isLogoutPressed]);
-
-  const handleLogout = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "LoginStack" }],
-    });
-    setIsLogoutPressed(false);
-    signOut();
-  };
 
   return (
     <ViewContainer>

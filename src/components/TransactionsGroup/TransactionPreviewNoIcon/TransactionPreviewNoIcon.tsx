@@ -6,7 +6,7 @@ import styles from './styles';
 
 const TransactionPreviewNoIcon = ({ transaction }: any) => {
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.rdca}>
                 <View style={styles.frame117}>
                     <View style={styles.textGroup}>
@@ -14,16 +14,16 @@ const TransactionPreviewNoIcon = ({ transaction }: any) => {
                             {transaction.description}
                         </Text>
                         <Text style={styles.nameDate}>
-                            {transaction.pointGain} credits  •  {transaction.date}
+                            {transaction.point_gain} credits  •  {transaction.date}
                         </Text>
                     </View>
                 </View>
-                <Text style={[styles.points, (transaction.pointGain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
-                    {((transaction.pointGain > 0) ? "+" : "") + transaction.pointGain}
+                <Text style={[styles.points, (transaction.point_gain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
+                    {((transaction.point_gain > 0) ? "+" : "") + transaction.point_gain}
                 </Text>
                 <SvgIcon type='chevron_right' />
             </View>
-        </Pressable>
+        </View>
     )
 }
 

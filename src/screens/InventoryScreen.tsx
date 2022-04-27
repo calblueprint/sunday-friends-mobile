@@ -24,7 +24,7 @@ const InventoryScreen = ({ navigation }: any) => {
                 <Title>"Bonus" Screen</Title>
                 <View style={styles.separator} />
                 {/* <EditScreenInfo path="/screens/InventoryScreen.tsx" /> */}
-                <TransactionsGroup/>
+                <TransactionsGroup forFamily={true}/>
             </ViewContainer>
         </SafeAreaView>
 

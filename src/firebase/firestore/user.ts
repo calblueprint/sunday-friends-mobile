@@ -86,7 +86,7 @@ export const getFilteredUsers = async (role: string): Promise<User[]> => {
  */
 export const addUser = async (user: User): Promise<void> => {
   try {
-    await userCollection.doc().set(user);
+    await userCollection.doc(user.user_id).set(user);
   } catch (e) {
     console.warn(e);
     throw e;

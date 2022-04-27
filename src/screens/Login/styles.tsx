@@ -16,8 +16,21 @@ export default StyleSheet.create({
     loginTitle: {
         textAlign: "left",
         width: "80%",
-        marginTop: "30%",
+        marginTop: "25%",
     },
+
+    signupTitle: {
+        textAlign: "left",
+        width: "80%",
+        marginTop: "25%",
+        marginBottom: "2%",
+    },
+
+    // loginTitle: {
+    //     textAlign: "left",
+    //     width: "80%",
+    //     marginTop: "25%",
+    // },
 
     title2: {
         fontFamily: "DM Sans",
@@ -51,6 +64,14 @@ export default StyleSheet.create({
         marginTop: '3%',
     },
 
+    body2: {
+        marginBottom: "4%",
+        textAlign: "left",
+        width: "80%",
+        marginTop: '1%',
+    },
+
+
     underline: {
         textDecorationLine: 'underline',
     },
@@ -60,7 +81,33 @@ export default StyleSheet.create({
         textAlign: "center",
     },
 
-    // inline: {
-    //     marginTop: "-15%"
-    // }
+    signupFooter: {
+        marginTop: "20%",
+        textAlign: "left",
+    },
+
+    left2: {
+        marginLeft: "0%",
+        textAlign: "left",
+        width: "80%",
+        marginTop: "-53%",
+    },
+    left1: {
+        marginLeft: "0%",
+        textAlign: "left",
+        width: "80%",
+        marginTop: "-40%",
+    },
+    inline: {
+        marginTop: "-38%"
+    },
+    back: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    backText: {
+        // marginBottom: "0%",
+        marginTop: "0.5%"
+
+    }
 });

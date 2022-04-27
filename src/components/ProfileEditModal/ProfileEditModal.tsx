@@ -6,6 +6,7 @@ import globalStyles from "../../globalStyles";
 import { User } from "../../types/schema";
 import userContext from "../../context/userContext";
 import { editUser, getUser } from "../../firebase/firestore/user";
+import { AuthenticatedUserContext } from "../../context/userContext";
 
 type ProfileEditModalProps = {
   visible: boolean;
@@ -20,13 +21,14 @@ export const ProfileEditModal = ({
   user,
   setUser,
 }: ProfileEditModalProps) => {
-  const value = useContext(userContext);
+  // const value = useContext(userContext);
+  const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
   const [name, onChangeName] = useState(user.full_name);
   const [email, onChangeEmail] = useState(user.email);
 
   useEffect(() => {
-    getUser(value).then((currUser) => {
+    getUser(userUID).then((currUser) => {
       setUser(currUser);
       onChangeName(user.full_name);
       onChangeEmail(user.email);
@@ -73,6 +75,7 @@ export const ProfileEditModal = ({
         <TextInput
           style={[globalStyles.body1, styles.emailTextInput]}
           onChangeText={onChangeEmail}
+          editable={false}
           value={email}
         />
         <Pressable

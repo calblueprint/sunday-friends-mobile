@@ -7,20 +7,20 @@ import styles from './styles';
 const TransactionPreview = ({ transaction }: any) => {
     const renderIcon = (role: String) => {
         switch(role) {
-            case "head":
+            case "Head":
                 return <Image source={require('../../../../assets/images/headSmiley.png')} style={styles.smiley}/>
-            case "parent":
+            case "Parent":
                 return <Image source={require('../../../../assets/images/parentSmiley.png')} style={styles.smiley}/>
-            case "child":
+            case "Child":
                 return <Image source={require('../../../../assets/images/childSmiley.png')} style={styles.smiley}/>
-            case "dependent":
+            case "Dependent":
                 return <Image source={require('../../../../assets/images/childSmiley.png')} style={styles.smiley}/>
             default:
                 <Image source={require('../../../../assets/images/headSmiley.png')} style={styles.smiley}/>
         }
     }
     return (
-        <Pressable style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.rdca}>
                 <View style={styles.frame117}>
                     {renderIcon(transaction.role)}
@@ -29,16 +29,16 @@ const TransactionPreview = ({ transaction }: any) => {
                             {transaction.description}
                         </Text>
                         <Text style={styles.nameDate}>
-                            {transaction.username}  •  {transaction.date}
+                            {transaction.user_name}  •  {transaction.date}
                         </Text>
                     </View>
                 </View>
-                <Text style={[styles.points, (transaction.pointGain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
-                    {((transaction.pointGain > 0) ? "+" : "") + transaction.pointGain}
+                <Text style={[styles.points, (transaction.point_gain > 0) ? {color: "#65C656"} : {color: "#FF6666"}]}>
+                    {((transaction.point_gain > 0) ? "+" : "") + transaction.point_gain}
                 </Text>
                 <SvgIcon type='chevron_right' />
             </View>
-        </Pressable>
+        </View>
     )
 }
 
