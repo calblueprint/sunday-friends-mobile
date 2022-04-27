@@ -199,6 +199,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                         // <ActivityIndicator size="large"/>
                     ) : (
                         <FlatList
+                            contentContainerStyle = {{ paddingBottom: 30 }}
                             data={transactions}
                             keyExtractor={item => (item.date, item.description)}
                             renderItem={(forFamily) ? (
@@ -210,6 +211,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                                 ))
                             }
                         />
+                        
                     )
                 )}
 
