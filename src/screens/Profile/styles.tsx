@@ -19,6 +19,7 @@ export default StyleSheet.create({
     borderColor: "#F2F2F2",
     borderWidth: 2,
     borderStyle: "solid",
+    left: "31.35%",
   },
   profileImage: {
     display: "flex",
