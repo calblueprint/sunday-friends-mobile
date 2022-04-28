@@ -3,8 +3,8 @@ import styles from "./styles";
 import { Modal, View, Pressable, TextInput, Text, Linking } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
-import emailjs, { init } from "@emailjs/browser";
-import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_SERVICE_ID } from "@env";
 import { setUserPassword } from "../../firebase/firestore/user";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
@@ -31,8 +31,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   };
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
-
+  
   const resetEmailParams = {
     from: "Sunday Friends",
     to: email,

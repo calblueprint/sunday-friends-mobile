@@ -1,17 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect, useContext} from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect, useContext } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useCachedResources from './src/hooks/useCachedResources';
-import { Provider as PaperProvider } from 'react-native-paper';
-import useTheme from './src/hooks/useTheme';
-import Navigation from './src/navigation';
-import { getUser } from './src/firebase/firestore/user';
-import { currUser } from './src/firebase/auth';
-import { AuthenticatedUserContext, AuthenticatedUserProvider } from './src/context/userContext';
-import { User } from './src/types/schema';
+import useCachedResources from "./src/hooks/useCachedResources";
+import { Provider as PaperProvider } from "react-native-paper";
+import useTheme from "./src/hooks/useTheme";
+import Navigation from "./src/navigation";
+import { getUser } from "./src/firebase/firestore/user";
+import { currUser } from "./src/firebase/auth";
+import {
+  AuthenticatedUserContext,
+  AuthenticatedUserProvider,
+} from "./src/context/userContext";
+import { User } from "./src/types/schema";
 import firebaseApp from "./src/firebase/firebaseApp";
-
+import emailjs, { init } from "@emailjs/browser";
+import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 
 import {
   useFonts,
@@ -21,10 +25,12 @@ import {
   DMSans_500Medium_Italic,
   DMSans_700Bold,
   DMSans_700Bold_Italic,
-} from '@expo-google-fonts/dm-sans';
+} from "@expo-google-fonts/dm-sans";
 
 export default function App() {
   const auth = firebaseApp.auth();
+
+  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
 
   const isLoadingComplete = useCachedResources();
   const theme = useTheme();
@@ -50,10 +56,9 @@ export default function App() {
   const test = async () => {
     const u = await getUser(userUID);
     console.log("try this");
-    console.log(u)
-  }
+    console.log(u);
+  };
   test();
-  
 
   let [fontsLoaded] = useFonts({
     DMSans_400Regular,
@@ -62,7 +67,7 @@ export default function App() {
     DMSans_500Medium_Italic,
     DMSans_700Bold,
     DMSans_700Bold_Italic,
-    DM_Mono: require('./assets/fonts/DMMono-Medium.ttf'),
+    DM_Mono: require("./assets/fonts/DMMono-Medium.ttf"),
   });
 
   if (!isLoadingComplete) {

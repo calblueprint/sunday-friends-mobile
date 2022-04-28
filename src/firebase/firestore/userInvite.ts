@@ -1,6 +1,7 @@
 import firebaseApp from "../firebaseApp";
 import "firebase/firestore";
 import { User_Invite } from "../../types/schema";
+import { EmailJSResponseStatus } from "@emailjs/browser";
 
 const db = firebaseApp.firestore();
 const userInvitesCollection = db.collection("user_invites");
@@ -51,16 +52,52 @@ export const addUserInvite = async (userInvite: User_Invite): Promise<void> => {
 };
 
 /**
+ * Deletes the given userInvite data from firestore
+ */
+export const deleteUserInvite = async (userInviteId: string): Promise<void> => {
+  try {
+    await userInvitesCollection.doc(userInviteId).delete();
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
+/**
+ * Edits the given userInvite data from firestore
+ */
+export const editUserInvite = async (
+  userInviteId: string,
+  name: string,
+  email: string,
+  status: string
+): Promise<void> => {
+  try {
+    const doc = await userInvitesCollection.doc(userInviteId).get();
+    var data = doc.data();
+    data.name = name;
+    data.email = email;
+    data.status = status;
+
+    userInvitesCollection.doc(userInviteId).set(data);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
+/**
  * Returns the family of userInvite data from firestore with the given userId
  */
 export const getUserInviteByFamily = async (
-  family_id: string
+  family_id: number
 ): Promise<User_Invite[]> => {
   try {
     const promises: Promise<User_Invite>[] = [];
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const getUserInvites = await userInvitesCollection
       .where("family_id", "==", family_id)
+      .where("status", "!=", "Head")
       .get()
       .then((doc) => {
         doc.forEach((item) => promises.push(parseUserInvite(item)));

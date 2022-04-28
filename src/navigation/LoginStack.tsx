@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import InviteScreen from '../screens/Invite/InviteScreen';
+import EditInviteScreen from '../screens/Invite/EditInviteScreen';
+import AllSetInviteScreen from '../screens/Invite/AllSetInviteScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
 import Signup1Screen from '../screens/Login/Signup1Screen';
 import Signup2Screen from '../screens/Login/Signup2Screen';
@@ -25,8 +27,18 @@ const LoginStack = () => {
       <Stack.Screen name="Invite" component={InviteScreen} options={{ headerShown: false, title: "Invite" }} />
       <Stack.Screen name="Error1" component={Error1Screen} options={{ headerShown: false, title: "Error1" }} />
       <Stack.Screen name="Error2" component={Error2Screen} options={{ headerShown: false, title: "Error2" }} />
+      <Stack.Screen
+        name="EditInvite"
+        component={EditInviteScreen}
+        options={{ headerShown: false, title: "EditInvite" }}
+      />
+      <Stack.Screen
+        name="AllSetInvite"
+        component={AllSetInviteScreen}
+        options={{ headerShown: false, title: "AllSetInvite" }}
+      />
     </Stack.Navigator>
   );
-}
+};
 
 export default LoginStack;
