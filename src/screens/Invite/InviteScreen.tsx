@@ -1,17 +1,10 @@
 import * as React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
-import FormInput from "../../components/FormInput";
 import RectangularButton from "../../components/RectangularButton/RectangularButton";
 import { default as styles } from "./styles";
 import MemberCard from "../../components/MemberCard/MemberCard";
 import InviteRadioButton from "../../components/InviteRadioButton/InviteRadioButton";
-import {
-  useForm,
-  FormProvider,
-  SubmitHandler,
-  SubmitErrorHandler,
-} from "react-hook-form";
 import "firebase/firestore";
 import firebaseApp from "../../firebase/firebaseApp";
 import { User_Invite } from "../../types/schema";
@@ -27,8 +20,6 @@ import { getUser } from "../../firebase/firestore/user";
 import { Z_DEFAULT_STRATEGY } from "zlib";
 import globalStyles from "../../globalStyles";
 import { getFamily } from "../../firebase/firestore/family";
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
-import { constants } from "os";
 
 const InviteScreen = ({ navigation }: any) => {
   const defaultUserInvites: User_Invite[] = [
@@ -60,25 +51,6 @@ const InviteScreen = ({ navigation }: any) => {
   const [userID, setUserID] = useState("");
   const [familyName, setFamilyName] = useState("");
   const refRBSheet = useRef();
-
-  type FormValues = {
-    email: string;
-    name: string;
-  };
-
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    try {
-      setInviteName(data.name);
-      setInviteEmail(data.email);
-      handleAdd();
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
-  const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
-    return console.log(errors);
-  };
 
   const handleAdd = () => {
     // methods.handleSubmit(onSubmit, onError);

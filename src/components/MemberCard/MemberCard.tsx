@@ -113,11 +113,6 @@ const MemberCard = ({
     }
   };
 
-  type FormValues = {
-    email: string;
-    name: string;
-  };
-
   const modalOpen = () => {
     setEditName(name);
     setEditEmail(email);

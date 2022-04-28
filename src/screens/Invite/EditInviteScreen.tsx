@@ -21,8 +21,8 @@ import {
 import { AuthenticatedUserContext } from "../../context/userContext";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamily } from "../../firebase/firestore/family";
-import emailjs, { init } from "@emailjs/browser";
-import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_SERVICE_ID } from "@env";
 import TabNavigator from "../../navigation/TabNavigator";
 
 const EditInviteScreen = ({ navigation }: any) => {
@@ -96,8 +96,6 @@ const EditInviteScreen = ({ navigation }: any) => {
     setUserInvites(sorted);
   };
 
-  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
-
   const handleSend = () => {
     {
       userInvites.forEach((user) =>
@@ -124,6 +122,7 @@ const EditInviteScreen = ({ navigation }: any) => {
           editScreen={true}
           userInviteId={userID}
           setUserInvites={setUserInvites}
+          familyID={familyID}
         />
         {userInvites.map((user) => (
           <MemberCard
@@ -133,13 +132,16 @@ const EditInviteScreen = ({ navigation }: any) => {
             editScreen={true}
             userInviteId={user.user_invite_id}
             setUserInvites={setUserInvites}
+            familyID={familyID}
           />
         ))}
       </ScrollView>
       <View style={styles.buttonContainer}>
         <Pressable
           style={styles.whiteHalfButton}
-          onPress={() => navigation.navigate("Root", { screen: "Home" })}
+          onPress={() =>
+            navigation.navigate("LoginStack", { screen: "Invite" })
+          }
         >
           <Text style={styles.rectangularButtonText2}>edit</Text>
         </Pressable>
