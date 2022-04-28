@@ -121,7 +121,7 @@ const PersonalScreen = ({navigation}: any) => {
                     <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
                 </View>
 
-                <TransactionsGroup forFamily = {true}>
+                <TransactionsGroup forFamily = {false}>
                 </TransactionsGroup>
 
             </View>
