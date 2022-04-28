@@ -12,6 +12,8 @@ import SvgIcon from ',,/../../assets/SvgIcon';
 import { getHeadInvitesByEmail, getUserInvite } from '../../firebase/firestore/userInvite';
 import { addUser } from '../../firebase/firestore/user';
 import { User } from '../../types/schema';
+import emailjs, { init } from "@emailjs/browser";
+import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 
 const Signup2Screen = ({ route, navigation }: any) => {
 
@@ -51,6 +53,30 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
     const { ...methods } = useForm();
 
+    init(EMAILJS_USER_ID);
+
+    const confirmEmailParams = {
+        from: "Sunday Friends",
+        to: user_invite.email,
+        name: user_invite.name,
+    };
+
+    const sendEmail = (type: string) => {
+        console.log("hellooooooooo\n");
+        console.log(EMAILJS_SERVICE_ID);
+        try {
+            emailjs.send(
+                EMAILJS_SERVICE_ID,
+                // "service_4586ayw",
+                "template_zgiqmdm",
+                confirmEmailParams,
+                "bpUmfdhrALYzPBWpx"
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
             if (data.password1 == data.password2) {
@@ -58,13 +84,14 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 console.log(user_invite.family_id)
                 const parent = user_invite.status != "Child";
                 const newUser = createUser(
-                    result.user.uid, 
-                    user_invite.name, 
-                    user_invite.email, 
-                    user_invite.status, 
+                    result.user.uid,
+                    user_invite.name,
+                    user_invite.email,
+                    user_invite.status,
                     user_invite.family_id,
                     parent);
                 addUser(newUser);
+                sendEmail("hello");
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'Invite' });
                 } else {
