@@ -109,8 +109,4 @@ export default StyleSheet.create({
     justifyContent: "center",
     zIndex: 1,
   },
-  downArrow: {
-    position: "absolute",
-    bottom: "6%",
-  },
 });

@@ -40,3 +40,9 @@ export type User_Invite = {
   status: string;
   user_invite_id: string;
 };
+
+export type Tiers = {
+  tier1: number;
+  tier2: number;
+  tier3: number;
+};

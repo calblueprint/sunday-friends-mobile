@@ -10,7 +10,7 @@ import Signup3Screen from '../screens/Login/Signup3Screen';
 import SigninScreen from '../screens/Login/SigninScreen';
 import Error1Screen from '../screens/Login/Error1Screen';
 import Error2Screen from '../screens/Login/Error2Screen';
-import HomeScreen from '../screens/Home/HomeScreen';
+import HomeScreen from '../screens/Family/FamilyScreen';
 import { LoginStackParamList } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import TabNavigator from './TabNavigator';

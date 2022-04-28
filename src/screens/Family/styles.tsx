@@ -8,6 +8,20 @@ export default StyleSheet.create({
     backgroundColor: "#eee",
   },
 
+  contentContainer: {
+    // paddingLeft: 20,
+    // paddingRight: 60,
+    width: "100%",
+
+  },
+
+  alignment: {
+    // paddingLeft: 20,
+    // paddingRight: 60,
+    alignItems: "center",
+
+  },
+
   title1: {
     fontFamily: "DM Sans",
     fontSize: 28,
@@ -37,6 +51,12 @@ export default StyleSheet.create({
   },
 
   homeContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+  },
+
+  shomeContainer: {
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
@@ -275,6 +295,17 @@ export default StyleSheet.create({
     fontSize: 18,
 
   },
+
+  tranxContainer: {
+    marginTop: 17,
+    height: 700,
+  },
+
+  tranxbar: {
+    marginLeft: "5%",
+    marginBottom: 17,
+  },
+
 });
 
 export const customStyles = {

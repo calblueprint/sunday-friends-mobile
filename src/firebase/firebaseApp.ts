@@ -15,7 +15,7 @@ const firebaseConfig = {
   projectId: PROJECT_ID,
   storageBucket: STORAGE_BUCKET,
   messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
+  appId: "1:50685877916:web:01eea06f0e77ba65bd5759",
 };
 
 const firebaseApp = firebase;
