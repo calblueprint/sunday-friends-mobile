@@ -1,28 +1,87 @@
 import * as React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image, ScrollView} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
-import { useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import ViewContainer from '../../components/ViewContainer';
 import { Divider, Title } from 'react-native-paper';
 import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
-import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import {moment} from 'moment';
 import StepIndicator from 'react-native-step-indicator';
+import { getAllTiers } from '../../firebase/firestore/tiers';
+import { getUser } from '../../firebase/firestore/user';
+import { AuthenticatedUserContext } from '../../context/userContext';
+import { User } from '../../types/schema';
+import {List} from 'react-native-paper';
+import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
 
-const labels = ["1000", '2000', '3000'];
+
+const defaultLabels = ['100', '200', '300']
+
+const defaultTier = {
+    tier1: 100,
+    tier2: 200,
+    tier3: 300
+}
 
 const getCurrentDate=()=>{
     var moment = require('moment');
     return (moment().format('dddd[,] MMMM Do')); 
 }
 
+const defaultUser: User = {
+    user_id: "",
+    address: "",
+    created_at: "",
+    email: "",
+    role: "",
+    family_id: 0,
+    full_name: "",
+    last_active: new Date(),
+    parent: false,
+    points: 0,
+    reward_eligible: false,
+    suspended: false,
+    phone_number: "",
+    transactions: [],
+  };
 
-const HomeScreen = ({navigation}: any) => {
+
+
+const FamilyScreen = ({navigation}: any) => {
+
+    const [labels, setLabels] = useState(['1000', '2000', '3000']);
+    const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
+    const [user, setUser] = useState(defaultUser);
+
+    
+    //const userID = useContext(userContext);
+    
+
+    useEffect(() => {
+        getAllTiers().then((tiers) => {
+            // console.log(tiers);
+            const newlabels = [];
+            newlabels[0] = tiers[0].tier1.toString();
+            newlabels[1] = tiers[0].tier2.toString();
+            newlabels[2] = tiers[0].tier3.toString();
+            setLabels(newlabels);
+
+        getUser(userUID).then((currUser) => {
+            setUser(currUser);
+        })
+
+        })
+    }, []);
+
+    const tiersStr = []
+
     return (
         <View style = {styles.homeContainer}>
+            <ScrollView style = {styles.contentContainer} contentContainerStyle = {styles.alignment}>
+
             <View style = {styles.dateContainer}>
                 <Text style={[globalStyles.body2, {color: '#525454'}]}>{getCurrentDate()}</Text>
             </View>
@@ -58,7 +117,7 @@ const HomeScreen = ({navigation}: any) => {
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
                     <View style = {styles.balanceContainer}>
-                        <Text style={[styles.balanceText, {color: "#253C85"}]}>100</Text>
+                        <Text style={[styles.balanceText, {color: "#253C85"}]}>200</Text>
                         <Text style={globalStyles.overline2}>FAMILY BALANCE</Text>
                     </View>
                         <Pressable style={({ pressed }) => [
@@ -96,7 +155,6 @@ const HomeScreen = ({navigation}: any) => {
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>Hygeine products, toiletries</Text>
                             </View>
-
                         </View>
                     </View>
                     <View style={styles.tierOptionsContainer}>
@@ -115,10 +173,20 @@ const HomeScreen = ({navigation}: any) => {
                 <View>
                 </View>
             </View>
-            
+            <View style={styles.tranxContainer}>
+
+                <View style = {styles.tranxbar}>
+                    <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
+                </View>
+
+                <TransactionsGroup forFamily = {true}>
+                </TransactionsGroup>
+
+            </View>
+            </ScrollView>
         </View>
         
     );
 }
 
-export default HomeScreen;
+export default FamilyScreen;
