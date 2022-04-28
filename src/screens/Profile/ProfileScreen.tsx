@@ -60,7 +60,11 @@ const ProfileScreen = ({ navigation }: any) => {
       </Pressable>
 
       <Pressable style={styles.profileImagePressable}>
-        <SvgIcon type="profileHeadSmiley" />
+        <SvgIcon
+          type={
+            user.role == "Head" ? "profileHeadSmiley" : "profileDependentSmiley"
+          }
+        />
       </Pressable>
       <Text style={[styles.profileName, globalStyles.h3Bold]}>
         {user.full_name}

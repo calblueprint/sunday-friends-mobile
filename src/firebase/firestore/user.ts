@@ -118,9 +118,9 @@ export const deleteUser = async (userId: string): Promise<void> => {
 };
 
 /**
- * Changes the password of the user that is currently signed in
+ * Changes the password of the user that is currently signed in with the given string
  */
-export const setUserPassword = async (password: any): Promise<void> => {
+export const setUserPassword = async (password: string): Promise<void> => {
 	try {
 		firebaseApp.auth().currentUser?.updatePassword(password);
 	} catch(e) {

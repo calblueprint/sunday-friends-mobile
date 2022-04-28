@@ -8,30 +8,30 @@ import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 import { setUserPassword } from "../../firebase/firestore/user";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
+  const [screen, setScreen] = useState("reset");
   const [email, onChangeEmail] = useState("");
   const [code, onChangeCode] = useState("");
   const [newPW, onChangeNewPW] = useState("");
   const [confirmPW, onChangeConfirmPW] = useState("");
   const [edited, setEdited] = useState(false);
-  const [screen, setScreen] = useState("reset");
   const [pin, setPin] = useState(0);
   const [pwError, setPwError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   const reset = () => {
+    setVisible(false);
+    setScreen("reset");
     onChangeEmail("");
     onChangeCode("");
     onChangeNewPW("");
     onChangeConfirmPW("");
     setEdited(false);
-    setScreen("reset");
-    setVisible(false);
     setPwError(false);
     setEmailError(false);
   };
 
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  init(EMAILJS_USER_ID); //initializes emailJS userID (only 200 emails a month...)
+  init(EMAILJS_USER_ID);
 
   const resetEmailParams = {
     from: "Sunday Friends",
@@ -92,6 +92,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <Pressable style={styles.exitPressable} onPress={() => reset()}>
             <Text style={[globalStyles.body1, styles.closeText]}>Close</Text>
           </Pressable>
+
           <Text style={[globalStyles.h2, styles.modalTitle]}>
             Reset Password
           </Text>
@@ -101,6 +102,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <Text style={[globalStyles.body1, styles.subText2]}>
             A text containing a 6-digit code will be sent
           </Text>
+
           <TextInput
             style={
               emailError
@@ -109,7 +111,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                     styles.emailInputTyping,
                     styles.errorBackground,
                   ]
-                : edited && email.length > 0
+                : edited && email
                 ? [globalStyles.body1, styles.emailInputTyping]
                 : [globalStyles.body1, styles.emailInput]
             }
@@ -119,11 +121,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             value={email}
             autoFocus={true}
           />
+
           {emailError ? (
             <Text style={[globalStyles.body2, styles.emailError]}>
-              Email must match a registered account
+              Email must match this registered account
             </Text>
           ) : null}
+
           <Pressable
             style={
               valid()
@@ -163,11 +167,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
-            Enter the 6-digit code sent to {email} {pin}
+            Enter the 6-digit code sent to {email}
           </Text>
+
           <TextInput
             style={
-              edited && code.length > 0
+              edited && code
                 ? [globalStyles.body1, styles.verifyInputTyping]
                 : [globalStyles.body1, styles.verifyInput]
             }
@@ -177,6 +182,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeCode(e), setEdited(true)]}
             value={code}
           />
+
           <Pressable
             style={styles.resendPressable}
             onPress={() => [
@@ -188,6 +194,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           >
             <Text style={globalStyles.overline1}>RESEND CODE</Text>
           </Pressable>
+
           <Pressable
             style={
               valid()
@@ -218,6 +225,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           <Text style={[globalStyles.h2, styles.modalTitle]}>
             Set New Password
           </Text>
+
           <Text style={[globalStyles.overline2, styles.labelPassword]}>
             PASSWORD
           </Text>
@@ -229,7 +237,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                     styles.setNewInputTyping,
                     styles.errorBackground,
                   ]
-                : edited && newPW.length > 0
+                : edited && newPW
                 ? [globalStyles.body1, styles.setNewInputTyping]
                 : [globalStyles.body1, styles.setNewInput]
             }
@@ -239,11 +247,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             value={newPW}
             autoFocus={true}
           />
-          {pwError && newPW.length == 0 ? (
+          {pwError && !newPW ? (
             <Text style={[globalStyles.body2, styles.fieldReqSetPW]}>
               Field Required
             </Text>
           ) : null}
+
           <Text style={[globalStyles.overline2, styles.labelConfirmPassword]}>
             CONFIRM PASSWORD
           </Text>
@@ -255,7 +264,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                     styles.confirmNewInputTyping,
                     styles.errorBackground,
                   ]
-                : edited && confirmPW.length > 0
+                : edited && confirmPW
                 ? [globalStyles.body1, styles.confirmNewInputTyping]
                 : [globalStyles.body1, styles.confirmNewInput]
             }
@@ -264,13 +273,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
           />
-
           {pwError ? (
             newPW != confirmPW ? (
               <Text style={[globalStyles.body2, styles.pwMustMatchError]}>
                 Passwords must match
               </Text>
-            ) : confirmPW.length == 0 ? (
+            ) : !confirmPW ? (
               <Text style={[globalStyles.body2, styles.fieldReqConfirmPW]}>
                 Field Required
               </Text>
