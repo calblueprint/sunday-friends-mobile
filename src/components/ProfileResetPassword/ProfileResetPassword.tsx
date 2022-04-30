@@ -15,7 +15,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [newPW, onChangeNewPW] = useState("");
   const [confirmPW, onChangeConfirmPW] = useState("");
   const [edited, setEdited] = useState(false);
-  const [pin, setPin] = useState(0);
   const [pwError, setPwError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -33,7 +32,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   };
 
   var generated = Math.floor(100000 + Math.random() * 900000);
-  setPin(generated);
 
   const resetEmailParams = {
     from: "Sunday Friends",
@@ -53,7 +51,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
       case "reset":
         return emailRegex.test(email);
       case "verify":
-        return parseInt(code) == pin;
+        return parseInt(code) == generated;
       case "setNew":
         return (
           newPW == confirmPW &&
