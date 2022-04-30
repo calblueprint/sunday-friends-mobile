@@ -54,7 +54,11 @@ const PersonalScreen = ({navigation}: any) => {
 
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
-    //const userID = useContext(userContext);
+    const [userInitial, setuserInitial] = useState("");
+
+    const fetchPersonalData = async () => {
+        setuserInitial(user.full_name.toString().slice(0,1))
+    }
     
 
     useEffect(() => {
@@ -69,6 +73,7 @@ const PersonalScreen = ({navigation}: any) => {
         getUser(userUID).then((currUser) => {
             setUser(currUser);
         })
+        fetchPersonalData;
 
         })
     }, []);
@@ -87,7 +92,7 @@ const PersonalScreen = ({navigation}: any) => {
                     <Pressable
                         onPress={()=>navigation.navigate('Profile')}
                     >
-                        <Text style={[styles.initialText, {color: '#253C85'}]}>Y</Text>
+                        <Text style={[styles.initialText, {color: '#253C85'}]}>{userInitial}</Text>
                     </Pressable>
                     </View>
                 </View>
