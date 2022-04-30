@@ -18,6 +18,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [pwError, setPwError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const [pin, setPin] = useState(0);
 
   const reset = () => {
     setVisible(false);
@@ -31,13 +32,16 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setEmailError(false);
   };
 
-  var generated = Math.floor(100000 + Math.random() * 900000);
+  const generatePin = () => {
+    var generated = Math.floor(100000 + Math.random() * 900000);
+    setPin(generated);
+  };
 
   const resetEmailParams = {
     from: "Sunday Friends",
     to: email,
     name: user.full_name,
-    pin: generated,
+    pin: pin,
   };
 
   const successEmailParams = {
@@ -51,7 +55,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
       case "reset":
         return emailRegex.test(email);
       case "verify":
-        return parseInt(code) == generated;
+        return parseInt(code) == pin;
       case "setNew":
         return (
           newPW == confirmPW &&
@@ -87,13 +91,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               emailError
                 ? [
-                  globalStyles.body1,
-                  styles.emailInputTyping,
-                  styles.errorBackground,
-                ]
+                    globalStyles.body1,
+                    styles.emailInputTyping,
+                    styles.errorBackground,
+                  ]
                 : edited && email
-                  ? [globalStyles.body1, styles.emailInputTyping]
-                  : [globalStyles.body1, styles.emailInput]
+                ? [globalStyles.body1, styles.emailInputTyping]
+                : [globalStyles.body1, styles.emailInput]
             }
             placeholder="email@gmail.com"
             placeholderTextColor={"#A9A9A9"}
@@ -116,10 +120,15 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             }
             onPress={() => {
               valid() && email == user.email
-                ? [setScreen("verify"), setEdited(false), SendEmail("reset", resetEmailParams)]
+                ? [
+                    setScreen("verify"),
+                    setEdited(false),
+                    generatePin(),
+                    SendEmail("reset", resetEmailParams),
+                  ]
                 : edited
-                  ? setEmailError(true)
-                  : null;
+                ? setEmailError(true)
+                : null;
             }}
           >
             <Text
@@ -147,7 +156,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
-            Enter the 6-digit code sent to {email}
+            Enter the 6-digit code sent to {email} {pin}
           </Text>
 
           <TextInput
@@ -168,6 +177,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onPress={() => [
               setEdited(false),
               setScreen("verify"),
+              generatePin(),
               SendEmail("reset", resetEmailParams),
               onChangeCode(""),
             ]}
@@ -213,13 +223,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               pwError
                 ? [
-                  globalStyles.body1,
-                  styles.setNewInputTyping,
-                  styles.errorBackground,
-                ]
+                    globalStyles.body1,
+                    styles.setNewInputTyping,
+                    styles.errorBackground,
+                  ]
                 : edited && newPW
-                  ? [globalStyles.body1, styles.setNewInputTyping]
-                  : [globalStyles.body1, styles.setNewInput]
+                ? [globalStyles.body1, styles.setNewInputTyping]
+                : [globalStyles.body1, styles.setNewInput]
             }
             placeholder={pwError ? "Error Empty" : "Enter password"}
             placeholderTextColor="#A9A9A9"
@@ -240,13 +250,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               pwError
                 ? [
-                  globalStyles.body1,
-                  styles.confirmNewInputTyping,
-                  styles.errorBackground,
-                ]
+                    globalStyles.body1,
+                    styles.confirmNewInputTyping,
+                    styles.errorBackground,
+                  ]
                 : edited && confirmPW
-                  ? [globalStyles.body1, styles.confirmNewInputTyping]
-                  : [globalStyles.body1, styles.confirmNewInput]
+                ? [globalStyles.body1, styles.confirmNewInputTyping]
+                : [globalStyles.body1, styles.confirmNewInput]
             }
             placeholder={pwError ? "Error Empty" : "Enter same password"}
             placeholderTextColor="#A9A9A9"
@@ -322,10 +332,10 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
               onPress={() =>
                 valid()
                   ? [
-                    setScreen("success"),
-                    SendEmail("success", successEmailParams),
-                    setUserPassword(confirmPW),
-                  ]
+                      setScreen("success"),
+                      SendEmail("success", successEmailParams),
+                      setUserPassword(confirmPW),
+                    ]
                   : setPwError(true)
               }
             >
