@@ -30,7 +30,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setPwError(false);
     setEmailError(false);
   };
-  
+
   const resetEmailParams = {
     from: "Sunday Friends",
     to: email,
@@ -244,6 +244,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeNewPW(e), setEdited(true)]}
             value={newPW}
             autoFocus={true}
+            secureTextEntry={true}
           />
           {pwError && !newPW ? (
             <Text style={[globalStyles.body2, styles.fieldReqSetPW]}>
@@ -270,6 +271,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
+            secureTextEntry={true}
           />
           {pwError ? (
             newPW != confirmPW ? (
