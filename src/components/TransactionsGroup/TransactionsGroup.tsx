@@ -283,7 +283,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     <ActivityIndicator size="large"/>
                 ) : (
                     (transactions.length === 0) ? (
-                        <Text style={{textAlign: "center"}}>No transactions found</Text>
+                        <Text style={styles.noneFoundText}>No transactions found</Text>
                         // <ActivityIndicator size="large"/>
                     ) : (
                         <FlatList

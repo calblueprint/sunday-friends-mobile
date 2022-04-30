@@ -70,6 +70,16 @@ export default StyleSheet.create({
     margin: 0,
     flex: 1
   },
+  noneFoundText: {
+    textAlign: "center",
+    color: "#525454",
+    fontFamily: "Avenir",
+    fontStyle: "normal",
+    fontWeight: "800",
+    fontSize: 12,
+    lineHeight: 16,
+    marginVertical: 2,
+  },
   filtersButton: {
     display: 'flex',
     flexDirection: 'row',
