@@ -93,13 +93,13 @@ const PersonalScreen = ({navigation}: any) => {
             <View style = {styles.headline}>
                 <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Morning, Yakob</Text>
                 <View style={styles.innerContainer}>
-                    <View style={styles.addPersonalCircle}>
                     <Pressable
                         onPress={()=>navigation.navigate('Profile')}
                     >
+                    <View style={styles.addPersonalCircle}>
                         <Text style={[styles.initialText, {color: '#253C85'}]}>{userInitial}</Text>
-                    </Pressable>
                     </View>
+                    </Pressable>
                 </View>
             </View>
 
