@@ -258,8 +258,10 @@ const TransactionsGroup = ({ forFamily }: any) => {
                                     handleSearch();
                                 }}
                             />
+                        </View>
+                        <View>
                             {(searchText !== "") && (
-                                <Pressable onPress={() => {
+                                <Pressable style={styles.iconWrapper} onPress={() => {
                                     setSearchText("");
                                   setEnteredSearch("");
                                     setSearchEntered(false);
@@ -268,6 +270,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                                     <SvgIcon type="searchbar_close" />
                                 </Pressable>
                             )}
+                            
                         </View>
                     </View>
                     <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}> 
