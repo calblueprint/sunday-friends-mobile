@@ -11,8 +11,10 @@ const SendEmail = (type: string, emailParams: any) => {
                 template_id = "template_mz61cu7";
             case "success":
                 template_id = "template_dessp0w";
-            case "confirm":
+            case "confirm_adult":
                 template_id = "template_zgiqmdm";
+            case "confirm_head":
+                template_id = "template_t9xx5ji";
             case "invite":
                 template_id = "template_j78fcdn"
         }
@@ -25,7 +27,6 @@ const SendEmail = (type: string, emailParams: any) => {
     } catch (e) {
         console.log(e);
     }
-
 };
 
 export default SendEmail;

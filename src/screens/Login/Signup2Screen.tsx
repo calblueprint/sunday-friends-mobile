@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Pressable, View } from 'react-native';
+import { Text, Pressable, View, Button } from 'react-native';
 import ViewContainer from '../../components/ViewContainer';
 import FormInput from "../../components/FormInput";
 import { default as styles } from "./styles";
@@ -29,6 +29,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
     const { user_invite } = route.params;
 
     const [isFocused, changeFocus] = React.useState(false);
+    const [submitting, changeSubmitting] = React.useState(false);
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
@@ -78,6 +79,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
+            changeSubmitting(true);
             if (data.password1 == data.password2) {
                 const result = await registerWithEmailAndPassword(user_invite.email, data.password1);
                 console.log(user_invite.family_id)
@@ -88,17 +90,19 @@ const Signup2Screen = ({ route, navigation }: any) => {
                     user_invite.email,
                     user_invite.status,
                     user_invite.family_id,
-                    parent);
+                    parent
+                );
                 addUser(newUser);
-                SendEmail("confirm", confirmEmailParams);
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'Invite' });
                 } else {
+                    SendEmail("confirm_adult", confirmEmailParams);
                     navigation.navigate('LoginStack', { screen: 'Signup3' });
                 }
             } else {
                 console.log("Passwords do not match!");
             }
+            // changeSubmitting(false);
         } catch (e) {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });
@@ -140,11 +144,18 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 />
             </FormProvider>
             <RectangularButton
+                disable={submitting}
                 onPress={methods.handleSubmit(onSubmit, onError)}
                 text="Next"
                 buttonStyle={{ marginTop: '10%', backgroundColor: '#253C85' }}
                 textStyle={{ color: '#FFF' }}
             />
+            <Button
+                title="hello"
+                disabled={submitting}
+                onPress={() => changeSubmitting(true)}
+            >
+            </Button>
             <Pressable
                 style={styles.text}
                 onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
