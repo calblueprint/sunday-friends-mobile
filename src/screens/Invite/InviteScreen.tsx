@@ -88,6 +88,7 @@ const InviteScreen = ({ navigation }: any) => {
         sortUserInvites(data);
       });
       getFamily(user.family_id.toString()).then((family) => {
+        console.log(family.family_name);
         setFamilyName(family.family_name);
       });
     });

@@ -5,18 +5,18 @@ import FormInput from "../../components/FormInput";
 import { default as styles } from "./styles";
 import RectangularButton from "../../components/RectangularButton/RectangularButton";
 import {
-  useForm,
-  FormProvider,
-  SubmitHandler,
-  SubmitErrorHandler,
+    useForm,
+    FormProvider,
+    SubmitHandler,
+    SubmitErrorHandler,
 } from "react-hook-form";
 import globalStyles from "../../globalStyles";
 import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
 import SvgIcon from ",,/../../assets/SvgIcon";
 import {
-  getHeadInvitesByEmail,
-  getUserInvite,
+    getHeadInvitesByEmail,
+    getUserInvite,
 } from "../../firebase/firestore/userInvite";
 import { addUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
@@ -102,7 +102,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 );
                 addUser(newUser);
                 if (user_invite.status == "Head") {
-                    navigation.navigate('LoginStack', { screen: 'Invite' });
+                    navigation.navigate('LoginStack', { screen: 'FamilyName' });
                 } else {
                     SendEmail("confirm_adult", confirmEmailParams);
                     navigation.navigate('LoginStack', { screen: 'Signup3' });
@@ -110,7 +110,6 @@ const Signup2Screen = ({ route, navigation }: any) => {
             } else {
                 console.log("Passwords do not match!");
             }
-            // changeSubmitting(false);
         } catch (e) {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });

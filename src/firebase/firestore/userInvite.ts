@@ -84,6 +84,26 @@ export const editUserInvite = async (
     console.warn(e);
     throw e;
   }
+  
+};
+
+/**
+ * Edits the given userInvite data from with the family ID created when creating a family
+ */
+export const updateFamilyIDforInvite = async (
+  userInviteId: string,
+  family_id: number,
+): Promise<void> => {
+  try {
+    const doc = await userInvitesCollection.doc(userInviteId).get();
+    var data = doc.data();
+    data.family_id = family_id;
+
+    userInvitesCollection.doc(userInviteId).set(data);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
 };
 
 /**
