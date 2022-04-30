@@ -34,15 +34,21 @@ export type User = {
 };
 
 export type User_Invite = {
-  user_invite_id: string;
   family_id: number;
   name: string;
   email: string;
   status: string;
+  user_invite_id: string;
 };
 
 export type Tiers = {
   tier1: number;
   tier2: number;
   tier3: number;
+  tier1title: string;
+  tier2title: string;
+  tier3title: string;
+  tier1description: string;
+  tier2description: string;
+  tier3description: string;
 };

@@ -1,17 +1,28 @@
-import * as React from 'react';
-import { Text, Pressable, View } from 'react-native';
-import ViewContainer from '../../components/ViewContainer';
+import * as React from "react";
+import { Text, Pressable, View } from "react-native";
+import ViewContainer from "../../components/ViewContainer";
 import FormInput from "../../components/FormInput";
 import { default as styles } from "./styles";
-import RectangularButton from '../../components/RectangularButton/RectangularButton';
-import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
-import globalStyles from '../../globalStyles';
+import RectangularButton from "../../components/RectangularButton/RectangularButton";
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from "react-hook-form";
+import globalStyles from "../../globalStyles";
 import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
-import SvgIcon from ',,/../../assets/SvgIcon';
-import { getHeadInvitesByEmail, getUserInvite } from '../../firebase/firestore/userInvite';
-import { addUser } from '../../firebase/firestore/user';
-import { User } from '../../types/schema';
+import SvgIcon from ",,/../../assets/SvgIcon";
+import {
+  getHeadInvitesByEmail,
+  getUserInvite,
+} from "../../firebase/firestore/userInvite";
+import { addUser } from "../../firebase/firestore/user";
+import { User } from "../../types/schema";
+import emailjs, { init } from "@emailjs/browser";
+import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import SendEmail from '../../components/SendEmail/SendEmail';
 
 const Signup2Screen = ({ route, navigation }: any) => {
 
@@ -26,6 +37,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
     const { user_invite } = route.params;
 
     const [isFocused, changeFocus] = React.useState(false);
+    const [submitting, changeSubmitting] = React.useState(false);
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
@@ -51,28 +63,54 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
     const { ...methods } = useForm();
 
+    const confirmEmailParams = {
+        from: "Sunday Friends",
+        to: user_invite.email,
+        name: user_invite.name,
+    };
+
+    // const sendEmail = (type: string) => {
+    //     console.log("hellooooooooo\n");
+    //     console.log(EMAILJS_SERVICE_ID);
+    //     try {
+    //         emailjs.send(
+    //             EMAILJS_SERVICE_ID,
+    //             // "service_4586ayw",
+    //             "template_zgiqmdm",
+    //             confirmEmailParams,
+    //             "bpUmfdhrALYzPBWpx"
+    //         )
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // };
+
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         try {
+            changeSubmitting(true);
             if (data.password1 == data.password2) {
                 const result = await registerWithEmailAndPassword(user_invite.email, data.password1);
                 console.log(user_invite.family_id)
                 const parent = user_invite.status != "Child";
                 const newUser = createUser(
-                    result.user.uid, 
-                    user_invite.name, 
-                    user_invite.email, 
-                    user_invite.status, 
+                    result.user.uid,
+                    user_invite.name,
+                    user_invite.email,
+                    user_invite.status,
                     user_invite.family_id,
-                    parent);
+                    parent
+                );
                 addUser(newUser);
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'Invite' });
                 } else {
+                    SendEmail("confirm_adult", confirmEmailParams);
                     navigation.navigate('LoginStack', { screen: 'Signup3' });
                 }
             } else {
                 console.log("Passwords do not match!");
             }
+            // changeSubmitting(false);
         } catch (e) {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });
@@ -114,6 +152,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 />
             </FormProvider>
             <RectangularButton
+                disable={submitting}
                 onPress={methods.handleSubmit(onSubmit, onError)}
                 text="Next"
                 buttonStyle={{ marginTop: '10%', backgroundColor: '#253C85' }}

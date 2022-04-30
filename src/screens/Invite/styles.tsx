@@ -7,6 +7,12 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
+  container2: {
+    flex: 1,
+    backgroundColor: "#FAFAFA",
+    alignItems: "center",
+  },
+
   scrollContainer: {
     backgroundColor: "#FAFAFA",
     alignContent: "center",
@@ -44,10 +50,17 @@ export default StyleSheet.create({
     width: "80%",
   },
 
+  innerContainer2: {
+    marginTop: "8%",
+    width: "80%",
+    alignContent: "center",
+    height: "58%",
+  },
+
   rectangularButton: {
     backgroundColor: "#253C85",
     width: "80%",
-    height: "7%",
+    height: "6.5%",
     justifyContent: "center",
     borderRadius: 5,
   },
@@ -83,11 +96,13 @@ export default StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "#EBEBEB",
-    width: "80%",
-    height: "7%",
-    justifyContent: "center",
-    marginBottom: "5%",
+    height: 40,
+    width: "100%",
+    marginBottom: "4%",
+    marginTop: "2%",
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
   },
 
   backgroundContainer: {
@@ -141,5 +156,64 @@ export default StyleSheet.create({
     height: 1,
     width: "100%",
     backgroundColor: "#FAFAFA",
+  },
+
+  whiteHalfButton: {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#526DC2",
+    borderWidth: 2,
+
+    width: "48%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  blueHalfButton: {
+    backgroundColor: "#253C85",
+
+    width: "48%",
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+
+  buttonContainer: {
+    width: "80%",
+    height: "5%",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+
+  rectangularButtonText2: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+    textTransform: "uppercase",
+    alignSelf: "center",
+    color: "#272929",
+  },
+
+  separator2: {
+    //marginTop: "10%",
+    height: 8,
+    width: "100%",
+    backgroundColor: "#FAFAFA",
+  },
+
+  separator3: {
+    //marginTop: "10%",
+    height: "25%",
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+  },
+
+  allSetContainer: {
+    width: "80%",
+    marginBottom: "3%",
+    marginTop: "44%",
+  },
+
+  logoContainer: {
+    width: "80%",
+    marginTop: "25%",
   },
 });
