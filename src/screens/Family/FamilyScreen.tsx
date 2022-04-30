@@ -139,8 +139,9 @@ const FamilyScreen = ({ navigation }: any) => {
                             currentPosition={0}
                             labels={labels}
                         />
-
                     </View>
+
+
                     <View style={styles.buttomBar}>
                         <View style={styles.tierContainer}>
                             <View style={styles.tierBox}>

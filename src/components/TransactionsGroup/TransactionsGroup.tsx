@@ -12,6 +12,7 @@ import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
 import { AuthenticatedUserContext } from '../../context/userContext';
+import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 
 const TransactionsGroup = ({ forFamily }: any) => {
     //const userId = useContext(userContext);
@@ -278,7 +279,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     <ActivityIndicator size="large" />
                 ) : (
                     (transactions.length === 0) ? (
-                        <Text style={{ textAlign: "center" }}>No transactions found</Text>
+                        <Text style={{ textAlign: "center", marginTop: "5%", fontFamily: "DMSans_400Regular" }}>No transactions found</Text>
                         // <ActivityIndicator size="large"/>
                     ) : (
                         <FlatList

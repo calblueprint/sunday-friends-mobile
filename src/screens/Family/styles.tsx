@@ -157,11 +157,12 @@ export default StyleSheet.create({
     color: 'green'
   },
 
-
-
   progressBar: {
+    width: '120%',
     marginTop: 20,
     justifyContent: "center",
+    marginLeft: "-10%",
+
     // borderWidth: 2, 
     // borderColor: 'black',
   },
