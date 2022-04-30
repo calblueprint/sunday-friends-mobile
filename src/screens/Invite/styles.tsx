@@ -50,6 +50,13 @@ export default StyleSheet.create({
     width: "80%",
   },
 
+  innerContainer2: {
+    marginTop: "8%",
+    width: "80%",
+    alignContent: "center",
+    height: "58%",
+  },
+
   rectangularButton: {
     backgroundColor: "#253C85",
     width: "80%",
