@@ -6,6 +6,7 @@ import globalStyles from "../../globalStyles";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_SERVICE_ID } from "@env";
 import { setUserPassword } from "../../firebase/firestore/user";
+import SendEmail from "../SendEmail/SendEmail";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [screen, setScreen] = useState("reset");
@@ -30,38 +31,21 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setPwError(false);
     setEmailError(false);
   };
-  
+
+  var generated = Math.floor(100000 + Math.random() * 900000);
+  setPin(generated);
+
   const resetEmailParams = {
     from: "Sunday Friends",
     to: email,
     name: user.full_name,
-    pin: pin,
+    pin: generated,
   };
 
   const successEmailParams = {
     from: "Sunday Friends",
     to: email,
     name: user.full_name,
-  };
-
-  const sendEmail = (type: string) => {
-    var generated = Math.floor(100000 + Math.random() * 900000);
-    setPin(generated);
-    resetEmailParams.pin = generated;
-    switch (type) {
-      case "reset":
-        return emailjs.send(
-          EMAILJS_SERVICE_ID,
-          "template_mz61cu7",
-          resetEmailParams
-        );
-      case "success":
-        return emailjs.send(
-          EMAILJS_SERVICE_ID,
-          "template_dessp0w",
-          successEmailParams
-        );
-    }
   };
 
   const valid = () => {
@@ -105,13 +89,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               emailError
                 ? [
-                    globalStyles.body1,
-                    styles.emailInputTyping,
-                    styles.errorBackground,
-                  ]
+                  globalStyles.body1,
+                  styles.emailInputTyping,
+                  styles.errorBackground,
+                ]
                 : edited && email
-                ? [globalStyles.body1, styles.emailInputTyping]
-                : [globalStyles.body1, styles.emailInput]
+                  ? [globalStyles.body1, styles.emailInputTyping]
+                  : [globalStyles.body1, styles.emailInput]
             }
             placeholder="email@gmail.com"
             placeholderTextColor={"#A9A9A9"}
@@ -134,10 +118,10 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             }
             onPress={() => {
               valid() && email == user.email
-                ? [setScreen("verify"), setEdited(false), sendEmail("reset")]
+                ? [setScreen("verify"), setEdited(false), SendEmail("reset", resetEmailParams)]
                 : edited
-                ? setEmailError(true)
-                : null;
+                  ? setEmailError(true)
+                  : null;
             }}
           >
             <Text
@@ -186,7 +170,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onPress={() => [
               setEdited(false),
               setScreen("verify"),
-              sendEmail("reset"),
+              SendEmail("reset", resetEmailParams),
               onChangeCode(""),
             ]}
           >
@@ -231,13 +215,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               pwError
                 ? [
-                    globalStyles.body1,
-                    styles.setNewInputTyping,
-                    styles.errorBackground,
-                  ]
+                  globalStyles.body1,
+                  styles.setNewInputTyping,
+                  styles.errorBackground,
+                ]
                 : edited && newPW
-                ? [globalStyles.body1, styles.setNewInputTyping]
-                : [globalStyles.body1, styles.setNewInput]
+                  ? [globalStyles.body1, styles.setNewInputTyping]
+                  : [globalStyles.body1, styles.setNewInput]
             }
             placeholder={pwError ? "Error Empty" : "Enter password"}
             placeholderTextColor="#A9A9A9"
@@ -258,13 +242,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             style={
               pwError
                 ? [
-                    globalStyles.body1,
-                    styles.confirmNewInputTyping,
-                    styles.errorBackground,
-                  ]
+                  globalStyles.body1,
+                  styles.confirmNewInputTyping,
+                  styles.errorBackground,
+                ]
                 : edited && confirmPW
-                ? [globalStyles.body1, styles.confirmNewInputTyping]
-                : [globalStyles.body1, styles.confirmNewInput]
+                  ? [globalStyles.body1, styles.confirmNewInputTyping]
+                  : [globalStyles.body1, styles.confirmNewInput]
             }
             placeholder={pwError ? "Error Empty" : "Enter same password"}
             placeholderTextColor="#A9A9A9"
@@ -340,10 +324,10 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
               onPress={() =>
                 valid()
                   ? [
-                      setScreen("success"),
-                      sendEmail("success"),
-                      setUserPassword(confirmPW),
-                    ]
+                    setScreen("success"),
+                    SendEmail("success", successEmailParams),
+                    setUserPassword(confirmPW),
+                  ]
                   : setPwError(true)
               }
             >
