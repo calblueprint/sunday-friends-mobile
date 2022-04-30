@@ -63,11 +63,11 @@ const FamilyScreen = ({navigation}: any) => {
     const [tierDescription, settierDescription] = useState("");
 
     const fetchFamilyData = async () => {
-        const family = await getFamilyById(user.family_id.toString())
-        setFamilyName(family.family_name.toString())
-        setuserInitial(user.full_name.toString().slice(0,1))
-        setFamilyBalance(family.total_points)
-        console.log(familyName)
+        // const family = await getFamilyById(user.family_id.toString())
+        // setFamilyName(family.family_name.toString())
+        // setuserInitial(user.full_name.toString().slice(0,1))
+        // setFamilyBalance(family.total_points)
+        // console.log(familyName)
     }
         
 
@@ -81,8 +81,18 @@ const FamilyScreen = ({navigation}: any) => {
 
         getUser(userUID).then((currUser) => {
             setUser(currUser);
+            // fetchFamilyData();
+            const family = getFamilyById(currUser.family_id.toString()).then((currFam) => {
+                setFamilyName(currFam.family_name.toString())
+                setuserInitial(currUser.full_name.toString().slice(0,1))
+                setFamilyBalance(currFam.total_points)
+                console.log(familyName)
+            })
+            // setFamilyName(family.family_name.toString())
+            // setuserInitial(user.full_name.toString().slice(0,1))
+            // setFamilyBalance(family.total_points)
+            // console.log(familyName)
         })
-        fetchFamilyData();
         if (familyBalance < tiers[0].tier1){
             settierStep(0)
             settierName("Tier 1: " + tiers[0].tier1title)

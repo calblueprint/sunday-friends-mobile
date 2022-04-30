@@ -55,10 +55,13 @@ const PersonalScreen = ({navigation}: any) => {
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
     const [userInitial, setuserInitial] = useState("");
+    const [personalBalance, setpersonalBalance] = useState(0);
 
-    const fetchPersonalData = async () => {
-        setuserInitial(user.full_name.toString().slice(0,1))
-    }
+    // const fetchPersonalData = async () => {
+    //     setuserInitial(user.full_name.toString().slice(0,1));
+    //     setpersonalBalance(user.points);
+    //     console.log(userInitial);
+    // }
     
 
     useEffect(() => {
@@ -72,8 +75,10 @@ const PersonalScreen = ({navigation}: any) => {
 
         getUser(userUID).then((currUser) => {
             setUser(currUser);
+            setuserInitial(currUser.full_name.toString().slice(0,1));
+            setpersonalBalance(currUser.points);
+            // fetchPersonalData();
         })
-        fetchPersonalData;
 
         })
     }, []);
@@ -104,7 +109,7 @@ const PersonalScreen = ({navigation}: any) => {
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
                     <View style = {styles.balanceContainer}>
-                        <Text style={[styles.balanceText, {color: "#253C85"}]}>100</Text>
+                        <Text style={[styles.balanceText, {color: "#253C85"}]}>{personalBalance}</Text>
                         <Text style={globalStyles.overline2}>MY BALANCE</Text>
                     </View>
                         <Pressable style={({ pressed }) => [
