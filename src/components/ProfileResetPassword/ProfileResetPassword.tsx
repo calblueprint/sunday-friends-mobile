@@ -35,6 +35,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const generatePin = () => {
     var generated = Math.floor(100000 + Math.random() * 900000);
     setPin(generated);
+    resetEmailParams.pin = generated;
   };
 
   const resetEmailParams = {
