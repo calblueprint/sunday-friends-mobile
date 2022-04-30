@@ -4,7 +4,6 @@ import { Modal, View, Pressable, TextInput, Text } from "react-native";
 import SvgIcon from "../../../assets/SvgIcon";
 import globalStyles from "../../globalStyles";
 import { User } from "../../types/schema";
-import userContext from "../../context/userContext";
 import { editUser, getUser } from "../../firebase/firestore/user";
 import { AuthenticatedUserContext } from "../../context/userContext";
 
@@ -21,7 +20,6 @@ export const ProfileEditModal = ({
   user,
   setUser,
 }: ProfileEditModalProps) => {
-  // const value = useContext(userContext);
   const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
   const [name, onChangeName] = useState(user.full_name);
@@ -59,7 +57,13 @@ export const ProfileEditModal = ({
         <Text style={[globalStyles.h4Bold, styles.title]}>Edit Profile</Text>
 
         <Pressable style={styles.profileImagePressable}>
-          <SvgIcon type="profileHeadSmiley" />
+          <SvgIcon
+            type={
+              user.role == "Head"
+                ? "profileHeadSmiley"
+                : "profileDependentSmiley"
+            }
+          />
         </Pressable>
 
         <View style={styles.fields}>

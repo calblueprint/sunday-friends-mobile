@@ -1,29 +1,29 @@
 import {
-    API_KEY,
-    AUTH_DOMAIN,
-    PROJECT_ID,
-    STORAGE_BUCKET,
-    MESSAGING_SENDER_ID,
-    APP_ID,
-} from '@env';
+  API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+} from "@env";
 import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBGr_Ikrt3obm1UQD08jMIlUZZie11SrWY",
-    authDomain: AUTH_DOMAIN,
-    projectId: PROJECT_ID,
-    storageBucket: STORAGE_BUCKET,
-    messagingSenderId: MESSAGING_SENDER_ID,
-    appId: "1:50685877916:web:01eea06f0e77ba65bd5759",
+  apiKey: "AIzaSyBGr_Ikrt3obm1UQD08jMIlUZZie11SrWY",
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: "1:50685877916:web:01eea06f0e77ba65bd5759",
 };
 
 const firebaseApp = firebase;
 
 if (!firebaseApp.apps.length) {
-    firebaseApp.initializeApp(firebaseConfig);
+  firebaseApp.initializeApp(firebaseConfig);
 } else {
-    firebaseApp.app();
+  firebaseApp.app();
 }
 
 export default firebaseApp;
