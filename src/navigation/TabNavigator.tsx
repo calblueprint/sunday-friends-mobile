@@ -13,9 +13,19 @@ import ProfileScreen from '../screens/Profile/ProfileScreen';
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator();
+
     return (
         <Tab.Navigator
             initialRouteName="F"
+            screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: '#253C85',
+                    height: 85,
+                    paddingTop: 10,
+                },
+                tabBarActiveTintColor: "#FFFFFF",
+                tabBarInactiveTintColor: "#7F93D1",
+            }}
         >
             <Tab.Screen
                 name="Family"

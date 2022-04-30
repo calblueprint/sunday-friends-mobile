@@ -24,15 +24,15 @@ const styles = StyleSheet.create({
 
 export default function Icon(props: IconProps) {
     const { onPress, size, style } = props;
-    const icon = <FontAwesome size={size} style={style} {...props} />;
 
     return (
-        <Pressable
-            onPress={onPress ?? null}
-            style={({ pressed }) => (pressed ? styles.opaque : styles.fade)}
-        >
-            {icon}
-        </Pressable>
+        <FontAwesome size={size} style={{color: '#E6ECFE'}} {...props} />
+        // <Pressable
+        //     onPress={onPress ?? null}
+        //     style={({ pressed }) => (pressed ? styles.opaque : styles.fade)}
+        // >
+        //     {icon}
+        // </Pressable>
     );
 }
 
