@@ -13,17 +13,17 @@ const RectangularButton = ({
   onPress,
   buttonStyle,
   textStyle,
-  // disable
+  disable
 }: {
   text: string;
   onPress: (event: GestureResponderEvent) => void;
   buttonStyle: any;
   textStyle: any;
-  // disable?: any;
+  disable?: any;
 }) => {
-
+  
   return (
-    <Pressable onPress={onPress} style={[styles.buttonContainer, buttonStyle]}>
+    <Pressable disabled={disable} onPress={onPress} style={[styles.buttonContainer, buttonStyle]}>
       <Text style={[styles.buttonText, textStyle]}>{text}</Text>
     </Pressable>
   );

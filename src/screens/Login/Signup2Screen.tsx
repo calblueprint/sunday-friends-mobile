@@ -144,18 +144,12 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 />
             </FormProvider>
             <RectangularButton
-                // disable={submitting}
-                onPress={() => methods.handleSubmit(onSubmit, onError)}
+                disable={submitting}
+                onPress={methods.handleSubmit(onSubmit, onError)}
                 text="Next"
                 buttonStyle={{ marginTop: '10%', backgroundColor: '#253C85' }}
                 textStyle={{ color: '#FFF' }}
             />
-            {/* <Button
-                title="hello"
-                disabled={submitting}
-                onPress={() => changeSubmitting(true)}
-            >
-            </Button> */}
             <Pressable
                 style={styles.text}
                 onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
