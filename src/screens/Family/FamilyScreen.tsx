@@ -20,8 +20,6 @@ import { getFamilyById } from "../../firebase/firestore/family";
 
 
 
-const defaultLabels = ['100', '200', '300']
-
 const defaultTier = {
     tier1: 100,
     tier2: 200,
@@ -61,12 +59,15 @@ const FamilyScreen = ({navigation}: any) => {
     const [userInitial, setuserInitial] = useState("");
     const [familyBalance, setFamilyBalance] = useState(0);
     const [tierStep, settierStep] = useState(0);
+    const [tierName, settierName] = useState("");
+    const [tierDescription, settierDescription] = useState("");
 
     const fetchFamilyData = async () => {
         const family = await getFamilyById(user.family_id.toString())
         setFamilyName(family.family_name.toString())
         setuserInitial(user.full_name.toString().slice(0,1))
         setFamilyBalance(family.total_points)
+        console.log(familyName)
     }
         
 
@@ -84,12 +85,16 @@ const FamilyScreen = ({navigation}: any) => {
         fetchFamilyData();
         if (familyBalance < tiers[0].tier1){
             settierStep(0)
+            settierName("Tier 1: " + tiers[0].tier1title)
         }
         if (familyBalance >= tiers[0].tier2 && familyBalance < tiers[0].tier3){
             settierStep(1)
+            console.log(tiers[0].tier2title)
+            settierName("Tier 2: " + tiers[0].tier2title)
         }
         if (familyBalance >= tiers[0].tier3){
             settierStep(2)
+            settierName("Tier 3: " + tiers[0].tier3title)
         }
         })
     }, []);
@@ -122,7 +127,7 @@ const FamilyScreen = ({navigation}: any) => {
                         <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
                         <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
                         <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 90}]} source={require('../../../assets/images/childSmiley.png')} />
+                        <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
                     </View>
                     <View style={styles.innerContainer}>
                         <View style={styles.rowContainer}>
@@ -147,7 +152,7 @@ const FamilyScreen = ({navigation}: any) => {
                             },
                             styles.contributions
                             ]}>
-                            <Text style={[globalStyles.body2Bold, {color: "#5F5F5F"}]}>View Contributions</Text>
+                            <Text style={[globalStyles.body2Bold, {color: "#5F5F5F"}]}>Learn More</Text>
                         </Pressable>
                 </View>
 
@@ -163,9 +168,21 @@ const FamilyScreen = ({navigation}: any) => {
                 <View style={styles.buttomBar}>
                     <View  style={styles.tierContainer}>
                         <View style={styles.tierBox}>
-                            <Text style={[globalStyles.overline1, {color: "#FFFFFF"}]}>TIER 1</Text>
+                            <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
                         </View>
-                        <View style={styles.columnContainer}>
+                        <View style={styles.tierOptionsContainer}>
+                            <Pressable style={({ pressed }) => [
+                                {
+                                    backgroundColor: pressed
+                                    ? 'black'
+                                    : '#F6F6F6'
+                                },
+                                styles.optionsContainer
+                                ]}>
+                                <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>What Can I Get?</Text>
+                            </Pressable>
+                        </View>
+                        {/* <View style={styles.columnContainer}>
                             <View style={styles.rowContainer}>
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>Bottle water, can food, fresh food</Text>
@@ -174,19 +191,7 @@ const FamilyScreen = ({navigation}: any) => {
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
                                 <Text style={[styles.itemsText, {color: "#525454"}]}>Hygeine products, toiletries</Text>
                             </View>
-                        </View>
-                    </View>
-                    <View style={styles.tierOptionsContainer}>
-                        <Pressable style={({ pressed }) => [
-                            {
-                                backgroundColor: pressed
-                                ? 'white'
-                                : '#F6F6F6'
-                            },
-                            styles.optionsContainer
-                            ]}>
-                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>Tier Options</Text>
-                        </Pressable>
+                        </View> */}
                     </View>
                 </View>
                 <View>
