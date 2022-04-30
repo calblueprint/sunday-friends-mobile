@@ -71,14 +71,19 @@ const TransactionsGroup = ({ forFamily }: any) => {
         let count = 0
 
         if (forFamily) {
+            console.log("in loop")
             const user = await getUser(userUID)
             const family = await getFamilyById(user.family_id.toString())
-            console.log(family)
+            console.log(family, "family")
             family.user_ids.forEach(async (user) => {
-                const addRole = user.transactions.map((transaction) => {
-                    return {...transaction, role: user.role}
-                })
-                newTransactions.push(...addRole)
+                if (!user?.transactions) {
+                    // continue
+                } else {
+                    const addRole = user.transactions.map((transaction) => {
+                        return {...transaction, role: user.role}
+                    })
+                    newTransactions.push(...addRole)
+                }
             })
         } else {
             const fetchedTransactions = await getTransactionByUser(userUID)
@@ -87,7 +92,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
         
         if (enteredSearch) {
             const filteredTransactions = newTransactions.filter((transaction) => {
-                return transaction.description.match(searchText)
+                return transaction.description.toLowerCase().match(searchText.toLowerCase())
             })
             newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
         }
@@ -144,10 +149,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     //get and filter transaction data
     useEffect(() => {
-        console.log(enteredSearch)
-        
         fetchTransactions().catch(console.error)
-
         //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         // setTransactions([
         //     {
