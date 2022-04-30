@@ -27,11 +27,11 @@ export default StyleSheet.create({
 
   familyCardContainer: {
     borderWidth: 2,
-    borderColor: '#E6ECFE',
+    borderColor: "#E6ECFE",
     backgroundColor: "#F6F6F6",
     // alignItems: "stretch",
     marginTop: 16,
-    borderRadius: 10, 
+    borderRadius: 10,
     width: "89.4%",
     overflow: "hidden",
   },
@@ -45,11 +45,11 @@ export default StyleSheet.create({
   familyBalanceCardContainer: {
     backgroundColor: "#F6F6F6",
     marginTop: 17,
-    borderRadius: 10, 
+    borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
     height: 95,
-    borderColor: '#E6ECFE',
+    borderColor: "#E6ECFE",
   },
 
   tranxContainer: {
@@ -59,7 +59,6 @@ export default StyleSheet.create({
   tranxbar: {
     marginLeft: "5%",
     marginBottom: 17,
-    
   },
 
   headline: {
@@ -71,8 +70,8 @@ export default StyleSheet.create({
   },
 
   shadow: {
-    shadowColor: '#202020',
-    shadowOffset: {width: 0, height: 0},
+    shadowColor: "#202020",
+    shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
 
@@ -91,12 +90,12 @@ export default StyleSheet.create({
   },
 
   topHalfContainer: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
-    marginTop: 16, 
+    marginTop: 16,
   },
 
   tierOptionsContainer: {
@@ -118,16 +117,14 @@ export default StyleSheet.create({
   },
 
   profileImage: {
-    width: 42, 
+    width: 42,
     height: 42,
     // borderWidth: 2,
     // borderColor: 'black',
   },
 
-
-
   buttomBar: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "column",
     marginTop: 20,
@@ -138,19 +135,17 @@ export default StyleSheet.create({
   },
 
   buttonText: {
-    color: '#393939',
+    color: "#393939",
   },
 
   buttonTextStyle: {
-    color: 'green'
+    color: "green",
   },
-
-
 
   progressBar: {
     marginTop: 20,
     justifyContent: "center",
-    // borderWidth: 2, 
+    // borderWidth: 2,
     // borderColor: 'black',
   },
 
@@ -173,10 +168,10 @@ export default StyleSheet.create({
     height: 37,
     borderRadius: 20,
     justifyContent: "center",
-    borderWidth: 2, 
-    borderColor: '#5A6AA2',
-    alignItems: 'flex-start',
-    paddingLeft: 10, 
+    borderWidth: 2,
+    borderColor: "#5A6AA2",
+    alignItems: "flex-start",
+    paddingLeft: 10,
     paddingVertical: 7,
   },
 
@@ -197,7 +192,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: '#A9A9A9',
+    borderColor: "#A9A9A9",
   },
 
   addLevelCircle: {
@@ -240,7 +235,7 @@ export default StyleSheet.create({
     // marginTop: 20,
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: 'center',
+    alignItems: "center",
     // width: '89.4%'
   },
 
@@ -249,10 +244,10 @@ export default StyleSheet.create({
     alignItems: "center",
     width: 69,
     height: 39,
-    backgroundColor: '#526DC2',
-    borderRadius: 5, 
+    backgroundColor: "#526DC2",
+    borderRadius: 5,
     paddingHorizontal: 13,
-    paddingVertical: 10, 
+    paddingVertical: 10,
     marginRight: 14,
   },
 
@@ -270,43 +265,40 @@ export default StyleSheet.create({
     fontFamily: "DM Mono",
     fontWeight: "500",
     fontSize: 36,
-
   },
   itemsText: {
-    fontFamily: 'Avenir',
+    fontFamily: "Avenir",
     fontWeight: "400",
     fontSize: 12,
-
   },
 
   initialText: {
-    fontFamily: 'DM Sans',
+    fontFamily: "DM Sans",
     fontWeight: "700",
     fontSize: 18,
-
   },
 });
 
 export const customStyles = {
   stepIndicatorSize: 23.05,
-  currentStepIndicatorSize:23.05,
+  currentStepIndicatorSize: 23.05,
   separatorStrokeWidth: 4.39,
   currentStepStrokeWidth: 2,
-  stepStrokeCurrentColor: '#7F93D1',
+  stepStrokeCurrentColor: "#7F93D1",
   stepStrokeWidth: 2,
-  stepStrokeFinishedColor: '#7F93D1',
-  stepStrokeUnFinishedColor: '#7F93D1',
-  separatorFinishedColor: '#7F93D1',
-  separatorUnFinishedColor: '#7F93D1',
-  stepIndicatorFinishedColor: '#253C85',
-  stepIndicatorUnFinishedColor: '#E6ECFE',
-  stepIndicatorCurrentColor: '#253C85',
+  stepStrokeFinishedColor: "#7F93D1",
+  stepStrokeUnFinishedColor: "#7F93D1",
+  separatorFinishedColor: "#7F93D1",
+  separatorUnFinishedColor: "#7F93D1",
+  stepIndicatorFinishedColor: "#253C85",
+  stepIndicatorUnFinishedColor: "#E6ECFE",
+  stepIndicatorCurrentColor: "#253C85",
   stepIndicatorLabelFontSize: 14,
   currentStepIndicatorLabelFontSize: 14,
-  stepIndicatorLabelCurrentColor: 'white',
-  stepIndicatorLabelFinishedColor: 'white',
-  stepIndicatorLabelUnFinishedColor: '#253C85',
-  labelColor: '#A9A9A9',
+  stepIndicatorLabelCurrentColor: "white",
+  stepIndicatorLabelFinishedColor: "white",
+  stepIndicatorLabelUnFinishedColor: "#253C85",
+  labelColor: "#A9A9A9",
   labelSize: 14,
-  currentStepLabelColor: '#253C85'
+  currentStepLabelColor: "#253C85",
 };

@@ -160,7 +160,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
-            Enter the 6-digit code sent to {email}
+            Enter the 6-digit code sent to {email} {pin}
           </Text>
 
           <TextInput

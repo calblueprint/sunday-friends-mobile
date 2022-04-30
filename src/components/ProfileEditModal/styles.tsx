@@ -68,6 +68,19 @@ export default StyleSheet.create({
     top: "38.4%",
     height: "9.96%",
   },
+  nameField: {
+    position: "absolute",
+    left: "8.26%",
+    //top: "38.4%",
+    bottom: "59.2%",
+  },
+  emailField: {
+    position: "absolute",
+    left: "8.26%",
+    //top: "45.87%",
+    bottom: "51.63%",
+  },
+
   nameTextInput: {
     position: "absolute",
     top: "37.09%",
