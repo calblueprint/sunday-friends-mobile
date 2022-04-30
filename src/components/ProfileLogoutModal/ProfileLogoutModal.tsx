@@ -14,35 +14,34 @@ export const ProfileLogoutModal = ({
   setLogout,
   navigation,
 }: any) => {
-  const handleLogout = () => {
+  // useEffect(() => {
+  //   handleLogout();
+  // }, [logout]);
+
+  const hideModal = async (): Promise<void> => {
     setVisible(false);
+  };
+
+  const reset = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: "LoginStack" }],
     });
   };
-  // useEffect(() => {
-  //   setVisible(false);
-  //   handleLogout();
-  // }, [isLogoutPressed]);
+
+  const handleLogout = () => {
+    hideModal().then(reset);
+    signOut();
+  };
 
   return (
     <Modal visible={visible} transparent>
       <View style={styles.logoutModal}>
-        <Pressable
-          style={styles.logoutPressableModal}
-          onPress={() => [
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "LoginStack" }],
-            }),
-            signOut(),
-          ]}
-        >
+        <Pressable style={styles.logoutPressable} onPress={handleLogout}>
           <Text style={styles.overline1WHITE}>LOGOUT</Text>
         </Pressable>
         <Pressable
-          style={styles.cancelLogoutPressable}
+          style={styles.cancelPressable}
           onPress={() => setVisible(false)}
         >
           <Text style={globalStyles.overline1}>CANCEL</Text>

@@ -35,6 +35,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const generatePin = () => {
     var generated = Math.floor(100000 + Math.random() * 900000);
     setPin(generated);
+    resetEmailParams.pin = generated;
   };
 
   const resetEmailParams = {
@@ -156,7 +157,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
           </Pressable>
           <Text style={[globalStyles.h2, styles.modalTitle]}>Verify Email</Text>
           <Text style={[globalStyles.h4, styles.subText1]}>
-            Enter the 6-digit code sent to {email}
+            Enter the 6-digit code sent to {email} {pin}
           </Text>
 
           <TextInput
@@ -236,6 +237,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onChangeText={(e) => [onChangeNewPW(e), setEdited(true)]}
             value={newPW}
             autoFocus={true}
+            secureTextEntry={true}
           />
           {pwError && !newPW ? (
             <Text style={[globalStyles.body2, styles.fieldReqSetPW]}>
@@ -262,6 +264,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             placeholderTextColor="#A9A9A9"
             onChangeText={(e) => [onChangeConfirmPW(e), setEdited(true)]}
             value={confirmPW}
+            secureTextEntry={true}
           />
           {pwError ? (
             newPW != confirmPW ? (
