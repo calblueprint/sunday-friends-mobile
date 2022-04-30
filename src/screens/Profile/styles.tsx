@@ -5,6 +5,8 @@ export default StyleSheet.create({
     position: "absolute",
     top: "8%",
     left: "8.1%",
+    width: 31,
+    height: 31,
   },
   profileImagePressable: {
     display: "flex",

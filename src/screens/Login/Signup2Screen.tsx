@@ -22,6 +22,7 @@ import { addUser } from "../../firebase/firestore/user";
 import { User } from "../../types/schema";
 import emailjs, { init } from "@emailjs/browser";
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
+import SendEmail from "../../components/SendEmail/SendEmail";
 
 const Signup2Screen = ({ route, navigation }: any) => {
   type FormValues = {
@@ -34,6 +35,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
   const { user_invite } = route.params;
 
   const [isFocused, changeFocus] = React.useState(false);
+  const [submitting, changeSubmitting] = React.useState(false);
   const handleFocus = () => changeFocus(false);
   const handleBlur = () => changeFocus(true);
 
@@ -59,32 +61,31 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
   const { ...methods } = useForm();
 
-  init(EMAILJS_USER_ID);
-
   const confirmEmailParams = {
     from: "Sunday Friends",
     to: user_invite.email,
     name: user_invite.name,
   };
 
-  const sendEmail = (type: string) => {
-    console.log("hellooooooooo\n");
-    console.log(EMAILJS_SERVICE_ID);
-    try {
-      emailjs.send(
-        EMAILJS_SERVICE_ID,
-        // "service_4586ayw",
-        "template_zgiqmdm",
-        confirmEmailParams,
-        "bpUmfdhrALYzPBWpx"
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const sendEmail = (type: string) => {
+  //     console.log("hellooooooooo\n");
+  //     console.log(EMAILJS_SERVICE_ID);
+  //     try {
+  //         emailjs.send(
+  //             EMAILJS_SERVICE_ID,
+  //             // "service_4586ayw",
+  //             "template_zgiqmdm",
+  //             confirmEmailParams,
+  //             "bpUmfdhrALYzPBWpx"
+  //         )
+  //     } catch (e) {
+  //         console.log(e)
+  //     }
+  // };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
+      changeSubmitting(true);
       if (data.password1 == data.password2) {
         const result = await registerWithEmailAndPassword(
           user_invite.email,
@@ -101,15 +102,16 @@ const Signup2Screen = ({ route, navigation }: any) => {
           parent
         );
         addUser(newUser);
-        sendEmail("hello");
         if (user_invite.status == "Head") {
           navigation.navigate("LoginStack", { screen: "Invite" });
         } else {
+          SendEmail("confirm_adult", confirmEmailParams);
           navigation.navigate("LoginStack", { screen: "Signup3" });
         }
       } else {
         console.log("Passwords do not match!");
       }
+      // changeSubmitting(false);
     } catch (e) {
       console.error(e.message);
       navigation.navigate("LoginStack", { screen: "Error2" });
@@ -141,17 +143,16 @@ const Signup2Screen = ({ route, navigation }: any) => {
           label="Password"
           placeholder="Enter password"
           // keyboardType="email-address"
-          secureTextEntry={true}
         />
         <FormInput
           name="password2"
           rules={{ required: "Password is required!" }}
           label="Confirm Password"
           placeholder="Enter same password"
-          secureTextEntry={true}
         />
       </FormProvider>
       <RectangularButton
+        disable={submitting}
         onPress={methods.handleSubmit(onSubmit, onError)}
         text="Next"
         buttonStyle={{ marginTop: "10%", backgroundColor: "#253C85" }}
