@@ -49,14 +49,13 @@ const defaultUser: User = {
     transactions: [],
   };
 
-
-
 const FamilyScreen = ({navigation}: any) => {
 
     const [labels, setLabels] = useState(['1000', '2000', '3000']);
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
     const [user, setUser] = useState(defaultUser);
     const [activeSections, setActiveSections] = useState([]);
+    const [expanded, setExpanded] = useState(false);
     
     //const userID = useContext(userContext);
     
@@ -81,7 +80,7 @@ const FamilyScreen = ({navigation}: any) => {
 
     const renderHeader = () => {
         return (
-            <View style={styles.familyCardContainer}>
+            <View style={expanded?styles.expandedContainer:styles.familyCardContainer}>
                 <View style={styles.addContainer}>
                     <View style={styles.stackOfSmileys}>
                         <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
@@ -102,14 +101,10 @@ const FamilyScreen = ({navigation}: any) => {
 
     const renderContent = () => {
         return (
-            <View>
-                <Text>Poopy</Text>
+            <View style={expanded?styles.expandContent:styles.collapseContent}>
+                <Text>list here</Text>
             </View>
         )
-    }
-
-    const setSections = ( sections: any ) => {
-        setActiveSections(sections);
     }
 
     return (
@@ -132,11 +127,13 @@ const FamilyScreen = ({navigation}: any) => {
                     </View>
                 </View>
 
-                <Collapse>
-                    <CollapseHeader>
+                <Collapse style={{margin: 0, padding: 0}} 
+                    isExpanded={expanded}
+                    onToggle={() => setExpanded(!expanded)}>
+                    <CollapseHeader style={{margin: 0, padding: 0, height: 85}}>
                         {renderHeader()}
                     </CollapseHeader>
-                    <CollapseBody>
+                    <CollapseBody style={{margin: 0, padding: 0}}>
                         {renderContent()}
                     </CollapseBody>
                 </Collapse>

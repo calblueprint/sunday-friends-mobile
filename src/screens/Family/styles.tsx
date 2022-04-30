@@ -46,8 +46,33 @@ export default StyleSheet.create({
     // alignItems: "stretch",
     marginTop: 16,
     borderRadius: 10, 
-    width: "89.4%",
     overflow: "hidden",
+  },
+
+  expandedContainer: {
+    borderBottomWidth: 0,
+    borderBottomColor: "#FFFFFF",
+    backgroundColor: "#F6F6F6",
+    // alignItems: "stretch",
+    marginTop: 16,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    overflow: "hidden",
+  },
+
+  collapseContent: {
+    borderWidth: 2,
+    borderColor: '#E6ECFE',
+    backgroundColor: "#F6F6F6",
+    borderRadius: 10, 
+  },
+
+  expandContent: {
+    borderWidth: 2,
+    borderColor: '#E6ECFE',
+    backgroundColor: "#F6F6F6",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
 
   homeContainer: {
@@ -95,9 +120,10 @@ export default StyleSheet.create({
 
   addContainer: {
     flexDirection: "row",
-    marginVertical: "5%",
+    paddingTop: "5%",
+    paddingBottom: "5%",
+    width: "80%",
     marginLeft: 10,
-    width: "89.4%",
   },
 
   topHalfContainer: {
@@ -229,7 +255,7 @@ export default StyleSheet.create({
   },
 
   innerContainer: {
-    alignSelf: "center",
+    alignContent: "center",
     marginLeft: "3%",
   },
 
