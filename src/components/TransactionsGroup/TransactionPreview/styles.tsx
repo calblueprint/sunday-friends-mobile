@@ -52,7 +52,7 @@ export default StyleSheet.create({
         fontFamily: "Avenir",
         fontStyle: "normal",
         fontWeight: "800",
-        fontSize: 12,
+        fontSize: 14,
         lineHeight: 16,
         marginVertical: 2,
     },
@@ -61,7 +61,7 @@ export default StyleSheet.create({
         fontFamily: "Avenir",
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: 12,
+        fontSize: 13,
         lineHeight: 16,
         marginVertical: 2
     },

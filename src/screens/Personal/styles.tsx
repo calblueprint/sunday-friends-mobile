@@ -31,7 +31,7 @@ export default StyleSheet.create({
     backgroundColor: "#F6F6F6",
     // alignItems: "stretch",
     marginTop: 16,
-    borderRadius: 10, 
+    borderRadius: 10,
     width: "89.4%",
     overflow: "hidden",
   },
@@ -40,12 +40,15 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
+    backgroundColor: "#FAFAFA",
+    marginTop: 21,
   },
 
   familyBalanceCardContainer: {
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "white",
     marginTop: 17,
-    borderRadius: 10, 
+    marginBottom: "3%",
+    borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
     height: 95,
@@ -59,7 +62,7 @@ export default StyleSheet.create({
   tranxbar: {
     marginLeft: "5%",
     marginBottom: 17,
-    
+
   },
 
   headline: {
@@ -72,7 +75,7 @@ export default StyleSheet.create({
 
   shadow: {
     shadowColor: '#202020',
-    shadowOffset: {width: 0, height: 0},
+    shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
 
@@ -96,7 +99,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
-    marginTop: 16, 
+    marginTop: 16,
   },
 
   tierOptionsContainer: {
@@ -118,7 +121,7 @@ export default StyleSheet.create({
   },
 
   profileImage: {
-    width: 42, 
+    width: 42,
     height: 42,
     // borderWidth: 2,
     // borderColor: 'black',
@@ -173,10 +176,10 @@ export default StyleSheet.create({
     height: 37,
     borderRadius: 20,
     justifyContent: "center",
-    borderWidth: 2, 
+    borderWidth: 2,
     borderColor: '#5A6AA2',
     alignItems: 'flex-start',
-    paddingLeft: 10, 
+    paddingLeft: 10,
     paddingVertical: 7,
   },
 
@@ -250,9 +253,9 @@ export default StyleSheet.create({
     width: 69,
     height: 39,
     backgroundColor: '#526DC2',
-    borderRadius: 5, 
+    borderRadius: 5,
     paddingHorizontal: 13,
-    paddingVertical: 10, 
+    paddingVertical: 10,
     marginRight: 14,
   },
 
@@ -289,7 +292,7 @@ export default StyleSheet.create({
 
 export const customStyles = {
   stepIndicatorSize: 23.05,
-  currentStepIndicatorSize:23.05,
+  currentStepIndicatorSize: 23.05,
   separatorStrokeWidth: 4.39,
   currentStepStrokeWidth: 2,
   stepStrokeCurrentColor: '#7F93D1',

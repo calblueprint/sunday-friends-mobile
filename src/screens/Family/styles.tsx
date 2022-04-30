@@ -54,6 +54,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
+    backgroundColor: "#FAFAFA",
   },
 
   shomeContainer: {
@@ -70,6 +71,7 @@ export default StyleSheet.create({
     borderWidth: 2,
     height: 268,
     borderColor: '#E6ECFE',
+    marginBottom: "4%",
   },
 
   headline: {

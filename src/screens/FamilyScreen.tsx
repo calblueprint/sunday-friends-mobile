@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Title } from 'react-native-paper';
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: "80%",
-        backgroundColor: "#eee"
+        backgroundColor: "#EEEEEE"
     },
     chevron: {
         width: '60px',
