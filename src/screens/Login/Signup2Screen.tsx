@@ -1,17 +1,25 @@
-import * as React from 'react';
-import { Text, Pressable, View, Button } from 'react-native';
-import ViewContainer from '../../components/ViewContainer';
+import * as React from "react";
+import { Text, Pressable, View } from "react-native";
+import ViewContainer from "../../components/ViewContainer";
 import FormInput from "../../components/FormInput";
 import { default as styles } from "./styles";
-import RectangularButton from '../../components/RectangularButton/RectangularButton';
-import { useForm, FormProvider, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
-import globalStyles from '../../globalStyles';
+import RectangularButton from "../../components/RectangularButton/RectangularButton";
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from "react-hook-form";
+import globalStyles from "../../globalStyles";
 import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
-import SvgIcon from ',,/../../assets/SvgIcon';
-import { getHeadInvitesByEmail, getUserInvite } from '../../firebase/firestore/userInvite';
-import { addUser } from '../../firebase/firestore/user';
-import { User } from '../../types/schema';
+import SvgIcon from ",,/../../assets/SvgIcon";
+import {
+  getHeadInvitesByEmail,
+  getUserInvite,
+} from "../../firebase/firestore/userInvite";
+import { addUser } from "../../firebase/firestore/user";
+import { User } from "../../types/schema";
 import emailjs, { init } from "@emailjs/browser";
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 import SendEmail from '../../components/SendEmail/SendEmail';
