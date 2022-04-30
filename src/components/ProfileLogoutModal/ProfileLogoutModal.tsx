@@ -31,7 +31,7 @@ export const ProfileLogoutModal = ({
 
   const handleLogout = () => {
     hideModal().then(reset);
-    //signOut();
+    signOut();
   };
 
   return (
