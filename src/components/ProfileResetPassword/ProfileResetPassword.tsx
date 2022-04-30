@@ -6,6 +6,7 @@ import globalStyles from "../../globalStyles";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_SERVICE_ID } from "@env";
 import { setUserPassword } from "../../firebase/firestore/user";
+import SendEmail from "../SendEmail/SendEmail";
 
 export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [screen, setScreen] = useState("reset");
@@ -14,10 +15,10 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
   const [newPW, onChangeNewPW] = useState("");
   const [confirmPW, onChangeConfirmPW] = useState("");
   const [edited, setEdited] = useState(false);
-  const [pin, setPin] = useState(0);
   const [pwError, setPwError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const [pin, setPin] = useState(0);
 
   const reset = () => {
     setVisible(false);
@@ -30,7 +31,13 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     setPwError(false);
     setEmailError(false);
   };
-  
+
+  const generatePin = () => {
+    var generated = Math.floor(100000 + Math.random() * 900000);
+    setPin(generated);
+    resetEmailParams.pin = generated;
+  };
+
   const resetEmailParams = {
     from: "Sunday Friends",
     to: email,
@@ -42,26 +49,6 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
     from: "Sunday Friends",
     to: email,
     name: user.full_name,
-  };
-
-  const sendEmail = (type: string) => {
-    var generated = Math.floor(100000 + Math.random() * 900000);
-    setPin(generated);
-    resetEmailParams.pin = generated;
-    switch (type) {
-      case "reset":
-        return emailjs.send(
-          EMAILJS_SERVICE_ID,
-          "template_mz61cu7",
-          resetEmailParams
-        );
-      case "success":
-        return emailjs.send(
-          EMAILJS_SERVICE_ID,
-          "template_dessp0w",
-          successEmailParams
-        );
-    }
   };
 
   const valid = () => {
@@ -134,7 +121,12 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             }
             onPress={() => {
               valid() && email == user.email
-                ? [setScreen("verify"), setEdited(false), sendEmail("reset")]
+                ? [
+                    setScreen("verify"),
+                    setEdited(false),
+                    generatePin(),
+                    SendEmail("reset", resetEmailParams),
+                  ]
                 : edited
                 ? setEmailError(true)
                 : null;
@@ -186,7 +178,8 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
             onPress={() => [
               setEdited(false),
               setScreen("verify"),
-              sendEmail("reset"),
+              generatePin(),
+              SendEmail("reset", resetEmailParams),
               onChangeCode(""),
             ]}
           >
@@ -341,7 +334,7 @@ export const ProfileResetPassword = ({ visible, setVisible, user }: any) => {
                 valid()
                   ? [
                       setScreen("success"),
-                      sendEmail("success"),
+                      SendEmail("success", successEmailParams),
                       setUserPassword(confirmPW),
                     ]
                   : setPwError(true)
