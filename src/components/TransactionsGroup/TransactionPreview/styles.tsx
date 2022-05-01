@@ -10,7 +10,7 @@ export default StyleSheet.create({
         marginTop: 1,
         marginBottom: 1,
         paddingVertical: 12,
-        paddingHorizontal: 14
+        paddingHorizontal: 20
     },
     rdca: {
         display: 'flex',

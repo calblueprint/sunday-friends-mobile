@@ -41,9 +41,9 @@ export default StyleSheet.create({
   },
   searchbar: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    // padding: 10,
     width: '70%',
     marginRight: 16,
     borderColor: '#A9A9A9',
@@ -53,10 +53,15 @@ export default StyleSheet.create({
   },
   innerSearchbar: {
     display: "flex",
+    margin: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 0
+    padding: 0,
+    flex: 1
+  },
+  iconWrapper: {
+    padding: 10
   },
   searchText: {
     fontFamily: 'Avenir',
@@ -66,6 +71,16 @@ export default StyleSheet.create({
     color: '#525454',
     margin: 0,
     flex: 1
+  },
+  noneFoundText: {
+    textAlign: "center",
+    color: "#525454",
+    fontFamily: "Avenir",
+    fontStyle: "normal",
+    fontWeight: "800",
+    fontSize: 12,
+    lineHeight: 16,
+    marginVertical: 2,
   },
   filtersButton: {
     display: 'flex',

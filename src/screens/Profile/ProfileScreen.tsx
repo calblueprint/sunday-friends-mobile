@@ -34,7 +34,7 @@ const ProfileScreen = ({ navigation }: any) => {
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
   const [user, setUser] = useState(defaultUser);
-  const [isLogoutPressed, setIsLogoutPressed] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false);
 
   useEffect(() => {
     getUser(userUID).then((currUser) => {
@@ -115,8 +115,8 @@ const ProfileScreen = ({ navigation }: any) => {
         <ProfileLogoutModal
           visible={logoutModalVisible}
           setVisible={setLogoutModalVisible}
-          logout={isLogoutPressed}
-          setLogout={setIsLogoutPressed}
+          logout={loggedOut}
+          setLogout={setLoggedOut}
           navigation={navigation}
         />
       </Pressable>

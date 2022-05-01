@@ -30,6 +30,12 @@ const parseTiers = async (doc: any) => {
         tier1: data.tier1,
         tier2: data.tier2,
         tier3: data.tier3,
+        tier1title: data.tier1title,
+        tier2title: data.tier2title,
+        tier3title: data.tier3title,
+        tier1description: data.tier1description,
+        tier2description: data.tier2description,
+        tier3description: data.tier3description,
     };
     return tiers as Tiers;
 };

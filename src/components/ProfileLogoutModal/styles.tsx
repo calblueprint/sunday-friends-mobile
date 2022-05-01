@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   logoutModal: {
     position: "absolute",
-    top: "27.9%",
+    top: "32%",
     left: "3.7%",
     width: "92.5%",
     height: "17.2%",
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
   },
-  logoutPressableModal: {
+  logoutPressable: {
     position: "absolute",
     width: "91.9%",
     height: "33.5%",
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     backgroundColor: "#253C85",
     borderRadius: 5,
   },
-  cancelLogoutPressable: {
+  cancelPressable: {
     position: "absolute",
     width: "91.9%",
     height: "33.5%",

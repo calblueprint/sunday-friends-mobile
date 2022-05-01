@@ -84,7 +84,6 @@ const MemberCard = ({
     getUserInvite(id).then((user) => {
       deleteUserInvite(id).then(() => {
         getUserInviteByFamily(user.family_id).then((data) => {
-          setUserInvites(data);
           sortUserInvites(data);
         });
       });
@@ -134,25 +133,17 @@ const MemberCard = ({
 
   const sortUserInvites = (data: User_Invite[]) => {
     const sorted: User_Invite[] = new Array(data.length);
-    let index = 0;
-    let inviteIndex = 0;
 
     data.forEach((user) => {
       if (user.status == "Parent") {
-        sorted[index] = user;
-        index++;
-        data.splice(inviteIndex, 1);
+        sorted.push(user);
       }
-      inviteIndex++;
     });
 
-    inviteIndex = 0;
-
     data.forEach((user) => {
-      sorted[index] = user;
-      index++;
-      data.splice(inviteIndex, 1);
-      inviteIndex++;
+      if (user.status == "Child") {
+        sorted.push(user);
+      }
     });
 
     setUserInvites(sorted);

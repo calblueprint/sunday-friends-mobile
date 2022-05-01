@@ -24,6 +24,7 @@ import { getFamily } from "../../firebase/firestore/family";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_SERVICE_ID } from "@env";
 import TabNavigator from "../../navigation/TabNavigator";
+import SendEmail from "../../components/SendEmail/SendEmail";
 
 const EditInviteScreen = ({ navigation }: any) => {
   const defaultUserInvites: User_Invite[] = [
@@ -61,7 +62,6 @@ const EditInviteScreen = ({ navigation }: any) => {
       setUserEmail(user.email);
       setUserID(user.user_id);
       getUserInviteByFamily(user.family_id).then((data) => {
-        setUserInvites(data);
         sortUserInvites(data);
       });
       getFamily(user.family_id.toString()).then((family) => {
@@ -72,25 +72,17 @@ const EditInviteScreen = ({ navigation }: any) => {
 
   const sortUserInvites = (data: User_Invite[]) => {
     const sorted: User_Invite[] = new Array(data.length);
-    let index = 0;
-    let inviteIndex = 0;
 
     data.forEach((user) => {
       if (user.status == "Parent") {
-        sorted[index] = user;
-        index++;
-        data.splice(inviteIndex, 1);
+        sorted.push(user);
       }
-      inviteIndex++;
     });
 
-    inviteIndex = 0;
-
     data.forEach((user) => {
-      sorted[index] = user;
-      index++;
-      data.splice(inviteIndex, 1);
-      inviteIndex++;
+      if (user.status == "Child") {
+        sorted.push(user);
+      }
     });
 
     setUserInvites(sorted);
@@ -98,13 +90,14 @@ const EditInviteScreen = ({ navigation }: any) => {
 
   const handleSend = () => {
     {
-      userInvites.forEach((user) =>
-        emailjs.send(EMAILJS_SERVICE_ID, "template_j78fcdn", {
+      userInvites.forEach((user) => {
+        const inviteEmailParams = {
           to: user.email,
           name: user.name,
           family: familyName,
-        })
-      );
+        }
+        emailjs.send(EMAILJS_SERVICE_ID, "template_j78fcdn", inviteEmailParams);
+      })
     }
     navigation.navigate("LoginStack", { screen: "AllSetInvite" });
   };

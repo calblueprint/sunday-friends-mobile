@@ -66,10 +66,9 @@ export const ProfileEditModal = ({
           />
         </Pressable>
 
-        <View style={styles.fields}>
-          <Text style={globalStyles.overline1}>NAME</Text>
-          <Text style={globalStyles.overline1}>EMAIL</Text>
-        </View>
+        <Text style={[globalStyles.overline1, styles.nameField]}>NAME</Text>
+        <Text style={[globalStyles.overline1, styles.emailField]}>EMAIL</Text>
+
         <TextInput
           style={[globalStyles.body1, styles.nameTextInput]}
           onChangeText={onChangeName}

@@ -118,6 +118,25 @@ export const deleteUser = async (userId: string): Promise<void> => {
 };
 
 /**
+ * Edits the given user data from with the family ID created when creating a family
+ */
+ export const editUserFamilyID = async (
+  userId: string,
+  family_id: number,
+): Promise<void> => {
+  try {
+    const doc = await userCollection.doc(userId).get();
+    var data = doc.data();
+    data.family_id = family_id;
+
+    userCollection.doc(userId).set(data);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+};
+
+/**
  * Changes the password of the user that is currently signed in with the given string
  */
 export const setUserPassword = async (password: string): Promise<void> => {
