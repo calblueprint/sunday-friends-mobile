@@ -90,8 +90,7 @@ export default StyleSheet.create({
   },
 
   topHalfContainer: {
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",

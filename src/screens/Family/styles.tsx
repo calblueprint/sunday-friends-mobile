@@ -68,7 +68,7 @@ export default StyleSheet.create({
     borderRadius: 10, 
     width: "89.4%",
     borderWidth: 2,
-    height: 268,
+    height: 224,
     borderColor: '#E6ECFE',
   },
 
@@ -102,7 +102,6 @@ export default StyleSheet.create({
 
   topHalfContainer: {
     justifyContent: 'space-between',
-    alignItems: "center",
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
@@ -110,10 +109,12 @@ export default StyleSheet.create({
   },
 
   tierOptionsContainer: {
-    flexDirection: "row-reverse",
-    width: "100%",
+    // flexDirection: "row-reverse",
+    // width: "89.4%",
     // borderWidth: 2,
     // borderColor: 'black',
+    // borderColor: 'blue',
+    // borderWidth: 2,
   },
 
   stackOfSmileys: {
@@ -138,9 +139,8 @@ export default StyleSheet.create({
 
   buttomBar: {
     justifyContent: 'space-between',
-    alignItems: "center",
-    flexDirection: "column",
-    marginTop: 20,
+    alignItems: "flex-start",
+    marginTop: 29,
     marginLeft: "5%",
     width: "89.4%",
     // borderColor: 'black',
@@ -158,7 +158,7 @@ export default StyleSheet.create({
 
 
   progressBar: {
-    marginTop: 20,
+    marginTop: 29,
     justifyContent: "center",
     // borderWidth: 2, 
     // borderColor: 'black',
@@ -200,7 +200,7 @@ export default StyleSheet.create({
   },
 
   contributions: {
-    width: 127,
+    width: 85,
     height: 24,
     borderRadius: 26,
     padding: 4,
@@ -234,7 +234,7 @@ export default StyleSheet.create({
   },
 
   optionsContainer: {
-    marginTop: 20,
+    // marginTop: 20,
   },
 
   levels: {
@@ -247,23 +247,23 @@ export default StyleSheet.create({
   },
 
   tierContainer: {
-    // marginTop: 20,
     flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: 'center',
-    // width: '89.4%'
+
+    justifyContent: "space-between",
+    width: '100%',
+    // borderColor: 'red',
+    // borderWidth: 2,
   },
 
   tierBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 69,
-    height: 39,
-    backgroundColor: '#526DC2',
-    borderRadius: 5, 
-    paddingHorizontal: 13,
-    paddingVertical: 10, 
-    marginRight: 14,
+    // alignItems: "flex-start",
+    // width: 69,
+    // height: 39,
+    // backgroundColor: '#526DC2',
+    // borderRadius: 5, 
+    // paddingHorizontal: 13,
+    // paddingVertical: 10, 
+    // marginRight: 14,
   },
 
   columnContainer: {
@@ -282,6 +282,14 @@ export default StyleSheet.create({
     fontSize: 36,
 
   },
+
+  tierText: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+
+  },
+
   itemsText: {
     fontFamily: 'Avenir',
     fontWeight: "400",
