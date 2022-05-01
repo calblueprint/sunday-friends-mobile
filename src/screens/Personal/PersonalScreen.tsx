@@ -128,7 +128,7 @@ const PersonalScreen = ({navigation}: any) => {
             <View style={styles.tranxContainer}>
 
                 <View style = {styles.tranxbar}>
-                    <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
+                    <Text style={[globalStyles.overline1]}>TRANSACTIONS HISTORY</Text>
                 </View>
 
                 <TransactionsGroup forFamily = {false}>
