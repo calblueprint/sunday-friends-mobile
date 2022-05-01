@@ -141,6 +141,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                     rules={{ required: 'Password is required!' }}
                     label="Password"
                     placeholder="Enter password"
+                    secureTextEntry={true}
                 // keyboardType="email-address"
                 />
                 <FormInput
@@ -148,6 +149,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                     rules={{ required: 'Password is required!' }}
                     label="Confirm Password"
                     placeholder="Enter same password"
+                    secureTextEntry={true}
                 />
             </FormProvider>
             <RectangularButton
