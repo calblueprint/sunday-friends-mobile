@@ -26,7 +26,9 @@ export type IconType =
   | "sfLogo"
   | "passwordHidden"
   | "redX"
-  | "greenCheck";
+  | "greenCheck"
+  | "tierActive"
+  | "tierInactive";
 
 const IconSvgs: Record<IconType, React.ReactElement> = {
   chevron_back: (
@@ -313,6 +315,24 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
 				<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1 4.75L4.5 9.25L13 0.75" stroke="#098D45" stroke-width="2"/>
 				</svg>
+			`}
+    />
+  ),
+  tierActive: (
+    <SvgXml
+      xml={`
+        <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.50032 17.3327C3.90005 17.3276 0.172044 13.5996 0.166992 8.99936V8.8327C0.258602 4.25314 4.02915 0.605994 8.60922 0.666764C13.1893 0.727534 16.8617 4.47344 16.8318 9.05381C16.8019 13.6342 13.0808 17.3318 8.50032 17.3327ZM4.67532 8.6577L3.50033 9.8327L6.83366 13.166L13.5003 6.49936L12.3253 5.31603L6.83366 10.8077L4.67532 8.6577Z" fill="#253C85"/>
+        </svg>
+			`}
+    />
+  ),
+  tierInactive: (
+    <SvgXml
+      xml={`
+        <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.50032 17.3327C3.90005 17.3276 0.172044 13.5996 0.166992 8.99936V8.8327C0.258602 4.25314 4.02915 0.605994 8.60922 0.666764C13.1893 0.727534 16.8617 4.47344 16.8318 9.05381C16.8019 13.6342 13.0808 17.3318 8.50032 17.3327ZM4.67532 8.6577L3.50033 9.8327L6.83366 13.166L13.5003 6.49936L12.3253 5.31603L6.83366 10.8077L4.67532 8.6577Z" fill="#A9A9A9"/>
+        </svg>
 			`}
     />
   ),

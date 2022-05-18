@@ -68,7 +68,6 @@ export default StyleSheet.create({
     borderRadius: 10, 
     width: "89.4%",
     borderWidth: 2,
-    height: 224,
     borderColor: '#E6ECFE',
   },
 
@@ -109,12 +108,11 @@ export default StyleSheet.create({
   },
 
   tierOptionsContainer: {
-    // flexDirection: "row-reverse",
-    // width: "89.4%",
-    // borderWidth: 2,
-    // borderColor: 'black',
-    // borderColor: 'blue',
-    // borderWidth: 2,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    width: "100%",
+    marginTop: 10,
   },
 
   stackOfSmileys: {
@@ -143,9 +141,20 @@ export default StyleSheet.create({
     marginTop: 29,
     marginLeft: "5%",
     width: "89.4%",
+    marginBottom: 15,
     // borderColor: 'black',
     // borderWidth: 2,
   },
+
+  tierList: {
+    flexDirection: 'column',
+    alignItems: "flex-start",
+    width: "89.4%",
+    marginTop: 29,
+    marginLeft: "5%",
+    marginBottom: 15,
+  },
+
 
   buttonText: {
     color: '#393939',
@@ -283,11 +292,44 @@ export default StyleSheet.create({
 
   },
 
+  tierTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+  },
+
+  tierTitle: {
+    fontFamily: 'Avenir',
+    fontWeight: "800",
+    fontSize: 14,
+    marginTop: 2,
+    marginLeft: 8,
+    color: "#272929",
+  },
+
+  tierTitleGray: {
+    fontFamily: 'Avenir',
+    fontWeight: "800",
+    fontSize: 14,
+    marginTop: 2,
+    marginLeft: 8,
+    color: "#525454",
+  },
+
   tierText: {
     fontFamily: "Avenir",
     fontWeight: "900",
     fontSize: 14,
 
+  },
+
+  tierDescription: {
+    fontFamily: "Avenir",
+    fontWeight: "400",
+    fontSize: 12,
+    marginTop: 5,
+    marginLeft: "10%",
   },
 
   itemsText: {
