@@ -155,6 +155,9 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
 
+  toggleButton: {
+    flexDirection: 'row',
+  },
 
   buttonText: {
     color: '#393939',

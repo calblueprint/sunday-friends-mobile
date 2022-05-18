@@ -5,6 +5,7 @@ export type IconType =
   | "chevron_back"
   | "chevron_down"
   | "chevron_right"
+  | "chevron_up"
   | "searchbar_close"
   | "searchbar_search"
   | "modal_close"
@@ -59,6 +60,15 @@ const IconSvgs: Record<IconType, React.ReactElement> = {
         </svg>
         `}
     />
+  ),
+  chevron_up: (
+    <SvgXml
+        xml={`
+          <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.5005 6.90625L15.5089 11.9146L14.3314 13.0938L10.5005 9.26042L6.67052 13.0938L5.49219 11.9154L10.5005 6.90625Z" fill="#A9A9A9"/>
+          </svg>
+          `}
+      />
   ),
   modal_x: (
     <SvgXml

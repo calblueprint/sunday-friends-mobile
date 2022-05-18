@@ -116,28 +116,19 @@ const FamilyScreen = ({navigation}: any) => {
                         <View style={styles.tierBox}>
                             <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
                         </View>
-                        <View>
-                            <Pressable onPress={() => setToggleExpanded(!toggleExpanded)}
-                            style={({ pressed }) => [
-                                {
-                                    backgroundColor: pressed
-                                    ? 'black'
-                                    : '#F6F6F6'
-                                },
-                                ]}>
-                                <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>What Can I Get?</Text>
-                            </Pressable>
-                        </View>
-                        {/* <View style={styles.columnContainer}>
-                            <View style={styles.rowContainer}>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>Bottle water, can food, fresh food</Text>
-                            </View>
-                            <View style={styles.rowContainer}>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>Hygeine products, toiletries</Text>
-                            </View>
-                        </View> */}
+                        
+                        <Pressable onPress={() => setToggleExpanded(!toggleExpanded)}
+                        style={({ pressed }) => [
+                            {
+                                backgroundColor: pressed
+                                ? 'black'
+                                : '#F6F6F6'
+                            },
+                            styles.toggleButton
+                            ]}>
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9', marginTop: 2}]}>What Can I Get?</Text>
+                            <SvgIcon type="chevron_down"></SvgIcon>
+                        </Pressable>
                     </View>
                 </View>
             )
@@ -169,9 +160,11 @@ const FamilyScreen = ({navigation}: any) => {
                                 backgroundColor: pressed
                                 ? 'black'
                                 : '#F6F6F6'
-                            }
+                            },
+                            styles.toggleButton
                             ]}>
-                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>What Can I Get?</Text>
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9', marginTop: 2}]}>What Can I Get?</Text>
+                            <SvgIcon type="chevron_up"></SvgIcon>
                         </Pressable>
                     </View>
                 </View>
