@@ -33,7 +33,7 @@ const TabNavigator = () => {
                 options={{
                     title: 'Family',
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
+                    tabBarIcon: ({ focused, color }) => <Icon name={focused?"familyIconWhite":"familyIconDark"} color={color} />,
                 }}
             />
             <Tab.Screen
@@ -42,7 +42,7 @@ const TabNavigator = () => {
                 options={{
                     title: 'Personal',
                     headerShown: false,
-                    tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
+                    tabBarIcon: ({ focused, color }) => <Icon name={focused?"personalIconWhite":"personalIconDark"} color={color} />,
                 }}
             />
             {/* <Tab.Screen
