@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image, ScrollView} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
@@ -9,6 +10,7 @@ import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
 import {moment} from 'moment';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
 import { getUser } from '../../firebase/firestore/user';
@@ -18,6 +20,7 @@ import {List} from 'react-native-paper';
 import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
 import { getFamilyById } from "../../firebase/firestore/family";
 import SvgIcon from '../../../assets/SvgIcon';
+import LearnMoreModal from '../../components/LearnMoreModal/LearnMoreModal';
 
 const getCurrentDate=()=>{
     var moment = require('moment');
@@ -55,6 +58,7 @@ const FamilyScreen = ({navigation}: any) => {
     const [tierStep, settierStep] = useState(0);
     const [tierName, settierName] = useState("");
     const [toggleExpanded, setToggleExpanded] = useState(false);
+    const refRBSheet = useRef();
 
     const fetchFamilyData = async () => {
         // const family = await getFamilyById(user.family_id.toString())
@@ -217,7 +221,8 @@ const FamilyScreen = ({navigation}: any) => {
                         <Text style={[styles.balanceText, {color: "#253C85"}]}>{familyBalance}</Text>
                         <Text style={globalStyles.overline2}>FAMILY BALANCE</Text>
                     </View>
-                        <Pressable style={({ pressed }) => [
+                        <Pressable onPress={() => refRBSheet.current.open()}
+                        style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
                                 ? 'white'
@@ -252,6 +257,20 @@ const FamilyScreen = ({navigation}: any) => {
 
             </View>
             </ScrollView>
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={761}
+                customStyles={{
+                    container: {
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                    }
+                }}
+            >
+                <LearnMoreModal refRBSheet={refRBSheet}/>
+            </RBSheet>
         </View>
         
     );
