@@ -102,6 +102,114 @@ const FamilyScreen = ({navigation}: any) => {
         })
     }, []);
 
+    const parseNames = () => {
+        var result = "";
+        familyMembers.map((member) => {
+            const name = member.full_name;
+            const firstname = name.split(' ')[0];
+            result += firstname;
+            result += ', ';
+        })
+        result = result.slice(0, -2);
+        //handle ... case here
+        return result;
+    }
+
+    const renderIcon = (role: string) => {
+        if (role == 'Head') {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/headSmiley.png')} />
+            )
+        } else if (role == 'Parent') {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/parentSmiley.png')}/>
+            )
+        } else {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/childSmiley.png')} />
+            )
+        }
+    }
+    
+    const iconStack = () => {
+        var count = 0;
+        return (
+            <View style={styles.stackOfSmileys}>
+                {
+                    familyMembers.map((member) => {
+                        if (count<4) {
+                            count++;
+                            return (
+                                renderIcon(member.role)
+                            )
+                        }
+                    })
+                }
+            </View>
+        )
+    }
+
+    const dropdownToggle = () => {
+        if (!dropdownExpanded) {
+            return (
+                <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.dropdownContainer}>
+                    <View style={styles.dropdownHeader}>
+                        {iconStack()}
+                        <View style={styles.addContainer}>
+                            <View style={styles.dropdownList}>
+                                <View style={styles.rowContainer}>
+                                    <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
+                                </View>
+                                <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                            </View>
+                            <SvgIcon type='chevron_down'></SvgIcon>
+                        </View>
+                    </View>
+                </Pressable>
+            )
+        } else {
+            return (
+                <View style={styles.dropdownContainer}>
+                    <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.familyCardContainer}>
+                        <View style={styles.dropdownHeader}>
+                            {iconStack()}
+                            <View style={styles.addContainer}>
+                                <View style={styles.dropdownList}>
+                                    <View style={styles.rowContainer}>
+                                        <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
+                                    </View>
+                                    <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                                </View>
+                                <SvgIcon type='chevron_up'></SvgIcon>
+                            </View>
+                        </View>
+                    </Pressable> 
+                    {
+                        familyMembers.map((member) => {
+                            return (
+                                <>
+                                    <View style={styles.memberSeparator}></View>
+                                    <View style={styles.memberRow}>
+                                        {member.role=='Head'?
+                                            <Image style={[styles.memberIcon]} source={require('../../../assets/images/headSmiley.png')} />
+                                            :member.role=='Parent'?
+                                            <Image style={[styles.memberIcon]} source={require('../../../assets/images/parentSmiley.png')} />
+                                            :<Image style={[styles.memberIcon]} source={require('../../../assets/images/childSmiley.png')} />
+                                        }
+                                        <View style={styles.memberInfo}>
+                                            <Text style={styles.memberName}>{member.role=='Child'?member.full_name.split(' ')[0] + ', not in balance':member.full_name.split(' ')[0]}</Text>
+                                            <Text style={styles.memberPoints}>{member.points}</Text>
+                                        </View>
+                                    </View>
+                                </>
+                            )
+                        })
+                    }
+                </View>
+            )
+        }
+    }
+
     const tierToggle = () => {
         if (!toggleExpanded) {
             return (
@@ -110,7 +218,6 @@ const FamilyScreen = ({navigation}: any) => {
                         <View style={styles.tierBox}>
                             <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
                         </View>
-                        
                         <Pressable onPress={() => setToggleExpanded(!toggleExpanded)}
                         style={({ pressed }) => [
                             {
@@ -161,63 +268,6 @@ const FamilyScreen = ({navigation}: any) => {
                             <SvgIcon type="chevron_up"></SvgIcon>
                         </Pressable>
                     </View>
-                </View>
-            )
-        }
-    }
-
-    const dropdownToggle = () => {
-        if (!dropdownExpanded) {
-            return (
-                <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.dropdownContainer}>
-                    <View style={styles.addContainer}>
-                        <View style={styles.stackOfSmileys}>
-                            <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
-                            <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
-                            <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
-                            <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
-                        </View>
-                        <View style={styles.innerContainer}>
-                            <View style={styles.rowContainer}>
-                                <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
-                            </View>
-                            <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
-                        </View>
-                    </View>
-                </Pressable>
-            )
-        } else {
-            return (
-                <View style={styles.dropdownContainer}>
-                    <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.familyCardContainer}>
-                        <View style={styles.addContainer}>
-                            <View style={styles.stackOfSmileys}>
-                                <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/headSmiley.png')} />
-                                <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/parentSmiley.png')}/>
-                                <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
-                                <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
-                            </View>
-                            <View style={styles.innerContainer}>
-                                <View style={styles.rowContainer}>
-                                    <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>3 People</Text>
-                                </View>
-                                <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
-                            </View>
-                        </View>
-                    </Pressable> 
-                    {console.log("members")}
-                    {
-                        familyMembers.map((member) => {
-                            console.log(member);
-                            return (
-                                <View style={styles.memberRow}>
-                                    <Image style={[styles.memberIcon]} source={require('../../../assets/images/headSmiley.png')} />
-                                    <Text style={styles.memberName}>{member.full_name}</Text>
-                                    <Text style={styles.memberPoints}>{member.points}</Text>
-                                </View>
-                            )
-                        })
-                    }
                 </View>
             )
         }

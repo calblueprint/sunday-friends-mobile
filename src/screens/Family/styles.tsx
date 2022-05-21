@@ -42,6 +42,8 @@ export default StyleSheet.create({
   familyCardContainer: {
     // alignItems: "stretch",
     overflow: "hidden",
+    // borderBottomColor: "#F2F2F2",
+    // borderBottomWidth: 2,
   },
 
   dropdownContainer: {
@@ -51,14 +53,40 @@ export default StyleSheet.create({
     backgroundColor: "#F6F6F6",
     marginTop: 16,
     borderRadius: 10, 
+    paddingHorizontal: 10,
   },  
+
+  dropdownHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+  },
+
+  dropdownList: {
+
+  },
+
+  memberSeparator: {
+    width: '80%',
+    height: 3,
+    backgroundColor: '#F2F2F2',
+    alignSelf: 'center',
+  },
 
   memberRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+
+  memberInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
+    marginLeft: 20,
   },
   
   memberIcon: {
@@ -67,7 +95,6 @@ export default StyleSheet.create({
   },
 
   memberName: {
-    width: '75%',
     fontFamily: 'Avenir',
     fontStyle: 'normal',
     fontWeight: '800',
@@ -128,9 +155,11 @@ export default StyleSheet.create({
 
   addContainer: {
     flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: "5%",
-    marginLeft: 10,
-    width: "89.4%",
+    marginLeft: 20,
+    flex: 1,
   },
 
   topHalfContainer: {
@@ -150,24 +179,19 @@ export default StyleSheet.create({
   },
 
   stackOfSmileys: {
-    marginRight: 10,
     flexDirection: "row",
-    width: 120,
-    // shadowColor: 'black',
-    // shadowOffset: {width: 10, height: 10},
-    // shadowRadius: 5,
-    // borderWidth: 2,
-    // borderColor: 'black',
+    justifyContent: 'flex-start',
+    marginRight: 12,
+    // width: '30%',
   },
 
   profileImage: {
     width: 42, 
     height: 42,
+    marginRight: -12,
     // borderWidth: 2,
     // borderColor: 'black',
   },
-
-
 
   buttomBar: {
     justifyContent: 'space-between',
@@ -276,7 +300,6 @@ export default StyleSheet.create({
 
   innerContainer: {
     alignSelf: "center",
-    marginLeft: "3%",
   },
 
   optionsContainer: {
@@ -380,7 +403,6 @@ export default StyleSheet.create({
     fontFamily: 'DMSans_700Bold',
     fontWeight: "700",
     fontSize: 18,
-
   },
 
   tranxContainer: {
