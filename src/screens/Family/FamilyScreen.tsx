@@ -55,19 +55,12 @@ const FamilyScreen = ({navigation}: any) => {
     const [familyName, setFamilyName] = useState("");
     const [userInitial, setuserInitial] = useState("");
     const [familyBalance, setFamilyBalance] = useState(0);
+    const [familyMembers, setFamilyMembers] = useState([defaultUser]);
     const [tierStep, settierStep] = useState(0);
     const [tierName, settierName] = useState("");
     const [toggleExpanded, setToggleExpanded] = useState(false);
+    const [dropdownExpanded, setDropdownExpanded] = useState(false);
     const refRBSheet = useRef();
-
-    const fetchFamilyData = async () => {
-        // const family = await getFamilyById(user.family_id.toString())
-        // setFamilyName(family.family_name.toString())
-        // setuserInitial(user.full_name.toString().slice(0,1))
-        // setFamilyBalance(family.total_points)
-        // console.log(familyName)
-    }
-        
 
     useEffect(() => {
         getAllTiers().then((tiers) => {
@@ -85,16 +78,13 @@ const FamilyScreen = ({navigation}: any) => {
             getUser(userUID).then((currUser) => {
                 setUser(currUser);
                 // fetchFamilyData();
-                const family = getFamilyById(currUser.family_id.toString()).then((currFam) => {
+                getFamilyById(currUser.family_id.toString()).then((currFam) => {
                     setFamilyName(currFam.family_name.toString())
                     setuserInitial(currUser.full_name.toString().slice(0,1))
                     setFamilyBalance(currFam.total_points)
+                    setFamilyMembers(currFam.user_ids)
                     console.log(familyName)
                 })
-                // setFamilyName(family.family_name.toString())
-                // setuserInitial(user.full_name.toString().slice(0,1))
-                // setFamilyBalance(family.total_points)
-                // console.log(familyName)
             })
             if (familyBalance < tiers[0].tier1){
                 settierStep(0)
@@ -176,6 +166,63 @@ const FamilyScreen = ({navigation}: any) => {
         }
     }
 
+    const dropdownToggle = () => {
+        if (!dropdownExpanded) {
+            return (
+                <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.dropdownContainer}>
+                    <View style={styles.addContainer}>
+                        <View style={styles.stackOfSmileys}>
+                            <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
+                            <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
+                            <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
+                            <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
+                        </View>
+                        <View style={styles.innerContainer}>
+                            <View style={styles.rowContainer}>
+                                <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
+                            </View>
+                            <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
+                        </View>
+                    </View>
+                </Pressable>
+            )
+        } else {
+            return (
+                <View style={styles.dropdownContainer}>
+                    <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.familyCardContainer}>
+                        <View style={styles.addContainer}>
+                            <View style={styles.stackOfSmileys}>
+                                <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/headSmiley.png')} />
+                                <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/parentSmiley.png')}/>
+                                <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
+                                <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
+                            </View>
+                            <View style={styles.innerContainer}>
+                                <View style={styles.rowContainer}>
+                                    <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>3 People</Text>
+                                </View>
+                                <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
+                            </View>
+                        </View>
+                    </Pressable> 
+                    {console.log("members")}
+                    {
+                        familyMembers.map((member) => {
+                            console.log(member);
+                            return (
+                                <View style={styles.memberRow}>
+                                    <Image style={[styles.memberIcon]} source={require('../../../assets/images/headSmiley.png')} />
+                                    <Text style={styles.memberName}>{member.full_name}</Text>
+                                    <Text style={styles.memberPoints}>{member.points}</Text>
+                                </View>
+                            )
+                        })
+                    }
+                </View>
+            )
+        }
+    }
+
 
     const tiersStr = []
 
@@ -198,22 +245,8 @@ const FamilyScreen = ({navigation}: any) => {
                     </Pressable>
                 </View>
             </View>
-            <View style={styles.familyCardContainer}>
-                <View style={styles.addContainer}>
-                    <View style={styles.stackOfSmileys}>
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
-                    </View>
-                    <View style={styles.innerContainer}>
-                        <View style={styles.rowContainer}>
-                            <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
-                        </View>
-                        <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
-                    </View>
-                </View>
-            </View>
+
+            {dropdownToggle()}
 
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>

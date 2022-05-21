@@ -23,6 +23,7 @@ import { User } from "../../types/schema";
 import emailjs, { init } from "@emailjs/browser";
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID } from "@env";
 import SendEmail from '../../components/SendEmail/SendEmail';
+import { addMemberToFamily } from "../../firebase/firestore/family";
 
 const Signup2Screen = ({ route, navigation }: any) => {
 
@@ -101,6 +102,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                     parent
                 );
                 addUser(newUser);
+                addMemberToFamily(newUser.user_id, newUser.family_id.toString());
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'FamilyName' });
                 } else {

@@ -29,7 +29,20 @@ export const addFamily = async (family: Family): Promise<void> => {
     console.warn(e);
     throw e;
   }
-};
+}
+
+export const addMemberToFamily = async (userId: string, FID: string): Promise<void> => {
+  try {
+    var doc = await familyCollection.doc(FID).get()
+    const fam = doc.data() as Family;
+    fam.user_ids.push(userId);
+
+    await familyCollection.doc(FID).set(fam);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+}
 
 export const getCountAndIncrement = async (): Promise<number> => {
   try {

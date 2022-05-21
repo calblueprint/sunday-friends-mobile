@@ -6,7 +6,6 @@ import SvgIcon from '../../assets/SvgIcon';
 interface IconProps {
     onPress?: () => void;
     name: string;
-    tab: number;
     color: string;
     size?: number;
     style?: object;
@@ -22,19 +21,19 @@ const styles = StyleSheet.create({
     fade: {
         opacity: 0.5,
     },
-    selected: {
-        color: "#FFFFFF"
-    },
-    notSelected: {
-        color: "#7F93D1"
-    }
+    // selected: {
+    //     color: "#FFFFFF"
+    // },
+    // notSelected: {
+    //     color: "#7F93D1"
+    // }
 });
 
 export default function Icon(props: IconProps) {
-    const { onPress, size, style, name, tab } = props;
+    const { onPress, size, style, name} = props;
 
     return (
-        <SvgIcon type={name} className={tab==0?styles.selected:styles.notSelected} {...props}></SvgIcon>
+        <SvgIcon type={name} {...props}></SvgIcon>
 
         //<FontAwesome size={size} style={{color: '#E6ECFE'}} {...props} />
         // <Pressable

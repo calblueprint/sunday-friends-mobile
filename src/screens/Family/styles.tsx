@@ -23,7 +23,7 @@ export default StyleSheet.create({
   },
 
   title1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 28,
     fontWeight: "500",
     textAlign: "left",
@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
 
   title2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
@@ -40,14 +40,48 @@ export default StyleSheet.create({
   },
 
   familyCardContainer: {
+    // alignItems: "stretch",
+    overflow: "hidden",
+  },
+
+  dropdownContainer: {
+    width: "89.4%",
     borderWidth: 2,
     borderColor: '#E6ECFE',
     backgroundColor: "#F6F6F6",
-    // alignItems: "stretch",
     marginTop: 16,
     borderRadius: 10, 
-    width: "89.4%",
-    overflow: "hidden",
+  },  
+
+  memberRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+  },
+  
+  memberIcon: {
+    width: 42, 
+    height: 42,
+  },
+
+  memberName: {
+    width: '75%',
+    fontFamily: 'Avenir',
+    fontStyle: 'normal',
+    fontWeight: '800',
+    fontSize: 14,
+    color: '#525454',
+  },
+
+  memberPoints: {
+    fontFamily: 'DMMono_500Medium',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: 24,
+    lineHeight: 31,
+    color: '#526DC2'
   },
 
   homeContainer: {
@@ -289,7 +323,7 @@ export default StyleSheet.create({
   },
 
   balanceText: {
-    fontFamily: "DM Mono",
+    fontFamily: "DMMono_500Medium",
     fontWeight: "500",
     fontSize: 36,
 
@@ -343,7 +377,7 @@ export default StyleSheet.create({
   },
 
   initialText: {
-    fontFamily: 'DM Sans',
+    fontFamily: 'DMSans_700Bold',
     fontWeight: "700",
     fontSize: 18,
 
