@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
 
   title1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 28,
     fontWeight: "500",
     textAlign: "left",
@@ -17,7 +17,7 @@ export default StyleSheet.create({
   },
 
   title2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
@@ -261,7 +261,7 @@ export default StyleSheet.create({
   },
 
   balanceText: {
-    fontFamily: "DM Mono",
+    fontFamily: "DMMono_500Medium",
     fontWeight: "500",
     fontSize: 36,
   },
@@ -272,7 +272,7 @@ export default StyleSheet.create({
   },
 
   initialText: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontWeight: "700",
     fontSize: 18,
   },

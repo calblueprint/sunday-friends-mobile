@@ -27,6 +27,15 @@ import {
   DMSans_700Bold_Italic,
 } from "@expo-google-fonts/dm-sans";
 
+import {
+  DMMono_300Light,
+  DMMono_300Light_Italic,
+  DMMono_400Regular,
+  DMMono_400Regular_Italic,
+  DMMono_500Medium,
+  DMMono_500Medium_Italic,
+} from "@expo-google-fonts/dm-mono";
+
 export default function App() {
   const auth = firebaseApp.auth();
 
@@ -67,7 +76,12 @@ export default function App() {
     DMSans_500Medium_Italic,
     DMSans_700Bold,
     DMSans_700Bold_Italic,
-    DM_Mono: require("./assets/fonts/DMMono-Medium.ttf"),
+    DMMono_300Light,
+    DMMono_300Light_Italic,
+    DMMono_400Regular,
+    DMMono_400Regular_Italic,
+    DMMono_500Medium,
+    DMMono_500Medium_Italic,
   });
 
   if (!isLoadingComplete) {

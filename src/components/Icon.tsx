@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Pressable } from 'react-native';
+import SvgIcon from '../../assets/SvgIcon';
 
 interface IconProps {
     onPress?: () => void;
-    name: React.ComponentProps<typeof FontAwesome>['name'];
+    name: string;
     color: string;
     size?: number;
     style?: object;
@@ -20,13 +21,21 @@ const styles = StyleSheet.create({
     fade: {
         opacity: 0.5,
     },
+    // selected: {
+    //     color: "#FFFFFF"
+    // },
+    // notSelected: {
+    //     color: "#7F93D1"
+    // }
 });
 
 export default function Icon(props: IconProps) {
-    const { onPress, size, style } = props;
+    const { onPress, size, style, name} = props;
 
     return (
-        <FontAwesome size={size} style={{color: '#E6ECFE'}} {...props} />
+        <SvgIcon type={name} {...props}></SvgIcon>
+
+        //<FontAwesome size={size} style={{color: '#E6ECFE'}} {...props} />
         // <Pressable
         //     onPress={onPress ?? null}
         //     style={({ pressed }) => (pressed ? styles.opaque : styles.fade)}

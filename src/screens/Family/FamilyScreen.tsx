@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Pressable, Button, Modal, Image, ScrollView} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
@@ -9,6 +10,7 @@ import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
 import {moment} from 'moment';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
 import { getUser } from '../../firebase/firestore/user';
@@ -17,14 +19,8 @@ import { User } from '../../types/schema';
 import {List} from 'react-native-paper';
 import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
 import { getFamilyById } from "../../firebase/firestore/family";
-
-
-
-const defaultTier = {
-    tier1: 100,
-    tier2: 200,
-    tier3: 300
-}
+import SvgIcon from '../../../assets/SvgIcon';
+import LearnMoreModal from '../../components/LearnMoreModal/LearnMoreModal';
 
 const getCurrentDate=()=>{
     var moment = require('moment');
@@ -53,23 +49,18 @@ const defaultUser: User = {
 const FamilyScreen = ({navigation}: any) => {
 
     const [labels, setLabels] = useState(['1000', '2000', '3000']);
+    const [tierDescriptions, setTierDescriptions] = useState([""]);
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
     const [user, setUser] = useState(defaultUser);
     const [familyName, setFamilyName] = useState("");
     const [userInitial, setuserInitial] = useState("");
     const [familyBalance, setFamilyBalance] = useState(0);
+    const [familyMembers, setFamilyMembers] = useState([defaultUser]);
     const [tierStep, settierStep] = useState(0);
     const [tierName, settierName] = useState("");
-    const [tierDescription, settierDescription] = useState("");
-
-    const fetchFamilyData = async () => {
-        // const family = await getFamilyById(user.family_id.toString())
-        // setFamilyName(family.family_name.toString())
-        // setuserInitial(user.full_name.toString().slice(0,1))
-        // setFamilyBalance(family.total_points)
-        // console.log(familyName)
-    }
-        
+    const [toggleExpanded, setToggleExpanded] = useState(false);
+    const [dropdownExpanded, setDropdownExpanded] = useState(false);
+    const refRBSheet = useRef();
 
     useEffect(() => {
         getAllTiers().then((tiers) => {
@@ -77,37 +68,214 @@ const FamilyScreen = ({navigation}: any) => {
             newlabels[0] = tiers[0].tier1.toString();
             newlabels[1] = tiers[0].tier2.toString();
             newlabels[2] = tiers[0].tier3.toString();
+            const newDescriptions = [];
+            newDescriptions[0] = tiers[0].tier1description;
+            newDescriptions[1] = tiers[0].tier2description;
+            newDescriptions[2] = tiers[0].tier3description;
             setLabels(newlabels);
+            setTierDescriptions(newDescriptions);
 
-        getUser(userUID).then((currUser) => {
-            setUser(currUser);
-            // fetchFamilyData();
-            const family = getFamilyById(currUser.family_id.toString()).then((currFam) => {
-                setFamilyName(currFam.family_name.toString())
-                setuserInitial(currUser.full_name.toString().slice(0,1))
-                setFamilyBalance(currFam.total_points)
-                console.log(familyName)
+            getUser(userUID).then((currUser) => {
+                setUser(currUser);
+                // fetchFamilyData();
+                getFamilyById(currUser.family_id.toString()).then((currFam) => {
+                    setFamilyName(currFam.family_name.toString())
+                    setuserInitial(currUser.full_name.toString().slice(0,1))
+                    setFamilyBalance(currFam.total_points)
+                    setFamilyMembers(currFam.user_ids);
+                })
             })
-            // setFamilyName(family.family_name.toString())
-            // setuserInitial(user.full_name.toString().slice(0,1))
-            // setFamilyBalance(family.total_points)
-            // console.log(familyName)
-        })
-        if (familyBalance < tiers[0].tier1){
-            settierStep(0)
-            settierName("Tier 1: " + tiers[0].tier1title)
-        }
-        if (familyBalance >= tiers[0].tier2 && familyBalance < tiers[0].tier3){
-            settierStep(1)
-            console.log(tiers[0].tier2title)
-            settierName("Tier 2: " + tiers[0].tier2title)
-        }
-        if (familyBalance >= tiers[0].tier3){
-            settierStep(2)
-            settierName("Tier 3: " + tiers[0].tier3title)
-        }
+            if (familyBalance < tiers[0].tier1){
+                settierStep(0)
+                settierName("Tier 1: " + tiers[0].tier1title)
+            }
+            if (familyBalance >= tiers[0].tier2 && familyBalance < tiers[0].tier3){
+                settierStep(1)
+                console.log(tiers[0].tier2title)
+                settierName("Tier 2: " + tiers[0].tier2title)
+            }
+            if (familyBalance >= tiers[0].tier3){
+                settierStep(2)
+                settierName("Tier 3: " + tiers[0].tier3title)
+            }
         })
     }, []);
+
+    const parseNames = () => {
+        var result = "";
+        familyMembers.map((member) => {
+            const name = member.full_name;
+            const firstname = name.split(' ')[0];
+            result += firstname;
+            result += ', ';
+        })
+        result = result.slice(0, -2);
+        //handle ... case here
+        const charlimit = 20;
+        if (result.length > charlimit) {
+            result = result.slice(0, charlimit);
+            result += '...';
+        }
+        return result;
+    }
+
+    const renderIcon = (role: string) => {
+        if (role == 'Head') {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/headSmiley.png')} />
+            )
+        } else if (role == 'Parent') {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/parentSmiley.png')}/>
+            )
+        } else {
+            return (
+                <Image style={styles.profileImage} source={require('../../../assets/images/childSmiley.png')} />
+            )
+        }
+    }
+    
+    const iconStack = () => {
+        var count = 0;
+        return (
+            <View style={styles.stackOfSmileys}>
+                {
+                    familyMembers.map((member) => {
+                        if (count<4) {
+                            count++;
+                            return (
+                                renderIcon(member.role)
+                            )
+                        }
+                    })
+                }
+            </View>
+        )
+    }
+
+    const dropdownToggle = () => {
+        if (!dropdownExpanded) {
+            return (
+                <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.dropdownContainer}>
+                    <View style={styles.dropdownHeader}>
+                        {iconStack()}
+                        <View style={styles.addContainer}>
+                            <View style={styles.dropdownList}>
+                                <View style={styles.rowContainer}>
+                                    <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
+                                </View>
+                                <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                            </View>
+                            <SvgIcon type='chevron_down'></SvgIcon>
+                        </View>
+                    </View>
+                </Pressable>
+            )
+        } else {
+            return (
+                <View style={styles.dropdownContainer}>
+                    <Pressable onPress={() => setDropdownExpanded(!dropdownExpanded)} style={styles.familyCardContainer}>
+                        <View style={styles.dropdownHeader}>
+                            {iconStack()}
+                            <View style={styles.addContainer}>
+                                <View style={styles.dropdownList}>
+                                    <View style={styles.rowContainer}>
+                                        <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
+                                    </View>
+                                    <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                                </View>
+                                <SvgIcon type='chevron_up'></SvgIcon>
+                            </View>
+                        </View>
+                    </Pressable> 
+                    {
+                        familyMembers.map((member) => {
+                            return (
+                                <>
+                                    <View style={styles.memberSeparator}></View>
+                                    <View style={styles.memberRow}>
+                                        {member.role=='Head'?
+                                            <Image style={[styles.memberIcon]} source={require('../../../assets/images/headSmiley.png')} />
+                                            :member.role=='Parent'?
+                                            <Image style={[styles.memberIcon]} source={require('../../../assets/images/parentSmiley.png')} />
+                                            :<Image style={[styles.memberIcon]} source={require('../../../assets/images/childSmiley.png')} />
+                                        }
+                                        <View style={styles.memberInfo}>
+                                            <Text style={styles.memberName}>{member.role=='Child'?member.full_name.split(' ')[0] + ', not in balance':member.full_name.split(' ')[0]}</Text>
+                                            <Text style={styles.memberPoints}>{member.points}</Text>
+                                        </View>
+                                    </View>
+                                </>
+                            )
+                        })
+                    }
+                </View>
+            )
+        }
+    }
+
+    const tierToggle = () => {
+        if (!toggleExpanded) {
+            return (
+                <View style={styles.buttomBar}>
+                    <View  style={styles.tierContainer}>
+                        <View style={styles.tierBox}>
+                            <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
+                        </View>
+                        <Pressable onPress={() => setToggleExpanded(!toggleExpanded)}
+                        style={({ pressed }) => [
+                            {
+                                backgroundColor: pressed
+                                ? 'black'
+                                : '#F6F6F6'
+                            },
+                            styles.toggleButton
+                            ]}>
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9', marginTop: 2}]}>What Can I Get?</Text>
+                            <SvgIcon type="chevron_down"></SvgIcon>
+                        </Pressable>
+                    </View>
+                </View>
+            )
+        } else {
+            return (
+                <View style={styles.tierList}>
+                    <View style={styles.tierBox}>
+                        <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
+                    </View>
+                    <View style={styles.tierTitleContainer}>
+                        <SvgIcon type={tierStep>=0?"tierActive":"tierInactive"} />
+                        <Text style={tierStep==0?styles.tierTitle:styles.tierTitleGray}>Basic Necessities</Text>
+                    </View>
+                    <Text style={styles.tierDescription}>{tierDescriptions[0]}</Text>
+                    <View style={styles.tierTitleContainer}>
+                        <SvgIcon type={tierStep>=1?"tierActive":"tierInactive"} />
+                        <Text style={tierStep==1?styles.tierTitle:styles.tierTitleGray}>Special Shopping Events</Text>
+                    </View>
+                    <Text style={styles.tierDescription}>{tierDescriptions[1]}</Text>
+                    <View style={styles.tierTitleContainer}>
+                        <SvgIcon type={tierStep>=2?"tierActive":"tierInactive"} />
+                        <Text style={tierStep==2?styles.tierTitle:styles.tierTitleGray}>Frontline for Tier 1 Offerings</Text>
+                    </View>
+                    {/* <Text style={styles.tierDescription}>{tierDescriptions[2]}</Text> */}
+                    <View style={styles.tierOptionsContainer}>
+                        <Pressable onPress={() => setToggleExpanded(!toggleExpanded)}
+                        style={({ pressed }) => [
+                            {
+                                backgroundColor: pressed
+                                ? 'black'
+                                : '#F6F6F6'
+                            },
+                            styles.toggleButton
+                            ]}>
+                            <Text style={[globalStyles.body2Bold, {color: '#A9A9A9', marginTop: 2}]}>What Can I Get?</Text>
+                            <SvgIcon type="chevron_up"></SvgIcon>
+                        </Pressable>
+                    </View>
+                </View>
+            )
+        }
+    }
 
 
     const tiersStr = []
@@ -131,22 +299,8 @@ const FamilyScreen = ({navigation}: any) => {
                     </Pressable>
                 </View>
             </View>
-            <View style={styles.familyCardContainer}>
-                <View style={styles.addContainer}>
-                    <View style={styles.stackOfSmileys}>
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 0}]} source={require('../../../assets/images/parentSmiley.png')}/>
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 27}]} source={require('../../../assets/images/headSmiley.png')} />
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 57}]} source={require('../../../assets/images/childSmiley.png')} />
-                        <Image style = {[styles.profileImage, {position: 'absolute', left: 87}]} source={require('../../../assets/images/childSmiley.png')} />
-                    </View>
-                    <View style={styles.innerContainer}>
-                        <View style={styles.rowContainer}>
-                            <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>5 People</Text>
-                        </View>
-                        <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>Me, Jacob, Cindy, Albe...</Text>
-                    </View>
-                </View>
-            </View>
+
+            {dropdownToggle()}
 
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
@@ -154,7 +308,8 @@ const FamilyScreen = ({navigation}: any) => {
                         <Text style={[styles.balanceText, {color: "#253C85"}]}>{familyBalance}</Text>
                         <Text style={globalStyles.overline2}>FAMILY BALANCE</Text>
                     </View>
-                        <Pressable style={({ pressed }) => [
+                        <Pressable onPress={() => refRBSheet.current.open()}
+                        style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
                                 ? 'white'
@@ -173,40 +328,11 @@ const FamilyScreen = ({navigation}: any) => {
                     currentPosition={tierStep}
                     labels={labels}
                     />
+                </View>
 
-                </View>
-                <View style={styles.buttomBar}>
-                    <View  style={styles.tierContainer}>
-                        <View style={styles.tierBox}>
-                            <Text style={[styles.tierText, {color: "#253C85"}]}>{tierName}</Text>
-                        </View>
-                        <View style={styles.tierOptionsContainer}>
-                            <Pressable style={({ pressed }) => [
-                                {
-                                    backgroundColor: pressed
-                                    ? 'black'
-                                    : '#F6F6F6'
-                                },
-                                styles.optionsContainer
-                                ]}>
-                                <Text style={[globalStyles.body2Bold, {color: '#A9A9A9'}]}>What Can I Get?</Text>
-                            </Pressable>
-                        </View>
-                        {/* <View style={styles.columnContainer}>
-                            <View style={styles.rowContainer}>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>Bottle water, can food, fresh food</Text>
-                            </View>
-                            <View style={styles.rowContainer}>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>[ICON] </Text>
-                                <Text style={[styles.itemsText, {color: "#525454"}]}>Hygeine products, toiletries</Text>
-                            </View>
-                        </View> */}
-                    </View>
-                </View>
-                <View>
-                </View>
+                {tierToggle()}
             </View>
+            
             <View style={styles.tranxContainer}>
 
                 <View style = {styles.tranxbar}>
@@ -218,6 +344,20 @@ const FamilyScreen = ({navigation}: any) => {
 
             </View>
             </ScrollView>
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={761}
+                customStyles={{
+                    container: {
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                    }
+                }}
+            >
+                <LearnMoreModal refRBSheet={refRBSheet}/>
+            </RBSheet>
         </View>
         
     );
