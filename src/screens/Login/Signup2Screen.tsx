@@ -102,7 +102,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                     parent
                 );
                 addUser(newUser);
-                addMemberToFamily(newUser.user_id, newUser.family_id.toString());
+                addMemberToFamily(newUser, newUser.family_id.toString());
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'FamilyName' });
                 } else {

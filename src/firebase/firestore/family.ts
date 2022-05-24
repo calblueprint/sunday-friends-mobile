@@ -31,11 +31,19 @@ export const addFamily = async (family: Family): Promise<void> => {
   }
 }
 
-export const addMemberToFamily = async (userId: string, FID: string): Promise<void> => {
+export const addMemberToFamily = async (user: User, FID: string): Promise<void> => {
   try {
     var doc = await familyCollection.doc(FID).get()
     const fam = doc.data() as Family;
-    fam.user_ids.push(userId);
+    if (user.role=="Parent") {
+      fam.user_ids = [
+        ...fam.user_ids.slice(0, 1),
+        user.user_id,
+        ...fam.user_ids.slice(1)
+      ]
+    } else if (user.role == "Child") {
+      fam.user_ids.push(user.user_id);
+    }
 
     await familyCollection.doc(FID).set(fam);
   } catch (e) {

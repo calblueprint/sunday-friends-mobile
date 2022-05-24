@@ -82,8 +82,7 @@ const FamilyScreen = ({navigation}: any) => {
                     setFamilyName(currFam.family_name.toString())
                     setuserInitial(currUser.full_name.toString().slice(0,1))
                     setFamilyBalance(currFam.total_points)
-                    setFamilyMembers(currFam.user_ids)
-                    console.log(familyName)
+                    setFamilyMembers(currFam.user_ids);
                 })
             })
             if (familyBalance < tiers[0].tier1){
@@ -112,6 +111,11 @@ const FamilyScreen = ({navigation}: any) => {
         })
         result = result.slice(0, -2);
         //handle ... case here
+        const charlimit = 20;
+        if (result.length > charlimit) {
+            result = result.slice(0, charlimit);
+            result += '...';
+        }
         return result;
     }
 
