@@ -47,10 +47,7 @@ export default StyleSheet.create({
   familyBalanceCardContainer: {
     backgroundColor: "white",
     marginTop: 17,
-<<<<<<< HEAD
     marginBottom: "3%",
-=======
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
     borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
@@ -65,10 +62,6 @@ export default StyleSheet.create({
   tranxbar: {
     marginLeft: "5%",
     marginBottom: 17,
-<<<<<<< HEAD
-
-=======
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
   },
 
   headline: {
@@ -80,11 +73,7 @@ export default StyleSheet.create({
   },
 
   shadow: {
-<<<<<<< HEAD
     shadowColor: '#202020',
-=======
-    shadowColor: "#202020",
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
@@ -182,13 +171,8 @@ export default StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     borderWidth: 2,
-<<<<<<< HEAD
     borderColor: '#5A6AA2',
     alignItems: 'flex-start',
-=======
-    borderColor: "#5A6AA2",
-    alignItems: "flex-start",
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
     paddingLeft: 10,
     paddingVertical: 7,
   },
@@ -262,11 +246,7 @@ export default StyleSheet.create({
     alignItems: "center",
     width: 69,
     height: 39,
-<<<<<<< HEAD
     backgroundColor: '#526DC2',
-=======
-    backgroundColor: "#526DC2",
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
     borderRadius: 5,
     paddingHorizontal: 13,
     paddingVertical: 10,

@@ -240,10 +240,11 @@ const FamilyScreen = ({ navigation }: any) => {
                             </TransactionsGroup>
 
                         </View>
-                    </ScrollView>
+                    </View>
                 </View>
-
-                );
+            </ScrollView>
+        </View>
+    );
 }
 
                 export default FamilyScreen;
