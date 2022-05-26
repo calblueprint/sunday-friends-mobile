@@ -77,12 +77,6 @@ const TransactionsGroup = ({ forFamily }: any) => {
             const family = await getFamilyById(user.family_id.toString())
             console.log(family, "family")
             family.user_ids.forEach(async (user) => {
-<<<<<<< HEAD
-                const addRole = user.transactions.map((transaction) => {
-                    return { ...transaction, role: user.role }
-                })
-                newTransactions.push(...addRole)
-=======
                 if (!user?.transactions) {
                     // continue
                 } else {
@@ -91,7 +85,6 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     })
                     newTransactions.push(...addRole)
                 }
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
             })
         } else {
             const fetchedTransactions = await getTransactionByUser(userUID)
@@ -157,11 +150,6 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     //get and filter transaction data
     useEffect(() => {
-<<<<<<< HEAD
-        console.log(enteredSearch)
-
-=======
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
         fetchTransactions().catch(console.error)
         //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
         // setTransactions([
@@ -296,11 +284,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                     <ActivityIndicator size="large" />
                 ) : (
                     (transactions.length === 0) ? (
-<<<<<<< HEAD
-                        <Text style={{ textAlign: "center", marginTop: "5%", fontFamily: "DMSans_400Regular" }}>No transactions found</Text>
-=======
                         <Text style={styles.noneFoundText}>No transactions found</Text>
->>>>>>> 3fc35adbd314193731b4668f02a30ac25cdb603f
                         // <ActivityIndicator size="large"/>
                     ) : (
                         <FlatList

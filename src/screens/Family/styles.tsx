@@ -23,7 +23,7 @@ export default StyleSheet.create({
   },
 
   title1: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_500Medium",
     fontSize: 28,
     fontWeight: "500",
     textAlign: "left",
@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
 
   title2: {
-    fontFamily: "DM Sans",
+    fontFamily: "DMSans_700Bold",
     fontSize: 30,
     fontWeight: "700",
     textAlign: "left",
@@ -40,14 +40,82 @@ export default StyleSheet.create({
   },
 
   familyCardContainer: {
+    // alignItems: "stretch",
+    overflow: "hidden",
+    // borderBottomColor: "#F2F2F2",
+    // borderBottomWidth: 2,
+  },
+
+  dropdownContainer: {
+    width: "89.4%",
     borderWidth: 2,
     borderColor: '#E6ECFE',
     backgroundColor: "white",
-    // alignItems: "stretch",
     marginTop: 16,
-    borderRadius: 10,
-    width: "89.4%",
-    overflow: "hidden",
+    borderRadius: 10, 
+    paddingHorizontal: 10,
+  },  
+
+  dropdownHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+  },
+
+  dropdownList: {
+
+  },
+
+  headSeparator: {
+    width: '100%',
+    height: 2,
+    backgroundColor: '#F2F2F2',
+    alignSelf: 'center',
+  },
+
+  memberSeparator: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#F2F2F2',
+    alignSelf: 'center',
+  },
+
+  memberRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+
+  memberInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
+    marginLeft: 20,
+  },
+  
+  memberIcon: {
+    width: 42, 
+    height: 42,
+  },
+
+  memberName: {
+    fontFamily: 'Avenir',
+    fontStyle: 'normal',
+    fontWeight: '800',
+    fontSize: 14,
+    color: '#525454',
+  },
+
+  memberPoints: {
+    fontFamily: 'DMMono_500Medium',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: 24,
+    lineHeight: 31,
+    color: '#526DC2'
   },
 
   homeContainer: {
@@ -69,7 +137,6 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
-    height: 268,
     borderColor: '#E6ECFE',
     marginBottom: "4%",
   },
@@ -97,14 +164,15 @@ export default StyleSheet.create({
 
   addContainer: {
     flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: "5%",
-    marginLeft: 10,
-    width: "89.4%",
+    marginLeft: 20,
+    flex: 1,
   },
 
   topHalfContainer: {
     justifyContent: 'space-between',
-    alignItems: "center",
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
@@ -112,31 +180,27 @@ export default StyleSheet.create({
   },
 
   tierOptionsContainer: {
-    flexDirection: "row-reverse",
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
     width: "100%",
-    // borderWidth: 2,
-    // borderColor: 'black',
+    marginTop: 10,
   },
 
   stackOfSmileys: {
-    marginRight: 10,
     flexDirection: "row",
-    width: 120,
-    // shadowColor: 'black',
-    // shadowOffset: {width: 10, height: 10},
-    // shadowRadius: 5,
-    // borderWidth: 2,
-    // borderColor: 'black',
+    justifyContent: 'flex-start',
+    marginRight: 12,
+    // width: '30%',
   },
 
   profileImage: {
     width: 42,
     height: 42,
+    marginRight: -12,
     // borderWidth: 2,
     // borderColor: 'black',
   },
-
-
 
   buttomBar: {
     justifyContent: 'space-between',
@@ -145,8 +209,30 @@ export default StyleSheet.create({
     marginTop: 20,
     marginLeft: "5%",
     width: "89.4%",
+    marginBottom: 15,
     // borderColor: 'black',
     // borderWidth: 2,
+  },
+
+  tierList: {
+    flexDirection: 'column',
+    alignItems: "flex-start",
+    width: "89.4%",
+    marginTop: 29,
+    marginLeft: "5%",
+    marginBottom: 15,
+  },
+
+  toggleButton: {
+    flexDirection: 'row',
+  },
+
+  nameText: {
+    fontFamily: 'Avenir',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 13,
+    lineHeight: 16
   },
 
   buttonText: {
@@ -203,7 +289,7 @@ export default StyleSheet.create({
   },
 
   contributions: {
-    width: 127,
+    width: 85,
     height: 24,
     borderRadius: 26,
     padding: 4,
@@ -211,6 +297,7 @@ export default StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: '#A9A9A9',
+    marginTop: '3%',
   },
 
   addLevelCircle: {
@@ -233,7 +320,6 @@ export default StyleSheet.create({
 
   innerContainer: {
     alignSelf: "center",
-    marginLeft: "3%",
   },
 
   optionsContainer: {
@@ -252,21 +338,22 @@ export default StyleSheet.create({
   tierContainer: {
     // marginTop: 20,
     flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: 'center',
+
+    justifyContent: "space-between",
+    width: '100%',
     // width: '89.4%'
   },
 
   tierBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 69,
-    height: 39,
-    backgroundColor: '#526DC2',
-    borderRadius: 5,
-    paddingHorizontal: 13,
-    paddingVertical: 10,
-    marginRight: 14,
+    // flexDirection: "row",
+    // alignItems: "center",
+    // width: 69,
+    // height: 39,
+    // backgroundColor: '#526DC2',
+    // borderRadius: 5,
+    // paddingHorizontal: 13,
+    // paddingVertical: 10,
+    // marginRight: 14,
   },
 
   columnContainer: {
@@ -280,11 +367,52 @@ export default StyleSheet.create({
   },
 
   balanceText: {
-    fontFamily: "DM Mono",
+    fontFamily: "DMMono_500Medium",
     fontWeight: "500",
     fontSize: 36,
 
   },
+
+  tierTitleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+  },
+
+  tierTitle: {
+    fontFamily: 'Avenir',
+    fontWeight: "800",
+    fontSize: 14,
+    marginTop: 2,
+    marginLeft: 8,
+    color: "#272929",
+  },
+
+  tierTitleGray: {
+    fontFamily: 'Avenir',
+    fontWeight: "800",
+    fontSize: 14,
+    marginTop: 2,
+    marginLeft: 8,
+    color: "#525454",
+  },
+
+  tierText: {
+    fontFamily: "Avenir",
+    fontWeight: "900",
+    fontSize: 14,
+
+  },
+
+  tierDescription: {
+    fontFamily: "Avenir",
+    fontWeight: "400",
+    fontSize: 12,
+    marginTop: 5,
+    marginLeft: "10%",
+  },
+
   itemsText: {
     fontFamily: 'Avenir',
     fontWeight: "400",
@@ -293,10 +421,9 @@ export default StyleSheet.create({
   },
 
   initialText: {
-    fontFamily: 'DM Sans',
+    fontFamily: 'DMSans_700Bold',
     fontWeight: "700",
     fontSize: 18,
-
   },
 
   tranxContainer: {

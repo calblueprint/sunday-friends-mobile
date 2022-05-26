@@ -135,12 +135,12 @@ const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, ma
                 </View>
             </View>
             <View style={styles.resetApplyContainer}>
-                    <Pressable style={styles.resetApplyButton} onPress={handleReset}> 
-                        <Text style={[globalStyles.overline1, {color: "#272929"}]}>Reset</Text>
-                    </Pressable>
-                    <Pressable style={[styles.resetApplyButton, {backgroundColor: "#253C85", borderColor: "#253C85"}]} onPress={handleApply}> 
-                        <Text style={[globalStyles.overline1, {color: "#FFFFFF"}]}>Apply</Text>
-                    </Pressable>
+                <Pressable style={styles.resetApplyButton} onPress={handleReset}> 
+                    <Text style={[globalStyles.overline1, {color: "#272929"}]}>Reset</Text>
+                </Pressable>
+                <Pressable style={[styles.resetApplyButton, {backgroundColor: "#253C85", borderColor: "#253C85"}]} onPress={handleApply}> 
+                    <Text style={[globalStyles.overline1, {color: "#FFFFFF"}]}>Apply</Text>
+                </Pressable>
             </View>
             <DateTimePickerModal
                 isVisible={showMin}

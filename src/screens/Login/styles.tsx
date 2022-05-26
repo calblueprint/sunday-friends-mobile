@@ -33,7 +33,7 @@ export default StyleSheet.create({
     // },
 
     title2: {
-        fontFamily: "DM Sans",
+        fontFamily: "DMSans_700Bold",
         fontSize: 30,
         fontWeight: "700",
         textAlign: "left",

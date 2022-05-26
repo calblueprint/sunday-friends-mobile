@@ -91,7 +91,7 @@ const PersonalScreen = ({navigation}: any) => {
                 <Text style={[globalStyles.body2, {color: '#525454'}]}>{getCurrentDate()}</Text>
             </View>
             <View style = {styles.headline}>
-                <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Morning, Yakob</Text>
+                <Text style={[globalStyles.h3Bold, {color: '#272929'}]}>Morning, {user.full_name.split(' ')[0]}</Text>
                 <View style={styles.innerContainer}>
                     <Pressable
                         onPress={()=>navigation.navigate('Profile')}

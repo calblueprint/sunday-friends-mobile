@@ -23,17 +23,17 @@ const FamilyNameScreen = ({ navigation }: any) => {
 
   const handleAdd = () => {
     try {
-      getCountAndIncrement().then((id) => {
+      getUser(userUID).then((user) => {
         const newFamily = {
           family_name: familyName,
           last_active: new Date(),
           total_points: 0,
-          family_id: id,
+          family_id: user.family_id,
           user_ids: [userUID] as string[],
         };
 
         addFamily(newFamily as Family);
-        editUserFamilyID(userUID, id);
+        //editUserFamilyID(userUID, user.family_id);
 
         navigation.navigate("LoginStack", { screen: "Invite" })
 
