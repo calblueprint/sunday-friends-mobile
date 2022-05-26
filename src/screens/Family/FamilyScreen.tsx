@@ -202,7 +202,7 @@ const FamilyScreen = ({navigation}: any) => {
                                         }
                                         <View style={styles.memberInfo}>
                                             <Text style={styles.memberName}>{member.role=='Child'?member.full_name.split(' ')[0] + ', not in balance':member.full_name.split(' ')[0]}</Text>
-                                            <Text style={styles.memberPoints}>{member.points}</Text>
+                                            <Text style={styles.memberPoints}>{member.suspended?'N/A':member.points}</Text>
                                         </View>
                                     </View>
                                 </>

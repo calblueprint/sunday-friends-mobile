@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Pressable, ScrollView, Button, Modal, Image} from 'react-native';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { getAllTransactions } from '../../firebase/firestore/transaction';
@@ -9,6 +10,7 @@ import styles from './styles';
 import {customStyles} from './styles';
 import globalStyles from "../../globalStyles";
 import {moment} from 'moment';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
 import { getUser } from '../../firebase/firestore/user';
@@ -16,6 +18,7 @@ import { AuthenticatedUserContext } from '../../context/userContext';
 import { User } from '../../types/schema';
 import {List} from 'react-native-paper';
 import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
+import LearnMoreModal from '../../components/LearnMoreModal/LearnMoreModal';
 
 const defaultLabels = ['100', '200', '300']
 
@@ -56,6 +59,7 @@ const PersonalScreen = ({navigation}: any) => {
 
     const [userInitial, setuserInitial] = useState("");
     const [personalBalance, setpersonalBalance] = useState(0);
+    const refRBSheet = useRef();
 
     // const fetchPersonalData = async () => {
     //     setuserInitial(user.full_name.toString().slice(0,1));
@@ -109,10 +113,11 @@ const PersonalScreen = ({navigation}: any) => {
             <View style={styles.familyBalanceCardContainer}>
                 <View style={styles.topHalfContainer}>
                     <View style = {styles.balanceContainer}>
-                        <Text style={[styles.balanceText, {color: "#253C85"}]}>{personalBalance}</Text>
-                        <Text style={globalStyles.overline2}>MY BALANCE</Text>
+                        <Text style={[styles.balanceText, {color: "#253C85"}]}>{user.suspended?'N/A':personalBalance}</Text>
+                        <Text style={globalStyles.overline2}>{user.suspended?'ACCOUNT SUSPENDED':'MY BALANCE'}</Text>
                     </View>
-                        <Pressable style={({ pressed }) => [
+                        <Pressable onPress={() => refRBSheet.current.open()}
+                        style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
                                 ? 'white'
@@ -135,7 +140,21 @@ const PersonalScreen = ({navigation}: any) => {
                 </TransactionsGroup>
 
             </View>
-            
+
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={761}
+                customStyles={{
+                    container: {
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                    }
+                }}
+            >
+                <LearnMoreModal refRBSheet={refRBSheet}/>
+            </RBSheet>
         </View>
     );
 }
