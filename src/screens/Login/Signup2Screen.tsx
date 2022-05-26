@@ -100,11 +100,15 @@ const Signup2Screen = ({ route, navigation }: any) => {
     // };
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        
+    };
+
+    const submitForm = async () => {
         console.log('buttonpress');
         try {
             changeSubmitting(true);
-            if (data.password1 == data.password2) {
-                const result = await registerWithEmailAndPassword(user_invite.email, data.password1);
+            if (valid()) {
+                const result = await registerWithEmailAndPassword(user_invite.email, pass);
                 console.log(user_invite.family_id)
                 const parent = user_invite.status != "Child";
                 const newUser = createUser(
@@ -130,7 +134,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });
         }
-    };
+    }
 
     const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
         return console.log(errors)
@@ -172,7 +176,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
             </FormProvider>
             <RectangularButton
                 disable={submitting}
-                onPress={methods.handleSubmit(onSubmit, onError)}
+                onPress={() => submitForm()}
                 text="Next"
                 buttonStyle={{ marginTop: '10%', backgroundColor: valid()?'#253C85':'#A9A9A9'}}
                 textStyle={{ color: '#FFF' }}
