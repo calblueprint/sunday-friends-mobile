@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: "white",
+        backgroundColor: "#FAFAFA",
         width: "100%",
         //   height: "66px",
         justifyContent: "center",
@@ -50,7 +50,7 @@ export default StyleSheet.create({
         fontFamily: "Avenir",
         fontStyle: "normal",
         fontWeight: "800",
-        fontSize: 12,
+        fontSize: 14,
         lineHeight: 16,
         marginVertical: 2,
     },
@@ -59,7 +59,7 @@ export default StyleSheet.create({
         fontFamily: "Avenir",
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: 12,
+        fontSize: 13,
         lineHeight: 16,
         marginVertical: 2
     },

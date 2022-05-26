@@ -164,7 +164,7 @@ const FamilyScreen = ({navigation}: any) => {
                                 <View style={styles.rowContainer}>
                                     <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
                                 </View>
-                                <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                                <Text style={[styles.nameText, {color: "#5F5F5F"}]}>{parseNames()}</Text>
                             </View>
                             <SvgIcon type='chevron_down'></SvgIcon>
                         </View>
@@ -182,14 +182,22 @@ const FamilyScreen = ({navigation}: any) => {
                                     <View style={styles.rowContainer}>
                                         <Text style={[globalStyles.body1Bold,{color: "#5F5F5F"}]}>{familyMembers.length} People</Text>
                                     </View>
-                                    <Text style={[globalStyles.body1, {color: "#5F5F5F"}]}>{parseNames()}</Text>
+                                    <Text style={[styles.nameText, {color: "#5F5F5F"}]}>{parseNames()}</Text>
                                 </View>
                                 <SvgIcon type='chevron_up'></SvgIcon>
                             </View>
                         </View>
                     </Pressable> 
+                    <View style={styles.headSeparator}></View>
+                    <View style={styles.memberRow}>
+                        <Image style={[styles.memberIcon]} source={require('../../../assets/images/headSmiley.png')} />
+                        <View style={styles.memberInfo}>
+                            <Text style={styles.memberName}>{familyMembers[0].full_name.split(' ')[0]}</Text>
+                            <Text style={styles.memberPoints}>{familyMembers[0].points}</Text>
+                        </View>
+                    </View>
                     {
-                        familyMembers.map((member) => {
+                        familyMembers.slice(1).map((member) => {
                             return (
                                 <>
                                     <View style={styles.memberSeparator}></View>
@@ -226,8 +234,8 @@ const FamilyScreen = ({navigation}: any) => {
                         style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
-                                ? 'black'
-                                : '#F6F6F6'
+                                ? '#F6F6F6'
+                                : 'white'
                             },
                             styles.toggleButton
                             ]}>
@@ -263,8 +271,8 @@ const FamilyScreen = ({navigation}: any) => {
                         style={({ pressed }) => [
                             {
                                 backgroundColor: pressed
-                                ? 'black'
-                                : '#F6F6F6'
+                                ? '#F6F6F6'
+                                : 'white'
                             },
                             styles.toggleButton
                             ]}>

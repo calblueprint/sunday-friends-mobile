@@ -5,7 +5,7 @@ export default StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "90%",
-    backgroundColor: "#eee",
+    backgroundColor: "#FAFAFA",
   },
 
   contentContainer: {
@@ -50,7 +50,7 @@ export default StyleSheet.create({
     width: "89.4%",
     borderWidth: 2,
     borderColor: '#E6ECFE',
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "white",
     marginTop: 16,
     borderRadius: 10, 
     paddingHorizontal: 10,
@@ -67,9 +67,16 @@ export default StyleSheet.create({
 
   },
 
+  headSeparator: {
+    width: '100%',
+    height: 2,
+    backgroundColor: '#F2F2F2',
+    alignSelf: 'center',
+  },
+
   memberSeparator: {
-    width: '80%',
-    height: 3,
+    width: '100%',
+    height: 1,
     backgroundColor: '#F2F2F2',
     alignSelf: 'center',
   },
@@ -115,6 +122,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
+    backgroundColor: "#FAFAFA",
   },
 
   shomeContainer: {
@@ -124,12 +132,13 @@ export default StyleSheet.create({
   },
 
   familyBalanceCardContainer: {
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "white",
     marginTop: 17,
-    borderRadius: 10, 
+    borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
     borderColor: '#E6ECFE',
+    marginBottom: "4%",
   },
 
   headline: {
@@ -142,7 +151,7 @@ export default StyleSheet.create({
 
   shadow: {
     shadowColor: '#202020',
-    shadowOffset: {width: 0, height: 0},
+    shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
 
@@ -167,7 +176,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
-    marginTop: 16, 
+    marginTop: 16,
   },
 
   tierOptionsContainer: {
@@ -186,7 +195,7 @@ export default StyleSheet.create({
   },
 
   profileImage: {
-    width: 42, 
+    width: 42,
     height: 42,
     marginRight: -12,
     // borderWidth: 2,
@@ -195,8 +204,9 @@ export default StyleSheet.create({
 
   buttomBar: {
     justifyContent: 'space-between',
-    alignItems: "flex-start",
-    marginTop: 29,
+    alignItems: "center",
+    flexDirection: "column",
+    marginTop: 20,
     marginLeft: "5%",
     width: "89.4%",
     marginBottom: 15,
@@ -217,6 +227,14 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
 
+  nameText: {
+    fontFamily: 'Avenir',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 13,
+    lineHeight: 16
+  },
+
   buttonText: {
     color: '#393939',
   },
@@ -225,11 +243,12 @@ export default StyleSheet.create({
     color: 'green'
   },
 
-
-
   progressBar: {
-    marginTop: 29,
+    width: '120%',
+    marginTop: 20,
     justifyContent: "center",
+    marginLeft: "-10%",
+
     // borderWidth: 2, 
     // borderColor: 'black',
   },
@@ -253,10 +272,10 @@ export default StyleSheet.create({
     height: 37,
     borderRadius: 20,
     justifyContent: "center",
-    borderWidth: 2, 
+    borderWidth: 2,
     borderColor: '#5A6AA2',
     alignItems: 'flex-start',
-    paddingLeft: 10, 
+    paddingLeft: 10,
     paddingVertical: 7,
   },
 
@@ -278,6 +297,7 @@ export default StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: '#A9A9A9',
+    marginTop: '3%',
   },
 
   addLevelCircle: {
@@ -303,7 +323,7 @@ export default StyleSheet.create({
   },
 
   optionsContainer: {
-    // marginTop: 20,
+    marginTop: 20,
   },
 
   levels: {
@@ -316,22 +336,23 @@ export default StyleSheet.create({
   },
 
   tierContainer: {
+    // marginTop: 20,
     flexDirection: "row",
 
     justifyContent: "space-between",
     width: '100%',
-    // borderColor: 'red',
-    // borderWidth: 2,
+    // width: '89.4%'
   },
 
   tierBox: {
-    // alignItems: "flex-start",
+    // flexDirection: "row",
+    // alignItems: "center",
     // width: 69,
     // height: 39,
     // backgroundColor: '#526DC2',
-    // borderRadius: 5, 
+    // borderRadius: 5,
     // paddingHorizontal: 13,
-    // paddingVertical: 10, 
+    // paddingVertical: 10,
     // marginRight: 14,
   },
 
@@ -419,7 +440,7 @@ export default StyleSheet.create({
 
 export const customStyles = {
   stepIndicatorSize: 23.05,
-  currentStepIndicatorSize:23.05,
+  currentStepIndicatorSize: 23.05,
   separatorStrokeWidth: 4.39,
   currentStepStrokeWidth: 2,
   stepStrokeCurrentColor: '#7F93D1',

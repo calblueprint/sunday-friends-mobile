@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    backgroundColor: '#F1F1F1',
   },
   btnGroup: {
     flexDirection: 'row',
@@ -36,6 +37,7 @@ export default StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
+    backgroundColor: '#FAFAFA',
   },
   searchbar: {
     display: 'flex',
@@ -63,7 +65,7 @@ export default StyleSheet.create({
   },
   searchText: {
     fontFamily: 'Avenir',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '400',
     lineHeight: 16,
     color: '#525454',

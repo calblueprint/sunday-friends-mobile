@@ -12,6 +12,7 @@ import { getTransactionByUser } from "../../firebase/firestore/transaction";
 import { getUser } from "../../firebase/firestore/user";
 import { getFamilyById } from "../../firebase/firestore/family";
 import { AuthenticatedUserContext } from '../../context/userContext';
+import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 
 const TransactionsGroup = ({ forFamily }: any) => {
     //const userId = useContext(userContext);
@@ -89,7 +90,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
             const fetchedTransactions = await getTransactionByUser(userUID)
             newTransactions.push(...fetchedTransactions)
         }
-        
+
         if (enteredSearch) {
             const filteredTransactions = newTransactions.filter((transaction) => {
                 return transaction.description.toLowerCase().match(searchText.toLowerCase())
@@ -213,37 +214,37 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     return (
         //Line below allows searchbar to dismiss keyboard when clicked away
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}> 
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
                 <View style={styles.btnGroup}>
-                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]} 
+                    <Pressable style={[styles.btn, selection === 1 ? styles.selectedBtn : styles.unselectedBtn]}
                         onPress={() => {
                             setSelection(1)
                             setTypeFilter(1)
                         }}>
-                        <Text style={[styles.btnText, selection === 1 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>All History</Text>
+                        <Text style={[styles.btnText, selection === 1 ? { color: '#6B7280' } : { color: '#A9A9A9' }]}>All History</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]} 
+                    <Pressable style={[styles.btn, selection === 2 ? styles.selectedBtn : styles.unselectedBtn]}
                         onPress={() => {
                             setSelection(2)
                             setTypeFilter(2)
                         }}>
-                        <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Earnings</Text>
+                        <Text style={[styles.btnText, selection === 2 ? { color: '#6B7280' } : { color: '#A9A9A9' }]}>Earnings</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]} 
+                    <Pressable style={[styles.btn, selection === 3 ? styles.selectedBtn : styles.unselectedBtn]}
                         onPress={() => {
                             setSelection(3)
                             setTypeFilter(3)
                         }}>
-                        <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : {color: '#A9A9A9'}]}>Expirations</Text>
+                        <Text style={[styles.btnText, selection === 3 ? { color: '#6B7280' } : { color: '#A9A9A9' }]}>Expirations</Text>
                     </Pressable>
                 </View>
 
                 <View style={styles.searchFilterContainer}>
-                    <View style={[styles.searchbar, searchClicked && { borderColor: "#7F93D1" }, searchEntered ? {backgroundColor: '#E6ECFE'} : {backgroundColor: 'white'}]}>
+                    <View style={[styles.searchbar, searchClicked && { borderColor: "#7F93D1" }, searchEntered ? { backgroundColor: '#E6ECFE' } : { backgroundColor: 'white' }]}>
                         <View style={styles.innerSearchbar}>
-                            <View style={{paddingRight: 10}}>
-                                <SvgIcon type="searchbar_search"/>
+                            <View style={{ paddingRight: 10 }}>
+                                <SvgIcon type="searchbar_search" />
                             </View>
                             <TextInput
                                 style={styles.searchText}
@@ -263,7 +264,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             {(searchText !== "") && (
                                 <Pressable style={styles.iconWrapper} onPress={() => {
                                     setSearchText("");
-                                  setEnteredSearch("");
+                                    setEnteredSearch("");
                                     setSearchEntered(false);
                                     setSearchClicked(false);
                                 }}>
@@ -273,43 +274,43 @@ const TransactionsGroup = ({ forFamily }: any) => {
                             
                         </View>
                     </View>
-                    <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}> 
+                    <Pressable style={styles.filtersButton} onPress={() => refRBSheet.current.open()}>
                         <Text style={styles.filtersButtonText}>Filters ({numFilters})</Text>
                     </Pressable>
-                    
+
                 </View>
 
                 {isLoading ? (
-                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator size="large" />
                 ) : (
                     (transactions.length === 0) ? (
                         <Text style={styles.noneFoundText}>No transactions found</Text>
                         // <ActivityIndicator size="large"/>
                     ) : (
                         <FlatList
-                            contentContainerStyle = {{ paddingBottom: 30 }}
+                            contentContainerStyle={{ paddingBottom: 30 }}
                             data={transactions}
                             keyExtractor={item => (item.date, item.description)}
                             renderItem={(forFamily) ? (
-                                ( {item} ) => (
+                                ({ item }) => (
                                     <Pressable onPress={() => {
                                         setDetailsModalVisible(true);
                                         setDetailsTransaction(item);
                                     }}>
-                                        <TransactionPreview transaction={item}/>
+                                        <TransactionPreview transaction={item} />
                                     </Pressable>
                                 )) : (
-                                ( {item} ) => (
+                                ({ item }) => (
                                     <Pressable onPress={() => {
                                         setDetailsModalVisible(true);
                                         setDetailsTransaction(item);
                                     }}>
-                                        <TransactionPreviewNoIcon transaction={item}/>
+                                        <TransactionPreviewNoIcon transaction={item} />
                                     </Pressable>
                                 ))
                             }
                         />
-                        
+
                     )
                 )}
                 {detailsTransaction && (
