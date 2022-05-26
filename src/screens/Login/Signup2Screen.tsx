@@ -39,6 +39,8 @@ const Signup2Screen = ({ route, navigation }: any) => {
 
     const [isFocused, changeFocus] = React.useState(false);
     const [submitting, changeSubmitting] = React.useState(false);
+    const [pass, onChangePW] = React.useState("");
+    const [confirmPass, onChangeConfirm] = React.useState("");
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
@@ -70,6 +72,17 @@ const Signup2Screen = ({ route, navigation }: any) => {
         name: user_invite.name,
     };
 
+    const valid = () => {
+        return (
+            pass == confirmPass &&
+            pass.length >= 8 &&
+            pass.length <= 20 &&
+            /\d/.test(pass) &&
+            /[A-Z]/.test(pass) &&
+            /^\S+$/.test(pass)
+        );
+    };
+
     // const sendEmail = (type: string) => {
     //     console.log("hellooooooooo\n");
     //     console.log(EMAILJS_SERVICE_ID);
@@ -87,10 +100,15 @@ const Signup2Screen = ({ route, navigation }: any) => {
     // };
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        
+    };
+
+    const submitForm = async () => {
+        console.log('buttonpress');
         try {
             changeSubmitting(true);
-            if (data.password1 == data.password2) {
-                const result = await registerWithEmailAndPassword(user_invite.email, data.password1);
+            if (valid()) {
+                const result = await registerWithEmailAndPassword(user_invite.email, pass);
                 console.log(user_invite.family_id)
                 const parent = user_invite.status != "Child";
                 const newUser = createUser(
@@ -116,7 +134,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });
         }
-    };
+    }
 
     const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
         return console.log(errors)
@@ -141,6 +159,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 <FormInput
                     name="password1"
                     rules={{ required: 'Password is required!' }}
+                    onChangeText={onChangePW}
                     label="Password"
                     placeholder="Enter password"
                     secureTextEntry={true}
@@ -149,6 +168,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 <FormInput
                     name="password2"
                     rules={{ required: 'Password is required!' }}
+                    onChangeText={onChangeConfirm}
                     label="Confirm Password"
                     placeholder="Enter same password"
                     secureTextEntry={true}
@@ -156,16 +176,67 @@ const Signup2Screen = ({ route, navigation }: any) => {
             </FormProvider>
             <RectangularButton
                 disable={submitting}
-                onPress={methods.handleSubmit(onSubmit, onError)}
+                onPress={() => submitForm()}
                 text="Next"
-                buttonStyle={{ marginTop: '10%', backgroundColor: '#253C85' }}
+                buttonStyle={{ marginTop: '10%', backgroundColor: valid()?'#253C85':'#A9A9A9'}}
                 textStyle={{ color: '#FFF' }}
             />
-            <Pressable
+            {/* <Pressable
                 style={styles.text}
                 onPress={() => navigation.navigate('LoginStack', { screen: 'Signup' })}
             >
-            </Pressable>
+            </Pressable> */}
+
+            <View style={styles.characterCheckIcon}>
+                {pass.length >= 8 && pass.length <= 20 ? (
+                <SvgIcon type="greenCheck" />
+                ) : (
+                <SvgIcon type="redX" />
+                )}
+            </View>
+            <View style={styles.characterCheckText}>
+                <Text style={globalStyles.body2}>8-20 Characters</Text>
+            </View>
+            <View style={styles.numberCheckIcon}>
+                {/\d/.test(pass) ? (
+                <SvgIcon type="greenCheck" />
+                ) : (
+                <SvgIcon type="redX" />
+                )}
+            </View>
+            <View style={styles.numberCheckText}>
+                <Text style={globalStyles.body2}>At least 1 number</Text>
+            </View>
+            <View style={styles.uppercaseCheckIcon}>
+                {/[A-Z]/.test(pass) ? (
+                <SvgIcon type="greenCheck" />
+                ) : (
+                <SvgIcon type="redX" />
+                )}
+            </View>
+            <View style={styles.uppercaseCheckText}>
+                <Text style={globalStyles.body2}>At least 1 uppercase letter</Text>
+            </View>
+            <View style={styles.spacesCheckIcon}>
+                {/^\S+$/.test(pass) ? (
+                <SvgIcon type="greenCheck" />
+                ) : (
+                <SvgIcon type="redX" />
+                )}
+            </View>
+            <View style={styles.spacesCheckText}>
+                <Text style={globalStyles.body2}>No spaces</Text>
+            </View>
+            <View style={styles.matchCheckIcon}>
+                {pass==confirmPass ? (
+                <SvgIcon type="greenCheck" />
+                ) : (
+                <SvgIcon type="redX" />
+                )}
+            </View>
+            <View style={styles.matchCheckText}>
+                <Text style={globalStyles.body2}>Passwords Match</Text>
+            </View>
 
         </ViewContainer>
     );

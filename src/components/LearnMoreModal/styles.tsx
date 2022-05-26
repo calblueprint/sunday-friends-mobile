@@ -28,7 +28,7 @@ export default StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         width: '100%',
-        marginTop: 50,
+        marginTop: 30,
     },
     leftColumn: {
         width: '50%',
@@ -38,6 +38,7 @@ export default StyleSheet.create({
     rightColumn: {
         width: '50%',
         flexDirection: 'column',
+        paddingRight: '5%'
     },
     subHeader: {
         fontFamily: 'Avenir',
