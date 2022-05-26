@@ -14,7 +14,7 @@ import { getFamilyById } from "../../firebase/firestore/family";
 import { AuthenticatedUserContext } from '../../context/userContext';
 import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 
-const TransactionsGroup = ({ forFamily }: any) => {
+const TransactionsGroup = ({ forFamily, setBalance }: any) => {
     //const userId = useContext(userContext);
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
@@ -76,19 +76,29 @@ const TransactionsGroup = ({ forFamily }: any) => {
             const user = await getUser(userUID)
             const family = await getFamilyById(user.family_id.toString())
             console.log(family, "family")
+            var familyBalance = 0;
             family.user_ids.forEach(async (user) => {
                 if (!user?.transactions) {
                     // continue
                 } else {
                     const addRole = user.transactions.map((transaction) => {
+                        if (user.role != 'Child' && !user.suspended) {
+                            familyBalance += transaction.point_gain;
+                        }
                         return {...transaction, role: user.role}
                     })
                     newTransactions.push(...addRole)
                 }
             })
+            setBalance(familyBalance);
         } else {
             const fetchedTransactions = await getTransactionByUser(userUID)
             newTransactions.push(...fetchedTransactions)
+            var personalBalance = 0;
+            fetchedTransactions.map((transaction) => {
+                personalBalance += transaction.point_gain;
+            })
+            setBalance(personalBalance);
         }
 
         if (enteredSearch) {

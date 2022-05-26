@@ -116,7 +116,7 @@ export default StyleSheet.create({
   },
 
   numbers: {
-    fontFamily: "DM_Mono",
+    fontFamily: 'DMMono_500Medium',
     fontSize: 12,
     fontWeight: "500",
     textAlign: "left",

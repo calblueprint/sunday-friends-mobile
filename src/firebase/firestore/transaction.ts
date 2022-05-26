@@ -77,6 +77,7 @@ export const getTransactionByUser = async (
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const getTransactions = await transactionsCollection
             .where("user_id", "==", user_id)
+            .where("date", "<=", new Date())
             .get()
             .then((doc) => {
                 doc.forEach((item) => promises.push(parseTransaction(item)));
