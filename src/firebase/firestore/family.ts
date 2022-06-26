@@ -97,6 +97,18 @@ export const getFamilyById = async (FID: string): Promise<Family> => {
   }
 };
 
+export const updateFamilyBalance = async (FID: string, balance: number): Promise<void> => {
+  try {
+    var doc = await familyCollection.doc(FID).get();
+    const fam = doc.data() as Family;
+    fam.total_points = balance;
+    familyCollection.doc(FID).set(fam);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+}
+
 const parseFamily = async (doc: any) => {
   const family_id = doc.id;
   const data = doc.data();

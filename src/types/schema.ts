@@ -26,7 +26,7 @@ export type User = {
   role: string;
   family_id: number;
   full_name: string;
-  last_active: Date | firebase.firestore.Timestamp;
+  last_active: Date | firebase.firestore.Timestamp | string;
   parent: boolean;
   points: number;
   reward_eligible: boolean;

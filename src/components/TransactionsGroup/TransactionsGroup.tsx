@@ -9,8 +9,8 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import DetailsModal from './DetailsModal/DetailsModal';
 import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
-import { getUser } from "../../firebase/firestore/user";
-import { getFamilyById } from "../../firebase/firestore/family";
+import { getUser, updatePersonalBalance } from "../../firebase/firestore/user";
+import { getFamilyById, updateFamilyBalance } from "../../firebase/firestore/family";
 import { AuthenticatedUserContext } from '../../context/userContext';
 import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
 import { Transaction } from '../../types/schema';
@@ -71,10 +71,10 @@ const TransactionsGroup = ({ forFamily, setBalance }: any) => {
         setIsLoading(true)
         const newTransactions: Transaction[] = []
         let count = 0
+        const user = await getUser(userUID)
 
         if (forFamily) {
             console.log("in loop")
-            const user = await getUser(userUID)
             const family = await getFamilyById(user.family_id.toString())
             console.log(family, "family")
             var familyBalance = 0;
@@ -90,6 +90,9 @@ const TransactionsGroup = ({ forFamily, setBalance }: any) => {
                 }
             })
             setBalance(familyBalance);
+            if (family.total_points != familyBalance) {
+                updateFamilyBalance(family.family_id.toString(), familyBalance);
+            }
         } else {
             const fetchedTransactions = await getTransactionByUser(userUID)
             newTransactions.push(...fetchedTransactions)
@@ -98,6 +101,9 @@ const TransactionsGroup = ({ forFamily, setBalance }: any) => {
                 personalBalance += transaction.point_gain;
             })
             setBalance(personalBalance);
+            if (user.points != personalBalance) {
+                updatePersonalBalance(userUID, personalBalance);
+            }
         }
 
         if (enteredSearch) {

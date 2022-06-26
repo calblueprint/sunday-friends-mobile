@@ -4,14 +4,13 @@ import styles from './styles';
 import globalStyles from '../../../globalStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import SvgIcon from '../../../../assets/SvgIcon';
-import userContext from '../../../context/userContext';
 
 const FiltersModal = ({ refRBSheet, minDate, setMinDate, showMin, setShowMin, maxDate, setMaxDate, showMax, setShowMax, 
     familyMembers, memberSelect, setMemberSelect, typeFilter, setTypeFilter, handleReset, handleApply, forFamily }: any) => {
 
     return (
         <>
-            <Pressable style={styles.modalIconContainer} onPress={() => refRBSheet.current.close()}>
+            <Pressable style={styles.modalIconContainer} onPress={handleApply}>
                 <Text style={styles.closeText}>Close</Text>
             </Pressable>
             <Text style={styles.modalTitle}>Filter Transactions</Text>
