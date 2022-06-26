@@ -15,6 +15,7 @@ import { registerWithEmailAndPassword } from "../../firebase/auth";
 import firebaseApp from "../../firebase/firebaseApp";
 import SvgIcon from ",,/../../assets/SvgIcon";
 import {
+    deleteUserInvite,
     getHeadInvitesByEmail,
     getUserInvite,
 } from "../../firebase/firestore/userInvite";
@@ -44,7 +45,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
     const handleFocus = () => changeFocus(false);
     const handleBlur = () => changeFocus(true);
 
-    const createUser = (uid, name, email, role, family_id, parent) => {
+    const createUser = (uid: any, name: any, email: any, role: any, family_id: any, parent: boolean) => {
         const defaultUser: User = {
             user_id: uid,
             address: "",
@@ -121,6 +122,8 @@ const Signup2Screen = ({ route, navigation }: any) => {
                 );
                 addUser(newUser);
                 addMemberToFamily(newUser, newUser.family_id.toString());
+                // delete userinvite
+                deleteUserInvite(user_invite.user_invite_id);
                 if (user_invite.status == "Head") {
                     navigation.navigate('LoginStack', { screen: 'FamilyName' });
                 } else {
@@ -130,7 +133,7 @@ const Signup2Screen = ({ route, navigation }: any) => {
             } else {
                 console.log("Passwords do not match!");
             }
-        } catch (e) {
+        } catch (e: any) {
             console.error(e.message);
             navigation.navigate('LoginStack', { screen: 'Error2' });
         }
