@@ -69,8 +69,8 @@ export const getFilteredUsers = async (role: string): Promise<User[]> => {
     if (role && role !== "All Roles") {
       query = query.where("role", "==", role);
     }
-    await query.get().then((doc) => {
-      doc.forEach((item) => promises.push(parseUser(item)));
+    await query.get().then((doc: any) => {
+      doc.forEach((item: any) => promises.push(parseUser(item)));
     });
     const users = await Promise.all(promises);
     //console.log("backend", users);
@@ -126,7 +126,7 @@ export const deleteUser = async (userId: string): Promise<void> => {
 ): Promise<void> => {
   try {
     const doc = await userCollection.doc(userId).get();
-    var data = doc.data();
+    const data = doc.data() as User;
     data.family_id = family_id;
 
     userCollection.doc(userId).set(data);
@@ -148,7 +148,19 @@ export const setUserPassword = async (password: string): Promise<void> => {
 	}
 }
 
-const parseUser = async (doc) => {
+export const updatePersonalBalance = async (user_id: string, balance: number): Promise<void> => {
+  try {
+    var doc = await userCollection.doc(user_id).get();
+    const user = doc.data() as User;
+    user.points = balance;
+    userCollection.doc(user_id).set(user);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+}
+
+const parseUser = async (doc: any) => {
   const user_id = doc.id.toString();
   const data = doc.data();
   const promise: Promise<Transaction[]> = getTransactionByUser(user_id);

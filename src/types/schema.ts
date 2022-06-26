@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 export type Transaction = {
   admin_name: string;
   date: Date | string;
+  deleteDate: Date | string;
   description: string | null;
   family_id: string;
   point_gain: number;
@@ -13,6 +14,7 @@ export type Family = {
   total_points: number;
   family_name: string;
   user_ids: string[];
+  users: User[];
   family_id: number;
 };
 
@@ -24,7 +26,7 @@ export type User = {
   role: string;
   family_id: number;
   full_name: string;
-  last_active: Date | firebase.firestore.Timestamp;
+  last_active: Date | firebase.firestore.Timestamp | string;
   parent: boolean;
   points: number;
   reward_eligible: boolean;

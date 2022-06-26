@@ -56,7 +56,7 @@ export default StyleSheet.create({
         height: 42
     },
     points: {
-        fontFamily: "DM_Mono",
+        fontFamily: 'DMMono_500Medium',
         fontStyle: "normal",
         fontWeight: "500",
         fontSize: 20,

@@ -18,7 +18,7 @@ export default StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 70,
+        marginTop: 50,
     },
     titleText: {
         width: '60%',
@@ -29,14 +29,15 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         marginTop: 30,
+        alignItems: 'center',
     },
     leftColumn: {
-        width: '50%',
+        width: '45%',
         flexDirection: 'column',
         alignItems: 'center',
     },
     rightColumn: {
-        width: '50%',
+        width: '55%',
         flexDirection: 'column',
         paddingRight: '5%'
     },

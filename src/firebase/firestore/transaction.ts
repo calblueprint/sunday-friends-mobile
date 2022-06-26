@@ -39,34 +39,6 @@ export const getAllTransactions = async (): Promise<Transaction[]> => {
 };
 
 /**
- * Adds the given transaction data to firestore
- */
-export const addTransaction = async (
-    transaction: Transaction
-): Promise<void> => {
-    try {
-        await transactionsCollection.doc().set(transaction);
-    } catch (e) {
-        console.warn(e);
-        throw e;
-    }
-};
-
-/**
- * Deletes the transaction from firestore with the given transactionId
- */
-export const deleteTransaction = async (
-    transactionId: string
-): Promise<void> => {
-    try {
-        await transactionsCollection.doc(transactionId).delete();
-    } catch (e) {
-        console.warn(e);
-        throw e;
-    }
-};
-
-/**
  * Returns the transaction data from firestore with the given transactionId
  */
 export const getTransactionByUser = async (
@@ -75,8 +47,9 @@ export const getTransactionByUser = async (
     try {
         const promises: Promise<Transaction>[] = [];
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const getTransactions = await transactionsCollection
+        await transactionsCollection
             .where("user_id", "==", user_id)
+            .where("date", "<=", new Date())
             .get()
             .then((doc) => {
                 doc.forEach((item) => promises.push(parseTransaction(item)));
@@ -95,6 +68,7 @@ const parseTransaction = async (doc: any) => {
     const transaction = {
         admin_name: data.admin_name,
         date: new Date(data.date.toMillis()).toLocaleDateString(),
+        deleteDate: new Date(data.date.toMillis()).toLocaleDateString(),
         description: data.description,
         family_id: data.family_id,
         point_gain: data.point_gain,

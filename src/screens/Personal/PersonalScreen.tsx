@@ -58,7 +58,7 @@ const PersonalScreen = ({navigation}: any) => {
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
     const [userInitial, setuserInitial] = useState("");
-    const [personalBalance, setpersonalBalance] = useState(0);
+    const [personalBalance, setPersonalBalance] = useState(0);
     const refRBSheet = useRef();
 
     // const fetchPersonalData = async () => {
@@ -80,7 +80,7 @@ const PersonalScreen = ({navigation}: any) => {
         getUser(userUID).then((currUser) => {
             setUser(currUser);
             setuserInitial(currUser.full_name.toString().slice(0,1));
-            setpersonalBalance(currUser.points);
+            //setPersonalBalance(currUser.points);
             // fetchPersonalData();
         })
 
@@ -136,7 +136,7 @@ const PersonalScreen = ({navigation}: any) => {
                     <Text style={[globalStyles.overline1]}>TRANSACTIONS HISTORY</Text>
                 </View>
 
-                <TransactionsGroup forFamily = {false}>
+                <TransactionsGroup forFamily={false} setBalance={setPersonalBalance}>
                 </TransactionsGroup>
 
             </View>

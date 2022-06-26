@@ -97,14 +97,26 @@ export const getFamilyById = async (FID: string): Promise<Family> => {
   }
 };
 
-const parseFamily = async (doc) => {
-  const family_id = doc.id as string;
+export const updateFamilyBalance = async (FID: string, balance: number): Promise<void> => {
+  try {
+    var doc = await familyCollection.doc(FID).get();
+    const fam = doc.data() as Family;
+    fam.total_points = balance;
+    familyCollection.doc(FID).set(fam);
+  } catch (e) {
+    console.warn(e);
+    throw e;
+  }
+}
+
+const parseFamily = async (doc: any) => {
+  const family_id = doc.id;
   const data = doc.data();
   const total_points = data.total_points;
   const user_ids = data.user_ids;
-  const promises: Promise<User>[] = user_ids.map((user_id) => getUser(user_id));
+  const promises: Promise<User>[] = user_ids.map((user_id: string) => getUser(user_id));
   const users = await Promise.all(promises);
   const family_name = data.family_name;
-  const family = { family_id, family_name, total_points, user_ids: users };
+  const family = { family_id, family_name, total_points, user_ids, users };
   return family as Family;
 };

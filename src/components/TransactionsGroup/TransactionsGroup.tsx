@@ -9,12 +9,13 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import DetailsModal from './DetailsModal/DetailsModal';
 import FiltersModal from "./FiltersModal/FiltersModal";
 import { getTransactionByUser } from "../../firebase/firestore/transaction";
-import { getUser } from "../../firebase/firestore/user";
-import { getFamilyById } from "../../firebase/firestore/family";
+import { getUser, updatePersonalBalance } from "../../firebase/firestore/user";
+import { getFamilyById, updateFamilyBalance } from "../../firebase/firestore/family";
 import { AuthenticatedUserContext } from '../../context/userContext';
 import { DMSans_400Regular } from '@expo-google-fonts/dm-sans';
+import { Transaction } from '../../types/schema';
 
-const TransactionsGroup = ({ forFamily }: any) => {
+const TransactionsGroup = ({ forFamily, setBalance }: any) => {
     //const userId = useContext(userContext);
     const { userUID, setUserUID } = useContext(AuthenticatedUserContext);
 
@@ -51,7 +52,7 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
             const user = await getUser(userUID)
             const family = await getFamilyById(user.family_id.toString())
-            family.user_ids.forEach(async (user) => {
+            family.users.forEach(async (user) => {
                 newMembers.push(user.full_name)
             })
 
@@ -68,32 +69,46 @@ const TransactionsGroup = ({ forFamily }: any) => {
 
     const fetchTransactions = async () => {
         setIsLoading(true)
-        const newTransactions = []
+        const newTransactions: Transaction[] = []
         let count = 0
+        const user = await getUser(userUID)
 
         if (forFamily) {
             console.log("in loop")
-            const user = await getUser(userUID)
             const family = await getFamilyById(user.family_id.toString())
             console.log(family, "family")
-            family.user_ids.forEach(async (user) => {
-                if (!user?.transactions) {
-                    // continue
-                } else {
+            var familyBalance = 0;
+            family.users.forEach(async (user) => {
+                if (user.transactions) {
                     const addRole = user.transactions.map((transaction) => {
+                        if (user.role != 'Child' && !user.suspended) {
+                            familyBalance += transaction.point_gain;
+                        }
                         return {...transaction, role: user.role}
                     })
                     newTransactions.push(...addRole)
                 }
             })
+            setBalance(familyBalance);
+            if (family.total_points != familyBalance) {
+                updateFamilyBalance(family.family_id.toString(), familyBalance);
+            }
         } else {
             const fetchedTransactions = await getTransactionByUser(userUID)
             newTransactions.push(...fetchedTransactions)
+            var personalBalance = 0;
+            fetchedTransactions.map((transaction) => {
+                personalBalance += transaction.point_gain;
+            })
+            setBalance(personalBalance);
+            if (user.points != personalBalance) {
+                updatePersonalBalance(userUID, personalBalance);
+            }
         }
 
         if (enteredSearch) {
             const filteredTransactions = newTransactions.filter((transaction) => {
-                return transaction.description.toLowerCase().match(searchText.toLowerCase())
+                return transaction.description && transaction.description.toLowerCase().match(searchText.toLowerCase())
             })
             newTransactions.splice(0, newTransactions.length, ...filteredTransactions);
         }
@@ -151,41 +166,6 @@ const TransactionsGroup = ({ forFamily }: any) => {
     //get and filter transaction data
     useEffect(() => {
         fetchTransactions().catch(console.error)
-        //dummy for now. later: if forFamily, set transactions by passing in family_id. otherwise, pass in user_id
-        // setTransactions([
-        //     {
-        //         username: "dummy",
-        //         date: "Oct 21",
-        //         description: "test overlap asdfsajl;fdk a s l f j d s d a a a a a a a a a a a a a",
-        //         pointGain: 107,
-        //         role: "head",
-        //         id: 0
-        //     },
-        //     {
-        //         username: "dummy1",
-        //         date: "Oct 21",
-        //         description: "Volunteered at community BBBBBB",
-        //         pointGain: -107,
-        //         role: "child",
-        //         id: 1
-        //     },
-        //     {
-        //         username: "dummy2",
-        //         date: "Oct 22",
-        //         description: "test",
-        //         pointGain: 108,
-        //         role: "parent",
-        //         id: 2
-        //     },
-        //     {
-        //         username: "dummy2",
-        //         date: "Oct 22",
-        //         description: "test",
-        //         pointGain: 108,
-        //         role: "dependent",
-        //         id: 3
-        //     },
-        // ])
     }, [selection, enteredSearch, filterMinDate, filterMaxDate, filterMemberSelect]);
 
     const handleSearch = () => {

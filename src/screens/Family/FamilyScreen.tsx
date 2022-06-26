@@ -15,7 +15,7 @@ import StepIndicator from 'react-native-step-indicator';
 import { getAllTiers } from '../../firebase/firestore/tiers';
 import { getUser } from '../../firebase/firestore/user';
 import { AuthenticatedUserContext } from '../../context/userContext';
-import { User } from '../../types/schema';
+import { Family, User } from '../../types/schema';
 import {List} from 'react-native-paper';
 import TransactionsGroup from '../../components/TransactionsGroup/TransactionsGroup';
 import { getFamilyById } from "../../firebase/firestore/family";
@@ -62,6 +62,17 @@ const FamilyScreen = ({navigation}: any) => {
     const [dropdownExpanded, setDropdownExpanded] = useState(false);
     const refRBSheet = useRef();
 
+    // const calculateBalance = (members: User[]) => {
+    //     var total = 0;
+        
+    //     members.map((member) => {
+    //         if (!member.suspended && member.role == 'Parent') {
+    //             member.
+    //         }
+    //     })
+    //     setFamilyBalance(total);
+    // }
+
     useEffect(() => {
         getAllTiers().then((tiers) => {
             const newlabels = [];
@@ -81,8 +92,8 @@ const FamilyScreen = ({navigation}: any) => {
                 getFamilyById(currUser.family_id.toString()).then((currFam) => {
                     setFamilyName(currFam.family_name.toString())
                     setuserInitial(currUser.full_name.toString().slice(0,1))
-                    setFamilyBalance(currFam.total_points)
-                    setFamilyMembers(currFam.user_ids);
+                    setFamilyMembers(currFam.users);
+                    //calculateBalance(currFam.user_ids);
                 })
             })
             if (familyBalance < tiers[0].tier1){
@@ -347,7 +358,7 @@ const FamilyScreen = ({navigation}: any) => {
                     <Text style={[globalStyles.overline1]}>FAMILY TRANSACTIONS</Text>
                 </View>
 
-                <TransactionsGroup forFamily = {true}>
+                <TransactionsGroup forFamily={true} setBalance={setFamilyBalance}>
                 </TransactionsGroup>
 
             </View>
