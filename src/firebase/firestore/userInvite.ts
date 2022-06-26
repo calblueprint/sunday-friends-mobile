@@ -74,7 +74,7 @@ export const editUserInvite = async (
 ): Promise<void> => {
   try {
     const doc = await userInvitesCollection.doc(userInviteId).get();
-    var data = doc.data();
+    const data = doc.data() as User_Invite;
     data.name = name;
     data.email = email;
     data.status = status;
@@ -96,7 +96,7 @@ export const updateFamilyIDforInvite = async (
 ): Promise<void> => {
   try {
     const doc = await userInvitesCollection.doc(userInviteId).get();
-    var data = doc.data();
+    const data = doc.data() as User_Invite;
     data.family_id = family_id;
 
     userInvitesCollection.doc(userInviteId).set(data);
