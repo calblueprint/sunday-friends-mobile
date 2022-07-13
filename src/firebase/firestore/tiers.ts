@@ -27,15 +27,17 @@ const tiersCollection = db.collection("tiers");
 const parseTiers = async (doc: any) => {
     const data = doc.data();
     const tiers = {
-        tier1: data.tier1,
         tier2: data.tier2,
         tier3: data.tier3,
+        tier4: data.tier4,
         tier1title: data.tier1title,
         tier2title: data.tier2title,
         tier3title: data.tier3title,
+        tier4title: data.tier4title,
         tier1description: data.tier1description,
         tier2description: data.tier2description,
         tier3description: data.tier3description,
+        tier4description: data.tier4description,
     };
     return tiers as Tiers;
 };
