@@ -12,14 +12,12 @@ export default StyleSheet.create({
     // paddingLeft: 20,
     // paddingRight: 60,
     width: "100%",
-
   },
 
   alignment: {
     // paddingLeft: 20,
     // paddingRight: 60,
     alignItems: "center",
-
   },
 
   title1: {
@@ -49,73 +47,71 @@ export default StyleSheet.create({
   dropdownContainer: {
     width: "89.4%",
     borderWidth: 2,
-    borderColor: '#E6ECFE',
+    borderColor: "#E6ECFE",
     backgroundColor: "white",
     marginTop: 16,
-    borderRadius: 10, 
+    borderRadius: 10,
     paddingHorizontal: 10,
-  },  
+  },
 
   dropdownHeader: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
   },
 
-  dropdownList: {
-
-  },
+  dropdownList: {},
 
   headSeparator: {
-    width: '100%',
+    width: "100%",
     height: 2,
-    backgroundColor: '#F2F2F2',
-    alignSelf: 'center',
+    backgroundColor: "#F2F2F2",
+    alignSelf: "center",
   },
 
   memberSeparator: {
-    width: '100%',
+    width: "100%",
     height: 1,
-    backgroundColor: '#F2F2F2',
-    alignSelf: 'center',
+    backgroundColor: "#F2F2F2",
+    alignSelf: "center",
   },
 
   memberRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 10,
   },
 
   memberInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     flex: 1,
     marginLeft: 20,
   },
-  
+
   memberIcon: {
-    width: 42, 
+    width: 42,
     height: 42,
   },
 
   memberName: {
-    fontFamily: 'Avenir',
-    fontStyle: 'normal',
-    fontWeight: '800',
+    fontFamily: "Avenir",
+    fontStyle: "normal",
+    fontWeight: "800",
     fontSize: 14,
-    color: '#525454',
+    color: "#525454",
   },
 
   memberPoints: {
-    fontFamily: 'DMMono_500Medium',
-    fontStyle: 'normal',
-    fontWeight: '500',
+    fontFamily: "DMMono_500Medium",
+    fontStyle: "normal",
+    fontWeight: "500",
     fontSize: 24,
     lineHeight: 31,
-    color: '#526DC2'
+    color: "#526DC2",
   },
 
   homeContainer: {
@@ -137,7 +133,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: "89.4%",
     borderWidth: 2,
-    borderColor: '#E6ECFE',
+    borderColor: "#E6ECFE",
     marginBottom: "4%",
   },
 
@@ -150,7 +146,7 @@ export default StyleSheet.create({
   },
 
   shadow: {
-    shadowColor: '#202020',
+    shadowColor: "#202020",
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
@@ -164,15 +160,15 @@ export default StyleSheet.create({
 
   addContainer: {
     flexDirection: "row",
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
     marginVertical: "5%",
     marginLeft: 20,
     flex: 1,
   },
 
   topHalfContainer: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     flexDirection: "row",
     marginLeft: "5%",
     width: "89.4%",
@@ -189,7 +185,7 @@ export default StyleSheet.create({
 
   stackOfSmileys: {
     flexDirection: "row",
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
     marginRight: 12,
     // width: '30%',
   },
@@ -203,7 +199,7 @@ export default StyleSheet.create({
   },
 
   buttomBar: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "column",
     marginTop: 20,
@@ -215,41 +211,41 @@ export default StyleSheet.create({
   },
 
   tierList: {
-    flexDirection: 'column',
+    flexDirection: "column",
     alignItems: "flex-start",
     width: "89.4%",
-    marginTop: 29,
+    marginTop: 20,
     marginLeft: "5%",
     marginBottom: 15,
   },
 
   toggleButton: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   nameText: {
-    fontFamily: 'Avenir',
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily: "Avenir",
+    fontStyle: "normal",
+    fontWeight: "400",
     fontSize: 13,
-    lineHeight: 16
+    lineHeight: 16,
   },
 
   buttonText: {
-    color: '#393939',
+    color: "#393939",
   },
 
   buttonTextStyle: {
-    color: 'green'
+    color: "green",
   },
 
   progressBar: {
-    width: '120%',
+    width: "110%",
     marginTop: 20,
     justifyContent: "center",
-    marginLeft: "-10%",
+    marginLeft: "-5%",
 
-    // borderWidth: 2, 
+    // borderWidth: 2,
     // borderColor: 'black',
   },
 
@@ -273,8 +269,8 @@ export default StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: '#5A6AA2',
-    alignItems: 'flex-start',
+    borderColor: "#5A6AA2",
+    alignItems: "flex-start",
     paddingLeft: 10,
     paddingVertical: 7,
   },
@@ -296,8 +292,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: '#A9A9A9',
-    marginTop: '3%',
+    borderColor: "#A9A9A9",
+    marginTop: "3%",
   },
 
   addLevelCircle: {
@@ -340,7 +336,7 @@ export default StyleSheet.create({
     flexDirection: "row",
 
     justifyContent: "space-between",
-    width: '100%',
+    width: "100%",
     // width: '89.4%'
   },
 
@@ -370,7 +366,6 @@ export default StyleSheet.create({
     fontFamily: "DMMono_500Medium",
     fontWeight: "500",
     fontSize: 36,
-
   },
 
   tierTitleContainer: {
@@ -381,7 +376,7 @@ export default StyleSheet.create({
   },
 
   tierTitle: {
-    fontFamily: 'Avenir',
+    fontFamily: "Avenir",
     fontWeight: "800",
     fontSize: 14,
     marginTop: 2,
@@ -390,7 +385,7 @@ export default StyleSheet.create({
   },
 
   tierTitleGray: {
-    fontFamily: 'Avenir',
+    fontFamily: "Avenir",
     fontWeight: "800",
     fontSize: 14,
     marginTop: 2,
@@ -402,7 +397,6 @@ export default StyleSheet.create({
     fontFamily: "Avenir",
     fontWeight: "900",
     fontSize: 14,
-
   },
 
   tierDescription: {
@@ -414,14 +408,13 @@ export default StyleSheet.create({
   },
 
   itemsText: {
-    fontFamily: 'Avenir',
+    fontFamily: "Avenir",
     fontWeight: "400",
     fontSize: 12,
-
   },
 
   initialText: {
-    fontFamily: 'DMSans_700Bold',
+    fontFamily: "DMSans_700Bold",
     fontWeight: "700",
     fontSize: 18,
   },
@@ -435,7 +428,6 @@ export default StyleSheet.create({
     marginLeft: "5%",
     marginBottom: 17,
   },
-
 });
 
 export const customStyles = {
@@ -443,21 +435,21 @@ export const customStyles = {
   currentStepIndicatorSize: 23.05,
   separatorStrokeWidth: 4.39,
   currentStepStrokeWidth: 2,
-  stepStrokeCurrentColor: '#7F93D1',
+  stepStrokeCurrentColor: "#7F93D1",
   stepStrokeWidth: 2,
-  stepStrokeFinishedColor: '#7F93D1',
-  stepStrokeUnFinishedColor: '#7F93D1',
-  separatorFinishedColor: '#7F93D1',
-  separatorUnFinishedColor: '#7F93D1',
-  stepIndicatorFinishedColor: '#253C85',
-  stepIndicatorUnFinishedColor: '#E6ECFE',
-  stepIndicatorCurrentColor: '#253C85',
+  stepStrokeFinishedColor: "#7F93D1",
+  stepStrokeUnFinishedColor: "#7F93D1",
+  separatorFinishedColor: "#7F93D1",
+  separatorUnFinishedColor: "#7F93D1",
+  stepIndicatorFinishedColor: "#253C85",
+  stepIndicatorUnFinishedColor: "#E6ECFE",
+  stepIndicatorCurrentColor: "#253C85",
   stepIndicatorLabelFontSize: 14,
   currentStepIndicatorLabelFontSize: 14,
-  stepIndicatorLabelCurrentColor: 'white',
-  stepIndicatorLabelFinishedColor: 'white',
-  stepIndicatorLabelUnFinishedColor: '#253C85',
-  labelColor: '#A9A9A9',
+  stepIndicatorLabelCurrentColor: "white",
+  stepIndicatorLabelFinishedColor: "white",
+  stepIndicatorLabelUnFinishedColor: "#253C85",
+  labelColor: "#A9A9A9",
   labelSize: 14,
-  currentStepLabelColor: '#253C85'
+  currentStepLabelColor: "#253C85",
 };
