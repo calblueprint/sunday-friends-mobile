@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import { User } from "../types/schema";
 import firebaseApp from "./firebaseApp";
 
 
